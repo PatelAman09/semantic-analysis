@@ -1,9 +1,13 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "E:\\Master_Of_Engg_IT\\SE_Project\\semantic-analysis\\Semantic_Analysis\\",
+  "WorkspaceRootPath": "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\semantic-analysis\\Semantic_Analysis\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8AFEF5BF-B683-4534-BF8B-682A71DA1E03}|Semantic_Analysis\\Semantic_Analysis.csproj|e:\\master_of_engg_it\\se_project\\semantic-analysis\\semantic_analysis\\semantic_analysis\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{AE0C7CB5-713D-4728-8C40-E1422DCFE036}|UnitTestProject\\UnitTestProject.csproj|c:\\users\\admin\\desktop\\semester 1\\software eng\\final project\\semantic-analysis\\semantic_analysis\\unittestproject\\mstestsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE0C7CB5-713D-4728-8C40-E1422DCFE036}|UnitTestProject\\UnitTestProject.csproj|solutionrelative:unittestproject\\mstestsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8AFEF5BF-B683-4534-BF8B-682A71DA1E03}|Semantic_Analysis\\Semantic_Analysis.csproj|c:\\users\\admin\\desktop\\semester 1\\software eng\\final project\\semantic-analysis\\semantic_analysis\\semantic_analysis\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8AFEF5BF-B683-4534-BF8B-682A71DA1E03}|Semantic_Analysis\\Semantic_Analysis.csproj|solutionrelative:semantic_analysis\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -14,34 +18,41 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "MSTestSettings.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\MSTestSettings.cs",
+              "RelativeDocumentMoniker": "UnitTestProject\\MSTestSettings.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\MSTestSettings.cs",
+              "RelativeToolTip": "UnitTestProject\\MSTestSettings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-09T21:05:39.302Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Program.cs",
-              "DocumentMoniker": "E:\\Master_Of_Engg_IT\\SE_Project\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Program.cs",
               "RelativeDocumentMoniker": "Semantic_Analysis\\Program.cs",
-              "ToolTip": "E:\\Master_Of_Engg_IT\\SE_Project\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Program.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Program.cs",
               "RelativeToolTip": "Semantic_Analysis\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-09T20:51:37.974Z",
               "EditorCaption": ""
-            }
-          ]
-        },
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": -1,
-          "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
             }
           ]
         }
