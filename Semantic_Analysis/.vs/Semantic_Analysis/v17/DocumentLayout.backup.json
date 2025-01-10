@@ -1,7 +1,21 @@
 {
   "Version": 1,
+<<<<<<< HEAD
+  "WorkspaceRootPath": "D:\\IT\\Software Engineering\\SE Project\\semantic-analysis\\Semantic_Analysis\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8AFEF5BF-B683-4534-BF8B-682A71DA1E03}|Semantic_Analysis\\Semantic_Analysis.csproj|d:\\it\\software engineering\\se project\\semantic-analysis\\semantic_analysis\\semantic_analysis\\dataextraction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8AFEF5BF-B683-4534-BF8B-682A71DA1E03}|Semantic_Analysis\\Semantic_Analysis.csproj|solutionrelative:semantic_analysis\\dataextraction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{489D5F55-F84F-401A-8C69-E9EE20300D89}|Documentation{489D5F55-F84F-401A-8C69-E9EE20300D89}|D:\\IT\\Software Engineering\\SE Project\\semantic-analysis\\Semantic_Analysis\\Documentation\\Project.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{489D5F55-F84F-401A-8C69-E9EE20300D89}|Documentation{489D5F55-F84F-401A-8C69-E9EE20300D89}|solutionrelative:Documentation\\Project.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    }
+  ],
+=======
   "WorkspaceRootPath": "E:\\Master_Of_Engg_IT\\SE_Project\\semantic-analysis\\Semantic_Analysis\\",
   "Documents": [],
+>>>>>>> 3379776a4fd0b1e5032705bffae3701e69dc42d6
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,6 +23,9 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
+<<<<<<< HEAD
+          "SelectedChildIndex": 1,
+=======
           "SelectedChildIndex": -1,
           "Children": [
             {
@@ -20,10 +37,40 @@
         {
           "DockedWidth": 200,
           "SelectedChildIndex": -1,
+>>>>>>> 3379776a4fd0b1e5032705bffae3701e69dc42d6
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+<<<<<<< HEAD
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DataExtraction.cs",
+              "DocumentMoniker": "D:\\IT\\Software Engineering\\SE Project\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\DataExtraction.cs",
+              "RelativeDocumentMoniker": "Semantic_Analysis\\DataExtraction.cs",
+              "ToolTip": "D:\\IT\\Software Engineering\\SE Project\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\DataExtraction.cs",
+              "RelativeToolTip": "Semantic_Analysis\\DataExtraction.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-10T21:53:09.455Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Project.md",
+              "DocumentMoniker": "D:\\IT\\Software Engineering\\SE Project\\semantic-analysis\\Semantic_Analysis\\Documentation\\Project.md",
+              "RelativeDocumentMoniker": "Documentation\\Project.md",
+              "ToolTip": "D:\\IT\\Software Engineering\\SE Project\\semantic-analysis\\Semantic_Analysis\\Documentation\\Project.md",
+              "RelativeToolTip": "Documentation\\Project.md",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2025-01-10T16:55:08.006Z",
+              "EditorCaption": ""
+=======
+>>>>>>> 3379776a4fd0b1e5032705bffae3701e69dc42d6
             }
           ]
         }
