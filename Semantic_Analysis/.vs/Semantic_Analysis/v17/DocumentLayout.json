@@ -1,5 +1,6 @@
 {
   "Version": 1,
+<<<<<<< HEAD
   "WorkspaceRootPath": "D:\\IT\\Software Engineering\\SE Project\\semantic-analysis\\Semantic_Analysis\\",
   "Documents": [
     {
@@ -9,6 +10,13 @@
     {
       "AbsoluteMoniker": "D:0:0:{489D5F55-F84F-401A-8C69-E9EE20300D89}|Documentation{489D5F55-F84F-401A-8C69-E9EE20300D89}|D:\\IT\\Software Engineering\\SE Project\\semantic-analysis\\Semantic_Analysis\\Documentation\\Project.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
       "RelativeMoniker": "D:0:0:{489D5F55-F84F-401A-8C69-E9EE20300D89}|Documentation{489D5F55-F84F-401A-8C69-E9EE20300D89}|solutionrelative:Documentation\\Project.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+=======
+  "WorkspaceRootPath": "E:\\Master_Of_Engg_IT\\SE_Project\\semantic-analysis\\Semantic_Analysis\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8AFEF5BF-B683-4534-BF8B-682A71DA1E03}|Semantic_Analysis\\Semantic_Analysis.csproj|e:\\master_of_engg_it\\se_project\\semantic-analysis\\semantic_analysis\\semantic_analysis\\cosinesimilarity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8AFEF5BF-B683-4534-BF8B-682A71DA1E03}|Semantic_Analysis\\Semantic_Analysis.csproj|solutionrelative:semantic_analysis\\cosinesimilarity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+>>>>>>> 3379776a4fd0b1e5032705bffae3701e69dc42d6
     }
   ],
   "DocumentGroupContainers": [
@@ -22,11 +30,16 @@
           "Children": [
             {
               "$type": "Bookmark",
+<<<<<<< HEAD
               "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+=======
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+>>>>>>> 3379776a4fd0b1e5032705bffae3701e69dc42d6
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+<<<<<<< HEAD
               "Title": "DataExtraction.cs",
               "DocumentMoniker": "D:\\IT\\Software Engineering\\SE Project\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\DataExtraction.cs",
               "RelativeDocumentMoniker": "Semantic_Analysis\\DataExtraction.cs",
@@ -48,6 +61,27 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
               "WhenOpened": "2025-01-10T16:55:08.006Z"
+=======
+              "Title": "CosineSimilarity.cs",
+              "DocumentMoniker": "E:\\Master_Of_Engg_IT\\SE_Project\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\CosineSimilarity.cs",
+              "RelativeDocumentMoniker": "Semantic_Analysis\\CosineSimilarity.cs",
+              "ToolTip": "E:\\Master_Of_Engg_IT\\SE_Project\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\CosineSimilarity.cs",
+              "RelativeToolTip": "Semantic_Analysis\\CosineSimilarity.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-10T22:19:52.038Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+>>>>>>> 3379776a4fd0b1e5032705bffae3701e69dc42d6
             }
           ]
         }
