@@ -14,11 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Semantic_Analysis")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-<<<<<<< HEAD
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+27cead029ac829ff70f12330f98033a2cfa4692c")]
-=======
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+350a36aaa68168560ed9144e098070358f93bb71")]
->>>>>>> origin/Development
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f183da27c218b45a7991b410e622c397245eb083")]
 [assembly: System.Reflection.AssemblyProductAttribute("Semantic_Analysis")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Semantic_Analysis")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
