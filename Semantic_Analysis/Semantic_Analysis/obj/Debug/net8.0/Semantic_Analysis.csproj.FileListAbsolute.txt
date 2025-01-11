@@ -28,3 +28,18 @@ C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-anal
 C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.pdb
 C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.genruntimeconfig.cache
 C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\ref\Semantic_Analysis.dll
+D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Semantic_Analysis.exe
+D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Semantic_Analysis.deps.json
+D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Semantic_Analysis.runtimeconfig.json
+D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Semantic_Analysis.dll
+D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Semantic_Analysis.pdb
+D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.GeneratedMSBuildEditorConfig.editorconfig
+D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.AssemblyInfoInputs.cache
+D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.AssemblyInfo.cs
+D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.csproj.CoreCompileInputs.cache
+D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.sourcelink.json
+D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.dll
+D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\refint\Semantic_Analysis.dll
+D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.pdb
+D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.genruntimeconfig.cache
+D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\ref\Semantic_Analysis.dll
