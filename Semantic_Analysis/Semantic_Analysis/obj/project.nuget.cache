@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "tUCEXfLvIK8=",
   "success": true,
   "projectFilePath": "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj",
+=======
+  "dgSpecHash": "RVavIVnXymA=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Ahsan\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj",
+>>>>>>> origin/Ahsan
   "expectedPackageFiles": [],
   "logs": []
 }
