@@ -79,7 +79,7 @@ class Embedding
         }
     }
 
-    // Step 3: Save extracted data and embeddings to CSV
+    // Step 3: Save extracted data and embeddings to CSV.
     static void SaveToCsv(string csvFilePath, List<string> data, List<string> embeddings)
     {
         using (StreamWriter writer = new StreamWriter(csvFilePath))
@@ -111,7 +111,7 @@ class Embedding
             Console.WriteLine("Analyzing JSON file...");
             List<string> analyzedData = AnalyzeJson(jsonFilePath);
 
-            // Step 2: Generate embeddings for each extracted piece of data
+            // Step 2: Generate embeddings for each extracted piece of data.
             Console.WriteLine("Generating embeddings...");
             List<string> embeddings = new List<string>();
             foreach (var data in analyzedData)
@@ -121,7 +121,7 @@ class Embedding
                 embeddings.Add(embedding);
             }
 
-            // Step 3: Save results to a CSV file
+            // Step 3: Save results to a CSV file.
             Console.WriteLine("Saving results to CSV...");
             SaveToCsv(csvFilePath, analyzedData, embeddings);
 
