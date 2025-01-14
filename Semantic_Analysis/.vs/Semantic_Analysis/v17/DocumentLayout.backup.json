@@ -54,8 +54,7 @@
               "RelativeToolTip": "UnitTestProject\\Test1.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-11T12:04:23.081Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-11T12:04:23.081Z"
             },
             {
               "$type": "Document",
@@ -67,8 +66,7 @@
               "RelativeToolTip": "UnitTestProject\\UnitTestProject.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-01-11T12:04:13.001Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-11T12:04:13.001Z"
             },
             {
               "$type": "Document",
@@ -78,7 +76,7 @@
               "RelativeDocumentMoniker": "Semantic_Analysis\\Embedding.cs",
               "ToolTip": "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Ahsan\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Embedding.cs",
               "RelativeToolTip": "Semantic_Analysis\\Embedding.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEwAAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFEAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-11T11:53:21.647Z",
               "EditorCaption": ""
@@ -93,8 +91,7 @@
               "RelativeToolTip": "UnitTestProject\\MSTestSettings.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-11T11:52:46.827Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-11T11:52:46.827Z"
             },
             {
               "$type": "Document",
@@ -106,8 +103,7 @@
               "RelativeToolTip": "Semantic_Analysis\\CosineSimilarity.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-11T11:52:03.418Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-11T11:52:03.418Z"
             },
             {
               "$type": "Document",
@@ -119,8 +115,7 @@
               "RelativeToolTip": "Semantic_Analysis\\Semantic_Analysis.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-01-11T11:37:25.436Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-11T11:37:25.436Z"
             }
           ]
         }
