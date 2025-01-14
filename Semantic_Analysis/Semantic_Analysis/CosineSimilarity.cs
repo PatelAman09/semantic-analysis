@@ -22,6 +22,20 @@ namespace Semantic_Analysis
             return dotProduct;
         }
 
+        // Function to calculate the magnitude of a vector
+        public static double CalculateMagnitude(double[] vector)
+        {
+            if (vector == null || vector.Length == 0)
+                throw new ArgumentException("Vector must not be null or empty");
+
+            double sumOfSquares = 0.0;
+            for (int i = 0; i < vector.Length; i++)
+            {
+                sumOfSquares += vector[i] * vector[i];
+            }
+
+            return Math.Sqrt(sumOfSquares);
+        }
 
     }
 }
