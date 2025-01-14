@@ -167,3 +167,9 @@ E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\U
 E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\UnitTestProject.pdb
 E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\UnitTestProject.genruntimeconfig.cache
 E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\ref\UnitTestProject.dll
+E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\.msCoverageSourceRootsMapping_UnitTestProject
+E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\Semantic_Analysis.deps.json
+E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\Semantic_Analysis.runtimeconfig.json
+E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\Semantic_Analysis.exe
+E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\Semantic_Analysis.dll
+E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\Semantic_Analysis.pdb

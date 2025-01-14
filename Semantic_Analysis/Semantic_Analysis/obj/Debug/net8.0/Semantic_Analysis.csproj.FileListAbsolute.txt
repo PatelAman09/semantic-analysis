@@ -43,3 +43,6 @@ E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\S
 E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.pdb
 E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.genruntimeconfig.cache
 E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\ref\Semantic_Analysis.dll
+E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Newtonsoft.Json.dll
+E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.csproj.AssemblyReference.cache
+E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic.22E14CE2.Up2Date

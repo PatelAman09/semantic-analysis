@@ -684,6 +684,19 @@
             "related": ".xml"
           }
         }
+      },
+      "Semantic_Analysis/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3"
+        },
+        "compile": {
+          "bin/placeholder/Semantic_Analysis.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Semantic_Analysis.dll": {}
+        }
       }
     }
   },
@@ -1737,13 +1750,19 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "Semantic_Analysis/1.0.0": {
+      "type": "project",
+      "path": "../Semantic_Analysis/Semantic_Analysis.csproj",
+      "msbuildProject": "../Semantic_Analysis/Semantic_Analysis.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0-windows7.0": [
       "MSTest >= 3.6.1",
       "Microsoft.NET.Test.Sdk >= 17.11.1",
-      "Newtonsoft.Json >= 13.0.3"
+      "Newtonsoft.Json >= 13.0.3",
+      "Semantic_Analysis >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -1778,7 +1797,11 @@
       "frameworks": {
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj": {
+              "projectPath": "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -1835,7 +1858,7 @@
       "code": "Undefined",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Problem reading the cache file C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Development\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+      "message": "Problem reading the cache file C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Development\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\obj\\project.nuget.cache : Unexpected character encountered while parsing value: <. Path '', line 0, position 0."
     }
   ]
 }
