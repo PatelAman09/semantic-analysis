@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Semantic_Analysis
 {
-    internal class CosineSimilarity
+    public class CosineSimilarity
     {
         // Function to calculate the dot product of two vectors
         public static double CalculateDotProduct(double[] vectorA, double[] vectorB)
