@@ -1,5 +1,6 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "tQqf8ctEV1k=",
   "success": true,
   "projectFilePath": "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Ahsan\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj",
@@ -21,4 +22,11 @@
       "message": "Problem reading the cache file C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Ahsan\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\obj\\project.nuget.cache : Unexpected character encountered while parsing value: <. Path '', line 0, position 0."
     }
   ]
+=======
+  "dgSpecHash": "BuNN2G5sq4s=",
+  "success": true,
+  "projectFilePath": "D:\\IT\\Software Engineering\\SE Project\\Saquib\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj",
+  "expectedPackageFiles": [],
+  "logs": []
+>>>>>>> origin/Saquib-Attar
 }

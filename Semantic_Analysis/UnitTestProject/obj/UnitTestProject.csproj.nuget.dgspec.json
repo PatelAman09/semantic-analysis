@@ -1,6 +1,7 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
     "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Ahsan\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\UnitTestProject.csproj": {}
   },
   "projects": {
@@ -88,12 +89,29 @@
         "projectPath": "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Ahsan\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\UnitTestProject.csproj",
         "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Ahsan\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\obj\\",
+=======
+    "D:\\IT\\Software Engineering\\SE Project\\Saquib\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\UnitTestProject.csproj": {}
+  },
+  "projects": {
+    "D:\\IT\\Software Engineering\\SE Project\\Saquib\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\UnitTestProject.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\IT\\Software Engineering\\SE Project\\Saquib\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\UnitTestProject.csproj",
+        "projectName": "UnitTestProject",
+        "projectPath": "D:\\IT\\Software Engineering\\SE Project\\Saquib\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\UnitTestProject.csproj",
+        "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
+        "outputPath": "D:\\IT\\Software Engineering\\SE Project\\Saquib\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\obj\\",
+>>>>>>> origin/Saquib-Attar
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
+<<<<<<< HEAD
           "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+          "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> origin/Saquib-Attar
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -102,17 +120,25 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+<<<<<<< HEAD
           "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\TestPakages": {},
+=======
+          "C:\\temp\\TestPackages": {},
+>>>>>>> origin/Saquib-Attar
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0-windows7.0": {
             "targetAlias": "net8.0-windows",
+<<<<<<< HEAD
             "projectReferences": {
               "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Ahsan\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj": {
                 "projectPath": "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Ahsan\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj"
               }
             }
+=======
+            "projectReferences": {}
+>>>>>>> origin/Saquib-Attar
           }
         },
         "warningProperties": {
@@ -138,10 +164,13 @@
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
               "version": "[17.11.1, )"
+<<<<<<< HEAD
             },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
+=======
+>>>>>>> origin/Saquib-Attar
             }
           },
           "imports": [
