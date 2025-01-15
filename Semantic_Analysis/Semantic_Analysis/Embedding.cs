@@ -6,34 +6,32 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using OpenAI.Embeddings; // NuGet package for embeddings
 
 class Embedding
 {
-    // Function to check if a JSON file exists and read its content
+    // Function to read JSON content from a file
     static string ReadJsonFile(string jsonFilePath)
     {
-        // Check if the file exists
         if (!File.Exists(jsonFilePath))
         {
             throw new FileNotFoundException($"The specified JSON file does not exist: {jsonFilePath}");
         }
 
-        // Read and return the content of the JSON file
         return File.ReadAllText(jsonFilePath);
     }
 
-    // Function to analyze JSON structure and extract data as a list of strings
+    // Function to analyze JSON content and extract data
     static List<string> AnalyzeJson(string jsonContent)
     {
         var parsedJson = JsonConvert.DeserializeObject(jsonContent);
-        List<string> extractedData = new List<string>();
+        var extractedData = new List<string>();
 
         if (parsedJson == null)
         {
             throw new Exception("The provided JSON content is empty or malformed.");
         }
 
-        // Recursive function to traverse JSON structure
         void Traverse(object? obj, string prefix = "")
         {
             if (obj is JObject jObject)
@@ -57,52 +55,27 @@ class Embedding
             }
         }
 
-        // Start traversing the parsed JSON
         Traverse(parsedJson);
         return extractedData;
     }
 
-    // Function to call OpenAI API and get embeddings for a single string of text
-    static async Task<string> GetEmbeddingAsync(string apiKey, string text)
+    // Function to generate embedding using EmbeddingClient (adapted from the first code)
+    static List<(string description, string embedding)> GetEmbeddings(string apiKey, List<string> descriptions)
     {
-        using (HttpClient client = new HttpClient())
+        Console.WriteLine("Generating embeddings...");
+        EmbeddingClient client = new EmbeddingClient("text-embedding-3-small", apiKey);
+
+        List<(string description, string embedding)> embeddings = new();
+
+        foreach (string description in descriptions)
         {
-            // Set API key in the authorization header
-            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {apiKey}");
-
-            // Prepare the request body
-            var requestBody = new
-            {
-                model = "text-embedding-ada-002",
-                input = text
-            };
-
-            // Convert the request body to JSON
-            string jsonBody = JsonConvert.SerializeObject(requestBody);
-            var content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
-
-            // Send the POST request to OpenAI API
-            HttpResponseMessage response = await client.PostAsync("https://api.openai.com/v1/embeddings", content);
-
-            // Handle unsuccessful responses
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new Exception($"OpenAI API request failed: {response.StatusCode} - {response.ReasonPhrase}");
-            }
-
-            // Parse the response safely
-            string responseString = await response.Content.ReadAsStringAsync();
-            dynamic result = JsonConvert.DeserializeObject(responseString);
-
-            // Ensure the result and data are not null before accessing
-            if (result?.data == null || result.data.Count == 0)
-            {
-                throw new Exception("No embedding data received from OpenAI API.");
-            }
-
-            // Use the null-forgiving operator to suppress warnings (because we know data exists)
-            return result.data[0]?.embedding?.ToString() ?? string.Empty;
+            Console.WriteLine($"Processing: {description}");
+            OpenAIEmbedding embedding = client.GenerateEmbedding(description);
+            string embeddingString = string.Join(",", embedding.ToFloats().ToArray());
+            embeddings.Add((description, embeddingString));
         }
+
+        return embeddings;
     }
 
     // Function to save data and embeddings to a CSV file
@@ -115,10 +88,8 @@ class Embedding
 
         using (StreamWriter writer = new StreamWriter(csvFilePath))
         {
-            // Write the CSV header
             writer.WriteLine("Data,Embedding");
 
-            // Write each data-embedding pair
             for (int i = 0; i < data.Count; i++)
             {
                 writer.WriteLine($"\"{data[i]}\",\"{embeddings[i]}\"");
@@ -126,47 +97,48 @@ class Embedding
         }
     }
 
-    // Main function to orchestrate the workflow
+    // Orchestrator function to process the JSON file and save results
+    static async Task ProcessJsonFile(string jsonFilePath, string csvFilePath, string apiKey)
+    {
+        Console.WriteLine("Reading and analyzing JSON file...");
+        string jsonContent = ReadJsonFile(jsonFilePath);
+        List<string> analyzedData = AnalyzeJson(jsonContent);
+
+        Console.WriteLine("Generating embeddings...");
+        List<(string description, string embedding)> embeddings = GetEmbeddings(apiKey, analyzedData);
+
+        // Extract the embeddings from the tuple list for saving
+        List<string> embeddingStrings = new List<string>();
+        foreach (var embed in embeddings)
+        {
+            embeddingStrings.Add(embed.embedding);
+        }
+
+        Console.WriteLine("Saving results to CSV...");
+        SaveToCsv(csvFilePath, analyzedData, embeddingStrings);
+
+        Console.WriteLine("Process completed successfully. Output saved to the CSV file.");
+    }
+
+    // Main function to collect user input and call the orchestrator
     static async Task Main(string[] args)
     {
         try
         {
-            // Prompt the user for input file paths and API key
             Console.WriteLine("Enter the path to your JSON file:");
             string jsonFilePath = Console.ReadLine() ?? throw new ArgumentNullException("jsonFilePath cannot be null");
 
             Console.WriteLine("Enter the path to save the output CSV file:");
             string csvFilePath = Console.ReadLine() ?? throw new ArgumentNullException("csvFilePath cannot be null");
 
-            Console.WriteLine("Enter your OpenAI API key:");
-            string apiKey = Console.ReadLine() ?? throw new ArgumentNullException("apiKey cannot be null");
+            string apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY")
+                            ?? throw new Exception("Environment variable 'OPENAI_API_KEY' is not set.");
 
-            // Step 1: Read and analyze the JSON file
-            Console.WriteLine("Reading and analyzing JSON file...");
-            string jsonContent = ReadJsonFile(jsonFilePath);
-            List<string> analyzedData = AnalyzeJson(jsonContent);
-
-            // Step 2: Generate embeddings for each extracted string
-            Console.WriteLine("Generating embeddings...");
-            List<string> embeddings = new List<string>();
-            foreach (var data in analyzedData)
-            {
-                Console.WriteLine($"Processing: {data}");
-                string embedding = await GetEmbeddingAsync(apiKey, data);
-                embeddings.Add(embedding);
-            }
-
-            // Step 3: Save results to CSV
-            Console.WriteLine("Saving results to CSV...");
-            SaveToCsv(csvFilePath, analyzedData, embeddings);
-
-            Console.WriteLine("Process completed successfully. Output saved to the CSV file.");
+            await ProcessJsonFile(jsonFilePath, csvFilePath, apiKey);
         }
         catch (Exception ex)
         {
-            // Handle any errors during execution
             Console.WriteLine($"An error occurred: {ex.Message}");
         }
     }
 }
-//Continou
