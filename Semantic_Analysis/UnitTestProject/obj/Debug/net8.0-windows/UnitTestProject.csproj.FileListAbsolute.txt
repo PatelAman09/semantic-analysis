@@ -167,3 +167,12 @@ E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\U
 E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\UnitTestProject.pdb
 E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\UnitTestProject.genruntimeconfig.cache
 E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\ref\UnitTestProject.dll
+D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\UnitTestProject.csproj.AssemblyReference.cache
+D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\UnitTestProject.GeneratedMSBuildEditorConfig.editorconfig
+D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\UnitTestProject.AssemblyInfoInputs.cache
+D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\UnitTestProject.AssemblyInfo.cs
+D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\UnitTestProject.csproj.CoreCompileInputs.cache
+D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\UnitTestProject.sourcelink.json
+D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\UnitTestProject.dll
+D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\refint\UnitTestProject.dll
+D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\UnitTestProject.pdb

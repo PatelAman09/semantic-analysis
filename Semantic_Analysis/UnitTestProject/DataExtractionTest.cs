@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace UnitTestProject
 {
-    internal class DataExtractionTest
+    [TestClass]
+    public class DataExtractionTest
     {
+        [TestMethod] 
+        public void Test()
+        {
+
+        }
     }
 }
