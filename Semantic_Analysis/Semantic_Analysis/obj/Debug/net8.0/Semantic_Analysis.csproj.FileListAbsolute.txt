@@ -1,19 +1,35 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/Development
 E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Semantic_Analysis.exe
 E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Semantic_Analysis.deps.json
 E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Semantic_Analysis.runtimeconfig.json
 E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Semantic_Analysis.dll
 E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Semantic_Analysis.pdb
+<<<<<<< HEAD
+=======
+E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Newtonsoft.Json.dll
+E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\OpenAI.dll
+E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\System.ClientModel.dll
+E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\System.Memory.Data.dll
+E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.csproj.AssemblyReference.cache
+>>>>>>> origin/Development
 E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.GeneratedMSBuildEditorConfig.editorconfig
 E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.AssemblyInfoInputs.cache
 E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.AssemblyInfo.cs
 E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.csproj.CoreCompileInputs.cache
 E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.sourcelink.json
+<<<<<<< HEAD
+=======
+E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic.22E14CE2.Up2Date
+>>>>>>> origin/Development
 E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.dll
 E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\refint\Semantic_Analysis.dll
 E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.pdb
 E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.genruntimeconfig.cache
 E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\ref\Semantic_Analysis.dll
+<<<<<<< HEAD
 C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Semantic_Analysis.exe
 C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Semantic_Analysis.deps.json
 C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Semantic_Analysis.runtimeconfig.json
@@ -58,3 +74,26 @@ D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\System.Memory.Data.dll
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.csproj.AssemblyReference.cache
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic.22E14CE2.Up2Date
+=======
+E:\Master_Of_Engg_IT\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Semantic_Analysis.exe
+E:\Master_Of_Engg_IT\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Semantic_Analysis.deps.json
+E:\Master_Of_Engg_IT\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Semantic_Analysis.runtimeconfig.json
+E:\Master_Of_Engg_IT\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Semantic_Analysis.dll
+E:\Master_Of_Engg_IT\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Semantic_Analysis.pdb
+E:\Master_Of_Engg_IT\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Newtonsoft.Json.dll
+E:\Master_Of_Engg_IT\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\OpenAI.dll
+E:\Master_Of_Engg_IT\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\System.ClientModel.dll
+E:\Master_Of_Engg_IT\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\System.Memory.Data.dll
+E:\Master_Of_Engg_IT\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.csproj.AssemblyReference.cache
+E:\Master_Of_Engg_IT\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.GeneratedMSBuildEditorConfig.editorconfig
+E:\Master_Of_Engg_IT\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.AssemblyInfoInputs.cache
+E:\Master_Of_Engg_IT\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.AssemblyInfo.cs
+E:\Master_Of_Engg_IT\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.csproj.CoreCompileInputs.cache
+E:\Master_Of_Engg_IT\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.sourcelink.json
+E:\Master_Of_Engg_IT\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic.22E14CE2.Up2Date
+E:\Master_Of_Engg_IT\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.dll
+E:\Master_Of_Engg_IT\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\refint\Semantic_Analysis.dll
+E:\Master_Of_Engg_IT\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.pdb
+E:\Master_Of_Engg_IT\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.genruntimeconfig.cache
+E:\Master_Of_Engg_IT\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\ref\Semantic_Analysis.dll
+>>>>>>> origin/Development
