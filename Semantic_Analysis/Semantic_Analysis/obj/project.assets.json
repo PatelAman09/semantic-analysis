@@ -1,7 +1,6 @@
 {
   "version": 3,
   "targets": {
-<<<<<<< HEAD
     "net8.0": {
       "Newtonsoft.Json/13.0.3": {
         "type": "package",
@@ -380,61 +379,23 @@
     ]
   },
   "packageFolders": {
-<<<<<<< HEAD
-    "C:\\Users\\ADMIN\\.nuget\\packages\\": {},
-=======
-    "net8.0": {}
-  },
-  "libraries": {},
-  "projectFileDependencyGroups": {
-    "net8.0": []
-  },
-  "packageFolders": {
-    "C:\\Users\\Lenovo\\.nuget\\packages\\": {},
->>>>>>> origin/Saquib-Attar
-=======
     "C:\\Users\\amman\\.nuget\\packages\\": {},
->>>>>>> origin/Aman-Patel
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
-<<<<<<< HEAD
-      "projectUniqueName": "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Ahsan\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj",
+      "projectUniqueName": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj",
       "projectName": "Semantic_Analysis",
-      "projectPath": "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Ahsan\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj",
-      "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Ahsan\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\obj\\",
-=======
-      "projectUniqueName": "D:\\IT\\Software Engineering\\SE Project\\Saquib\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj",
-      "projectName": "Semantic_Analysis",
-      "projectPath": "D:\\IT\\Software Engineering\\SE Project\\Saquib\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj",
-      "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
-      "outputPath": "D:\\IT\\Software Engineering\\SE Project\\Saquib\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\obj\\",
->>>>>>> origin/Saquib-Attar
-=======
-      "projectUniqueName": "E:\\Master_Of_Engg_IT\\SE Project\\Aman-Patel\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj",
-      "projectName": "Semantic_Analysis",
-      "projectPath": "E:\\Master_Of_Engg_IT\\SE Project\\Aman-Patel\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj",
+      "projectPath": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj",
       "packagesPath": "C:\\Users\\amman\\.nuget\\packages\\",
-      "outputPath": "E:\\Master_Of_Engg_IT\\SE Project\\Aman-Patel\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\obj\\",
->>>>>>> origin/Aman-Patel
+      "outputPath": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-<<<<<<< HEAD
-<<<<<<< HEAD
-        "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
-=======
-        "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
->>>>>>> origin/Saquib-Attar
-=======
         "C:\\Users\\amman\\AppData\\Roaming\\NuGet\\NuGet.Config",
->>>>>>> origin/Aman-Patel
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -443,15 +404,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-<<<<<<< HEAD
-<<<<<<< HEAD
-        "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\TestPakages": {},
-=======
-        "C:\\temp\\TestPackages": {},
->>>>>>> origin/Saquib-Attar
-=======
         "C:\\Temp_NuGet_Package": {},
->>>>>>> origin/Aman-Patel
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -475,7 +428,6 @@
     "frameworks": {
       "net8.0": {
         "targetAlias": "net8.0",
-<<<<<<< HEAD
         "dependencies": {
           "Newtonsoft.Json": {
             "target": "Package",
@@ -486,8 +438,6 @@
             "version": "[2.1.0, )"
           }
         },
-=======
->>>>>>> origin/Saquib-Attar
         "imports": [
           "net461",
           "net462",
@@ -507,21 +457,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
       }
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-  },
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Ahsan\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\obj\\project.nuget.cache : Unexpected character encountered while parsing value: <. Path '', line 0, position 0."
-    }
-  ]
-=======
   }
->>>>>>> origin/Saquib-Attar
-=======
-  }
->>>>>>> origin/Aman-Patel
 }

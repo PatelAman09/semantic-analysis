@@ -1,6 +1,13 @@
 # Visual Studio 2015/2017 cache/options directory
 .vs/
 
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
 # Visual Studio 2017 auto generated files
 Generated\ Files/
 
@@ -37,6 +44,11 @@ Generated\ Files/
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
+
+# NUnit
+*.VisualState.xml
+TestResult.xml
+nunit-*.xml
 
 # Build results
 [Dd]ebug/
