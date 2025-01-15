@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Semantic_Analysis", "Semant
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject", "UnitTestProject\UnitTestProject.csproj", "{E68607CD-0CF5-44D6-AE68-5F7E6EE7B1E1}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6359AD4A-DBFE-4415-86A6-D23605EE4D72}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{6359AD4A-DBFE-4415-86A6-D23605EE4D72}"
 	ProjectSection(SolutionItems) = preProject
 		Documentation\Project.md = Documentation\Project.md
 	EndProjectSection

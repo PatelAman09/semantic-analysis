@@ -37,5 +37,22 @@ namespace Semantic_Analysis
             return Math.Sqrt(sumOfSquares);
         }
 
+        // Function to calculate cosine similarity
+        public static double CosineSimilarityCalculation(double[] vectorA, double[] vectorB)
+        {
+            if (vectorA == null || vectorB == null)
+                throw new ArgumentException("Vectors must not be null");
+
+            double dotProduct = CalculateDotProduct(vectorA, vectorB);
+            double magnitudeA = CalculateMagnitude(vectorA);
+            double magnitudeB = CalculateMagnitude(vectorB);
+
+            // Avoid division by zero
+            if (magnitudeA == 0 || magnitudeB == 0)
+                return 0.0;
+
+            return dotProduct / (magnitudeA * magnitudeB);
+        }
+
     }
 }
