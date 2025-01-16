@@ -19,7 +19,7 @@ namespace Semantic_Analysis
             var fileContent = new List<string>();
             try
             {
-                string fileExtension = Path.GetExtension(filePath);
+                string fileExtension = Path.GetExtension(filePath).ToLower();
 
                 // Extract data based on the file type
                 switch (fileExtension)
