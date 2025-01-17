@@ -14,46 +14,42 @@ namespace Semantic_Analysis
     /// This class provides methods for extracting data from various file types 
     public class DataExtraction
     {
-        public static void Fileselection()
+        public static void FileSelection()
         {
-            try
+            // Initialize OpenFileDialog for file selection
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "Select a file to extract data from";
+            openFileDialog.Filter = "All Files (*.*)|*.*|Text Files (*.txt)|*.txt|CSV Files (*.csv)|*.csv|JSON Files (*.json)|*.json|XML Files (*.xml)|*.xml|HTML Files (*.html)|*.html|Markdown Files (*.md)|*.md|PDF Files (*.pdf)|*.pdf";  // Filter for multiple file types
+
+            // Show dialog and check if the user selects a file
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                // Initialize OpenFileDialog for file selection
-                OpenFileDialog openFileDialog = new OpenFileDialog
-                {
-                    Title = "Select a file to extract data from",
-                    Filter = "All Files (*.*)|*.*|Text Files (*.txt)|*.txt|CSV Files (*.csv)|*.csv|JSON Files (*.json)|*.json|XML Files (*.xml)|*.xml|HTML Files (*.html)|*.html|Markdown Files (*.md)|*.md|PDF Files (*.pdf)|*.pdf"
-                };
+                string userFilePath = openFileDialog.FileName;  // Get the selected file path
 
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                // Check if the file exists (should always be true after file dialog)
+                if (File.Exists(userFilePath))
                 {
-                    string userFilePath = openFileDialog.FileName;
-                    if (File.Exists(userFilePath))
-                    {
-                        // Extract data from the selected file
-                        DataExtraction processor = new DataExtraction();
-                        List<string> extractedData = processor.ExtractDataFromFile(userFilePath);
+                    // Create an instance of the DataProcessor class
+                    DataExtraction processor = new DataExtraction();
 
-                        // Display the extracted data
-                        Console.WriteLine("\nExtracted Data:");
-                        foreach (var line in extractedData)
-                        {
-                            Console.WriteLine(line);
-                        }
-                    }
-                    else
+                    // Extract data from the file
+                    List<string> extractedData = processor.ExtractDataFromFile(userFilePath);
+
+                    // Display the extracted (and cleaned) data
+                    Console.WriteLine("\nExtracted Data:");
+                    foreach (var line in extractedData)
                     {
-                        Console.WriteLine("The selected file does not exist. Please try again.");
+                        Console.WriteLine(line);
                     }
                 }
                 else
                 {
-                    Console.WriteLine("No file was selected. Exiting the program.");
+                    Console.WriteLine("The selected file does not exist. Please try again.");
                 }
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine($"An error occurred: {ex.Message}");
+                Console.WriteLine("No file was selected. Exiting the program.");
             }
         }
 
