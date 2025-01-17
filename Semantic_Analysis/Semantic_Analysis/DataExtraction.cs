@@ -1,15 +1,62 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+using Newtonsoft.Json;
+using System.Xml.Linq;
+using System.Windows.Forms;
+
 
 namespace Semantic_Analysis
 {
+    
     /// This class provides methods for extracting data from various file types 
     public class DataExtraction
     {
+        public static void Fileselection()
+        {
+            try
+            {
+                // Initialize OpenFileDialog for file selection
+                OpenFileDialog openFileDialog = new OpenFileDialog
+                {
+                    Title = "Select a file to extract data from",
+                    Filter = "All Files (*.*)|*.*|Text Files (*.txt)|*.txt|CSV Files (*.csv)|*.csv|JSON Files (*.json)|*.json|XML Files (*.xml)|*.xml|HTML Files (*.html)|*.html|Markdown Files (*.md)|*.md|PDF Files (*.pdf)|*.pdf"
+                };
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string userFilePath = openFileDialog.FileName;
+                    if (File.Exists(userFilePath))
+                    {
+                        // Extract data from the selected file
+                        DataExtraction processor = new DataExtraction();
+                        List<string> extractedData = processor.ExtractDataFromFile(userFilePath);
+
+                        // Display the extracted data
+                        Console.WriteLine("\nExtracted Data:");
+                        foreach (var line in extractedData)
+                        {
+                            Console.WriteLine(line);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("The selected file does not exist. Please try again.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No file was selected. Exiting the program.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+        }
+
         // --- Data Extraction Methods ---
         /// Extracts data from a file based on its type. 
         /// <param name="filePath">The full path of the PDF file to extract data from.</param>
