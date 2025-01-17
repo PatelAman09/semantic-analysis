@@ -59,65 +59,55 @@ class Embedding
         return extractedData;
     }
 
-    // Function to generate embedding using EmbeddingClient (adapted from the first code)
-    static List<(string description, string embedding)> GetEmbeddings(string apiKey, List<string> descriptions)
+    // Function to generate embeddings using EmbeddingClient
+    static async Task GenerateAndSaveEmbeddingsAsync(string apiKey, List<string> descriptions, string csvFilePath, int saveInterval)
     {
         Console.WriteLine("Generating embeddings...");
         EmbeddingClient client = new EmbeddingClient("text-embedding-3-small", apiKey);
 
-        List<(string description, string embedding)> embeddings = new();
-
-        foreach (string description in descriptions)
+        // Prepare CSV file
+        using StreamWriter writer = new StreamWriter(csvFilePath, append: true);
+        if (new FileInfo(csvFilePath).Length == 0)
         {
-            Console.WriteLine($"Processing: {description}");
-            OpenAIEmbedding embedding = client.GenerateEmbedding(description);
-            string embeddingString = string.Join(",", embedding.ToFloats().ToArray());
-            embeddings.Add((description, embeddingString));
+            writer.WriteLine("Description,Embedding"); // Write header only if the file is empty
         }
 
-        return embeddings;
-    }
-
-    // Function to save data and embeddings to a CSV file
-    static void SaveToCsv(string csvFilePath, List<string> data, List<string> embeddings)
-    {
-        if (data.Count != embeddings.Count)
+        for (int i = 0; i < descriptions.Count; i++)
         {
-            throw new Exception("Data and embeddings lists have different lengths.");
-        }
-
-        using (StreamWriter writer = new StreamWriter(csvFilePath))
-        {
-            writer.WriteLine("Data,Embedding");
-
-            for (int i = 0; i < data.Count; i++)
+            try
             {
-                writer.WriteLine($"\"{data[i]}\",\"{embeddings[i]}\"");
+                Console.WriteLine($"Processing: {descriptions[i]}");
+                OpenAIEmbedding embedding = client.GenerateEmbedding(descriptions[i]);
+                string embeddingString = string.Join(",", embedding.ToFloats().ToArray());
+
+                // Save the embedding immediately
+                writer.WriteLine($"\"{descriptions[i]}\",\"{embeddingString}\"");
+
+                // Save progress after the specified interval
+                if ((i + 1) % saveInterval == 0)
+                {
+                    writer.Flush(); // Ensure data is written to the file
+                    Console.WriteLine($"Checkpoint: Saved {i + 1} embeddings.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error processing description at index {i}: {ex.Message}");
             }
         }
+
+        Console.WriteLine("All embeddings processed and saved.");
     }
 
     // Orchestrator function to process the JSON file and save results
-    static async Task ProcessJsonFile(string jsonFilePath, string csvFilePath, string apiKey)
+    static async Task ProcessJsonFileAsync(string jsonFilePath, string csvFilePath, string apiKey, int saveInterval)
     {
         Console.WriteLine("Reading and analyzing JSON file...");
         string jsonContent = ReadJsonFile(jsonFilePath);
         List<string> analyzedData = AnalyzeJson(jsonContent);
 
-        Console.WriteLine("Generating embeddings...");
-        List<(string description, string embedding)> embeddings = GetEmbeddings(apiKey, analyzedData);
-
-        // Extract the embeddings from the tuple list for saving
-        List<string> embeddingStrings = new List<string>();
-        foreach (var embed in embeddings)
-        {
-            embeddingStrings.Add(embed.embedding);
-        }
-
-        Console.WriteLine("Saving results to CSV...");
-        SaveToCsv(csvFilePath, analyzedData, embeddingStrings);
-
-        Console.WriteLine("Process completed successfully. Output saved to the CSV file.");
+        Console.WriteLine("Starting embedding generation...");
+        await GenerateAndSaveEmbeddingsAsync(apiKey, analyzedData, csvFilePath, saveInterval);
     }
 
     // Main function to collect user input and call the orchestrator
@@ -126,15 +116,21 @@ class Embedding
         try
         {
             Console.WriteLine("Enter the path to your JSON file:");
-            string jsonFilePath = Console.ReadLine() ?? throw new ArgumentNullException("jsonFilePath cannot be null");
+            string jsonFilePath = Console.ReadLine() ?? throw new ArgumentNullException("JSON file path cannot be null.");
 
             Console.WriteLine("Enter the path to save the output CSV file:");
-            string csvFilePath = Console.ReadLine() ?? throw new ArgumentNullException("csvFilePath cannot be null");
+            string csvFilePath = Console.ReadLine() ?? throw new ArgumentNullException("CSV file path cannot be null.");
+
+            Console.WriteLine("Enter the save interval (e.g., 10):");
+            if (!int.TryParse(Console.ReadLine(), out int saveInterval) || saveInterval <= 0)
+            {
+                throw new ArgumentException("Save interval must be a positive integer.");
+            }
 
             string apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY")
                             ?? throw new Exception("Environment variable 'OPENAI_API_KEY' is not set.");
 
-            await ProcessJsonFile(jsonFilePath, csvFilePath, apiKey);
+            await ProcessJsonFileAsync(jsonFilePath, csvFilePath, apiKey, saveInterval);
         }
         catch (Exception ex)
         {
