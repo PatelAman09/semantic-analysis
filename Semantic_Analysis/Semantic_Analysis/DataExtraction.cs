@@ -19,7 +19,7 @@ namespace Semantic_Analysis
             // Initialize OpenFileDialog for file selection
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Title = "Select a file to extract data from";
-            openFileDialog.Filter = "All Files (*.*)|*.*|Text Files (*.txt)|*.txt|CSV Files (*.csv)|*.csv|JSON Files (*.json)|*.json|XML Files (*.xml)|*.xml|HTML Files (*.html)|*.html|Markdown Files (*.md)|*.md|PDF Files (*.pdf)|*.pdf";  // Filter for multiple file types
+            openFileDialog.Filter = "All Files (*.*)|*.*|Text Files (*.txt)|*.txt";  // Filter for multiple file types
 
             // Show dialog and check if the user selects a file
             if (openFileDialog.ShowDialog() == DialogResult.OK)
@@ -35,11 +35,25 @@ namespace Semantic_Analysis
                     // Extract data from the file
                     List<string> extractedData = processor.ExtractDataFromFile(userFilePath);
 
-                    // Display the extracted (and cleaned) data
-                    Console.WriteLine("\nExtracted Data:");
-                    foreach (var line in extractedData)
+                    // Initialize SaveFileDialog to ask the user where to save the output JSON file
+                    SaveFileDialog saveFileDialog = new SaveFileDialog();
+                    saveFileDialog.Title = "Save Extracted Data as JSON";
+                    saveFileDialog.Filter = "JSON Files (*.json)|*.json|All Files (*.*)|*.*";
+                    saveFileDialog.FileName = Path.GetFileNameWithoutExtension(userFilePath) + "_extracted.json"; // Default name
+
+                    // Show dialog and check if the user selects a location and file name
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
                     {
-                        Console.WriteLine(line);
+                        string outputFilePath = saveFileDialog.FileName;
+
+                        // Save the extracted data to the JSON file
+                        processor.SaveDataToJson(outputFilePath, extractedData);
+
+                        Console.WriteLine($"\nData extracted and saved to: {outputFilePath}");
+                    }
+                    else
+                    {
+                        Console.WriteLine("No location or file name was selected. Exiting the program.");
                     }
                 }
                 else
@@ -96,6 +110,19 @@ namespace Semantic_Analysis
                 Console.WriteLine($"Error reading Text file: {ex.Message}");
             }
             return data;
+        }
+
+        public void SaveDataToJson(string outputFilePath, List<string> data)
+        {
+            try
+            {
+                var jsonContent = JsonConvert.SerializeObject(new { extractedData = data }, Formatting.Indented);
+                File.WriteAllText(outputFilePath, jsonContent);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error saving data to JSON file: {ex.Message}");
+            }
         }
     }
 }
