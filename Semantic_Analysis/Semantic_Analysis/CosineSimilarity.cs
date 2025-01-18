@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Semantic_Analysis
 {
@@ -16,38 +16,32 @@ namespace Semantic_Analysis
             var vectors = new List<double[]>();
             try
             {
-                using (var reader = new StreamReader(inputFilePath))
+                using (var reader = new StreamReader(inputFilePath, Encoding.UTF8, true, 65536))
                 {
                     while (!reader.EndOfStream)
                     {
                         var line = reader.ReadLine();
                         if (string.IsNullOrWhiteSpace(line)) continue;
 
-                        // Split the line by commas and parse values to double
-                        var values = line.Split(',');
+                        // Process the line to extract vector data
+                        var parts = line.Split(new[] { ':' }, 2); // Split at first colon to separate label
+                        if (parts.Length < 2) continue; // If no vector data, skip
 
-                        //var vector = Array.ConvertAll(values, double.Parse);
-                        //vectors.Add(vector);
-                        // Skip lines that don't contain valid numeric data
-                        var vector = new double[values.Length];
-                        bool validLine = true;
+                        // Extract the numeric part after the colon
+                        var vectorPart = parts[1];
 
-                        for (int i = 0; i < values.Length; i++)
-                        {
-                            if (!double.TryParse(values[i], out vector[i]))
-                            {
-                                validLine = false;
-                                break;
-                            }
-                        }
+                        // Clean up any non-numeric identifiers or metadata before the actual vector
+                        var vectorData = vectorPart.Split(',').Skip(1).FirstOrDefault(); // Skip metadata like IDs
 
-                        if (validLine)
+                        if (!string.IsNullOrEmpty(vectorData))
                         {
-                            vectors.Add(vector); // Only add valid vectors
-                        }
-                        else
-                        {
-                            Console.WriteLine($"Skipping invalid line: {line}");
+                            // Split the vector by commas to get individual values and parse them into a double array
+                            var vectorValues = vectorData.Split(',')
+                                                         .Select(value => double.Parse(value.Trim('"')))
+                                                         .ToArray();
+
+                            vectors.Add(vectorValues);
+                            Console.WriteLine($"Added vector: {string.Join(",", vectorValues)}");
                         }
                     }
                 }
@@ -55,6 +49,12 @@ namespace Semantic_Analysis
             catch (Exception ex)
             {
                 throw new Exception($"Error reading CSV file: {ex.Message}");
+            }
+
+            if (vectors.Count < 2)
+            {
+                Console.WriteLine("CSV must contain at least two vectors.");
+                throw new InvalidOperationException("Insufficient number of vectors for cosine similarity calculation.");
             }
 
             return vectors;
@@ -67,8 +67,17 @@ namespace Semantic_Analysis
                 Console.WriteLine("CSV must contain at least two vectors.");
                 throw new InvalidOperationException("Insufficient number of vectors for cosine similarity calculation.");
             }
+
+            int vectorLength = vectors[0].Length;
+            foreach (var vector in vectors)
+            {
+                if (vector.Length != vectorLength)
+                {
+                    throw new InvalidOperationException("All vectors must be of the same length.");
+                }
+            }
         }
-        // Function to calculate the dot product of two vectors
+
         public static double CalculateDotProduct(double[] vectorA, double[] vectorB)
         {
             if (vectorA.Length != vectorB.Length)
@@ -116,33 +125,28 @@ namespace Semantic_Analysis
 
         public static void Main(string[] args)
         {
-            string inputFilePath = "E:\\Test\\sample_vectors.csv"; // Provide the path to your input CSV file
-            string outputFilePath = "E:\\Test\\output_file.csv"; // Provide the path to save the output
+            string inputFilePath = "E:\\Test\\input_Sample.csv"; // You can modify this for user input
+            string outputFilePath = "E:\\Test\\output_file.csv";
 
             try
             {
-                // Step 1: Read vectors from the CSV file
-                List<double[]> vectors = CosineSimilarity.ReadVectorsFromCsv(inputFilePath);
+                List<double[]> vectors = ReadVectorsFromCsv(inputFilePath);
+                ValidateVectors(vectors);
 
-                // Step 2: Validate that there are at least two vectors
-                CosineSimilarity.ValidateVectors(vectors);
-
-                // Step 3: Calculate the cosine similarity for each pair of vectors
                 List<string> outputData = new List<string>
                 {
-                    "Vector1,Vector2,CosineSimilarity" // Header row for the output CSV
+                    "Vector1,Vector2,CosineSimilarity" // Header
                 };
 
                 for (int i = 0; i < vectors.Count - 1; i++)
                 {
                     for (int j = i + 1; j < vectors.Count; j++)
                     {
-                        double similarity = CosineSimilarity.CosineSimilarityCalculation(vectors[i], vectors[j]);
-                        outputData.Add($"{i + 1},{j + 1},{similarity:F4}"); // Add the similarity for this pair
+                        double similarity = CosineSimilarityCalculation(vectors[i], vectors[j]);
+                        outputData.Add($"{i + 1},{j + 1},{similarity}");
                     }
                 }
 
-                // Step 4: Save the results to a CSV file
                 SaveOutputToCsv(outputFilePath, outputData);
 
                 Console.WriteLine("Cosine similarity calculations saved to the output CSV file.");
@@ -156,12 +160,19 @@ namespace Semantic_Analysis
         // Function to save the output data to a CSV file
         public static void SaveOutputToCsv(string filePath, List<string> data)
         {
-            using (var writer = new StreamWriter(filePath))
+            try
             {
-                foreach (string line in data)
+                using (var writer = new StreamWriter(filePath))
                 {
-                    writer.WriteLine(line);
+                    foreach (string line in data)
+                    {
+                        writer.WriteLine(line);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred while saving the output: {ex.Message}");
             }
         }
     }
