@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Net.Http;
 using System.Text;
@@ -78,7 +79,10 @@ class Embedding
             {
                 Console.WriteLine($"Processing: {descriptions[i]}");
                 OpenAIEmbedding embedding = client.GenerateEmbedding(descriptions[i]);
-                string embeddingString = string.Join(",", embedding.ToFloats().ToArray());
+
+                // Convert ReadOnlyMemory<float> to array and create a string with periods (.) separating the vector components
+                var embeddingArray = embedding.ToFloats().ToArray();
+                var embeddingString = string.Join(",", embeddingArray.Select(e => e.ToString(CultureInfo.InvariantCulture)));  // Use InvariantCulture to force period as decimal separator
 
                 // Save the embedding immediately
                 writer.WriteLine($"\"{descriptions[i]}\",\"{embeddingString}\"");
