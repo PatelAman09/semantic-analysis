@@ -14,12 +14,19 @@ namespace Semantic_Analysis
     /// This class provides methods for extracting data from various file types 
     public class DataExtraction
     {
+        [STAThread]
+        public static void Main(string[] args)
+        {
+            // Call FileSelection directly when the application starts
+            FileSelection();
+        }
+
         public static void FileSelection()
         {
             // Initialize OpenFileDialog for file selection
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Title = "Select a file to extract data from";
-            openFileDialog.Filter = "All Files (*.*)|*.*|Text Files (*.txt)|*.txt";  // Filter for multiple file types
+            openFileDialog.Filter = "All Files (*.*)|*.*|Text Files (*.txt)|*.txt|CSV Files (*.csv)|*.csv";  // Filter for multiple file types
 
             // Show dialog and check if the user selects a file
             if (openFileDialog.ShowDialog() == DialogResult.OK)
@@ -68,6 +75,8 @@ namespace Semantic_Analysis
         }
 
         // --- Data Extraction Methods ---
+
+        
         /// Extracts data from a file based on its type. 
         /// <param name="filePath">The full path of the PDF file to extract data from.</param>
         /// <returns>A list of strings representing the extracted text from each page of the PDF.</returns>
@@ -83,6 +92,9 @@ namespace Semantic_Analysis
                 {
                     case ".txt":
                         fileContent = ExtractDataFromText(filePath);
+                        break;
+                    case ".csv":
+                        fileContent = ExtractDataFromCsv(filePath);
                         break;
                 }
             }
@@ -111,6 +123,26 @@ namespace Semantic_Analysis
             }
             return data;
         }
+
+
+        /// Extracts data from a CSV file.
+        /// <param name="filePath">The path to the CSV file.</param>
+        /// <returns>A list of strings containing the extracted CSV data.</returns>
+        private List<string> ExtractDataFromCsv(string filePath)
+        {
+            var data = new List<string>();
+            try
+            {
+                var lines = File.ReadAllLines(filePath);
+                data.AddRange(lines);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error reading CSV file: {ex.Message}");
+            }
+            return data;
+        }
+
 
         public void SaveDataToJson(string outputFilePath, List<string> data)
         {
