@@ -24,5 +24,22 @@ namespace UnitTestProject
 
             }
         }
+
+        [TestClass]
+
+        public sealed class TestCase2
+        {
+            [TestMethod]
+
+            public void CalculateMagnitudeUnitTest()
+            {
+                double[] vector = { 3.0, 4.0 };
+
+                double result = CosineSimilarity.CalculateMagnitude(vector);
+
+                Assert.AreEqual(5.0, result, "The magnitude should be 5.");
+            }
+
+        }
     }
 }
