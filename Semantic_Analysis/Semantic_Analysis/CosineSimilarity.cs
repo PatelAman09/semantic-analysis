@@ -125,8 +125,8 @@ namespace Semantic_Analysis
 
         public static void Main(string[] args)
         {
-            string inputFilePath = "E:\\Test\\input_Sample.csv"; // You can modify this for user input
-            string outputFilePath = "E:\\Test\\output_file.csv";
+            string inputFilePath = "E:\\Test\\input.csv"; // You can modify this for user input
+            string outputFilePath = "E:\\Test\\output.csv";
 
             try
             {
@@ -135,7 +135,7 @@ namespace Semantic_Analysis
 
                 List<string> outputData = new List<string>
                 {
-                    "Vector1,Vector2,CosineSimilarity" // Header
+                    "CosineSimilarity" // Header
                 };
 
                 for (int i = 0; i < vectors.Count - 1; i++)
@@ -143,7 +143,7 @@ namespace Semantic_Analysis
                     for (int j = i + 1; j < vectors.Count; j++)
                     {
                         double similarity = CosineSimilarityCalculation(vectors[i], vectors[j]);
-                        outputData.Add($"{i + 1},{j + 1},{similarity}");
+                        outputData.Add($"{similarity}");
                     }
                 }
 

@@ -41,5 +41,22 @@ namespace UnitTestProject
             }
 
         }
+
+        [TestClass]
+
+        public sealed class TestCase3
+        {
+            [TestMethod]
+
+            public void CosineSimilarityUnitTest()
+            {
+                double[] vectorA = { 1.0, 2.0, 3.0 };
+                double[] vectorB = { 4.0, 5.0, 6.0 };
+
+                double result = CosineSimilarity.CosineSimilarityCalculation(vectorA, vectorB);
+
+                Assert.AreEqual(0.974631846, result, 1e-6, "Cosine similarity should be approximately 0.9746.");
+            }
+        }
     }
 }
