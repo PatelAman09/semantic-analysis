@@ -96,6 +96,10 @@ namespace Semantic_Analysis
                     case ".csv":
                         fileContent = ExtractDataFromCsv(filePath);
                         break;
+                    case ".json":
+                        fileContent = ExtractDataFromJson(filePath);
+                        break;
+
                 }
             }
             catch(Exception ex)
@@ -139,6 +143,36 @@ namespace Semantic_Analysis
             catch (Exception ex)
             {
                 Console.WriteLine($"Error reading CSV file: {ex.Message}");
+            }
+            return data;
+        }
+
+     
+        /// Extracts data from a JSON file and returns key-value pairs.
+        /// <param name="filePath">The path to the JSON file.</param>
+        /// <returns>A list of strings containing key-value pairs from the JSON file.</returns>
+        private List<string> ExtractDataFromJson(string filePath)
+        {
+            var data = new List<string>();
+            try
+            {
+                var json = File.ReadAllText(filePath);
+
+                // Deserialize the JSON data as a list of strings
+                var jsonArray = JsonConvert.DeserializeObject<List<string>>(json);
+
+                if (jsonArray != null)
+                {
+                    data.AddRange(jsonArray);
+                }
+                else
+                {
+                    data.Add("Error: JSON content is null or could not be parsed.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error reading JSON file: {ex.Message}");
             }
             return data;
         }
