@@ -99,7 +99,9 @@ namespace Semantic_Analysis
                     case ".json":
                         fileContent = ExtractDataFromJson(filePath);
                         break;
-
+                    case ".xml":
+                        fileContent = ExtractDataFromXml(filePath);
+                        break;
                 }
             }
             catch(Exception ex)
@@ -176,6 +178,28 @@ namespace Semantic_Analysis
             }
             return data;
         }
+
+        /// Extracts data from an XML file.
+        /// <param name="filePath">The path to the XML file.</param>
+        /// <returns>A list of strings containing extracted XML data.</returns>
+        private List<string> ExtractDataFromXml(string filePath)
+        {
+            var data = new List<string>();
+            try
+            {
+                var xml = XDocument.Load(filePath);
+                foreach (var element in xml.Descendants())
+                {
+                    data.Add($"{element.Name}: {element.Value}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error reading XML file: {ex.Message}");
+            }
+            return data;
+        }
+
 
 
         public void SaveDataToJson(string outputFilePath, List<string> data)
