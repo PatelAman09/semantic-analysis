@@ -102,6 +102,10 @@ namespace Semantic_Analysis
                     case ".xml":
                         fileContent = ExtractDataFromXml(filePath);
                         break;
+                    case ".html":
+                    case ".htm":
+                        fileContent = ExtractDataFromHtml(filePath);
+                        break;
                 }
             }
             catch(Exception ex)
@@ -199,6 +203,26 @@ namespace Semantic_Analysis
             }
             return data;
         }
+
+        /// Extracts text data from an HTML file by removing HTML tags.
+        /// <param name="filePath">The path to the HTML file.</param>
+        /// <returns>A list of strings containing the extracted text data.</returns>
+        private List<string> ExtractDataFromHtml(string filePath)
+        {
+            var data = new List<string>();
+            try
+            {
+                var htmlContent = File.ReadAllText(filePath);
+                var textOnly = Regex.Replace(htmlContent, @"<[^>]+?>", " ").Replace("\n", " ").Trim();
+                data.Add(textOnly);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error reading HTML file: {ex.Message}");
+            }
+            return data;
+        }
+
 
 
 
