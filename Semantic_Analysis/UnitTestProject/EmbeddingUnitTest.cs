@@ -7,7 +7,7 @@ using Newtonsoft.Json.Linq;
 
 namespace UnitTestProject
 {
-    public static class Embedding // Your main class (for reference)
+    public static class Embedding // Your main class
     {
         public static string ReadJsonFile(string jsonFilePath)
         {
@@ -48,7 +48,8 @@ namespace UnitTestProject
                 }
                 else if (obj is JValue jValue)
                 {
-                    extractedData.Add($"{prefix}{jValue.Value}");
+                    // Add the prefix and the value
+                    extractedData.Add($"{prefix.TrimEnd(' ')}{jValue.Value}");
                 }
             }
 
@@ -88,7 +89,6 @@ namespace UnitTestProject
         {
             // Arrange
             string nonExistentFilePath = "nonexistent.json";
-
 
             // Act & Assert
             Assert.ThrowsException<FileNotFoundException>(() => Embedding.ReadJsonFile(nonExistentFilePath));
