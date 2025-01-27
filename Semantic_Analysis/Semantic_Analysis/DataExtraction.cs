@@ -106,6 +106,10 @@ namespace Semantic_Analysis
                     case ".htm":
                         fileContent = ExtractDataFromHtml(filePath);
                         break;
+                    case ".md":
+                        fileContent = ExtractDataFromMarkdown(filePath);
+                        break;
+
                 }
             }
             catch(Exception ex)
@@ -223,6 +227,25 @@ namespace Semantic_Analysis
             return data;
         }
 
+
+        /// Extracts text data from a Markdown file by removing Markdown syntax.
+        /// <param name="filePath">The path to the Markdown file.</param>
+        /// <returns>A list of strings containing the extracted text data.</returns>
+        private List<string> ExtractDataFromMarkdown(string filePath)
+        {
+            var data = new List<string>();
+            try
+            {
+                var markdownContent = File.ReadAllText(filePath);
+                var textOnly = Regex.Replace(markdownContent, @"[#\*\-]\s?", " ").Replace("\n", " ").Trim();
+                data.Add(textOnly);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error reading Markdown file: {ex.Message}");
+            }
+            return data;
+        }
 
 
 
