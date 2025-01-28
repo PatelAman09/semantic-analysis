@@ -42,6 +42,9 @@ namespace Semantic_Analysis
                     // Extract data from the file
                     List<string> extractedData = processor.ExtractDataFromFile(userFilePath);
 
+                    // Clean the extracted data
+                    extractedData = processor.CleanData(extractedData);  
+
                     // Initialize SaveFileDialog to ask the user where to save the output JSON file
                     SaveFileDialog saveFileDialog = new SaveFileDialog();
                     saveFileDialog.Title = "Save Extracted Data as JSON";
@@ -261,5 +264,27 @@ namespace Semantic_Analysis
                 Console.WriteLine($"Error saving data to JSON file: {ex.Message}");
             }
         }
+
+        /// Cleans extracted data by trimming whitespace, removing special characters, and converting to lowercase.
+        /// <param name="data">The extracted data to be cleaned.</param>
+        /// <returns>A list of cleaned strings.</returns>
+        private List<string> CleanData(List<string> data)
+        {
+            var cleanedData = new List<string>();
+
+            foreach (var line in data)
+            {
+                var cleanedLine = line.Trim();  // Trim whitespaces
+                cleanedLine = Regex.Replace(cleanedLine, @"[^A-Za-z0-9\s]", ""); // Remove special characters
+                cleanedLine = cleanedLine.ToLower(); // Convert to lowercase
+                if (!string.IsNullOrEmpty(cleanedLine)) // Remove empty lines
+                {
+                    cleanedData.Add(cleanedLine);
+                }
+            }
+
+            return cleanedData;
+        }
+
     }
 }
