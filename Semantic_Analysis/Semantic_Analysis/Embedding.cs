@@ -18,7 +18,6 @@ class Embedding
         {
             throw new FileNotFoundException($"The specified JSON file does not exist: {jsonFilePath}");
         }
-
         return File.ReadAllText(jsonFilePath);
     }
 
