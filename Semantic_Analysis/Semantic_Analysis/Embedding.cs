@@ -2,23 +2,24 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Net.Http;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using OpenAI.Embeddings; // NuGet package for embeddings
+using OpenAI.Embeddings; // Ensure you have the OpenAI NuGet package installed
 
-class Embedding
+class EmbeddingProcessor
 {
     // Function to read JSON content from a file
-    static string ReadJsonFile(string jsonFilePath)
+    static async Task<string> ReadJsonFileAsync(string jsonFilePath)
     {
         if (!File.Exists(jsonFilePath))
         {
             throw new FileNotFoundException($"The specified JSON file does not exist: {jsonFilePath}");
         }
-        return File.ReadAllText(jsonFilePath);
+
+        return await File.ReadAllTextAsync(jsonFilePath);
     }
 
     // Function to analyze JSON content and extract data
@@ -32,7 +33,7 @@ class Embedding
             throw new Exception("The provided JSON content is empty or malformed.");
         }
 
-        void Traverse(object? obj, string prefix = "")
+        void Traverse(object obj, string prefix = "")
         {
             if (obj is JObject jObject)
             {
@@ -59,43 +60,46 @@ class Embedding
         return extractedData;
     }
 
-    // Function to generate embeddings using EmbeddingClient
+    // Function to generate embeddings using OpenAI EmbeddingClient
     static async Task GenerateAndSaveEmbeddingsAsync(string apiKey, List<string> descriptions, string csvFilePath, int saveInterval)
     {
-        Console.WriteLine("Generating embeddings...");
-        EmbeddingClient client = new EmbeddingClient("text-embedding-3-small", apiKey);
+        Console.WriteLine("Initializing embedding generation...");
 
-        // Prepare CSV file
-        using StreamWriter writer = new StreamWriter(csvFilePath, append: true);
-        if (new FileInfo(csvFilePath).Length == 0)
+        EmbeddingClient client = new EmbeddingClient("text-embedding-3-small", apiKey);
+        bool fileExists = File.Exists(csvFilePath);
+
+        using StreamWriter writer = new StreamWriter(csvFilePath, append: true, encoding: Encoding.UTF8);
+
+        if (!fileExists)
         {
-            writer.WriteLine("Description,Embedding"); // Write header only if the file is empty
+            await writer.WriteLineAsync("Description,Embedding");
         }
 
         for (int i = 0; i < descriptions.Count; i++)
         {
             try
             {
-                Console.WriteLine($"Processing: {descriptions[i]}");
-                OpenAIEmbedding embedding = client.GenerateEmbedding(descriptions[i]);
+                string description = descriptions[i];
+                Console.WriteLine($"Processing entry {i + 1}/{descriptions.Count}: {description}");
 
-                // Convert ReadOnlyMemory<float> to array and create a string with periods (.) separating the vector components
-                var embeddingArray = embedding.ToFloats().ToArray();
-                var embeddingString = string.Join(",", embeddingArray.Select(e => e.ToString(CultureInfo.InvariantCulture)));  // Use InvariantCulture to force period as decimal separator
+                // Generate embedding asynchronously
+                OpenAIEmbedding embedding = await client.GenerateEmbeddingAsync(description);
 
-                // Save the embedding immediately
-                writer.WriteLine($"\"{descriptions[i]}\",\"{embeddingString}\"");
+                // Convert ReadOnlyMemory<float> to an array and format the output
+                string embeddingString = string.Join(",", embedding.ToFloats().ToArray()
+                                                        .Select(e => e.ToString(CultureInfo.InvariantCulture)));
 
-                // Save progress after the specified interval
+                await writer.WriteLineAsync($"\"{description}\",\"{embeddingString}\"");
+
                 if ((i + 1) % saveInterval == 0)
                 {
-                    writer.Flush(); // Ensure data is written to the file
-                    Console.WriteLine($"Checkpoint: Saved {i + 1} embeddings.");
+                    await writer.FlushAsync();
+                    Console.WriteLine($"Checkpoint reached: {i + 1} embeddings saved.");
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error processing description at index {i}: {ex.Message}");
+                Console.WriteLine($"Error processing entry {i + 1}: {ex.Message}");
             }
         }
 
@@ -105,12 +109,19 @@ class Embedding
     // Orchestrator function to process the JSON file and save results
     static async Task ProcessJsonFileAsync(string jsonFilePath, string csvFilePath, string apiKey, int saveInterval)
     {
-        Console.WriteLine("Reading and analyzing JSON file...");
-        string jsonContent = ReadJsonFile(jsonFilePath);
-        List<string> analyzedData = AnalyzeJson(jsonContent);
+        try
+        {
+            Console.WriteLine("Reading and analyzing JSON file...");
+            string jsonContent = await ReadJsonFileAsync(jsonFilePath);
+            List<string> analyzedData = AnalyzeJson(jsonContent);
 
-        Console.WriteLine("Starting embedding generation...");
-        await GenerateAndSaveEmbeddingsAsync(apiKey, analyzedData, csvFilePath, saveInterval);
+            Console.WriteLine("Starting embedding generation...");
+            await GenerateAndSaveEmbeddingsAsync(apiKey, analyzedData, csvFilePath, saveInterval);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
     }
 
     // Main function to collect user input and call the orchestrator
