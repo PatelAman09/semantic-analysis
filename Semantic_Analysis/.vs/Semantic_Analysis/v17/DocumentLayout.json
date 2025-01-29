@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "E:\\Master_Of_Engg_IT\\SE Project\\Aman-Patel\\semantic-analysis\\Semantic_Analysis\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E68607CD-0CF5-44D6-AE68-5F7E6EE7B1E1}|UnitTestProject\\UnitTestProject.csproj|e:\\master_of_engg_it\\se project\\aman-patel\\semantic-analysis\\semantic_analysis\\unittestproject\\cosinesimilarityunittest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E68607CD-0CF5-44D6-AE68-5F7E6EE7B1E1}|UnitTestProject\\UnitTestProject.csproj|solutionrelative:unittestproject\\cosinesimilarityunittest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{9D28E360-331D-4197-857A-50BA888C9E81}|Semantic_Analysis\\Semantic_Analysis.csproj|e:\\master_of_engg_it\\se project\\aman-patel\\semantic-analysis\\semantic_analysis\\semantic_analysis\\cosinesimilarity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9D28E360-331D-4197-857A-50BA888C9E81}|Semantic_Analysis\\Semantic_Analysis.csproj|solutionrelative:semantic_analysis\\cosinesimilarity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D28E360-331D-4197-857A-50BA888C9E81}|Semantic_Analysis\\Semantic_Analysis.csproj|e:\\master_of_engg_it\\se project\\aman-patel\\semantic-analysis\\semantic_analysis\\semantic_analysis\\appsetting.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{9D28E360-331D-4197-857A-50BA888C9E81}|Semantic_Analysis\\Semantic_Analysis.csproj|solutionrelative:semantic_analysis\\appsetting.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D28E360-331D-4197-857A-50BA888C9E81}|Semantic_Analysis\\Semantic_Analysis.csproj|e:\\master_of_engg_it\\se project\\aman-patel\\semantic-analysis\\semantic_analysis\\semantic_analysis\\semantic_analysis.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{9D28E360-331D-4197-857A-50BA888C9E81}|Semantic_Analysis\\Semantic_Analysis.csproj|solutionrelative:semantic_analysis\\semantic_analysis.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -26,26 +30,39 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CosineSimilarityUnitTest.cs",
-              "DocumentMoniker": "E:\\Master_Of_Engg_IT\\SE Project\\Aman-Patel\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\CosineSimilarityUnitTest.cs",
-              "RelativeDocumentMoniker": "UnitTestProject\\CosineSimilarityUnitTest.cs",
-              "ToolTip": "E:\\Master_Of_Engg_IT\\SE Project\\Aman-Patel\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\CosineSimilarityUnitTest.cs",
-              "RelativeToolTip": "UnitTestProject\\CosineSimilarityUnitTest.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAMwB4AAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-20T22:39:12.319Z",
+              "DocumentIndex": 2,
+              "Title": "Semantic_Analysis",
+              "DocumentMoniker": "E:\\Master_Of_Engg_IT\\SE Project\\Aman-Patel\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj",
+              "RelativeDocumentMoniker": "Semantic_Analysis\\Semantic_Analysis.csproj",
+              "ToolTip": "E:\\Master_Of_Engg_IT\\SE Project\\Aman-Patel\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj",
+              "RelativeToolTip": "Semantic_Analysis\\Semantic_Analysis.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-01-29T20:43:59.726Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "appsetting.json",
+              "DocumentMoniker": "E:\\Master_Of_Engg_IT\\SE Project\\Aman-Patel\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\appsetting.json",
+              "RelativeDocumentMoniker": "Semantic_Analysis\\appsetting.json",
+              "ToolTip": "E:\\Master_Of_Engg_IT\\SE Project\\Aman-Patel\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\appsetting.json",
+              "RelativeToolTip": "Semantic_Analysis\\appsetting.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-01-29T20:47:03.887Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "CosineSimilarity.cs",
               "DocumentMoniker": "E:\\Master_Of_Engg_IT\\SE Project\\Aman-Patel\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\CosineSimilarity.cs",
               "RelativeDocumentMoniker": "Semantic_Analysis\\CosineSimilarity.cs",
               "ToolTip": "E:\\Master_Of_Engg_IT\\SE Project\\Aman-Patel\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\CosineSimilarity.cs",
               "RelativeToolTip": "Semantic_Analysis\\CosineSimilarity.cs",
-              "ViewState": "AgIAAGIAAAAAAAAAAAAUwG0AAABBAAAAAAAAAA==",
+              "ViewState": "AgIAAJEAAAAAAAAAAIA6wJMAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-19T22:00:30.498Z",
               "EditorCaption": ""

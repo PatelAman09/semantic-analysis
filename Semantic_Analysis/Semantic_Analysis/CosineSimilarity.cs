@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -123,46 +124,11 @@ namespace Semantic_Analysis
             return dotProduct / (magnitudeA * magnitudeB);
         }
 
-        public static void Main(string[] args)
-        {
-            string inputFilePath = "E:\\Test\\input.csv"; // You can modify this for user input
-            string outputFilePath = "E:\\Test\\output.csv";
-
-            try
-            {
-                List<double[]> vectors = ReadVectorsFromCsv(inputFilePath);
-                ValidateVectors(vectors);
-
-                List<string> outputData = new List<string>
-                {
-                    "CosineSimilarity" // Header
-                };
-
-                for (int i = 0; i < vectors.Count - 1; i++)
-                {
-                    for (int j = i + 1; j < vectors.Count; j++)
-                    {
-                        double similarity = CosineSimilarityCalculation(vectors[i], vectors[j]);
-                        outputData.Add($"{similarity}");
-                    }
-                }
-
-                SaveOutputToCsv(outputFilePath, outputData);
-
-                Console.WriteLine("Cosine similarity calculations saved to the output CSV file.");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"An error occurred: {ex.Message}");
-            }
-        }
-
-        // Function to save the output data to a CSV file
-        public static void SaveOutputToCsv(string filePath, List<string> data)
+        public static void SaveOutputToCsv(string outputFilePath, List<string> data)
         {
             try
             {
-                using (var writer = new StreamWriter(filePath))
+                using (var writer = new StreamWriter(outputFilePath))
                 {
                     foreach (string line in data)
                     {
@@ -173,6 +139,49 @@ namespace Semantic_Analysis
             catch (Exception ex)
             {
                 Console.WriteLine($"An error occurred while saving the output: {ex.Message}");
+            }
+        }
+
+
+        public static IConfigurationRoot LoadConfiguration()
+        {
+            var config = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsetting.json", optional: false, reloadOnChange: true)
+                .Build();
+            return config;
+        }
+
+
+        public static void Main(string[] args)
+        {
+            // Load configuration
+            IConfigurationRoot config = LoadConfiguration();
+            string inputFilePath = config["FilePaths:InputFilePathEmbedding"];
+            string outputFilePath = config["FilePaths:OutputFilePathCSV"];
+
+            try
+            {
+                List<double[]> vectors = ReadVectorsFromCsv(inputFilePath);
+                ValidateVectors(vectors);
+
+                List<string> outputData = new List<string> { "CosineSimilarity" };
+
+                for (int i = 0; i < vectors.Count - 1; i++)
+                {
+                    for (int j = i + 1; j < vectors.Count; j++)
+                    {
+                        double similarity = CosineSimilarityCalculation(vectors[i], vectors[j]);
+                        outputData.Add($"Vector {i} vs Vector {j}: {similarity}");
+                    }
+                }
+
+                SaveOutputToCsv(outputFilePath, outputData);
+                Console.WriteLine("Cosine similarity calculations saved to the output CSV file.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
             }
         }
     }

@@ -61,3 +61,15 @@ C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-anal
 C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.pdb
 C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.genruntimeconfig.cache
 C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\ref\Semantic_Analysis.dll
+E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Microsoft.Extensions.Configuration.dll
+E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Abstractions.dll
+E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Microsoft.Extensions.Configuration.FileExtensions.dll
+E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Json.dll
+E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Microsoft.Extensions.FileProviders.Abstractions.dll
+E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Microsoft.Extensions.FileProviders.Physical.dll
+E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Microsoft.Extensions.FileSystemGlobbing.dll
+E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
+E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\System.IO.Pipelines.dll
+E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\System.Text.Encodings.Web.dll
+E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\System.Text.Json.dll
+E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
