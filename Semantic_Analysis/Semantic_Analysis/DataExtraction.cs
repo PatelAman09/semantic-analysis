@@ -112,6 +112,10 @@ namespace Semantic_Analysis
                     case ".md":
                         fileContent = ExtractDataFromMarkdown(filePath);
                         break;
+                    default:
+                        fileContent = ExtractRawData(filePath);
+                        break;
+
 
                 }
             }
@@ -246,6 +250,27 @@ namespace Semantic_Analysis
             catch (Exception ex)
             {
                 Console.WriteLine($"Error reading Markdown file: {ex.Message}");
+            }
+            return data;
+        }
+
+
+        /// Extracts raw byte data from a file.
+        /// <param name="filePath">The path to the file.</param>
+        /// <returns>A list containing a representation of the raw bytes.</returns>
+        private List<string> ExtractRawData(string filePath)
+        {
+            var data = new List<string>();
+            try
+            {
+                byte[] bytes = File.ReadAllBytes(filePath);
+                string rawContent = BitConverter.ToString(bytes.Take(100).ToArray()); // Get first 100 bytes
+                data.Add($"Raw Content (first 100 bytes): {rawContent}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error reading raw file: {ex.Message}");
+                data.Add($"Error: {ex.Message}");
             }
             return data;
         }
