@@ -7,11 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using OpenAI.Embeddings; // Ensure you have the OpenAI NuGet package installed
+using OpenAI.Embeddings; //OpenAI NuGet package 
 
 class EmbeddingProcessor
 {
-    // Function to read JSON content from a file
     static async Task<string> ReadJsonFileAsync(string jsonFilePath)
     {
         if (!File.Exists(jsonFilePath))
@@ -22,7 +21,6 @@ class EmbeddingProcessor
         return await File.ReadAllTextAsync(jsonFilePath);
     }
 
-    // Function to analyze JSON content and extract data
     static List<string> AnalyzeJson(string jsonContent)
     {
         var parsedJson = JsonConvert.DeserializeObject(jsonContent);
@@ -60,12 +58,29 @@ class EmbeddingProcessor
         return extractedData;
     }
 
-    // Function to generate embeddings using OpenAI EmbeddingClient
+    static async Task<OpenAIEmbedding> GenerateEmbeddingWithRetryAsync(EmbeddingClient client, string text, int maxRetries = 3)
+    {
+        int attempt = 0;
+        while (attempt < maxRetries)
+        {
+            try
+            {
+                return await client.GenerateEmbeddingAsync(text);
+            }
+            catch (Exception ex) when (attempt < maxRetries - 1)
+            {
+                Console.WriteLine($"Attempt {attempt + 1} failed: {ex.Message}. Retrying...");
+                await Task.Delay(1000);
+                attempt++;
+            }
+        }
+        throw new Exception("Failed to generate embedding after multiple attempts.");
+    }
+
     static async Task GenerateAndSaveEmbeddingsAsync(string apiKey, List<string> descriptions, string csvFilePath, int saveInterval)
     {
         Console.WriteLine("Initializing embedding generation...");
-
-        EmbeddingClient client = new EmbeddingClient("text-embedding-3-small", apiKey);
+        var client = new EmbeddingClient("text-embedding-3-small", apiKey);
         bool fileExists = File.Exists(csvFilePath);
 
         using StreamWriter writer = new StreamWriter(csvFilePath, append: true, encoding: Encoding.UTF8);
@@ -82,12 +97,11 @@ class EmbeddingProcessor
                 string description = descriptions[i];
                 Console.WriteLine($"Processing entry {i + 1}/{descriptions.Count}: {description}");
 
-                // Generate embedding asynchronously
-                OpenAIEmbedding embedding = await client.GenerateEmbeddingAsync(description);
+                OpenAIEmbedding embedding = await GenerateEmbeddingWithRetryAsync(client, description);
 
-                // Convert ReadOnlyMemory<float> to an array and format the output
-                string embeddingString = string.Join(",", embedding.ToFloats().ToArray()
-                                                        .Select(e => e.ToString(CultureInfo.InvariantCulture)));
+                // ReadOnlyMemory<float> to an array before async processing
+                float[] embeddingArray = embedding.ToFloats().ToArray();
+                string embeddingString = string.Join(",", embeddingArray.Select(e => e.ToString(CultureInfo.InvariantCulture)));
 
                 await writer.WriteLineAsync($"\"{description}\",\"{embeddingString}\"");
 
@@ -106,7 +120,6 @@ class EmbeddingProcessor
         Console.WriteLine("All embeddings processed and saved.");
     }
 
-    // Orchestrator function to process the JSON file and save results
     static async Task ProcessJsonFileAsync(string jsonFilePath, string csvFilePath, string apiKey, int saveInterval)
     {
         try
@@ -124,7 +137,6 @@ class EmbeddingProcessor
         }
     }
 
-    // Main function to collect user input and call the orchestrator
     static async Task Main(string[] args)
     {
         try
