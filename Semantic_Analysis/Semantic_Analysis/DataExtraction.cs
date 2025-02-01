@@ -6,6 +6,12 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using System.Xml.Linq;
 using System.Windows.Forms;
+using iText.Kernel.Pdf;
+using iText.Layout;
+using iText.Layout.Element;
+using iText.Kernel.Pdf.Canvas.Parser;
+using System.Reflection.PortableExecutable;
+using iText.Kernel.Pdf.Canvas.Parser.Listener;
 
 
 namespace Semantic_Analysis
@@ -111,6 +117,9 @@ namespace Semantic_Analysis
                         break;
                     case ".md":
                         fileContent = ExtractDataFromMarkdown(filePath);
+                        break;
+                    case ".pdf":
+                        fileContent = ExtractDataFromPdf(filePath);
                         break;
                     default:
                         fileContent = ExtractRawData(filePath);
@@ -250,6 +259,37 @@ namespace Semantic_Analysis
             catch (Exception ex)
             {
                 Console.WriteLine($"Error reading Markdown file: {ex.Message}");
+            }
+            return data;
+        }
+
+        /// Extracts text data from a PDF file.
+        /// <param name="filePath">The path to the PDF file.</param>
+        /// <returns>A list of strings containing the extracted text data.</returns>
+        private List<string> ExtractDataFromPdf(string filePath)
+        {
+            var data = new List<string>();
+            try
+            {
+                using (var reader = new PdfReader(filePath))
+                using (var pdfDoc = new PdfDocument(reader))
+                {
+                    for (int i = 1; i <= pdfDoc.GetNumberOfPages(); i++)
+                    {
+                        var page = pdfDoc.GetPage(i);
+                        // Create a strategy for text extraction (TextEventListener is used here)
+                        var strategy = new SimpleTextExtractionStrategy();
+
+                        // Use PdfTextExtractor to extract text from the page with the strategy
+                        var text = PdfTextExtractor.GetTextFromPage(page, strategy);
+                        data.Add(text);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error reading PDF file: {ex.Message}");
+                data.Add($"Error: {ex.Message}");
             }
             return data;
         }
