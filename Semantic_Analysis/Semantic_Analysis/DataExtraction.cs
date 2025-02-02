@@ -5,12 +5,9 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using System.Xml.Linq;
-using System.Windows.Forms;
 using iText.Kernel.Pdf;
 using iText.Layout;
-using iText.Layout.Element;
 using iText.Kernel.Pdf.Canvas.Parser;
-using System.Reflection.PortableExecutable;
 using iText.Kernel.Pdf.Canvas.Parser.Listener;
 
 
