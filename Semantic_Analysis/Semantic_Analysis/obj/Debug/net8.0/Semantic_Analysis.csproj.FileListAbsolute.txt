@@ -73,3 +73,4 @@ E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\S
 E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\System.Text.Encodings.Web.dll
 E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\System.Text.Json.dll
 E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\appsettings.json
