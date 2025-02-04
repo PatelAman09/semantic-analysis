@@ -7,11 +7,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using OpenAI.Embeddings; //OpenAI NuGet package 
+using OpenAI.Embeddings; // OpenAI NuGet package
+using Semantic_Analysis.Interfaces; // Reference to the interface
 
-class EmbeddingProcessor
+class EmbeddingProcessor : IEmbeddingProcessor
 {
-    static async Task<string> ReadJsonFileAsync(string jsonFilePath)
+    public async Task<string> ReadJsonFileAsync(string jsonFilePath)
     {
         if (!File.Exists(jsonFilePath))
         {
@@ -21,7 +22,7 @@ class EmbeddingProcessor
         return await File.ReadAllTextAsync(jsonFilePath);
     }
 
-    static List<string> AnalyzeJson(string jsonContent)
+    public List<string> AnalyzeJson(string jsonContent)
     {
         var parsedJson = JsonConvert.DeserializeObject(jsonContent);
         var extractedData = new List<string>();
@@ -58,7 +59,7 @@ class EmbeddingProcessor
         return extractedData;
     }
 
-    static async Task<OpenAIEmbedding> GenerateEmbeddingWithRetryAsync(EmbeddingClient client, string text, int maxRetries = 3)
+    public async Task<OpenAIEmbedding> GenerateEmbeddingWithRetryAsync(EmbeddingClient client, string text, int maxRetries = 3)
     {
         int attempt = 0;
         while (attempt < maxRetries)
@@ -77,7 +78,7 @@ class EmbeddingProcessor
         throw new Exception("Failed to generate embedding after multiple attempts.");
     }
 
-    static async Task GenerateAndSaveEmbeddingsAsync(string apiKey, List<string> descriptions, string csvFilePath, int saveInterval)
+    public async Task GenerateAndSaveEmbeddingsAsync(string apiKey, List<string> descriptions, string csvFilePath, int saveInterval)
     {
         Console.WriteLine("Initializing embedding generation...");
         var client = new EmbeddingClient("text-embedding-3-small", apiKey);
@@ -120,7 +121,7 @@ class EmbeddingProcessor
         Console.WriteLine("All embeddings processed and saved.");
     }
 
-    static async Task ProcessJsonFileAsync(string jsonFilePath, string csvFilePath, string apiKey, int saveInterval)
+    public async Task ProcessJsonFileAsync(string jsonFilePath, string csvFilePath, string apiKey, int saveInterval)
     {
         try
         {
@@ -156,7 +157,8 @@ class EmbeddingProcessor
             string apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY")
                             ?? throw new Exception("Environment variable 'OPENAI_API_KEY' is not set.");
 
-            await ProcessJsonFileAsync(jsonFilePath, csvFilePath, apiKey, saveInterval);
+            IEmbeddingProcessor processor = new EmbeddingProcessor();
+            await processor.ProcessJsonFileAsync(jsonFilePath, csvFilePath, apiKey, saveInterval);
         }
         catch (Exception ex)
         {
