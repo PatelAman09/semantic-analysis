@@ -4,13 +4,29 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
+<<<<<<< HEAD
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
+=======
+>>>>>>> origin/Development
   </PropertyGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+<<<<<<< HEAD
     <PackageReference Include="itext7" Version="9.0.0" />
     <PackageReference Include="Microsoft.Windows.Compatibility" Version="9.0.1" />
+=======
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.1" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Physical" Version="9.0.1" />
+>>>>>>> origin/Development
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="OpenAI" Version="2.1.0" />
   </ItemGroup>
