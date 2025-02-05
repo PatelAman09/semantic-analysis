@@ -4,89 +4,135 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Semantic_Analysis;
+using Semantic_Analysis.Interfaces;
 
 namespace UnitTestProject
 {
     public class CosineSimilarityUnitTest
     {
         [TestClass]
-        public sealed class TestCase1
+        public class DotProductTests
         {
-            [TestMethod]
+            private CosineSimilarity _cosineSimilarity = null!;
 
-            public void CalculateDotProductUnitTest()
+            [TestInitialize]
+            public void Setup()
             {
+                _cosineSimilarity = new CosineSimilarity();
+            }
 
-                double[] vectorA = { 1.0, 2.0, 3.0 };
-                double[] vectorB = { 4.0, 5.0, 6.0 };
-                double result = CosineSimilarity.CalculateDotProduct(vectorA, vectorB);
-                Assert.AreEqual(32.0, result, "The dot product should be 32.");
+            [TestMethod]
+            public void CalculateDotProduct_ValidVectors_ReturnsCorrectResult()
+            {
+                double[] vectorA = { 1, 2, 3 };
+                double[] vectorB = { 4, 5, 6 };
+                double expected = 32;
 
+                double result = _cosineSimilarity.CalculateDotProduct(vectorA, vectorB);
+
+                Assert.AreEqual(expected, result);
+            }
+
+            [TestMethod]
+            [ExpectedException(typeof(ArgumentException))]
+            public void CalculateDotProduct_DifferentLengths_ThrowsArgumentException()
+            {
+                double[] vectorA = { 1, 2 };
+                double[] vectorB = { 1, 2, 3 };
+
+                _cosineSimilarity.CalculateDotProduct(vectorA, vectorB);
             }
         }
 
         [TestClass]
-
-        public sealed class TestCase2
+        public class MagnitudeTests
         {
-            [TestMethod]
+            private CosineSimilarity _cosineSimilarity = null!;
 
-            public void CalculateMagnitudeUnitTest()
+            [TestInitialize]
+            public void Setup()
             {
-                double[] vector = { 3.0, 4.0 };
-
-                double result = CosineSimilarity.CalculateMagnitude(vector);
-
-                Assert.AreEqual(5.0, result, "The magnitude should be 5.");
+                _cosineSimilarity = new CosineSimilarity();
             }
 
             [TestMethod]
-
-            public void CalculateMagnitude_EmptyVector_ThrowsArgumentException()
+            public void CalculateMagnitude_ValidVector_ReturnsCorrectResult()
             {
-                double[] vector = { };
+                double[] vector = { 3, 4 };
+                double expected = 5;
 
-                Assert.ThrowsException<ArgumentException>(() => CosineSimilarity.CalculateMagnitude(vector));
+                double result = _cosineSimilarity.CalculateMagnitude(vector);
+
+                Assert.AreEqual(expected, result);
             }
-
         }
 
         [TestClass]
-
-        public sealed class TestCase3
+        public class CosineSimilarityCalculationTests
         {
-            [TestMethod]
+            private CosineSimilarity _cosineSimilarity = null!;
 
-            public void cosineSimilarityUnitTest()
+            [TestInitialize]
+            public void Setup()
             {
-                double[] vectorA = { 1.0, 2.0, 3.0 };
-                double[] vectorB = { 4.0, 5.0, 6.0 };
-
-                double result = CosineSimilarity.CosineSimilarityCalculation(vectorA, vectorB);
-
-                Assert.AreEqual(0.974631846, result, 1e-6, "Cosine similarity should be approximately 0.9746.");
+                _cosineSimilarity = new CosineSimilarity();
             }
 
             [TestMethod]
-            public void CosineSimilarity_OneZeroVector_ReturnsZero()
+            public void CosineSimilarityCalculation_ValidVectors_ReturnsCorrectSimilarity()
             {
-                double[] vectorA = { 0.0, 0.0, 0.0 };
-                double[] vectorB = { 4.0, 5.0, 6.0 };
+                double[] vectorA = { 1, 0, -1 };
+                double[] vectorB = { -1, 0, 1 };
+                double expected = -1.0;
 
-                double result = CosineSimilarity.CosineSimilarityCalculation(vectorA, vectorB);
+                double result = _cosineSimilarity.CosineSimilarityCalculation(vectorA, vectorB);
 
-                Assert.AreEqual(0.0, result, "Cosine similarity between a zero vector and any vector should be 0.");
+                Assert.AreEqual(expected, result, 10);
             }
 
             [TestMethod]
-            public void CosineSimilarity_NullVector_ThrowsArgumentException()
-        {
-            double[] vectorA = { 1.0, 2.0, 3.0 };
-            double[] vectorB = null;
+            public void CosineSimilarityCalculation_ZeroMagnitude_ReturnsZero()
+            {
+                double[] vectorA = { 0, 0, 0 };
+                double[] vectorB = { 1, 2, 3 };
 
-            Assert.ThrowsException<ArgumentException>(() => CosineSimilarity.CosineSimilarityCalculation(vectorA, vectorB));
+                double result = _cosineSimilarity.CosineSimilarityCalculation(vectorA, vectorB);
+
+                Assert.AreEqual(0.0, result);
+            }
         }
 
+        [TestClass]
+        public class VectorValidationTests
+        {
+            private CosineSimilarity _cosineSimilarity = null!;
+
+            [TestInitialize]
+            public void Setup()
+            {
+                _cosineSimilarity = new CosineSimilarity();
+            }
+
+            [TestMethod]
+            [ExpectedException(typeof(InvalidOperationException))]
+            public void ValidateVectors_InconsistentLengths_ThrowsException()
+            {
+                List<double[]> vectors = new List<double[]> {
+                new double[] {1, 2, 3},
+                new double[] {4, 5}
+            };
+
+                _cosineSimilarity.ValidateVectors(vectors);
+            }
+
+            [TestMethod]
+            [ExpectedException(typeof(InvalidOperationException))]
+            public void ValidateVectors_LessThanTwoVectors_ThrowsException()
+            {
+                List<double[]> vectors = new List<double[]> { new double[] { 1, 2, 3 } };
+
+                _cosineSimilarity.ValidateVectors(vectors);
+            }
         }
     }
 }

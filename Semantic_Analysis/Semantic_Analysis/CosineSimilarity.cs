@@ -84,7 +84,6 @@ namespace Semantic_Analysis
         {
             return Math.Sqrt(vector.Sum(v => v * v));
         }
-
         public double CosineSimilarityCalculation(double[] vectorA, double[] vectorB)
         {
             double dotProduct = CalculateDotProduct(vectorA, vectorB);
@@ -155,7 +154,7 @@ namespace Semantic_Analysis
                 {
                     for (int j = i + 1; j < vectors.Count; j++)
                     {
-                        double similarity = Math.Round(cosineSimilarity.CosineSimilarityCalculation(vectors[i], vectors[j]), 4);
+                        double similarity = Math.Round(cosineSimilarity.CosineSimilarityCalculation(vectors[i], vectors[j]), 10);
                         string result = $"Vector {i} vs Vector {j}: {similarity}";
                         Console.WriteLine(result);
                         outputData.Add(result);
