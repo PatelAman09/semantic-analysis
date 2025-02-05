@@ -3,89 +3,72 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Microsoft.Extensions.Configuration;  // For reading appsettings.json
 using Newtonsoft.Json;
-using System.Xml.Linq;
 using iText.Kernel.Pdf;
-using iText.Layout;
-using iText.Kernel.Pdf.Canvas.Parser;
 using iText.Kernel.Pdf.Canvas.Parser.Listener;
-
+using iText.Kernel.Pdf.Canvas.Parser;
+using System.Xml.Linq;
 
 namespace Semantic_Analysis
 {
-    
-    /// This class provides methods for extracting data from various file types 
     public class DataExtraction
     {
-        [STAThread]
         public static void Main(string[] args)
         {
-            // Call FileSelection directly when the application starts
-            FileSelection();
+            // Load settings from appsettings.json
+            var configuration = LoadConfiguration();
+
+            // Get folder paths from configuration
+            string dataPreprocessingPath = configuration["FilePaths:DataPreprocessing"];
+            string preprocessedDataPath = configuration["FilePaths:PreprocessedData"];
+            string extractedDataFileName = configuration["FilePaths:ExtractedDataFileName"];
+
+            // Resolve paths
+            string projectRoot = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            string absoluteDataPreprocessingPath = Path.Combine(projectRoot, dataPreprocessingPath);
+            string absolutePreprocessedDataPath = Path.Combine(projectRoot, preprocessedDataPath);
+
+            // Ensure ExtractedData folder exists
+            if (!Directory.Exists(absolutePreprocessedDataPath))
+            {
+                Directory.CreateDirectory(absolutePreprocessedDataPath);
+            }
+
+            // Find the first file in the Preprocessing folder (this can be refined to be more specific if needed)
+            string inputFilePath = GetFirstFileInDirectory(absoluteDataPreprocessingPath);
+
+            if (string.IsNullOrEmpty(inputFilePath))
+            {
+                Console.WriteLine("No preprocessing files found in the folder.");
+                return;
+            }
+
+            // Define output file path
+            string outputFilePath = Path.Combine(absolutePreprocessedDataPath, extractedDataFileName);
+
+            // Call the file extraction and saving methods
+            DataExtraction processor = new DataExtraction();
+            List<string> extractedData = processor.ExtractDataFromFile(inputFilePath);
+            extractedData = processor.CleanData(extractedData);
+
+            // Save the cleaned data to a text file
+            processor.SaveDataToText(outputFilePath, extractedData);
+
+            Console.WriteLine($"Data extracted and saved to: {outputFilePath}");
         }
 
-        public static void FileSelection()
+        // Load configuration from appsettings.json
+        private static IConfiguration LoadConfiguration()
         {
-            // Initialize OpenFileDialog for file selection
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Title = "Select a file to extract data from";
-            openFileDialog.Filter = "All Files (*.*)|*.*|Text Files (*.txt)|*.txt|CSV Files (*.csv)|*.csv";  // Filter for multiple file types
+            var configurationBuilder = new ConfigurationBuilder();
+            configurationBuilder.SetBasePath(Directory.GetCurrentDirectory());
+            configurationBuilder.AddJsonFile("appsettings.json");
 
-            // Show dialog and check if the user selects a file
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                string userFilePath = openFileDialog.FileName;  // Get the selected file path
-
-                // Check if the file exists (should always be true after file dialog)
-                if (File.Exists(userFilePath))
-                {
-                    // Create an instance of the DataProcessor class
-                    DataExtraction processor = new DataExtraction();
-
-                    // Extract data from the file
-                    List<string> extractedData = processor.ExtractDataFromFile(userFilePath);
-
-                    // Clean the extracted data
-                    extractedData = processor.CleanData(extractedData);  
-
-                    // Initialize SaveFileDialog to ask the user where to save the output JSON file
-                    SaveFileDialog saveFileDialog = new SaveFileDialog();
-                    saveFileDialog.Title = "Save Extracted Data as JSON";
-                    saveFileDialog.Filter = "JSON Files (*.json)|*.json|All Files (*.*)|*.*";
-                    saveFileDialog.FileName = Path.GetFileNameWithoutExtension(userFilePath) + "_extracted.json"; // Default name
-
-                    // Show dialog and check if the user selects a location and file name
-                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        string outputFilePath = saveFileDialog.FileName;
-
-                        // Save the extracted data to the JSON file
-                        processor.SaveDataToJson(outputFilePath, extractedData);
-
-                        Console.WriteLine($"\nData extracted and saved to: {outputFilePath}");
-                    }
-                    else
-                    {
-                        Console.WriteLine("No location or file name was selected. Exiting the program.");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("The selected file does not exist. Please try again.");
-                }
-            }
-            else
-            {
-                Console.WriteLine("No file was selected. Exiting the program.");
-            }
+            return configurationBuilder.Build();
         }
 
-        // --- Data Extraction Methods ---
-
-        
-        /// Extracts data from a file based on its type. 
-        /// <param name="filePath">The full path of the PDF file to extract data from.</param>
-        /// <returns>A list of strings representing the extracted text from each page of the PDF.</returns>
+        // Extracts data from a file based on its type. 
         public List<string> ExtractDataFromFile(string filePath)
         {
             var fileContent = new List<string>();
@@ -121,21 +104,16 @@ namespace Semantic_Analysis
                     default:
                         fileContent = ExtractRawData(filePath);
                         break;
-
-
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine($"Error reading file {filePath}: {ex.Message}");
             }
             return fileContent;
         }
 
-
-        /// Extracts text from a plain text file. <summary>
-        /// <param name="filePath">The full path of the text file to extract data from.</param>
-        /// <returns>A list of strings representing the lines of text in the file.</returns>
+        // Extracts text from a plain text file
         private List<string> ExtractDataFromText(string filePath)
         {
             var data = new List<string>();
@@ -151,10 +129,7 @@ namespace Semantic_Analysis
             return data;
         }
 
-
-        /// Extracts data from a CSV file.
-        /// <param name="filePath">The path to the CSV file.</param>
-        /// <returns>A list of strings containing the extracted CSV data.</returns>
+        // Extracts data from a CSV file
         private List<string> ExtractDataFromCsv(string filePath)
         {
             var data = new List<string>();
@@ -170,10 +145,7 @@ namespace Semantic_Analysis
             return data;
         }
 
-     
-        /// Extracts data from a JSON file and returns key-value pairs.
-        /// <param name="filePath">The path to the JSON file.</param>
-        /// <returns>A list of strings containing key-value pairs from the JSON file.</returns>
+        // Extracts data from JSON file
         private List<string> ExtractDataFromJson(string filePath)
         {
             var data = new List<string>();
@@ -200,9 +172,7 @@ namespace Semantic_Analysis
             return data;
         }
 
-        /// Extracts data from an XML file.
-        /// <param name="filePath">The path to the XML file.</param>
-        /// <returns>A list of strings containing extracted XML data.</returns>
+        // Extracts data from XML file
         private List<string> ExtractDataFromXml(string filePath)
         {
             var data = new List<string>();
@@ -221,48 +191,7 @@ namespace Semantic_Analysis
             return data;
         }
 
-        /// Extracts text data from an HTML file by removing HTML tags.
-        /// <param name="filePath">The path to the HTML file.</param>
-        /// <returns>A list of strings containing the extracted text data.</returns>
-        private List<string> ExtractDataFromHtml(string filePath)
-        {
-            var data = new List<string>();
-            try
-            {
-                var htmlContent = File.ReadAllText(filePath);
-                var textOnly = Regex.Replace(htmlContent, @"<[^>]+?>", " ").Replace("\n", " ").Trim();
-                data.Add(textOnly);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error reading HTML file: {ex.Message}");
-            }
-            return data;
-        }
-
-
-        /// Extracts text data from a Markdown file by removing Markdown syntax.
-        /// <param name="filePath">The path to the Markdown file.</param>
-        /// <returns>A list of strings containing the extracted text data.</returns>
-        private List<string> ExtractDataFromMarkdown(string filePath)
-        {
-            var data = new List<string>();
-            try
-            {
-                var markdownContent = File.ReadAllText(filePath);
-                var textOnly = Regex.Replace(markdownContent, @"[#\*\-]\s?", " ").Replace("\n", " ").Trim();
-                data.Add(textOnly);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error reading Markdown file: {ex.Message}");
-            }
-            return data;
-        }
-
-        /// Extracts text data from a PDF file.
-        /// <param name="filePath">The path to the PDF file.</param>
-        /// <returns>A list of strings containing the extracted text data.</returns>
+        // Extracts text data from a PDF file
         private List<string> ExtractDataFromPdf(string filePath)
         {
             var data = new List<string>();
@@ -291,10 +220,7 @@ namespace Semantic_Analysis
             return data;
         }
 
-
-        /// Extracts raw byte data from a file.
-        /// <param name="filePath">The path to the file.</param>
-        /// <returns>A list containing a representation of the raw bytes.</returns>
+        // Extracts raw byte data from a file
         private List<string> ExtractRawData(string filePath)
         {
             var data = new List<string>();
@@ -312,24 +238,41 @@ namespace Semantic_Analysis
             return data;
         }
 
-
-
-        public void SaveDataToJson(string outputFilePath, List<string> data)
+        // Extracts text data from a Markdown file
+        private List<string> ExtractDataFromMarkdown(string filePath)
         {
+            var data = new List<string>();
             try
             {
-                var jsonContent = JsonConvert.SerializeObject(new { extractedData = data }, Formatting.Indented);
-                File.WriteAllText(outputFilePath, jsonContent);
+                var markdownContent = File.ReadAllText(filePath);
+                var textOnly = Regex.Replace(markdownContent, @"[#\*\-]\s?", " ").Replace("\n", " ").Trim();
+                data.Add(textOnly);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error saving data to JSON file: {ex.Message}");
+                Console.WriteLine($"Error reading Markdown file: {ex.Message}");
             }
+            return data;
         }
 
-        /// Cleans extracted data by trimming whitespace, removing special characters, and converting to lowercase.
-        /// <param name="data">The extracted data to be cleaned.</param>
-        /// <returns>A list of cleaned strings.</returns>
+        // Extracts text data from an HTML file by removing HTML tags
+        private List<string> ExtractDataFromHtml(string filePath)
+        {
+            var data = new List<string>();
+            try
+            {
+                var htmlContent = File.ReadAllText(filePath);
+                var textOnly = Regex.Replace(htmlContent, @"<[^>]+?>", " ").Replace("\n", " ").Trim();
+                data.Add(textOnly);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error reading HTML file: {ex.Message}");
+            }
+            return data;
+        }
+
+        // Cleans extracted data by trimming whitespace, removing special characters, and converting to lowercase
         private List<string> CleanData(List<string> data)
         {
             var cleanedData = new List<string>();
@@ -348,5 +291,32 @@ namespace Semantic_Analysis
             return cleanedData;
         }
 
+        // Saves data to a text file
+        public void SaveDataToText(string outputFilePath, List<string> data)
+        {
+            try
+            {
+                File.WriteAllLines(outputFilePath, data);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error saving data to text file: {ex.Message}");
+            }
+        }
+
+        // Helper method to find the first file in a directory
+        private static string GetFirstFileInDirectory(string directoryPath)
+        {
+            try
+            {
+                var files = Directory.GetFiles(directoryPath);
+                return files.FirstOrDefault(); // Returns the first file, or null if no files are found
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error accessing the directory: {ex.Message}");
+                return null;
+            }
+        }
     }
 }

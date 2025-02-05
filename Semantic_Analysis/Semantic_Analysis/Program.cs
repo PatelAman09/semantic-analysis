@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 ﻿//namespace Semantic_Analysis
 //{
 //    internal class Program
@@ -10,7 +10,7 @@
 //        }
 //    }
 //}
-=======
+
 ﻿namespace Semantic_Analysis
 {
     internal class Program
@@ -21,4 +21,4 @@
         //}
     }
 }
->>>>>>> origin/Development
+

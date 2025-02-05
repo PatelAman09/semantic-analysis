@@ -137,30 +137,30 @@ class EmbeddingProcessor
         }
     }
 
-    static async Task Main(string[] args)
-    {
-        try
-        {
-            Console.WriteLine("Enter the path to your JSON file:");
-            string jsonFilePath = Console.ReadLine() ?? throw new ArgumentNullException("JSON file path cannot be null.");
+    //static async Task Main(string[] args)
+    //{
+    //    try
+    //    {
+    //        Console.WriteLine("Enter the path to your JSON file:");
+    //        string jsonFilePath = Console.ReadLine() ?? throw new ArgumentNullException("JSON file path cannot be null.");
 
-            Console.WriteLine("Enter the path to save the output CSV file:");
-            string csvFilePath = Console.ReadLine() ?? throw new ArgumentNullException("CSV file path cannot be null.");
+    //        Console.WriteLine("Enter the path to save the output CSV file:");
+    //        string csvFilePath = Console.ReadLine() ?? throw new ArgumentNullException("CSV file path cannot be null.");
 
-            Console.WriteLine("Enter the save interval (e.g., 10):");
-            if (!int.TryParse(Console.ReadLine(), out int saveInterval) || saveInterval <= 0)
-            {
-                throw new ArgumentException("Save interval must be a positive integer.");
-            }
+    //        Console.WriteLine("Enter the save interval (e.g., 10):");
+    //        if (!int.TryParse(Console.ReadLine(), out int saveInterval) || saveInterval <= 0)
+    //        {
+    //            throw new ArgumentException("Save interval must be a positive integer.");
+    //        }
 
-            string apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY")
-                            ?? throw new Exception("Environment variable 'OPENAI_API_KEY' is not set.");
+    //        string apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY")
+    //                        ?? throw new Exception("Environment variable 'OPENAI_API_KEY' is not set.");
 
-            await ProcessJsonFileAsync(jsonFilePath, csvFilePath, apiKey, saveInterval);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"An error occurred: {ex.Message}");
-        }
-    }
+    //        await ProcessJsonFileAsync(jsonFilePath, csvFilePath, apiKey, saveInterval);
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        Console.WriteLine($"An error occurred: {ex.Message}");
+    //    }
+    //}
 }
