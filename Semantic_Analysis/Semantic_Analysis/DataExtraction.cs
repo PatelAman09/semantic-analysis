@@ -12,7 +12,7 @@ using System.Xml.Linq;
 
 namespace Semantic_Analysis
 {
-    public class DataExtraction
+    public class DataExtraction : IDataExtraction
     {
         public static void Main(string[] args)
         {
@@ -47,8 +47,8 @@ namespace Semantic_Analysis
             // Define output file path
             string outputFilePath = Path.Combine(absolutePreprocessedDataPath, extractedDataFileName);
 
-            // Call the file extraction and saving methods
-            DataExtraction processor = new DataExtraction();
+            // Create an instance of DataExtraction
+            IDataExtraction processor = new DataExtraction();
             List<string> extractedData = processor.ExtractDataFromFile(inputFilePath);
             extractedData = processor.CleanData(extractedData);
 
@@ -68,7 +68,7 @@ namespace Semantic_Analysis
             return configurationBuilder.Build();
         }
 
-        // Extracts data from a file based on its type. 
+        // Implement ExtractDataFromFile method
         public List<string> ExtractDataFromFile(string filePath)
         {
             var fileContent = new List<string>();
@@ -114,7 +114,7 @@ namespace Semantic_Analysis
         }
 
         // Extracts text from a plain text file
-        private List<string> ExtractDataFromText(string filePath)
+        public List<string> ExtractDataFromText(string filePath)
         {
             var data = new List<string>();
             try
@@ -130,7 +130,7 @@ namespace Semantic_Analysis
         }
 
         // Extracts data from a CSV file
-        private List<string> ExtractDataFromCsv(string filePath)
+        public List<string> ExtractDataFromCsv(string filePath)
         {
             var data = new List<string>();
             try
@@ -146,7 +146,7 @@ namespace Semantic_Analysis
         }
 
         // Extracts data from JSON file
-        private List<string> ExtractDataFromJson(string filePath)
+        public List<string> ExtractDataFromJson(string filePath)
         {
             var data = new List<string>();
             try
@@ -173,7 +173,7 @@ namespace Semantic_Analysis
         }
 
         // Extracts data from XML file
-        private List<string> ExtractDataFromXml(string filePath)
+        public List<string> ExtractDataFromXml(string filePath)
         {
             var data = new List<string>();
             try
@@ -192,7 +192,7 @@ namespace Semantic_Analysis
         }
 
         // Extracts text data from a PDF file
-        private List<string> ExtractDataFromPdf(string filePath)
+        public List<string> ExtractDataFromPdf(string filePath)
         {
             var data = new List<string>();
             try
@@ -203,10 +203,7 @@ namespace Semantic_Analysis
                     for (int i = 1; i <= pdfDoc.GetNumberOfPages(); i++)
                     {
                         var page = pdfDoc.GetPage(i);
-                        // Create a strategy for text extraction (TextEventListener is used here)
                         var strategy = new SimpleTextExtractionStrategy();
-
-                        // Use PdfTextExtractor to extract text from the page with the strategy
                         var text = PdfTextExtractor.GetTextFromPage(page, strategy);
                         data.Add(text);
                     }
@@ -221,13 +218,13 @@ namespace Semantic_Analysis
         }
 
         // Extracts raw byte data from a file
-        private List<string> ExtractRawData(string filePath)
+        public List<string> ExtractRawData(string filePath)
         {
             var data = new List<string>();
             try
             {
                 byte[] bytes = File.ReadAllBytes(filePath);
-                string rawContent = BitConverter.ToString(bytes.Take(100).ToArray()); // Get first 100 bytes
+                string rawContent = BitConverter.ToString(bytes.Take(100).ToArray());
                 data.Add($"Raw Content (first 100 bytes): {rawContent}");
             }
             catch (Exception ex)
@@ -239,7 +236,7 @@ namespace Semantic_Analysis
         }
 
         // Extracts text data from a Markdown file
-        private List<string> ExtractDataFromMarkdown(string filePath)
+        public List<string> ExtractDataFromMarkdown(string filePath)
         {
             var data = new List<string>();
             try
@@ -256,7 +253,7 @@ namespace Semantic_Analysis
         }
 
         // Extracts text data from an HTML file by removing HTML tags
-        private List<string> ExtractDataFromHtml(string filePath)
+        public List<string> ExtractDataFromHtml(string filePath)
         {
             var data = new List<string>();
             try
@@ -273,7 +270,7 @@ namespace Semantic_Analysis
         }
 
         // Cleans extracted data by trimming whitespace, removing special characters, and converting to lowercase
-        private List<string> CleanData(List<string> data)
+        public List<string> CleanData(List<string> data)
         {
             var cleanedData = new List<string>();
 
