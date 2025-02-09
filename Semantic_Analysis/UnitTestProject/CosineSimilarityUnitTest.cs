@@ -100,6 +100,18 @@ namespace UnitTestProject
 
                 Assert.AreEqual(0.0, result);
             }
+
+            [TestMethod]
+            public void CosineSimilarityCalculation_IdenticalVectors_ReturnsOne()
+            {
+                double[] vectorA = { 1, 2, 3 };
+                double[] vectorB = { 1, 2, 3 };
+                double expected = 1.0;
+
+                double result = _cosineSimilarity.CosineSimilarityCalculation(vectorA, vectorB);
+
+                Assert.AreEqual(expected, result, 10);
+            }
         }
 
         [TestClass]
@@ -132,6 +144,52 @@ namespace UnitTestProject
                 List<double[]> vectors = new List<double[]> { new double[] { 1, 2, 3 } };
 
                 _cosineSimilarity.ValidateVectors(vectors);
+            }
+
+            [TestMethod]
+            [ExpectedException(typeof(InvalidOperationException))]
+            public void ValidateVectors_EmptyList_ThrowsException()
+            {
+                List<double[]> vectors = new List<double[]>();
+                _cosineSimilarity.ValidateVectors(vectors);
+            }
+        }
+
+        [TestClass]
+        public class CsvHandlingTests
+        {
+            private CosineSimilarity _cosineSimilarity = null!;
+
+            [TestInitialize]
+            public void Setup()
+            {
+                _cosineSimilarity = new CosineSimilarity();
+            }
+
+            [TestMethod]
+            [ExpectedException(typeof(ArgumentException))]
+            public void ReadVectorsFromCsv_InvalidFilePath_ThrowsException()
+            {
+                _cosineSimilarity.ReadVectorsFromCsv(null!);
+            }
+            [TestMethod]
+            [ExpectedException(typeof(InvalidOperationException))]
+            public void ReadVectorsFromCsv_MalformedData_ThrowsException()
+            {
+                // Arrange
+                string tempFilePath = Path.GetTempFileName();
+                File.WriteAllText(tempFilePath, "InvalidDataWithoutVectors");
+
+                try
+                {
+                    // Act
+                    _cosineSimilarity.ReadVectorsFromCsv(tempFilePath);
+                }
+                finally
+                {
+                    // Cleanup
+                    File.Delete(tempFilePath);
+                }
             }
         }
     }
