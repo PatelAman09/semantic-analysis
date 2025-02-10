@@ -22,40 +22,60 @@ namespace Semantic_Analysis
             // Get folder paths from configuration
             string dataPreprocessingPath = configuration["FilePaths:DataPreprocessing"];
             string preprocessedDataPath = configuration["FilePaths:PreprocessedData"];
-            string extractedDataFileName = configuration["FilePaths:ExtractedDataFileName"];
+            string referenceDataPath = configuration["FilePaths:ReferenceData"];
 
-            // Resolve paths
+            // Read file names from configuration
+            var extractedDataFileNames = configuration.GetSection("FilePaths:ExtractedDataFileNames").GetChildren()
+                .Select(x => x.Value).ToList();
+            var referenceDocumentFileNames = configuration.GetSection("FilePaths:ReferenceDocumentFileNames").GetChildren()
+                .Select(x => x.Value).ToList();
+
+            // Resolve paths using project root
             string projectRoot = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
             string absoluteDataPreprocessingPath = Path.Combine(projectRoot, dataPreprocessingPath);
             string absolutePreprocessedDataPath = Path.Combine(projectRoot, preprocessedDataPath);
+            string absoluteReferenceDataPath = Path.Combine(projectRoot, referenceDataPath);
 
-            // Ensure ExtractedData folder exists
-            if (!Directory.Exists(absolutePreprocessedDataPath))
+            // Ensure necessary directories exist
+            EnsureDirectoryExists(absolutePreprocessedDataPath);
+            EnsureDirectoryExists(absoluteReferenceDataPath);
+
+            // Locate the extracted data files
+            string extractedDataFilePath = FindFileInDirectory(absoluteDataPreprocessingPath, extractedDataFileNames);
+            string referenceDocumentFilePath = FindFileInDirectory(absoluteDataPreprocessingPath, referenceDocumentFileNames);
+
+            // Validate file existence
+            if (string.IsNullOrEmpty(extractedDataFilePath))
             {
-                Directory.CreateDirectory(absolutePreprocessedDataPath);
-            }
-
-            // Find the first file in the Preprocessing folder (this can be refined to be more specific if needed)
-            string inputFilePath = GetFirstFileInDirectory(absoluteDataPreprocessingPath);
-
-            if (string.IsNullOrEmpty(inputFilePath))
-            {
-                Console.WriteLine("No preprocessing files found in the folder.");
+                Console.WriteLine("No extracted data file found.");
                 return;
             }
 
-            // Define output file path
-            string outputFilePath = Path.Combine(absolutePreprocessedDataPath, extractedDataFileName);
+            if (string.IsNullOrEmpty(referenceDocumentFilePath))
+            {
+                Console.WriteLine("No reference document file found.");
+                return;
+            }
+
+            // Define output file paths
+            string outputExtractedDataFilePath = Path.Combine(absolutePreprocessedDataPath, $"{Path.GetFileNameWithoutExtension(extractedDataFilePath)}.json");
+            string outputReferenceDocumentFilePath = Path.Combine(absoluteReferenceDataPath, $"{Path.GetFileNameWithoutExtension(referenceDocumentFilePath)}.json");
 
             // Create an instance of DataExtraction
             IDataExtraction processor = new DataExtraction();
-            List<string> extractedData = processor.ExtractDataFromFile(inputFilePath);
+
+            // Process extracted data file
+            List<string> extractedData = processor.ExtractDataFromFile(extractedDataFilePath);
             extractedData = processor.CleanData(extractedData);
+            processor.SaveDataToJson(outputExtractedDataFilePath, extractedData);
 
-            // Save the cleaned data to a text file
-            processor.SaveDataToText(outputFilePath, extractedData);
+            // Process reference data file
+            List<string> referenceData = processor.ExtractDataFromFile(referenceDocumentFilePath);
+            referenceData = processor.CleanData(referenceData);
+            processor.SaveDataToJson(outputReferenceDocumentFilePath, referenceData);
 
-            Console.WriteLine($"Data extracted and saved to: {outputFilePath}");
+            Console.WriteLine($"Data extracted and saved to: {outputExtractedDataFilePath}");
+            Console.WriteLine($"Reference document data extracted and saved to: {outputReferenceDocumentFilePath}");
         }
 
         // Load configuration from appsettings.json
@@ -68,7 +88,31 @@ namespace Semantic_Analysis
             return configurationBuilder.Build();
         }
 
-        // Implement ExtractDataFromFile method
+        // Helper method to ensure directory exists
+        private static void EnsureDirectoryExists(string directoryPath)
+        {
+            if (!Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+            }
+        }
+
+        // Helper method to find a file in a directory based on filenames
+        private static string FindFileInDirectory(string directoryPath, List<string> fileNames)
+        {
+            foreach (var fileName in fileNames)
+            {
+                var files = Directory.GetFiles(directoryPath, fileName);
+                if (files.Any())
+                {
+                    return files.First(); // Return the first matching file
+                }
+            }
+
+            return null; // Return null if no matching file is found
+        }
+
+        // Extract data from different file types
         public List<string> ExtractDataFromFile(string filePath)
         {
             var fileContent = new List<string>();
@@ -76,7 +120,6 @@ namespace Semantic_Analysis
             {
                 string fileExtension = Path.GetExtension(filePath).ToLower();
 
-                // Extract data based on the file type
                 switch (fileExtension)
                 {
                     case ".txt":
@@ -152,8 +195,6 @@ namespace Semantic_Analysis
             try
             {
                 var json = File.ReadAllText(filePath);
-
-                // Deserialize the JSON data as a list of strings
                 var jsonArray = JsonConvert.DeserializeObject<List<string>>(json);
 
                 if (jsonArray != null)
@@ -269,7 +310,7 @@ namespace Semantic_Analysis
             return data;
         }
 
-        // Cleans extracted data by trimming whitespace, removing special characters, and converting to lowercase
+        // Cleans extracted data
         public List<string> CleanData(List<string> data)
         {
             var cleanedData = new List<string>();
@@ -288,31 +329,17 @@ namespace Semantic_Analysis
             return cleanedData;
         }
 
-        // Saves data to a text file
-        public void SaveDataToText(string outputFilePath, List<string> data)
+        // Saves cleaned data to a JSON file
+        public void SaveDataToJson(string outputFilePath, List<string> data)
         {
             try
             {
-                File.WriteAllLines(outputFilePath, data);
+                string jsonData = JsonConvert.SerializeObject(data, Formatting.Indented);
+                File.WriteAllText(outputFilePath, jsonData);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error saving data to text file: {ex.Message}");
-            }
-        }
-
-        // Helper method to find the first file in a directory
-        private static string GetFirstFileInDirectory(string directoryPath)
-        {
-            try
-            {
-                var files = Directory.GetFiles(directoryPath);
-                return files.FirstOrDefault(); // Returns the first file, or null if no files are found
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error accessing the directory: {ex.Message}");
-                return null;
+                Console.WriteLine($"Error saving data to JSON file: {ex.Message}");
             }
         }
     }
