@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <Folder Include="CSVOutput\" />
+    <Folder Include="EmbeddingInput\" />
   </ItemGroup>
 
 </Project>
