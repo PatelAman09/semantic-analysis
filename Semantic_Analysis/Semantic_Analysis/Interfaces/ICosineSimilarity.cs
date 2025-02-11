@@ -8,6 +8,7 @@ namespace Semantic_Analysis.Interfaces
 {
     public interface ICosineSimilarity
     {
+
         List<double[]> ReadVectorsFromCsv(string inputFilePath);
         void ValidateVectors(List<double[]> vectors);
         double CalculateDotProduct(double[] vectorA, double[] vectorB);
