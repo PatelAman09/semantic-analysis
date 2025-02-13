@@ -19,8 +19,13 @@ namespace UnitTestProject
             return File.ReadAllText(jsonFilePath);
         }
 
-        public static List<string> AnalyzeJson(string jsonContent)
+        public static List<string> AnalyzeJson(string? jsonContent)
         {
+            if (jsonContent == null)
+            {
+                throw new Exception("The provided JSON content is empty or malformed.");
+            }
+
             var parsedJson = JsonConvert.DeserializeObject(jsonContent);
             var extractedData = new List<string>();
 
