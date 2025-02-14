@@ -185,8 +185,12 @@ namespace Semantic_Analysis
             {
                 Console.WriteLine($"Error reading CSV file: {ex.Message}");
             }
+
+            // Data will always be a non-null list, return it directly
             return data;
         }
+
+
 
         // Extracts data from JSON file
         public List<string> ExtractDataFromJson(string filePath)
