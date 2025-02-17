@@ -94,6 +94,29 @@ namespace UnitTestProject
 #pragma warning restore CS8602 // Restore warning after this block
         }
 
+        [TestMethod]
+        public void ExtractDataFromJson_ShouldReturnNonEmptyData_WhenValidJsonFile()
+        {
+            // Arrange
+            string filePath = @"D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\Semantic_Analysis\Preprocessing\data.json"; // Example for JSON file
+
+            // Check if the test file exists before proceeding
+            if (!File.Exists(filePath))
+            {
+                Assert.Fail($"Test file not found at {filePath}. Please ensure the file exists before running the test.");
+            }
+
+            // Act
+            var result = _dataExtraction.ExtractDataFromJson(filePath);
+
+            // Assert: Ensure the result contains data
+            Assert.IsTrue(result.Count > 0, "The file should contain at least one non-empty line of data.");
+            foreach (var line in result)
+            {
+                Assert.IsFalse(string.IsNullOrWhiteSpace(line), "There should be no empty or whitespace-only lines in the file.");
+                Assert.IsTrue(line.Length > 2, "Each line should be meaningful (more than 2 characters).");
+            }
+        }
 
 
     }
