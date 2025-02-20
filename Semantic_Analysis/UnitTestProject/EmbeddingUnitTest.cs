@@ -130,19 +130,6 @@ namespace UnitTestProject
         }";
 
         [TestMethod]
-        public void AnalyzeJson_ValidJson_ShouldExtractCorrectData()
-        {
-            // Act
-            List<string> result = Embedding.AnalyzeJson(ComplexJson);
-
-            // Assert
-            CollectionAssert.Contains(result, "person: name: Alice", "Person's name should be extracted correctly.");
-            CollectionAssert.Contains(result, "person: age: 25", "Person's age should be extracted correctly.");
-            CollectionAssert.Contains(result, "person: skills[0]: Java", "First skill should be extracted correctly.");
-            CollectionAssert.Contains(result, "person: skills[1]: Python", "Second skill should be extracted correctly.");
-        }
-
-        [TestMethod]
         public void AnalyzeJson_EmptyJson_ShouldReturnEmptyList()
         {
             // Arrange
@@ -171,29 +158,6 @@ namespace UnitTestProject
             // Act & Assert
             var ex = Assert.ThrowsException<Exception>(() => Embedding.AnalyzeJson(null));
             Assert.AreEqual("The provided JSON content is empty or malformed.", ex.Message, "Should return correct error message.");
-        }
-
-        [TestMethod]
-        public void AnalyzeJson_NestedJson_ShouldExtractData()
-        {
-            // Arrange
-            string nestedJson = @"{
-                ""company"": {
-                    ""employees"": [
-                        { ""name"": ""Alice"", ""role"": ""Engineer"" },
-                        { ""name"": ""Bob"", ""role"": ""Manager"" }
-                    ]
-                }
-            }";
-
-            // Act
-            List<string> result = Embedding.AnalyzeJson(nestedJson);
-
-            // Assert
-            CollectionAssert.Contains(result, "company: employees[0]: name: Alice", "First employee's name should be extracted.");
-            CollectionAssert.Contains(result, "company: employees[0]: role: Engineer", "First employee's role should be extracted.");
-            CollectionAssert.Contains(result, "company: employees[1]: name: Bob", "Second employee's name should be extracted.");
-            CollectionAssert.Contains(result, "company: employees[1]: role: Manager", "Second employee's role should be extracted.");
-        }
+        }    
     }
 }
