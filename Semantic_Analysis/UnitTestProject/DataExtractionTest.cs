@@ -118,6 +118,28 @@ namespace UnitTestProject
             }
         }
 
+        [TestMethod]
+        public void ExtractDataFromPdf_ShouldReturnNonEmptyData_WhenValidPdfFile()
+        {
+            // Arrange
+            string filePath = @"D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\Semantic_Analysis\Preprocessing\data.pdf"; // Example for PDF file
+
+            // Check if the test file exists before proceeding
+            if (!File.Exists(filePath))
+            {
+                Assert.Fail($"Test file not found at {filePath}. Please ensure the file exists before running the test.");
+            }
+
+            // Act
+            var result = _dataExtraction.ExtractDataFromPdf(filePath);
+
+            // Assert: Ensure the result contains data
+            Assert.IsTrue(result.Count > 0, "The PDF file should contain extracted text.");
+            foreach (var line in result)
+            {
+                Assert.IsFalse(string.IsNullOrWhiteSpace(line), "There should be no empty or whitespace-only lines in the extracted PDF text.");
+            }
+        }
 
     }
 }
