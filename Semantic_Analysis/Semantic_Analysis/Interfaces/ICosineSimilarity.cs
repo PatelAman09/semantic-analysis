@@ -12,9 +12,7 @@ namespace Semantic_Analysis.Interfaces
 
         //List<double[]> ReadVectorsFromCsv(string inputFilePath);
         Dictionary<string, double[]> ReadVectorsFromCsv(string inputFilePath);
-        void ValidateVectors(Dictionary<string, double[]> vectors);
-        double CalculateDotProduct(double[] vectorA, double[] vectorB);
-        double CalculateMagnitude(double[] vector);
+        void ValidateVectors(Dictionary<string, double[]> vectors);;
         double CosineSimilarityCalculation(double[] vectorA, double[] vectorB);
         void SaveOutputToCsv(string outputFilePath, List<string> outputData);
     }

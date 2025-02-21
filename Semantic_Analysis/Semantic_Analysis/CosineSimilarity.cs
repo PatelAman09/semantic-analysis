@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Globalization;
 
 namespace Semantic_Analysis
 {
@@ -25,17 +26,21 @@ namespace Semantic_Analysis
                 {
                     if (string.IsNullOrWhiteSpace(line)) continue;
 
-                    var parts = line.Split(new[] { ':' }, 2);
-                    if (parts.Length < 2) continue; // Skip invalid lines
+                    var parts = line.Split(new[] { "\"," }, StringSplitOptions.None);
 
-                    string vectorName = parts[0].Trim(new[] { '[', ']', ' ' });
-                    var vectorPart = parts[1].Trim();
-                    var values = vectorPart.Split(',');
+                    if (parts.Length < 2)
+                    {
+                        Console.WriteLine($"Warning: Skipped malformed line: {line}");
+                        continue;
+                    }
+
+                    string vectorName = parts[0].Trim().Split(':')[1].Trim().Trim('\"');
+                    string[] values = parts[1].Trim('\"').Split(',');
 
                     var vectorValues = new List<double>();
                     foreach (var value in values)
                     {
-                        if (double.TryParse(value.Trim('"'), out double number))
+                        if (double.TryParse(value.Trim(), NumberStyles.Float, CultureInfo.InvariantCulture, out double number))
                         {
                             vectorValues.Add(number);
                         }
@@ -45,7 +50,7 @@ namespace Semantic_Analysis
                         }
                     }
 
-                    if (vectorValues.Count > 0)
+                    if (!string.IsNullOrEmpty(vectorName) && vectorValues.Count > 0)
                     {
                         vectors[vectorName] = vectorValues.ToArray();
                     }
@@ -74,26 +79,11 @@ namespace Semantic_Analysis
                 throw new InvalidOperationException("All vectors must have the same length.");
         }
 
-        public double CalculateDotProduct(double[] vectorA, double[] vectorB)
-        {
-            double sum = 0;
-            for (int i = 0; i < vectorA.Length; i++)
-            {
-                sum += vectorA[i] * vectorB[i];
-            }
-            return sum;
-        }
-
-        public double CalculateMagnitude(double[] vector)
-        {
-            double sum = vector.Sum(v => v * v);
-            return sum > 0 ? Math.Sqrt(sum) : 0;
-        }
         public double CosineSimilarityCalculation(double[] vectorA, double[] vectorB)
         {
-            double dotProduct = CalculateDotProduct(vectorA, vectorB);
-            double magnitudeA = CalculateMagnitude(vectorA);
-            double magnitudeB = CalculateMagnitude(vectorB);
+            double dotProduct = vectorA.Zip(vectorB, (a, b) => a * b).Sum();
+            double magnitudeA = Math.Sqrt(vectorA.Sum(v => v * v));
+            double magnitudeB = Math.Sqrt(vectorB.Sum(v => v * v));
 
             return (magnitudeA == 0 || magnitudeB == 0) ? 0.0 : dotProduct / (magnitudeA * magnitudeB);
         }
@@ -122,64 +112,38 @@ namespace Semantic_Analysis
         public static void Main(string[] args)
         {
             IConfigurationRoot config = LoadConfiguration();
-            string inputFolder = config["FilePaths:InputFolder"];
-            string outputFolder = config["FilePaths:OutputFolder"];
             string inputFile1 = config["FilePaths:InputFileName1"];
             string inputFile2 = config["FilePaths:InputFileName2"];
             string outputFileName = config["FilePaths:CSVOutputFileName"];
 
             string rootDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
-
-            string inputFilePath1 = Path.Combine(rootDirectory, inputFolder, inputFile1);
-            string inputFilePath2 = Path.Combine(rootDirectory, inputFolder, inputFile2);
-            string outputFilePath = Path.Combine(rootDirectory, outputFolder, outputFileName);
-
-            if (string.IsNullOrEmpty(inputFile1) || string.IsNullOrEmpty(inputFile2) || string.IsNullOrEmpty(outputFileName))
-                throw new InvalidOperationException("Missing configuration values in appsettings.json.");
+            string inputFilePath1 = Path.Combine(rootDirectory, config["FilePaths:InputFolder"], inputFile1);
+            string inputFilePath2 = Path.Combine(rootDirectory, config["FilePaths:InputFolder"], inputFile2);
+            string outputFilePath = Path.Combine(rootDirectory, config["FilePaths:OutputFolder"], outputFileName);
 
             ICosineSimilarity cosineSimilarity = new CosineSimilarity();
 
             try
             {
-                // Read vectors from both CSV files
                 Dictionary<string, double[]> vectorsFile1 = cosineSimilarity.ReadVectorsFromCsv(inputFilePath1);
                 Dictionary<string, double[]> vectorsFile2 = cosineSimilarity.ReadVectorsFromCsv(inputFilePath2);
 
-                // Validate both vector dictionaries
                 cosineSimilarity.ValidateVectors(vectorsFile1);
                 cosineSimilarity.ValidateVectors(vectorsFile2);
 
-                if (vectorsFile1.Values.First().Length != vectorsFile2.Values.First().Length)
-                {
-                    throw new InvalidOperationException("Vectors from both files must have the same dimensions.");
-                }
-
-                // Initialize List to collect output data
-                List<string> outputData = new List<string>();
+                ConcurrentBag<string> outputData = new ConcurrentBag<string>();
                 outputData.Add("Cosine Similarity Results");
-
-                // Compute similarity between each vector from File1 and each vector from File2
-                object lockObject = new object();
-
-                List<string> outputData = new List<string> { "CosineSimilarity" };
 
                 Parallel.ForEach(vectorsFile1.Keys, file1Key =>
                 {
                     foreach (var file2Key in vectorsFile2.Keys)
                     {
-                        // Calculate the cosine similarity between the two vectors
                         double similarity = Math.Round(cosineSimilarity.CosineSimilarityCalculation(vectorsFile1[file1Key], vectorsFile2[file2Key]), 10);
-
-                        // Create the result string with the correct names (instead of indices)
-                        string result = $"\"{file1Key}\" (File1) vs \"{file2Key}\" (File2): {similarity}";
-
-                        // Add the result to the output list
-                        outputData.Add(result);
+                        outputData.Add($"\"{file1Key}\" (File1) vs \"{file2Key}\" (File2): {similarity.ToString(CultureInfo.InvariantCulture)}");
                     }
                 });
 
-                // Save results
-                cosineSimilarity.SaveOutputToCsv(outputFilePath, outputData);
+                cosineSimilarity.SaveOutputToCsv(outputFilePath, outputData.ToList());
             }
             catch (Exception ex)
             {

@@ -1,81 +1,81 @@
+"jackie chan" (File1) vs "entertainment" (File2): 0.4012482614
+"jackie chan" (File1) vs "sports" (File2): 0.3680685905
+"jackie chan" (File1) vs "music" (File2): 0.3611018538
+"jackie chan" (File1) vs "government" (File2): 0.2965908697
+"rihanna" (File1) vs "entertainment" (File2): 0.3212386976
+"rihanna" (File1) vs "sports" (File2): 0.2841673713
+"rihanna" (File1) vs "music" (File2): 0.4053136273
+"rihanna" (File1) vs "government" (File2): 0.2433243892
+"boris johnson" (File1) vs "entertainment" (File2): 0.2960125631
+"boris johnson" (File1) vs "sports" (File2): 0.2731466037
+"boris johnson" (File1) vs "music" (File2): 0.3220347624
+"boris johnson" (File1) vs "government" (File2): 0.4434975618
+"greta thunberg" (File1) vs "entertainment" (File2): 0.2658983463
+"greta thunberg" (File1) vs "sports" (File2): 0.2691193056
+"greta thunberg" (File1) vs "music" (File2): 0.3101510758
+"greta thunberg" (File1) vs "government" (File2): 0.3207328377
+"oprah winfrey" (File1) vs "entertainment" (File2): 0.3445283783
+"oprah winfrey" (File1) vs "sports" (File2): 0.2859664415
+"oprah winfrey" (File1) vs "music" (File2): 0.3709084748
+"oprah winfrey" (File1) vs "government" (File2): 0.262514871
+"frida kahlo" (File1) vs "entertainment" (File2): 0.2536248624
+"frida kahlo" (File1) vs "sports" (File2): 0.2320523303
+"frida kahlo" (File1) vs "music" (File2): 0.4249910673
+"frida kahlo" (File1) vs "government" (File2): 0.223501236
+"jacinda ardern" (File1) vs "entertainment" (File2): 0.2566019005
+"jacinda ardern" (File1) vs "sports" (File2): 0.231101537
+"jacinda ardern" (File1) vs "music" (File2): 0.284248312
+"jacinda ardern" (File1) vs "government" (File2): 0.3457142362
+"mahatma gandhi" (File1) vs "entertainment" (File2): 0.3174317448
+"mahatma gandhi" (File1) vs "sports" (File2): 0.3672259159
+"mahatma gandhi" (File1) vs "music" (File2): 0.3852380309
+"mahatma gandhi" (File1) vs "government" (File2): 0.4055660382
+"marie curie" (File1) vs "entertainment" (File2): 0.2753707212
+"marie curie" (File1) vs "sports" (File2): 0.2803730383
+"marie curie" (File1) vs "music" (File2): 0.2945952366
+"marie curie" (File1) vs "government" (File2): 0.241765168
+"david beckham" (File1) vs "entertainment" (File2): 0.3312362101
+"david beckham" (File1) vs "sports" (File2): 0.3617687717
+"david beckham" (File1) vs "music" (File2): 0.3713273598
+"david beckham" (File1) vs "government" (File2): 0.274656557
+"xi jinping" (File1) vs "entertainment" (File2): 0.2934365862
+"xi jinping" (File1) vs "sports" (File2): 0.2684328735
+"xi jinping" (File1) vs "music" (File2): 0.2687841463
+"xi jinping" (File1) vs "government" (File2): 0.3788466017
+"emma watson" (File1) vs "entertainment" (File2): 0.3401477065
+"emma watson" (File1) vs "sports" (File2): 0.2881567131
+"emma watson" (File1) vs "music" (File2): 0.3322313089
+"emma watson" (File1) vs "government" (File2): 0.2559113583
+"lionel messi" (File1) vs "entertainment" (File2): 0.3387925878
+"lionel messi" (File1) vs "sports" (File2): 0.4344312667
+"lionel messi" (File1) vs "music" (File2): 0.3436793501
+"lionel messi" (File1) vs "government" (File2): 0.2736644461
+"pablo picasso" (File1) vs "entertainment" (File2): 0.2822525717
+"pablo picasso" (File1) vs "sports" (File2): 0.2691037375
+"pablo picasso" (File1) vs "music" (File2): 0.3501560478
+"pablo picasso" (File1) vs "government" (File2): 0.2430197124
+"shakira" (File1) vs "entertainment" (File2): 0.2999080233
+"shakira" (File1) vs "sports" (File2): 0.2802183574
+"shakira" (File1) vs "music" (File2): 0.4174508117
+"shakira" (File1) vs "government" (File2): 0.2256988358
+"nelson mandela" (File1) vs "entertainment" (File2): 0.2564970562
+"nelson mandela" (File1) vs "sports" (File2): 0.2500813873
+"nelson mandela" (File1) vs "music" (File2): 0.3159127259
+"nelson mandela" (File1) vs "government" (File2): 0.382687634
+"ariana grande" (File1) vs "entertainment" (File2): 0.3608299843
+"ariana grande" (File1) vs "sports" (File2): 0.3089406522
+"ariana grande" (File1) vs "music" (File2): 0.4344812476
+"ariana grande" (File1) vs "government" (File2): 0.272602838
+"vladimir putin" (File1) vs "entertainment" (File2): 0.2766699306
+"vladimir putin" (File1) vs "sports" (File2): 0.2615368901
+"vladimir putin" (File1) vs "music" (File2): 0.3171329418
+"vladimir putin" (File1) vs "government" (File2): 0.3999998937
+"angela merkel" (File1) vs "entertainment" (File2): 0.3435771968
+"angela merkel" (File1) vs "sports" (File2): 0.2517735142
+"angela merkel" (File1) vs "music" (File2): 0.2777895897
+"angela merkel" (File1) vs "government" (File2): 0.3406291918
+"barack obama" (File1) vs "entertainment" (File2): 0.3346485565
+"barack obama" (File1) vs "sports" (File2): 0.3287276962
+"barack obama" (File1) vs "music" (File2): 0.3716808134
+"barack obama" (File1) vs "government" (File2): 0.464059757
 Cosine Similarity Results
-"[1 (File1) vs "[0 (File2): 0,0890365617
-"[2 (File1) vs "[0 (File2): 0,1236297633
-"[3 (File1) vs "[0 (File2): 0,1507516159
-"[4 (File1) vs "[0 (File2): 0,1084611539
-"[0 (File1) vs "[0 (File2): 0,1512321796
-"[2 (File1) vs "[1 (File2): 0,0915414862
-"[1 (File1) vs "[1 (File2): 0,1692808425
-"[3 (File1) vs "[1 (File2): 0,064121868
-"[0 (File1) vs "[1 (File2): 0,1048518329
-"[4 (File1) vs "[1 (File2): 0,1082987655
-"[5 (File1) vs "[0 (File2): 0,1687753077
-"[2 (File1) vs "[2 (File2): 0,1566480196
-"[3 (File1) vs "[2 (File2): 0,1068473346
-"[1 (File1) vs "[2 (File2): 0,082192023
-"[4 (File1) vs "[2 (File2): 0,1759286838
-"[5 (File1) vs "[1 (File2): 0,1386097944
-"[2 (File1) vs "[3 (File2): 0,1035185413
-"[3 (File1) vs "[3 (File2): 0,1692056622
-"[5 (File1) vs "[2 (File2): 0,1334186128
-"[6 (File1) vs "[0 (File2): 0,0854286423
-"[4 (File1) vs "[3 (File2): 0,1741590651
-"[5 (File1) vs "[3 (File2): 0,1485138194
-"[0 (File1) vs "[2 (File2): 0,0862218209
-"[1 (File1) vs "[3 (File2): 0,0572238892
-"[0 (File1) vs "[3 (File2): 0,1035952466
-"[9 (File1) vs "[0 (File2): 0,0858243836
-"[7 (File1) vs "[0 (File2): 0,1918396195
-"[11 (File1) vs "[0 (File2): 0,0758906938
-"[8 (File1) vs "[0 (File2): 0,1641604881
-"[12 (File1) vs "[0 (File2): 0,1510684754
-"[9 (File1) vs "[1 (File2): 0,1015237052
-"[10 (File1) vs "[0 (File2): 0,1623405475
-"[7 (File1) vs "[1 (File2): 0,0959091004
-"[11 (File1) vs "[1 (File2): 0,130466358
-"[9 (File1) vs "[2 (File2): 0,1014444375
-"[8 (File1) vs "[1 (File2): 0,1175725891
-"[12 (File1) vs "[1 (File2): 0,1331115923
-"[10 (File1) vs "[1 (File2): 0,1210001078
-"[9 (File1) vs "[3 (File2): 0,1344918473
-"[11 (File1) vs "[2 (File2): 0,0988715605
-"[7 (File1) vs "[2 (File2): 0,1336178059
-"[8 (File1) vs "[2 (File2): 0,1231434531
-"[6 (File1) vs "[1 (File2): 0,0956262525
-"[10 (File1) vs "[2 (File2): 0,1193670582
-"[14 (File1) vs "[0 (File2): 0,0761783502
-"[8 (File1) vs "[3 (File2): 0,1649432088
-"[10 (File1) vs "[3 (File2): 0,0804813137
-"[11 (File1) vs "[3 (File2): 0,1020611398
-"[6 (File1) vs "[2 (File2): 0,0775164553
-"[7 (File1) vs "[3 (File2): 0,1101509027
-"[15 (File1) vs "[0 (File2): 0,1310642106
-"[13 (File1) vs "[0 (File2): 0,1628028871
-"[6 (File1) vs "[3 (File2): 0,1345717224
-"[18 (File1) vs "[0 (File2): 0,0902167279
-"[15 (File1) vs "[1 (File2): 0,1013192735
-"[19 (File1) vs "[0 (File2): 0,0912816672
-"[18 (File1) vs "[1 (File2): 0,0815164375
-"[14 (File1) vs "[1 (File2): 0,0991713502
-"[17 (File1) vs "[0 (File2): 0,1363370281
-"[15 (File1) vs "[2 (File2): 0,0850981046
-"[16 (File1) vs "[0 (File2): 0,1060119703
-"[19 (File1) vs "[1 (File2): 0,0846469298
-"[13 (File1) vs "[1 (File2): 0,0391476035
-"[16 (File1) vs "[1 (File2): 0,1211423332
-"[19 (File1) vs "[2 (File2): 0,0709190471
-"[13 (File1) vs "[2 (File2): 0,0854024573
-"[12 (File1) vs "[2 (File2): 0,1280136212
-"[16 (File1) vs "[2 (File2): 0,0846602501
-"[15 (File1) vs "[3 (File2): 0,0977892448
-"[18 (File1) vs "[2 (File2): 0,1219513878
-"[14 (File1) vs "[2 (File2): 0,0596441254
-"[17 (File1) vs "[1 (File2): 0,0949201236
-"[19 (File1) vs "[3 (File2): 0,0840612051
-"[18 (File1) vs "[3 (File2): 0,1050637504
-"[12 (File1) vs "[3 (File2): 0,1083262853
-"[17 (File1) vs "[2 (File2): 0,1055250141
-"[13 (File1) vs "[3 (File2): 0,1087701706
-"[14 (File1) vs "[3 (File2): 0,0847407283
-"[16 (File1) vs "[3 (File2): 0,0865182281
-"[17 (File1) vs "[3 (File2): 0,0935083028
