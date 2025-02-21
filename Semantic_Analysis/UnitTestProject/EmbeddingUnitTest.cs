@@ -116,6 +116,20 @@ namespace UnitTestProject
             // Assert
             Assert.AreEqual(string.Empty, result, "An empty JSON file should return an empty string.");
         }
+
+        [TestMethod]
+        public void ReadJsonFile_NullFilePath_ShouldThrowArgumentException()
+        {
+            // Act & Assert
+            Assert.ThrowsException<ArgumentException>(() => Embedding.ReadJsonFile(null));
+        }
+
+        [TestMethod]
+        public void ReadJsonFile_WhitespaceFilePath_ShouldThrowArgumentException()
+        {
+            // Act & Assert
+            Assert.ThrowsException<ArgumentException>(() => Embedding.ReadJsonFile(" "));
+        }
     }
 
     [TestClass]
