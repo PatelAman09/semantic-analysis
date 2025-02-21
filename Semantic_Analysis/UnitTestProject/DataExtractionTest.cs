@@ -107,6 +107,8 @@ namespace UnitTestProject
             }
 
             // Act
+            // Ensure that _dataExtraction is not null before calling the method
+            Assert.IsNotNull(_dataExtraction, "The DataExtraction object should be initialized.");
             var result = _dataExtraction.ExtractDataFromJson(filePath);
 
             // Assert: Ensure the result contains data
