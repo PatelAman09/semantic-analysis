@@ -136,12 +136,12 @@ namespace UnitTestProject
     public class JsonAnalyzerUnitTest
     {
         private const string ComplexJson = @"{
-            ""person"": {
-                ""name"": ""Alice"",
-                ""age"": 25,
-                ""skills"": [""Java"", ""Python""]
-            }
-        }";
+        ""person"": {
+            ""name"": ""Alice"",
+            ""age"": 25,
+            ""skills"": [""Java"", ""Python""]
+        }
+    }";
 
         [TestMethod]
         public void AnalyzeJson_EmptyJson_ShouldReturnEmptyList()
@@ -167,11 +167,33 @@ namespace UnitTestProject
         }
 
         [TestMethod]
-        public void AnalyzeJson_NullJson_ShouldThrowException()
+        public void AnalyzeJson_NullJson_ShouldThrowArgumentException()
         {
             // Act & Assert
-            var ex = Assert.ThrowsException<Exception>(() => Embedding.AnalyzeJson(null));
-            Assert.AreEqual("The provided JSON content is empty or malformed.", ex.Message, "Should return correct error message.");
-        }    
+            Assert.ThrowsException<ArgumentException>(() => Embedding.AnalyzeJson(null), "Should throw ArgumentException for null input.");
+        }
+
+        [TestMethod]
+        public void AnalyzeJson_WhitespaceJson_ShouldThrowArgumentException()
+        {
+            // Arrange
+            string whitespaceJson = "  ";
+
+            // Act & Assert
+            Assert.ThrowsException<ArgumentException>(() => Embedding.AnalyzeJson(whitespaceJson), "Should throw ArgumentException for whitespace input.");
+        }
+
+        [TestMethod]
+        public void AnalyzeJson_ArrayJson_ShouldExtractValues()
+        {
+            // Arrange
+            string jsonArray = @"[ ""One"", ""Two"", ""Three"" ]";
+
+            // Act
+            List<string> result = Embedding.AnalyzeJson(jsonArray);
+
+            // Assert
+            CollectionAssert.AreEqual(new List<string> { "One", "Two", "Three" }, result, "Array elements should be extracted properly.");
+        }
     }
 }
