@@ -135,13 +135,45 @@ namespace UnitTestProject
             // Act
             var result = _dataExtraction.ExtractDataFromPdf(filePath);
 
-            // Assert: Ensure the result contains data
-            Assert.IsTrue(result.Count > 0, "The PDF file should contain extracted text.");
-            foreach (var line in result)
+            // Assert: Ensure the result is not null
+            Assert.IsNotNull(result, "The result should not be null.");
+
+            // Check if result is not null before accessing its properties
+            if (result != null)
             {
-                Assert.IsFalse(string.IsNullOrWhiteSpace(line), "There should be no empty or whitespace-only lines in the extracted PDF text.");
+                // Assert: Ensure the result contains data (ensure result is not empty)
+                Assert.IsTrue(result.Count > 0, "The PDF file should contain extracted text.");
+
+                // Assert: Ensure there are no empty or whitespace-only lines
+                foreach (var line in result)
+                {
+                    Assert.IsFalse(string.IsNullOrWhiteSpace(line), "There should be no empty or whitespace-only lines in the extracted PDF text.");
+                }
             }
         }
+
+        [TestMethod]
+        public void CleanData_ShouldRemoveSpecialCharactersAndWhitespace()
+        {
+            // Arrange
+            List<string> rawData = new List<string>
+            {
+                "  Hello World!   ",
+                "     This is a test.  ",
+                "   Special @# characters!  "
+            };
+
+            // Act
+            var cleanedData = _dataExtraction.CleanData(rawData);
+
+            // Assert: Ensure the cleaned data has no leading/trailing whitespaces or special characters
+            foreach (var line in cleanedData)
+            {
+                Assert.IsFalse(line.Contains("@") || line.Contains("#"), "Special characters should be removed.");
+                Assert.IsFalse(string.IsNullOrWhiteSpace(line), "There should be no empty or whitespace-only lines.");
+            }
+        }
+
 
     }
 }
