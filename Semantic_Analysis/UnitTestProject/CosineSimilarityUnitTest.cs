@@ -11,7 +11,7 @@ namespace UnitTestProject
     public class CosineSimilarityUnitTest
     {
         [TestClass]
-        public class DotProductTests
+        public class ReadVectorsTests
         {
             private CosineSimilarity _cosineSimilarity = null!;
 
@@ -19,33 +19,18 @@ namespace UnitTestProject
             public void Setup()
             {
                 _cosineSimilarity = new CosineSimilarity();
-            }
-
-            [TestMethod]
-            public void CalculateDotProduct_ValidVectors_ReturnsCorrectResult()
-            {
-                double[] vectorA = { 1, 2, 3 };
-                double[] vectorB = { 4, 5, 6 };
-                double expected = 32;
-
-                double result = _cosineSimilarity.CalculateDotProduct(vectorA, vectorB);
-
-                Assert.AreEqual(expected, result);
             }
 
             [TestMethod]
             [ExpectedException(typeof(ArgumentException))]
-            public void CalculateDotProduct_DifferentLengths_ThrowsArgumentException()
+            public void ReadVectorsFromCsv_EmptyFilePath_ThrowsException()
             {
-                double[] vectorA = { 1, 2 };
-                double[] vectorB = { 1, 2, 3 };
-
-                _cosineSimilarity.CalculateDotProduct(vectorA, vectorB);
+                _cosineSimilarity.ReadVectorsFromCsv("");
             }
         }
 
         [TestClass]
-        public class MagnitudeTests
+        public class ValidateVectorsTests
         {
             private CosineSimilarity _cosineSimilarity = null!;
 
@@ -56,14 +41,16 @@ namespace UnitTestProject
             }
 
             [TestMethod]
-            public void CalculateMagnitude_ValidVector_ReturnsCorrectResult()
+            [ExpectedException(typeof(InvalidOperationException))]
+            public void ValidateVectors_IncorrectVectorLengths_ThrowsException()
             {
-                double[] vector = { 3, 4 };
-                double expected = 5;
+                var vectors = new Dictionary<string, double[]>()
+            {
+                { "Vector1", new double[] { 1.0, 2.0 } },
+                { "Vector2", new double[] { 3.0, 4.0, 5.0 } }
+            };
 
-                double result = _cosineSimilarity.CalculateMagnitude(vector);
-
-                Assert.AreEqual(expected, result);
+                _cosineSimilarity.ValidateVectors(vectors);
             }
         }
 
@@ -79,117 +66,62 @@ namespace UnitTestProject
             }
 
             [TestMethod]
-            public void CosineSimilarityCalculation_ValidVectors_ReturnsCorrectSimilarity()
-            {
-                double[] vectorA = { 1, 0, -1 };
-                double[] vectorB = { -1, 0, 1 };
-                double expected = -1.0;
-
-                double result = _cosineSimilarity.CosineSimilarityCalculation(vectorA, vectorB);
-
-                Assert.AreEqual(expected, result, 10);
-            }
-
-            [TestMethod]
-            public void CosineSimilarityCalculation_ZeroMagnitude_ReturnsZero()
-            {
-                double[] vectorA = { 0, 0, 0 };
-                double[] vectorB = { 1, 2, 3 };
-
-                double result = _cosineSimilarity.CosineSimilarityCalculation(vectorA, vectorB);
-
-                Assert.AreEqual(0.0, result);
-            }
-
-            [TestMethod]
-            public void CosineSimilarityCalculation_IdenticalVectors_ReturnsOne()
-            {
-                double[] vectorA = { 1, 2, 3 };
-                double[] vectorB = { 1, 2, 3 };
-                double expected = 1.0;
-
-                double result = _cosineSimilarity.CosineSimilarityCalculation(vectorA, vectorB);
-
-                Assert.AreEqual(expected, result, 10);
-            }
-        }
-
-        [TestClass]
-        public class VectorValidationTests
-        {
-            private CosineSimilarity _cosineSimilarity = null!;
-
-            [TestInitialize]
-            public void Setup()
-            {
-                _cosineSimilarity = new CosineSimilarity();
-            }
-
-            [TestMethod]
-            [ExpectedException(typeof(InvalidOperationException))]
-            public void ValidateVectors_InconsistentLengths_ThrowsException()
-            {
-                List<double[]> vectors = new List<double[]> {
-                new double[] {1, 2, 3},
-                new double[] {4, 5}
-            };
-
-                _cosineSimilarity.ValidateVectors(vectors);
-            }
-
-            [TestMethod]
-            [ExpectedException(typeof(InvalidOperationException))]
-            public void ValidateVectors_LessThanTwoVectors_ThrowsException()
-            {
-                List<double[]> vectors = new List<double[]> { new double[] { 1, 2, 3 } };
-
-                _cosineSimilarity.ValidateVectors(vectors);
-            }
-
-            [TestMethod]
-            [ExpectedException(typeof(InvalidOperationException))]
-            public void ValidateVectors_EmptyList_ThrowsException()
-            {
-                List<double[]> vectors = new List<double[]>();
-                _cosineSimilarity.ValidateVectors(vectors);
-            }
-        }
-
-        [TestClass]
-        public class CsvHandlingTests
-        {
-            private CosineSimilarity _cosineSimilarity = null!;
-
-            [TestInitialize]
-            public void Setup()
-            {
-                _cosineSimilarity = new CosineSimilarity();
-            }
-
-            [TestMethod]
-            [ExpectedException(typeof(ArgumentException))]
-            public void ReadVectorsFromCsv_InvalidFilePath_ThrowsException()
-            {
-                _cosineSimilarity.ReadVectorsFromCsv(null!);
-            }
-            [TestMethod]
-            [ExpectedException(typeof(InvalidOperationException))]
-            public void ReadVectorsFromCsv_MalformedData_ThrowsException()
+            public void CosineSimilarityCalculation_ValidVectors_ReturnsCorrectValue()
             {
                 // Arrange
-                string tempFilePath = Path.GetTempFileName();
-                File.WriteAllText(tempFilePath, "InvalidDataWithoutVectors");
+                double[] vectorA = { 1.0, 2.0, 3.0 };
+                double[] vectorB = { 4.0, 5.0, 6.0 };
 
-                try
-                {
-                    // Act
-                    _cosineSimilarity.ReadVectorsFromCsv(tempFilePath);
-                }
-                finally
-                {
-                    // Cleanup
-                    File.Delete(tempFilePath);
-                }
+                // Act
+                double similarity = _cosineSimilarity.CosineSimilarityCalculation(vectorA, vectorB);
+
+                // Assert
+                double expected = 0.974631846;
+                Assert.AreEqual(expected, similarity, 0.0001);
+            }
+
+            [TestMethod]
+            public void CosineSimilarityCalculation_ZeroMagnitudeVector_ReturnsZero()
+            {
+                // Arrange
+                double[] vectorA = { 0.0, 0.0, 0.0 };
+                double[] vectorB = { 4.0, 5.0, 6.0 };
+
+                // Act
+                double similarity = _cosineSimilarity.CosineSimilarityCalculation(vectorA, vectorB);
+
+                // Assert
+                Assert.AreEqual(0.0, similarity);
+            }
+        }
+
+        [TestClass]
+        public class SaveOutputTests
+        {
+            private CosineSimilarity _cosineSimilarity = null!;
+
+            [TestInitialize]
+            public void Setup()
+            {
+                _cosineSimilarity = new CosineSimilarity();
+            }
+
+            [TestMethod]
+            public void SaveOutputToCsv_ValidData_SavesFileSuccessfully()
+            {
+                // Arrange
+                string testOutputPath = Path.GetTempFileName();
+                List<string> outputData = new List<string>
+            {
+                "Test Cosine Similarity Output"
+            };
+
+                // Act
+                _cosineSimilarity.SaveOutputToCsv(testOutputPath, outputData);
+                var savedData = File.ReadAllLines(testOutputPath);
+
+                // Assert
+                Assert.AreEqual(outputData[0], savedData[0]);
             }
         }
     }
