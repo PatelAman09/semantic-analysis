@@ -31,7 +31,11 @@ namespace UnitTestProject
             }
 
             // Act
-            var result = _dataExtraction!.ExtractDataFromFile(filePath);  // Using null-forgiving operator to tell compiler _dataExtraction is not null here
+            if (_dataExtraction == null)
+            {
+                Assert.Fail("DataExtraction is not initialized.");
+            }
+            var result = _dataExtraction.ExtractDataFromFile(filePath);  // Using null-forgiving operator to tell compiler _dataExtraction is not null here
 
             // Assert
             Assert.IsTrue(result.Count > 0, "The file should contain at least one non-empty line of data.");
@@ -55,7 +59,11 @@ namespace UnitTestProject
             }
 
             // Act
-            var result = _dataExtraction!.ExtractDataFromText(filePath); // Use the null-forgiving operator
+            if (_dataExtraction == null)
+            {
+                Assert.Fail("DataExtraction is not initialized.");
+            }
+            var result = _dataExtraction.ExtractDataFromText(filePath); // Use the null-forgiving operator
 
             // Assert: Ensure the result contains data
             Assert.IsTrue(result.Count > 0, "The file should contain at least one non-empty line of data.");
@@ -69,8 +77,6 @@ namespace UnitTestProject
         [TestMethod]
         public void ExtractDataFromCsv_ShouldReturnNonEmptyData_WhenValidCsvFile()
         {
-#pragma warning disable CS8602 // Disable warning for dereference of possibly null reference
-
             // Arrange
             string filePath = @"D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\Semantic_Analysis\Preprocessing\data.csv"; // Example for CSV file
 
@@ -81,6 +87,10 @@ namespace UnitTestProject
             }
 
             // Act
+            if (_dataExtraction == null)
+            {
+                Assert.Fail("DataExtraction is not initialized.");
+            }
             var result = _dataExtraction.ExtractDataFromCsv(filePath);
 
             // Assert: Ensure the result contains data
@@ -90,8 +100,6 @@ namespace UnitTestProject
                 Assert.IsFalse(string.IsNullOrWhiteSpace(line), "There should be no empty or whitespace-only lines in the file.");
                 Assert.IsTrue(line.Length > 2, "Each line should be meaningful (more than 2 characters).");
             }
-
-#pragma warning restore CS8602 // Restore warning after this block
         }
 
         [TestMethod]
@@ -107,8 +115,10 @@ namespace UnitTestProject
             }
 
             // Act
-            // Ensure that _dataExtraction is not null before calling the method
-            Assert.IsNotNull(_dataExtraction, "The DataExtraction object should be initialized.");
+            if (_dataExtraction == null)
+            {
+                Assert.Fail("DataExtraction is not initialized.");
+            }
             var result = _dataExtraction.ExtractDataFromJson(filePath);
 
             // Assert: Ensure the result contains data
@@ -133,6 +143,10 @@ namespace UnitTestProject
             }
 
             // Act
+            if (_dataExtraction == null)
+            {
+                Assert.Fail("DataExtraction is not initialized.");
+            }
             var result = _dataExtraction.ExtractDataFromPdf(filePath);
 
             // Assert: Ensure the result is not null
@@ -157,11 +171,14 @@ namespace UnitTestProject
         {
             // Arrange
             List<string> rawData = new List<string>
-            {
-                "  Hello World!   ",
-                "     This is a test.  ",
-                "   Special @# characters!  "
-            };
+        {
+        "  Hello World!   ",
+        "     This is a test.  ",
+        "   Special @# characters!  "
+    };
+
+            // Ensure that _dataExtraction is initialized
+            Assert.IsNotNull(_dataExtraction, "The DataExtraction object should be initialized.");
 
             // Act
             var cleanedData = _dataExtraction.CleanData(rawData);
@@ -173,7 +190,5 @@ namespace UnitTestProject
                 Assert.IsFalse(string.IsNullOrWhiteSpace(line), "There should be no empty or whitespace-only lines.");
             }
         }
-
-
     }
 }
