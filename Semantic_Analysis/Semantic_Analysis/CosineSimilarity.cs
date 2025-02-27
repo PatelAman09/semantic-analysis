@@ -26,27 +26,22 @@ namespace Semantic_Analysis
                 {
                     if (string.IsNullOrWhiteSpace(line)) continue;
 
-                    var parts = line.Split(new[] { "\"," }, StringSplitOptions.None);
+                    var parts = line.Split(new[] { "\",\"" }, StringSplitOptions.None);
 
                     if (parts.Length < 2)
                     {
-                        Console.WriteLine($"Warning: Skipped malformed line: {line}");
-                        continue;
+                        continue; // Skip malformed lines
                     }
 
-                    string vectorName = parts[0].Trim().Split(':')[1].Trim().Trim('\"');
+                    string vectorName = parts[0].Trim('\"');
                     string[] values = parts[1].Trim('\"').Split(',');
 
-                    var vectorValues = new List<double>();
+                    List<double> vectorValues = new List<double>();
                     foreach (var value in values)
                     {
                         if (double.TryParse(value.Trim(), NumberStyles.Float, CultureInfo.InvariantCulture, out double number))
                         {
                             vectorValues.Add(number);
-                        }
-                        else
-                        {
-                            Console.WriteLine($"Warning: Skipped invalid value '{value}' in line: {line}");
                         }
                     }
 
@@ -68,7 +63,6 @@ namespace Semantic_Analysis
 
             return vectors;
         }
-
         public void ValidateVectors(Dictionary<string, double[]> vectors)
         {
             if (vectors.Count < 2)

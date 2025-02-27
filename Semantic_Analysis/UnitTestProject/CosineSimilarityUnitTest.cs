@@ -27,6 +27,26 @@ namespace UnitTestProject
             {
                 _cosineSimilarity.ReadVectorsFromCsv("");
             }
+
+            [TestMethod]
+            public void ShouldReadValidVectors()
+            {
+                string filePath = "test_vectors.csv";
+                File.WriteAllLines(filePath, new[]
+                {
+                        "\"Vector1\",\"1.0,2.0,3.0\"",
+                        "\"Vector2\",\"4.0,5.0,6.0\""
+                }
+                );
+
+                var vectors = _cosineSimilarity.ReadVectorsFromCsv(filePath);
+
+                Assert.AreEqual(2, vectors.Count);
+                CollectionAssert.AreEqual(new double[] { 1.0, 2.0, 3.0 }, vectors["Vector1"]);
+                CollectionAssert.AreEqual(new double[] { 4.0, 5.0, 6.0 }, vectors["Vector2"]);
+
+                File.Delete(filePath);
+            }
         }
 
         [TestClass]
