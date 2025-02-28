@@ -10,8 +10,15 @@ using Newtonsoft.Json.Linq;
 using OpenAI.Embeddings; // OpenAI NuGet package
 using Semantic_Analysis.Interfaces; // Reference to the interface
 
+// Class implementing the IEmbeddingProcessor interface
 class EmbeddingProcessor : IEmbeddingProcessor
 {
+    /// <summary>
+    /// Reads a JSON file asynchronously from the given file path.
+    /// </summary>
+    /// <param name="jsonFilePath">Path to the JSON file.</param>
+    /// <returns>Returns the JSON content as a string.</returns>
+    /// <exception cref="FileNotFoundException">Thrown if the file does not exist.</exception>
     public async Task<string> ReadJsonFileAsync(string jsonFilePath)
     {
         if (!File.Exists(jsonFilePath))
@@ -21,6 +28,12 @@ class EmbeddingProcessor : IEmbeddingProcessor
 
         return await File.ReadAllTextAsync(jsonFilePath);
     }
+    /// <summary>
+    /// Parses and analyzes JSON content, extracting key-value pairs into a list.
+    /// </summary>
+    /// <param name="jsonContent">JSON content as a string.</param>
+    /// <returns>A list of extracted data from the JSON structure.</returns>
+    /// <exception cref="Exception">Thrown if the JSON content is empty or malformed.</exception>
 
     public List<string> AnalyzeJson(string jsonContent)
     {
