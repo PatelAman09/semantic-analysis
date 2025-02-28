@@ -45,6 +45,11 @@ class EmbeddingProcessor : IEmbeddingProcessor
             throw new Exception("The provided JSON content is empty or malformed.");
         }
 
+        /// <summary>
+        /// Recursively traverses a JSON object and extracts values.
+        /// </summary>
+        /// <param name="obj">JSON object to traverse.</param>
+        /// <param name="prefix">Prefix to keep track of nested keys.</param>
         void Traverse(object obj, string prefix = "")
         {
             if (obj is JObject jObject)
@@ -72,6 +77,14 @@ class EmbeddingProcessor : IEmbeddingProcessor
         return extractedData;
     }
 
+    /// <summary>
+    /// Generates an embedding asynchronously with retry logic.
+    /// </summary>
+    /// <param name="client">The OpenAI embedding client.</param>
+    /// <param name="text">The text to generate the embedding for.</param>
+    /// <param name="maxRetries">Maximum number of retry attempts.</param>
+    /// <returns>Returns an OpenAI embedding object.</returns>
+    /// <exception cref="Exception">Thrown if the embedding generation fails after max retries.</exception>
     public async Task<OpenAIEmbedding> GenerateEmbeddingWithRetryAsync(EmbeddingClient client, string text, int maxRetries = 3)
     {
         int attempt = 0;
