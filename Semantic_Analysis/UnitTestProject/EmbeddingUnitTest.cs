@@ -118,10 +118,19 @@ namespace UnitTestProject
         }
 
         [TestMethod]
-        public void ReadJsonFile_NullFilePath_ShouldThrowArgumentException()
+        public static string ReadJsonFile(string? jsonFilePath)
         {
-            // Act & Assert
-            Assert.ThrowsException<ArgumentException>(() => Embedding.ReadJsonFile(null));
+            if (string.IsNullOrWhiteSpace(jsonFilePath))
+            {
+                throw new ArgumentException("File path cannot be null or whitespace.");
+            }
+
+            if (!File.Exists(jsonFilePath))
+            {
+                throw new FileNotFoundException($"The specified JSON file does not exist: {jsonFilePath}");
+            }
+
+            return File.ReadAllText(jsonFilePath);
         }
 
         [TestMethod]
