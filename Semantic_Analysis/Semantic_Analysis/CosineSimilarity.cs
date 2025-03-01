@@ -26,42 +26,35 @@ namespace Semantic_Analysis
                 {
                     if (string.IsNullOrWhiteSpace(line)) continue;
 
-                    var parts = line.Split(new[] { "\",\"" }, StringSplitOptions.None);
-
-                    if (parts.Length < 2)
-                    {
-                        continue; // Skip malformed lines
-                    }
+                    var parts = line.Split(',');
+                    if (parts.Length < 2) continue; // Skip malformed lines
 
                     string vectorName = parts[0].Trim('\"');
-                    string[] values = parts[1].Trim('\"').Split(',');
+                    double[] vectorValues = parts.Skip(1)
+                                                 .Select(value => double.TryParse(value.Trim(), NumberStyles.Float, CultureInfo.InvariantCulture, out double num) ? num : double.NaN)
+                                                 .Where(num => !double.IsNaN(num))
+                                                 .ToArray();
 
-                    List<double> vectorValues = new List<double>();
-                    foreach (var value in values)
-                    {
-                        if (double.TryParse(value.Trim(), NumberStyles.Float, CultureInfo.InvariantCulture, out double number))
-                        {
-                            vectorValues.Add(number);
-                        }
-                    }
-
-                    if (!string.IsNullOrEmpty(vectorName) && vectorValues.Count > 0)
-                    {
-                        vectors[vectorName] = vectorValues.ToArray();
-                    }
+                    if (!string.IsNullOrEmpty(vectorName) && vectorValues.Length > 0)
+                        vectors[vectorName] = NormalizeVector(vectorValues.ToArray());
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error reading CSV file '{inputFilePath}': {ex.Message}");
+                Console.WriteLine($"Error reading CSV file '{inputFilePath}': {ex.Message}");
+                throw;
             }
 
             if (vectors.Count < 2)
-            {
                 throw new InvalidOperationException("CSV must contain at least two valid vectors.");
-            }
 
             return vectors;
+        }
+
+        public double[] NormalizeVector(double[] vector)
+        {
+            double magnitude = Math.Sqrt(vector.Sum(v => v * v));
+            return magnitude == 0 ? vector : vector.Select(v => v / magnitude).ToArray();
         }
         public void ValidateVectors(Dictionary<string, double[]> vectors)
         {

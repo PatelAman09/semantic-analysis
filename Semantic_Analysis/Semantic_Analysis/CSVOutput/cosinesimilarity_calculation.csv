@@ -1,81 +1,81 @@
-"[15]: jacinda ardern" (File1) vs "[3]: entertainment" (File2): 0.2566019005
-"[15]: jacinda ardern" (File1) vs "[2]: sports" (File2): 0.231101537
-"[15]: jacinda ardern" (File1) vs "[1]: music" (File2): 0.284248312
-"[15]: jacinda ardern" (File1) vs "[0]: government" (File2): 0.3457142362
-"[6]: ariana grande" (File1) vs "[3]: entertainment" (File2): 0.3608299843
-"[6]: ariana grande" (File1) vs "[2]: sports" (File2): 0.3089406522
-"[6]: ariana grande" (File1) vs "[1]: music" (File2): 0.4344812476
-"[6]: ariana grande" (File1) vs "[0]: government" (File2): 0.272602838
-"[17]: greta thunberg" (File1) vs "[3]: entertainment" (File2): 0.2658983463
-"[17]: greta thunberg" (File1) vs "[2]: sports" (File2): 0.2691193056
-"[17]: greta thunberg" (File1) vs "[1]: music" (File2): 0.3101510758
-"[17]: greta thunberg" (File1) vs "[0]: government" (File2): 0.3207328377
-"[11]: oprah winfrey" (File1) vs "[3]: entertainment" (File2): 0.3445283783
-"[11]: oprah winfrey" (File1) vs "[2]: sports" (File2): 0.2859664415
-"[11]: oprah winfrey" (File1) vs "[1]: music" (File2): 0.3709084748
-"[11]: oprah winfrey" (File1) vs "[0]: government" (File2): 0.262514871
-"[0]: nelson mandela" (File1) vs "[3]: entertainment" (File2): 0.2564970562
-"[0]: nelson mandela" (File1) vs "[2]: sports" (File2): 0.2500813873
-"[0]: nelson mandela" (File1) vs "[1]: music" (File2): 0.3159127259
-"[0]: nelson mandela" (File1) vs "[0]: government" (File2): 0.382687634
-"[19]: marie curie" (File1) vs "[3]: entertainment" (File2): 0.2753707212
-"[19]: marie curie" (File1) vs "[2]: sports" (File2): 0.2803730383
-"[19]: marie curie" (File1) vs "[1]: music" (File2): 0.2945952366
-"[19]: marie curie" (File1) vs "[0]: government" (File2): 0.241765168
-"[12]: shakira" (File1) vs "[3]: entertainment" (File2): 0.2999080233
-"[12]: shakira" (File1) vs "[2]: sports" (File2): 0.2802183574
-"[12]: shakira" (File1) vs "[1]: music" (File2): 0.4174508117
-"[12]: shakira" (File1) vs "[0]: government" (File2): 0.2256988358
-"[5]: barack obama" (File1) vs "[3]: entertainment" (File2): 0.3346485565
-"[5]: barack obama" (File1) vs "[2]: sports" (File2): 0.3287276962
-"[5]: barack obama" (File1) vs "[1]: music" (File2): 0.3716808134
-"[5]: barack obama" (File1) vs "[0]: government" (File2): 0.464059757
-"[16]: pablo picasso" (File1) vs "[3]: entertainment" (File2): 0.2822525717
-"[16]: pablo picasso" (File1) vs "[2]: sports" (File2): 0.2691037375
-"[16]: pablo picasso" (File1) vs "[1]: music" (File2): 0.3501560478
-"[16]: pablo picasso" (File1) vs "[0]: government" (File2): 0.2430197124
-"[14]: rihanna" (File1) vs "[3]: entertainment" (File2): 0.3212386976
-"[14]: rihanna" (File1) vs "[2]: sports" (File2): 0.2841673713
-"[14]: rihanna" (File1) vs "[1]: music" (File2): 0.4053136273
-"[14]: rihanna" (File1) vs "[0]: government" (File2): 0.2433243892
-"[1]: frida kahlo" (File1) vs "[3]: entertainment" (File2): 0.2536248624
-"[1]: frida kahlo" (File1) vs "[2]: sports" (File2): 0.2320523303
-"[1]: frida kahlo" (File1) vs "[1]: music" (File2): 0.4249910673
-"[1]: frida kahlo" (File1) vs "[0]: government" (File2): 0.223501236
-"[8]: jackie chan" (File1) vs "[3]: entertainment" (File2): 0.4012482614
-"[8]: jackie chan" (File1) vs "[2]: sports" (File2): 0.3680685905
-"[8]: jackie chan" (File1) vs "[1]: music" (File2): 0.3611018538
-"[8]: jackie chan" (File1) vs "[0]: government" (File2): 0.2965908697
-"[18]: david beckham" (File1) vs "[3]: entertainment" (File2): 0.3312362101
-"[18]: david beckham" (File1) vs "[2]: sports" (File2): 0.3617687717
-"[18]: david beckham" (File1) vs "[1]: music" (File2): 0.3713273598
-"[18]: david beckham" (File1) vs "[0]: government" (File2): 0.274656557
-"[13]: xi jinping" (File1) vs "[3]: entertainment" (File2): 0.2934365862
-"[13]: xi jinping" (File1) vs "[2]: sports" (File2): 0.2684328735
-"[13]: xi jinping" (File1) vs "[1]: music" (File2): 0.2687841463
-"[13]: xi jinping" (File1) vs "[0]: government" (File2): 0.3788466017
-"[3]: angela merkel" (File1) vs "[3]: entertainment" (File2): 0.3435771968
-"[3]: angela merkel" (File1) vs "[2]: sports" (File2): 0.2517735142
-"[3]: angela merkel" (File1) vs "[1]: music" (File2): 0.2777895897
-"[3]: angela merkel" (File1) vs "[0]: government" (File2): 0.3406291918
-"[9]: emma watson" (File1) vs "[3]: entertainment" (File2): 0.3401477065
-"[9]: emma watson" (File1) vs "[2]: sports" (File2): 0.2881567131
-"[9]: emma watson" (File1) vs "[1]: music" (File2): 0.3322313089
-"[9]: emma watson" (File1) vs "[0]: government" (File2): 0.2559113583
-"[2]: mahatma gandhi" (File1) vs "[3]: entertainment" (File2): 0.3174317448
-"[2]: mahatma gandhi" (File1) vs "[2]: sports" (File2): 0.3672259159
-"[2]: mahatma gandhi" (File1) vs "[1]: music" (File2): 0.3852380309
-"[2]: mahatma gandhi" (File1) vs "[0]: government" (File2): 0.4055660382
-"[10]: vladimir putin" (File1) vs "[3]: entertainment" (File2): 0.2766699306
-"[10]: vladimir putin" (File1) vs "[2]: sports" (File2): 0.2615368901
-"[10]: vladimir putin" (File1) vs "[1]: music" (File2): 0.3171329418
-"[10]: vladimir putin" (File1) vs "[0]: government" (File2): 0.3999998937
-"[7]: boris johnson" (File1) vs "[3]: entertainment" (File2): 0.2960125631
-"[7]: boris johnson" (File1) vs "[2]: sports" (File2): 0.2731466037
-"[7]: boris johnson" (File1) vs "[1]: music" (File2): 0.3220347624
-"[7]: boris johnson" (File1) vs "[0]: government" (File2): 0.4434975618
-"[4]: lionel messi" (File1) vs "[3]: entertainment" (File2): 0.3387925878
-"[4]: lionel messi" (File1) vs "[2]: sports" (File2): 0.4344312667
-"[4]: lionel messi" (File1) vs "[1]: music" (File2): 0.3436793501
-"[4]: lionel messi" (File1) vs "[0]: government" (File2): 0.2736644461
+"[18]: david beckham" (File1) vs "[3]: entertainment" (File2): 0.3301915145
+"[18]: david beckham" (File1) vs "[2]: sports" (File2): 0.3617247705
+"[18]: david beckham" (File1) vs "[1]: music" (File2): 0.3726315731
+"[18]: david beckham" (File1) vs "[0]: government" (File2): 0.2756291878
+"[12]: shakira" (File1) vs "[3]: entertainment" (File2): 0.2992374247
+"[12]: shakira" (File1) vs "[2]: sports" (File2): 0.2801472249
+"[12]: shakira" (File1) vs "[1]: music" (File2): 0.4181770844
+"[12]: shakira" (File1) vs "[0]: government" (File2): 0.2262044275
+"[7]: boris johnson" (File1) vs "[3]: entertainment" (File2): 0.2968978948
+"[7]: boris johnson" (File1) vs "[2]: sports" (File2): 0.272553383
+"[7]: boris johnson" (File1) vs "[1]: music" (File2): 0.3225224508
+"[7]: boris johnson" (File1) vs "[0]: government" (File2): 0.443127302
+"[17]: greta thunberg" (File1) vs "[3]: entertainment" (File2): 0.2660678068
+"[17]: greta thunberg" (File1) vs "[2]: sports" (File2): 0.2683926522
+"[17]: greta thunberg" (File1) vs "[1]: music" (File2): 0.3106456517
+"[17]: greta thunberg" (File1) vs "[0]: government" (File2): 0.3204018598
+"[11]: oprah winfrey" (File1) vs "[3]: entertainment" (File2): 0.344268863
+"[11]: oprah winfrey" (File1) vs "[2]: sports" (File2): 0.2867593634
+"[11]: oprah winfrey" (File1) vs "[1]: music" (File2): 0.3712838577
+"[11]: oprah winfrey" (File1) vs "[0]: government" (File2): 0.2632676854
+"[3]: angela merkel" (File1) vs "[3]: entertainment" (File2): 0.3435691427
+"[3]: angela merkel" (File1) vs "[2]: sports" (File2): 0.250957654
+"[3]: angela merkel" (File1) vs "[1]: music" (File2): 0.2783364429
+"[3]: angela merkel" (File1) vs "[0]: government" (File2): 0.3404111597
+"[19]: marie curie" (File1) vs "[3]: entertainment" (File2): 0.274561994
+"[19]: marie curie" (File1) vs "[2]: sports" (File2): 0.2785148594
+"[19]: marie curie" (File1) vs "[1]: music" (File2): 0.2962298077
+"[19]: marie curie" (File1) vs "[0]: government" (File2): 0.2417230008
+"[2]: mahatma gandhi" (File1) vs "[3]: entertainment" (File2): 0.3163104349
+"[2]: mahatma gandhi" (File1) vs "[2]: sports" (File2): 0.3673309713
+"[2]: mahatma gandhi" (File1) vs "[1]: music" (File2): 0.3866958556
+"[2]: mahatma gandhi" (File1) vs "[0]: government" (File2): 0.406935332
+"[16]: pablo picasso" (File1) vs "[3]: entertainment" (File2): 0.2820852262
+"[16]: pablo picasso" (File1) vs "[2]: sports" (File2): 0.269288117
+"[16]: pablo picasso" (File1) vs "[1]: music" (File2): 0.3504029961
+"[16]: pablo picasso" (File1) vs "[0]: government" (File2): 0.243244925
+"[15]: jacinda ardern" (File1) vs "[3]: entertainment" (File2): 0.256813433
+"[15]: jacinda ardern" (File1) vs "[2]: sports" (File2): 0.231306912
+"[15]: jacinda ardern" (File1) vs "[1]: music" (File2): 0.2843008466
+"[15]: jacinda ardern" (File1) vs "[0]: government" (File2): 0.3457279241
+"[9]: emma watson" (File1) vs "[3]: entertainment" (File2): 0.3394955775
+"[9]: emma watson" (File1) vs "[2]: sports" (File2): 0.2872676904
+"[9]: emma watson" (File1) vs "[1]: music" (File2): 0.3331555774
+"[9]: emma watson" (File1) vs "[0]: government" (File2): 0.2560453986
+"[8]: jackie chan" (File1) vs "[3]: entertainment" (File2): 0.4015024888
+"[8]: jackie chan" (File1) vs "[2]: sports" (File2): 0.3677447547
+"[8]: jackie chan" (File1) vs "[1]: music" (File2): 0.3614646737
+"[8]: jackie chan" (File1) vs "[0]: government" (File2): 0.2963383528
+"[5]: barack obama" (File1) vs "[3]: entertainment" (File2): 0.3346639252
+"[5]: barack obama" (File1) vs "[2]: sports" (File2): 0.3289183604
+"[5]: barack obama" (File1) vs "[1]: music" (File2): 0.3718700366
+"[5]: barack obama" (File1) vs "[0]: government" (File2): 0.4641941331
+"[4]: lionel messi" (File1) vs "[3]: entertainment" (File2): 0.3380933894
+"[4]: lionel messi" (File1) vs "[2]: sports" (File2): 0.43302087
+"[4]: lionel messi" (File1) vs "[1]: music" (File2): 0.3453718215
+"[4]: lionel messi" (File1) vs "[0]: government" (File2): 0.2737016885
+"[1]: frida kahlo" (File1) vs "[3]: entertainment" (File2): 0.2547475952
+"[1]: frida kahlo" (File1) vs "[2]: sports" (File2): 0.2327933494
+"[1]: frida kahlo" (File1) vs "[1]: music" (File2): 0.4248369768
+"[1]: frida kahlo" (File1) vs "[0]: government" (File2): 0.2232871406
+"[14]: rihanna" (File1) vs "[3]: entertainment" (File2): 0.3205116188
+"[14]: rihanna" (File1) vs "[2]: sports" (File2): 0.2830429309
+"[14]: rihanna" (File1) vs "[1]: music" (File2): 0.4064727431
+"[14]: rihanna" (File1) vs "[0]: government" (File2): 0.2434171012
+"[13]: xi jinping" (File1) vs "[3]: entertainment" (File2): 0.2933304219
+"[13]: xi jinping" (File1) vs "[2]: sports" (File2): 0.2680090864
+"[13]: xi jinping" (File1) vs "[1]: music" (File2): 0.269161462
+"[13]: xi jinping" (File1) vs "[0]: government" (File2): 0.37878246
+"[10]: vladimir putin" (File1) vs "[3]: entertainment" (File2): 0.2785270366
+"[10]: vladimir putin" (File1) vs "[2]: sports" (File2): 0.2619434959
+"[10]: vladimir putin" (File1) vs "[1]: music" (File2): 0.317243043
+"[10]: vladimir putin" (File1) vs "[0]: government" (File2): 0.3996818205
+"[6]: ariana grande" (File1) vs "[3]: entertainment" (File2): 0.3603736804
+"[6]: ariana grande" (File1) vs "[2]: sports" (File2): 0.3087294054
+"[6]: ariana grande" (File1) vs "[1]: music" (File2): 0.4350831074
+"[6]: ariana grande" (File1) vs "[0]: government" (File2): 0.272878748
+"[0]: nelson mandela" (File1) vs "[3]: entertainment" (File2): 0.2560240718
+"[0]: nelson mandela" (File1) vs "[2]: sports" (File2): 0.2491904094
+"[0]: nelson mandela" (File1) vs "[1]: music" (File2): 0.3166420075
+"[0]: nelson mandela" (File1) vs "[0]: government" (File2): 0.3827075467
 Cosine Similarity Results
