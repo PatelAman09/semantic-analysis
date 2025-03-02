@@ -146,6 +146,15 @@ class EmbeddingProcessor : IEmbeddingProcessor
 
         Console.WriteLine("All embeddings processed and saved.");
     }
+    /// <summary>
+    /// Reads a JSON file, extracts relevant text data, generates embeddings, and saves the results to a CSV file.
+    /// </summary>
+    /// <param name="jsonFilePath">Path to the JSON file to process.</param>
+    /// <param name="csvFilePath">Path where the output CSV file will be saved.</param>
+    /// <param name="apiKey">OpenAI API key for embedding generation.</param>
+    /// <param name="saveInterval">Interval at which progress is saved.</param>
+    /// <returns>A Task representing the asynchronous operation.</returns>
+    /// <exception cref="Exception">Handles errors that occur during processing.</exception>
 
     public async Task ProcessJsonFileAsync(string jsonFilePath, string csvFilePath, string apiKey, int saveInterval)
     {
@@ -164,6 +173,12 @@ class EmbeddingProcessor : IEmbeddingProcessor
         }
     }
 
+    /// <summary>
+    /// Entry point for the application, prompting user input, validating paths, and initiating the embedding process.
+    /// </summary>
+    /// <param name="args">Command-line arguments (not used).</param>
+    /// <returns>A Task representing the asynchronous operation.</returns>
+    /// <exception cref="Exception">Handles any errors occurring in the application.</exception>
     static async Task Main(string[] args)
     {
         try
