@@ -12,39 +12,42 @@ using System.Xml.Linq;
 
 namespace Semantic_Analysis
 {
+    /// <summary>
+    /// Class responsible for extracting, cleaning, and saving data from various file types.
+    /// </summary>
     public class DataExtraction : IDataExtraction
     {
+        /// <summary>
+        /// Main entry point of the application, which coordinates the file extraction and saving process.
+        /// </summary>
+        /// <param name="args">Command-line arguments (not used in this implementation).</param>
         public static void Main(string[] args)
         {
-            // Load settings from appsettings.json
+            // Load configuration settings from appsettings.json
             var configuration = LoadConfiguration();
 
-            // Get folder paths from configuration
+            // Retrieve folder paths and file names from configuration
             string dataPreprocessingPath = configuration["FilePaths:DataPreprocessing"];
             string preprocessedDataPath = configuration["FilePaths:PreprocessedData"];
             string referenceDataPath = configuration["FilePaths:ReferenceData"];
+            var extractedDataFileNames = configuration.GetSection("FilePaths:ExtractedDataFileNames").GetChildren().Select(x => x.Value).ToList();
+            var referenceDocumentFileNames = configuration.GetSection("FilePaths:ReferenceDocumentFileNames").GetChildren().Select(x => x.Value).ToList();
 
-            // Read file names from configuration
-            var extractedDataFileNames = configuration.GetSection("FilePaths:ExtractedDataFileNames").GetChildren()
-                .Select(x => x.Value).ToList();
-            var referenceDocumentFileNames = configuration.GetSection("FilePaths:ReferenceDocumentFileNames").GetChildren()
-                .Select(x => x.Value).ToList();
-
-            // Resolve paths using project root
+            // Resolve the absolute paths for the directories
             string projectRoot = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
             string absoluteDataPreprocessingPath = Path.Combine(projectRoot, dataPreprocessingPath);
             string absolutePreprocessedDataPath = Path.Combine(projectRoot, preprocessedDataPath);
             string absoluteReferenceDataPath = Path.Combine(projectRoot, referenceDataPath);
 
-            // Ensure necessary directories exist
+            // Ensure the necessary directories exist
             EnsureDirectoryExists(absolutePreprocessedDataPath);
             EnsureDirectoryExists(absoluteReferenceDataPath);
 
-            // Locate the extracted data files
+            // Locate the required extracted and reference data files
             string extractedDataFilePath = FindFileInDirectory(absoluteDataPreprocessingPath, extractedDataFileNames);
             string referenceDocumentFilePath = FindFileInDirectory(absoluteDataPreprocessingPath, referenceDocumentFileNames);
 
-            // Validate file existence
+            // Validate file existence and print appropriate messages if not found
             if (string.IsNullOrEmpty(extractedDataFilePath))
             {
                 Console.WriteLine("No extracted data file found.");
@@ -57,28 +60,32 @@ namespace Semantic_Analysis
                 return;
             }
 
-            // Define output file paths
+            // Define the output file paths for the processed data
             string outputExtractedDataFilePath = Path.Combine(absolutePreprocessedDataPath, $"{Path.GetFileNameWithoutExtension(extractedDataFilePath)}.json");
             string outputReferenceDocumentFilePath = Path.Combine(absoluteReferenceDataPath, $"{Path.GetFileNameWithoutExtension(referenceDocumentFilePath)}.json");
 
-            // Create an instance of DataExtraction
+            // Create an instance of DataExtraction to process the files
             IDataExtraction processor = new DataExtraction();
 
-            // Process extracted data file
+            // Process the extracted data file
             List<string> extractedData = processor.ExtractDataFromFile(extractedDataFilePath);
             extractedData = processor.CleanData(extractedData);
             processor.SaveDataToJson(outputExtractedDataFilePath, extractedData);
 
-            // Process reference data file
+            // Process the reference document file
             List<string> referenceData = processor.ExtractDataFromFile(referenceDocumentFilePath);
             referenceData = processor.CleanData(referenceData);
             processor.SaveDataToJson(outputReferenceDocumentFilePath, referenceData);
 
+            // Output the result of the data extraction
             Console.WriteLine($"Data extracted and saved to: {outputExtractedDataFilePath}");
             Console.WriteLine($"Reference document data extracted and saved to: {outputReferenceDocumentFilePath}");
         }
 
-        // Load configuration from appsettings.json
+        /// <summary>
+        /// Loads configuration from the appsettings.json file.
+        /// </summary>
+        /// <returns>The loaded configuration.</returns>
         private static IConfiguration LoadConfiguration()
         {
             var configurationBuilder = new ConfigurationBuilder();
@@ -88,7 +95,10 @@ namespace Semantic_Analysis
             return configurationBuilder.Build();
         }
 
-        // Helper method to ensure directory exists
+        /// <summary>
+        /// Ensures that the specified directory exists. If not, it creates the directory.
+        /// </summary>
+        /// <param name="directoryPath">The directory path to ensure exists.</param>
         private static void EnsureDirectoryExists(string directoryPath)
         {
             if (!Directory.Exists(directoryPath))
@@ -97,7 +107,12 @@ namespace Semantic_Analysis
             }
         }
 
-        // Helper method to find a file in a directory based on filenames
+        /// <summary>
+        /// Finds a file within a directory based on a list of filenames.
+        /// </summary>
+        /// <param name="directoryPath">The directory in which to search.</param>
+        /// <param name="fileNames">A list of filenames to search for.</param>
+        /// <returns>The full path of the first matching file, or null if no match is found.</returns>
         private static string FindFileInDirectory(string directoryPath, List<string> fileNames)
         {
             foreach (var fileName in fileNames)
@@ -112,7 +127,11 @@ namespace Semantic_Analysis
             return null; // Return null if no matching file is found
         }
 
-        // Extract data from different file types
+        /// <summary>
+        /// Extracts data from various types of files based on their extensions.
+        /// </summary>
+        /// <param name="filePath">The path of the file to extract data from.</param>
+        /// <returns>A list of strings containing the extracted data.</returns>
         public List<string> ExtractDataFromFile(string filePath)
         {
             var fileContent = new List<string>();
@@ -156,87 +175,55 @@ namespace Semantic_Analysis
             return fileContent;
         }
 
-        // Extracts text from a plain text file
-        public List<string> ExtractDataFromText(string filePath)
-        {
-            var data = new List<string>();
-            try
-            {
-                var lines = File.ReadAllLines(filePath);
-                data.AddRange(lines);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error reading Text file: {ex.Message}");
-            }
-            return data;
-        }
+        // --- Extraction Methods ---
 
-        // Extracts data from a CSV file
-        public List<string> ExtractDataFromCsv(string filePath)
-        {
-            var data = new List<string>();
-            try
-            {
-                var lines = File.ReadAllLines(filePath);
-                data.AddRange(lines);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error reading CSV file: {ex.Message}");
-            }
+        /// <summary>
+        /// Extracts data from a plain text file.
+        /// </summary>
+        public List<string> ExtractDataFromText(string filePath) => File.ReadAllLines(filePath).ToList();
 
-            // Data will always be a non-null list, return it directly
-            return data;
-        }
+        /// <summary>
+        /// Extracts data from a CSV file.
+        /// </summary>
+        public List<string> ExtractDataFromCsv(string filePath) => File.ReadAllLines(filePath).ToList();
 
-
-
-        // Extracts data from JSON file
+        /// <summary>
+        /// Extracts data from a JSON file.
+        /// </summary>
         public List<string> ExtractDataFromJson(string filePath)
         {
-            var data = new List<string>();
             try
             {
                 var json = File.ReadAllText(filePath);
-                var jsonArray = JsonConvert.DeserializeObject<List<string>>(json);
-
-                if (jsonArray != null)
-                {
-                    data.AddRange(jsonArray);
-                }
-                else
-                {
-                    data.Add("Error: JSON content is null or could not be parsed.");
-                }
+                return JsonConvert.DeserializeObject<List<string>>(json) ?? new List<string> { "Error: JSON content is null or could not be parsed." };
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error reading JSON file: {ex.Message}");
+                return new List<string> { $"Error: {ex.Message}" };
             }
-            return data;
         }
 
-        // Extracts data from XML file
+        /// <summary>
+        /// Extracts data from an XML file.
+        /// </summary>
         public List<string> ExtractDataFromXml(string filePath)
         {
-            var data = new List<string>();
             try
             {
                 var xml = XDocument.Load(filePath);
-                foreach (var element in xml.Descendants())
-                {
-                    data.Add($"{element.Name}: {element.Value}");
-                }
+                return xml.Descendants().Select(element => $"{element.Name}: {element.Value}").ToList();
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error reading XML file: {ex.Message}");
+                return new List<string> { $"Error: {ex.Message}" };
             }
-            return data;
         }
 
-        // Extracts text data from a PDF file
+        /// <summary>
+        /// Extracts text data from a PDF file.
+        /// </summary>
         public List<string> ExtractDataFromPdf(string filePath)
         {
             var data = new List<string>();
@@ -262,78 +249,80 @@ namespace Semantic_Analysis
             return data;
         }
 
-        // Extracts raw byte data from a file
+        /// <summary>
+        /// Extracts raw byte data from a file.
+        /// </summary>
         public List<string> ExtractRawData(string filePath)
         {
-            var data = new List<string>();
             try
             {
                 byte[] bytes = File.ReadAllBytes(filePath);
                 string rawContent = BitConverter.ToString(bytes.Take(100).ToArray());
-                data.Add($"Raw Content (first 100 bytes): {rawContent}");
+                return new List<string> { $"Raw Content (first 100 bytes): {rawContent}" };
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error reading raw file: {ex.Message}");
-                data.Add($"Error: {ex.Message}");
+                return new List<string> { $"Error: {ex.Message}" };
             }
-            return data;
         }
 
-        // Extracts text data from a Markdown file
+        /// <summary>
+        /// Extracts text data from a Markdown file.
+        /// </summary>
         public List<string> ExtractDataFromMarkdown(string filePath)
         {
-            var data = new List<string>();
             try
             {
                 var markdownContent = File.ReadAllText(filePath);
                 var textOnly = Regex.Replace(markdownContent, @"[#\*\-]\s?", " ").Replace("\n", " ").Trim();
-                data.Add(textOnly);
+                return new List<string> { textOnly };
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error reading Markdown file: {ex.Message}");
+                return new List<string> { $"Error: {ex.Message}" };
             }
-            return data;
         }
 
-        // Extracts text data from an HTML file by removing HTML tags
+        /// <summary>
+        /// Extracts text data from an HTML file by removing HTML tags.
+        /// </summary>
         public List<string> ExtractDataFromHtml(string filePath)
         {
-            var data = new List<string>();
             try
             {
                 var htmlContent = File.ReadAllText(filePath);
                 var textOnly = Regex.Replace(htmlContent, @"<[^>]+?>", " ").Replace("\n", " ").Trim();
-                data.Add(textOnly);
+                return new List<string> { textOnly };
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error reading HTML file: {ex.Message}");
+                return new List<string> { $"Error: {ex.Message}" };
             }
-            return data;
         }
 
-        // Cleans extracted data
+        // --- Data Cleaning Methods ---
+
+        /// <summary>
+        /// Cleans extracted data by trimming whitespace, removing special characters, and converting text to lowercase.
+        /// </summary>
         public List<string> CleanData(List<string> data)
         {
-            var cleanedData = new List<string>();
-
-            foreach (var line in data)
-            {
-                var cleanedLine = line.Trim();  // Trim whitespaces
-                cleanedLine = Regex.Replace(cleanedLine, @"[^A-Za-z0-9\s]", ""); // Remove special characters
-                cleanedLine = cleanedLine.ToLower(); // Convert to lowercase
-                if (!string.IsNullOrEmpty(cleanedLine)) // Remove empty lines
-                {
-                    cleanedData.Add(cleanedLine);
-                }
-            }
-
-            return cleanedData;
+            return data
+                .Select(line => line.Trim())
+                .Select(line => Regex.Replace(line, @"[^A-Za-z0-9\s]", "")) // Remove special characters
+                .Select(line => line.ToLower()) // Convert to lowercase
+                .Where(line => !string.IsNullOrEmpty(line)) // Remove empty lines
+                .ToList();
         }
 
-        // Saves cleaned data to a JSON file
+        // --- Data Saving Methods ---
+
+        /// <summary>
+        /// Saves the cleaned data to a JSON file.
+        /// </summary>
         public void SaveDataToJson(string outputFilePath, List<string> data)
         {
             try
