@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E68607CD-0CF5-44D6-AE68-5F7E6EE7B1E1}|UnitTestProject\\UnitTestProject.csproj|e:\\master_of_engg_it\\se project\\development\\semantic-analysis\\semantic_analysis\\unittestproject\\embeddingunittest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E68607CD-0CF5-44D6-AE68-5F7E6EE7B1E1}|UnitTestProject\\UnitTestProject.csproj|solutionrelative:unittestproject\\embeddingunittest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E68607CD-0CF5-44D6-AE68-5F7E6EE7B1E1}|UnitTestProject\\UnitTestProject.csproj|e:\\master_of_engg_it\\se project\\development\\semantic-analysis\\semantic_analysis\\unittestproject\\cosinesimilarityunittest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E68607CD-0CF5-44D6-AE68-5F7E6EE7B1E1}|UnitTestProject\\UnitTestProject.csproj|solutionrelative:unittestproject\\cosinesimilarityunittest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9D28E360-331D-4197-857A-50BA888C9E81}|Semantic_Analysis\\Semantic_Analysis.csproj|e:\\master_of_engg_it\\se project\\development\\semantic-analysis\\semantic_analysis\\semantic_analysis\\cosinesimilarity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9D28E360-331D-4197-857A-50BA888C9E81}|Semantic_Analysis\\Semantic_Analysis.csproj|solutionrelative:semantic_analysis\\cosinesimilarity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E68607CD-0CF5-44D6-AE68-5F7E6EE7B1E1}|UnitTestProject\\UnitTestProject.csproj|e:\\master_of_engg_it\\se project\\development\\semantic-analysis\\semantic_analysis\\unittestproject\\embeddingunittest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E68607CD-0CF5-44D6-AE68-5F7E6EE7B1E1}|UnitTestProject\\UnitTestProject.csproj|solutionrelative:unittestproject\\embeddingunittest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9D28E360-331D-4197-857A-50BA888C9E81}|Semantic_Analysis\\Semantic_Analysis.csproj|e:\\master_of_engg_it\\se project\\development\\semantic-analysis\\semantic_analysis\\semantic_analysis\\embedding.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -22,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,20 +42,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Embedding.cs",
-              "DocumentMoniker": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Embedding.cs",
-              "RelativeDocumentMoniker": "Semantic_Analysis\\Embedding.cs",
-              "ToolTip": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Embedding.cs",
-              "RelativeToolTip": "Semantic_Analysis\\Embedding.cs",
-              "ViewState": "AgIAAIgAAAAAAAAAAAAYwIwAAAAWAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "CosineSimilarityUnitTest.cs",
+              "DocumentMoniker": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\CosineSimilarityUnitTest.cs",
+              "RelativeDocumentMoniker": "UnitTestProject\\CosineSimilarityUnitTest.cs",
+              "ToolTip": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\CosineSimilarityUnitTest.cs",
+              "RelativeToolTip": "UnitTestProject\\CosineSimilarityUnitTest.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAIAxwB8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-03T21:36:31.261Z",
+              "WhenOpened": "2025-03-03T21:42:39.924Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "EmbeddingUnitTest.cs",
               "DocumentMoniker": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\EmbeddingUnitTest.cs",
               "RelativeDocumentMoniker": "UnitTestProject\\EmbeddingUnitTest.cs",
@@ -70,10 +74,22 @@
               "RelativeDocumentMoniker": "Semantic_Analysis\\CosineSimilarity.cs",
               "ToolTip": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\CosineSimilarity.cs",
               "RelativeToolTip": "Semantic_Analysis\\CosineSimilarity.cs",
-              "ViewState": "AgIAAGEAAAAAAAAAAAAAAJEAAAALAAAAAAAAAA==",
+              "ViewState": "AgIAAGEAAAAAAAAAAAAAAJEAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-03T21:35:11.556Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Embedding.cs",
+              "DocumentMoniker": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Embedding.cs",
+              "RelativeDocumentMoniker": "Semantic_Analysis\\Embedding.cs",
+              "ToolTip": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Embedding.cs",
+              "RelativeToolTip": "Semantic_Analysis\\Embedding.cs",
+              "ViewState": "AgIAAIgAAAAAAAAAAAAYwIwAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-03T21:36:31.261Z"
             }
           ]
         },

@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-CosineSimilarity
-Vector 1 vs Vector 2: 0,1256
-Vector 0 vs Vector 1: 0,1484
-Vector 0 vs Vector 2: 0,1745
-=======
 greta thunberg,entertainment,455,0.2660678068
 greta thunberg,sports,455,0.2683926522
 greta thunberg,music,455,0.3106456517
@@ -85,4 +79,4 @@ nelson mandela,sports,0,0.2491904094
 nelson mandela,music,0,0.3166420075
 nelson mandela,government,0,0.3827075467
 Word1,Word2,X-Position,Cosine Similarity
->>>>>>> origin/Aman-Patel
+
