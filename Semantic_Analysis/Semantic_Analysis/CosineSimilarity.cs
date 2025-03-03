@@ -29,14 +29,16 @@ namespace Semantic_Analysis
                     var parts = line.Split(',');
                     if (parts.Length < 2) continue; // Skip malformed lines
 
-                    string vectorName = parts[0].Trim('\"');
+                    string rawWord = parts[0].Trim('\"');
+                    string cleanedWord = rawWord.Contains(":") ? rawWord.Split(':').Last().Trim() : rawWord; // Clean word
+
                     double[] vectorValues = parts.Skip(1)
                                                  .Select(value => double.TryParse(value.Trim(), NumberStyles.Float, CultureInfo.InvariantCulture, out double num) ? num : double.NaN)
                                                  .Where(num => !double.IsNaN(num))
                                                  .ToArray();
 
-                    if (!string.IsNullOrEmpty(vectorName) && vectorValues.Length > 0)
-                        vectors[vectorName] = NormalizeVector(vectorValues.ToArray());
+                    if (!string.IsNullOrEmpty(cleanedWord) && vectorValues.Length > 0)
+                        vectors[cleanedWord] = NormalizeVector(vectorValues);
                 }
             }
             catch (Exception ex)
@@ -56,6 +58,7 @@ namespace Semantic_Analysis
             double magnitude = Math.Sqrt(vector.Sum(v => v * v));
             return magnitude == 0 ? vector : vector.Select(v => v / magnitude).ToArray();
         }
+
         public void ValidateVectors(Dictionary<string, double[]> vectors)
         {
             if (vectors.Count < 2)
@@ -119,14 +122,18 @@ namespace Semantic_Analysis
                 cosineSimilarity.ValidateVectors(vectorsFile2);
 
                 ConcurrentBag<string> outputData = new ConcurrentBag<string>();
-                outputData.Add("Cosine Similarity Results");
+                outputData.Add("Word1,Word2,X-Position,Cosine Similarity");
 
-                Parallel.ForEach(vectorsFile1.Keys, file1Key =>
+                int totalWords = vectorsFile1.Count;
+
+                Parallel.ForEach(vectorsFile1.Keys, (file1Key, _, index) =>
                 {
                     foreach (var file2Key in vectorsFile2.Keys)
                     {
                         double similarity = Math.Round(cosineSimilarity.CosineSimilarityCalculation(vectorsFile1[file1Key], vectorsFile2[file2Key]), 10);
-                        outputData.Add($"\"{file1Key}\" (File1) vs \"{file2Key}\" (File2): {similarity.ToString(CultureInfo.InvariantCulture)}");
+
+                        int xPosition = (int)(((double)index / totalWords) * 536.0); // Ensure proper scaling
+                        outputData.Add($"{file1Key},{file2Key},{xPosition},{similarity.ToString(CultureInfo.InvariantCulture)}");
                     }
                 });
 
