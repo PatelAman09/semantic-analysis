@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,11 +9,10 @@ namespace Semantic_Analysis.Interfaces
 {
     public interface ICosineSimilarity
     {
-        List<double[]> ReadVectorsFromCsv(string inputFilePath);
-        void ValidateVectors(List<double[]> vectors);
-        double CalculateDotProduct(double[] vectorA, double[] vectorB);
-        double CalculateMagnitude(double[] vector);
+        Dictionary<string, double[]> ReadVectorsFromCsv(string inputFilePath);
+        double[] NormalizeVector(double[] vector);
+        void ValidateVectors(Dictionary<string, double[]> vectors);
         double CosineSimilarityCalculation(double[] vectorA, double[] vectorB);
-        void SaveOutputToCsv(string outputFilePath, List<string> data);
+        void SaveOutputToCsv(string outputFilePath, List<string> outputData);
     }
 }
