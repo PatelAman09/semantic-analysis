@@ -10,7 +10,6 @@ using Newtonsoft.Json.Linq;
 using OpenAI.Embeddings; // OpenAI NuGet package
 using Semantic_Analysis.Interfaces; // Reference to the interface
 
-// Class implementing the IEmbeddingProcessor interface
 class EmbeddingProcessor : IEmbeddingProcessor
 {
     /// <summary>
@@ -22,9 +21,7 @@ class EmbeddingProcessor : IEmbeddingProcessor
     public async Task<string> ReadJsonFileAsync(string jsonFilePath)
     {
         if (!File.Exists(jsonFilePath))
-        {
             throw new FileNotFoundException($"The specified JSON file does not exist: {jsonFilePath}");
-        }
 
         return await File.ReadAllTextAsync(jsonFilePath);
     }
@@ -34,22 +31,19 @@ class EmbeddingProcessor : IEmbeddingProcessor
     /// <param name="jsonContent">JSON content as a string.</param>
     /// <returns>A list of extracted data from the JSON structure.</returns>
     /// <exception cref="Exception">Thrown if the JSON content is empty or malformed.</exception>
-
     public List<string> AnalyzeJson(string jsonContent)
     {
         var parsedJson = JsonConvert.DeserializeObject(jsonContent);
         var extractedData = new List<string>();
 
         if (parsedJson == null)
-        {
             throw new Exception("The provided JSON content is empty or malformed.");
-        }
-
         /// <summary>
         /// Recursively traverses a JSON object and extracts values.
         /// </summary>
         /// <param name="obj">JSON object to traverse.</param>
         /// <param name="prefix">Prefix to keep track of nested keys.</param>
+
         void Traverse(object obj, string prefix = "")
         {
             if (obj is JObject jObject)
@@ -61,22 +55,20 @@ class EmbeddingProcessor : IEmbeddingProcessor
             }
             else if (obj is JArray jArray)
             {
-                int index = 0;
-                foreach (var item in jArray)
+                for (int i = 0; i < jArray.Count; i++)
                 {
-                    Traverse(item, $"{prefix}[{index++}]: ");
+                    Traverse(jArray[i], $"{prefix}[{i}]: ");
                 }
             }
             else if (obj is JValue jValue)
             {
-                extractedData.Add($"{prefix}{jValue.Value}");
+                extractedData.Add($"{prefix.TrimEnd(' ')}{jValue.Value}");
             }
         }
 
         Traverse(parsedJson);
         return extractedData;
     }
-
     /// <summary>
     /// Generates an embedding asynchronously with retry logic.
     /// </summary>
@@ -106,13 +98,11 @@ class EmbeddingProcessor : IEmbeddingProcessor
 
     public async Task GenerateAndSaveEmbeddingsAsync(string apiKey, List<string> descriptions, string csvFilePath, int saveInterval)
     {
-        Console.WriteLine("Initializing embedding generation...");
+        Console.WriteLine("Initializing OpenAI Embedding client...");
         var client = new EmbeddingClient("text-embedding-3-small", apiKey);
-        bool fileExists = File.Exists(csvFilePath);
 
         using StreamWriter writer = new StreamWriter(csvFilePath, append: true, encoding: Encoding.UTF8);
-
-        if (!fileExists)
+        if (!File.Exists(csvFilePath))
         {
             await writer.WriteLineAsync("Description,Embedding");
         }
@@ -125,11 +115,9 @@ class EmbeddingProcessor : IEmbeddingProcessor
                 Console.WriteLine($"Processing entry {i + 1}/{descriptions.Count}: {description}");
 
                 OpenAIEmbedding embedding = await GenerateEmbeddingWithRetryAsync(client, description);
-
-                // ReadOnlyMemory<float> to an array before async processing
                 float[] embeddingArray = embedding.ToFloats().ToArray();
-                string embeddingString = string.Join(",", embeddingArray.Select(e => e.ToString(CultureInfo.InvariantCulture)));
 
+                string embeddingString = string.Join(",", embeddingArray.Select(e => e.ToString(CultureInfo.InvariantCulture)));
                 await writer.WriteLineAsync($"\"{description}\",\"{embeddingString}\"");
 
                 if ((i + 1) % saveInterval == 0)
@@ -172,7 +160,6 @@ class EmbeddingProcessor : IEmbeddingProcessor
             Console.WriteLine($"Error: {ex.Message}");
         }
     }
-
     /// <summary>
     /// Entry point for the application, prompting user input, validating paths, and initiating the embedding process.
     /// </summary>
@@ -184,16 +171,16 @@ class EmbeddingProcessor : IEmbeddingProcessor
         try
         {
             Console.WriteLine("Enter the path to your JSON file:");
-            string jsonFilePath = Console.ReadLine() ?? throw new ArgumentNullException("JSON file path cannot be null.");
+            string jsonFilePath = Console.ReadLine()?.Trim();
+            if (string.IsNullOrEmpty(jsonFilePath)) throw new ArgumentException("JSON file path cannot be empty.");
 
             Console.WriteLine("Enter the path to save the output CSV file:");
-            string csvFilePath = Console.ReadLine() ?? throw new ArgumentNullException("CSV file path cannot be null.");
+            string csvFilePath = Console.ReadLine()?.Trim();
+            if (string.IsNullOrEmpty(csvFilePath)) throw new ArgumentException("CSV file path cannot be empty.");
 
             Console.WriteLine("Enter the save interval (e.g., 10):");
             if (!int.TryParse(Console.ReadLine(), out int saveInterval) || saveInterval <= 0)
-            {
                 throw new ArgumentException("Save interval must be a positive integer.");
-            }
 
             string apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY")
                             ?? throw new Exception("Environment variable 'OPENAI_API_KEY' is not set.");
