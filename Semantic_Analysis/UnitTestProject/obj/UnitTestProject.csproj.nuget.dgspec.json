@@ -1,12 +1,7 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Development\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\UnitTestProject.csproj": {}
-=======
     "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\UnitTestProject.csproj": {}
->>>>>>> b25a216 (Devlopment Branch)
   },
   "projects": {
     "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj": {
@@ -14,28 +9,9 @@
       "restore": {
         "projectUniqueName": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj",
         "projectName": "Semantic_Analysis",
-<<<<<<< HEAD
-        "projectPath": "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj",
-        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\obj\\",
-=======
-    "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Ahsan\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\UnitTestProject.csproj": {}
-  },
-  "projects": {
-    "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Ahsan\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Ahsan\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj",
-        "projectName": "Semantic_Analysis",
-        "projectPath": "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Ahsan\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj",
-        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Ahsan\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\obj\\",
->>>>>>> origin/Ahsan
-=======
         "projectPath": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj",
         "packagesPath": "C:\\Users\\amman\\.nuget\\packages\\",
         "outputPath": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\obj\\",
->>>>>>> b25a216 (Devlopment Branch)
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -120,35 +96,14 @@
         }
       }
     },
-<<<<<<< HEAD
-<<<<<<< HEAD
-    "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Development\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\UnitTestProject.csproj": {
-=======
     "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\UnitTestProject.csproj": {
->>>>>>> b25a216 (Devlopment Branch)
       "version": "1.0.0",
       "restore": {
         "projectUniqueName": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\UnitTestProject.csproj",
         "projectName": "UnitTestProject",
-<<<<<<< HEAD
-        "projectPath": "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Development\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\UnitTestProject.csproj",
-        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Development\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\obj\\",
-=======
-    "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Ahsan\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\UnitTestProject.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Ahsan\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\UnitTestProject.csproj",
-        "projectName": "UnitTestProject",
-        "projectPath": "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Ahsan\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\UnitTestProject.csproj",
-        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Ahsan\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\obj\\",
->>>>>>> origin/Ahsan
-=======
         "projectPath": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\UnitTestProject.csproj",
         "packagesPath": "C:\\Users\\amman\\.nuget\\packages\\",
         "outputPath": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\obj\\",
->>>>>>> b25a216 (Devlopment Branch)
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -170,18 +125,8 @@
           "net8.0-windows7.0": {
             "targetAlias": "net8.0-windows",
             "projectReferences": {
-<<<<<<< HEAD
-<<<<<<< HEAD
-              "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj": {
-                "projectPath": "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj"
-=======
-              "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Ahsan\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj": {
-                "projectPath": "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Ahsan\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj"
->>>>>>> origin/Ahsan
-=======
               "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj": {
                 "projectPath": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj"
->>>>>>> b25a216 (Devlopment Branch)
               }
             }
           }

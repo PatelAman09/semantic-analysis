@@ -1,24 +1,8 @@
 {
   "version": 2,
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  "dgSpecHash": "Ub0MvDZXmuU=",
-=======
-  "dgSpecHash": "B4sL0UOAtng=",
->>>>>>> origin/Aman-Patel
-  "success": true,
-  "projectFilePath": "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Development\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\UnitTestProject.csproj",
-=======
-  "dgSpecHash": "72QdMcFd6es=",
-  "success": true,
-  "projectFilePath": "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Ahsan\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\UnitTestProject.csproj",
->>>>>>> origin/Ahsan
-=======
   "dgSpecHash": "HNkkQHuYzBM=",
   "success": true,
   "projectFilePath": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\UnitTestProject.csproj",
->>>>>>> b25a216 (Devlopment Branch)
   "expectedPackageFiles": [
     "C:\\Users\\amman\\.nuget\\packages\\microsoft.applicationinsights\\2.22.0\\microsoft.applicationinsights.2.22.0.nupkg.sha512",
     "C:\\Users\\amman\\.nuget\\packages\\microsoft.codecoverage\\17.11.1\\microsoft.codecoverage.17.11.1.nupkg.sha512",
