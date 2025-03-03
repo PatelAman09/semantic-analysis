@@ -127,7 +127,6 @@ namespace UnitTestProject
             }
 
             [TestMethod]
-<<<<<<< HEAD
             public void CosineSimilarity_NullVector_ThrowsArgumentException()
             {
                 double[] vectorA = { 1.0, 2.0, 3.0 };
@@ -135,7 +134,6 @@ namespace UnitTestProject
 
                 Assert.ThrowsException<ArgumentException>(() => CosineSimilarity.CosineSimilarityCalculation(vectorA, vectorB));
             }
-=======
             public void SaveOutputToCsv_ValidData_SavesFileSuccessfully()
             {
                 // Arrange
@@ -148,7 +146,6 @@ namespace UnitTestProject
                 // Act
                 _cosineSimilarity.SaveOutputToCsv(testOutputPath, outputData);
                 var savedData = File.ReadAllLines(testOutputPath);
->>>>>>> origin/Development
 
                 // Assert
                 Assert.AreEqual(outputData[0], savedData[0]);
