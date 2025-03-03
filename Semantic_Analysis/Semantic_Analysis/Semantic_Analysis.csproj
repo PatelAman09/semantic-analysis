@@ -21,4 +21,9 @@
     <PackageReference Include="OpenAI" Version="2.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="CSVOutput\" />
+    <Folder Include="EmbeddingInput\" />
+  </ItemGroup>
+
 </Project>

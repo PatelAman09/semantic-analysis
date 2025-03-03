@@ -16,6 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+eab8d7a7568bca0c36dcca48523a5a82803d36d6")]
 =======
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e4ed5440da1f6b2e67f4ebb88d60bcb7161a35f3")]
@@ -23,6 +24,9 @@ using System.Reflection;
 =======
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5ebd050e987669949f757bc7ceb5347824f3fdb8")]
 >>>>>>> b25a216 (Devlopment Branch)
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fb8f6c9677a6782fae2f67a1fc849e1374880ae8")]
+>>>>>>> origin/Aman-Patel
 [assembly: System.Reflection.AssemblyProductAttribute("UnitTestProject")]
 [assembly: System.Reflection.AssemblyTitleAttribute("UnitTestProject")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
