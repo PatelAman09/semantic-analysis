@@ -29,7 +29,7 @@ namespace Semantic_Analysis
                     var parts = line.Split(',');
                     if (parts.Length < 2) continue; // Skip malformed lines
 
-                    string rawWord = parts[0].Trim('\"');
+                    string rawWord = parts[0].Trim('"');
                     string cleanedWord = rawWord.Contains(":") ? rawWord.Split(':').Last().Trim() : rawWord; // Clean word
 
                     double[] vectorValues = parts.Skip(1)
@@ -47,8 +47,8 @@ namespace Semantic_Analysis
                 throw;
             }
 
-            if (vectors.Count < 2)
-                throw new InvalidOperationException("CSV must contain at least two valid vectors.");
+            if (vectors.Count < 1)
+                throw new InvalidOperationException("CSV must contain at least one valid vector.");
 
             return vectors;
         }
@@ -61,8 +61,8 @@ namespace Semantic_Analysis
 
         public void ValidateVectors(Dictionary<string, double[]> vectors)
         {
-            if (vectors.Count < 2)
-                throw new InvalidOperationException("Insufficient number of vectors for cosine similarity calculation.");
+            if (vectors.Count < 1)
+                throw new InvalidOperationException("Each file must contain at least one valid vector.");
 
             int vectorLength = vectors.Values.First().Length;
             if (vectors.Values.Any(v => v.Length != vectorLength))
@@ -117,6 +117,11 @@ namespace Semantic_Analysis
             {
                 Dictionary<string, double[]> vectorsFile1 = cosineSimilarity.ReadVectorsFromCsv(inputFilePath1);
                 Dictionary<string, double[]> vectorsFile2 = cosineSimilarity.ReadVectorsFromCsv(inputFilePath2);
+
+                if (vectorsFile1.Count == 0 || vectorsFile2.Count == 0)
+                {
+                    throw new InvalidOperationException("Each input file must contain at least one valid vector.");
+                }
 
                 cosineSimilarity.ValidateVectors(vectorsFile1);
                 cosineSimilarity.ValidateVectors(vectorsFile2);
