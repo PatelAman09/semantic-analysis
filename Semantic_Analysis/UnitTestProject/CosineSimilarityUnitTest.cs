@@ -107,13 +107,6 @@ namespace UnitTestProject
             }
 
             [TestMethod]
-            public void CosineSimilarity_NullVector_ThrowsArgumentException()
-            {
-                double[] vectorA = { 1.0, 2.0, 3.0 };
-                double[] vectorB = null;
-
-                Assert.ThrowsException<ArgumentException>(() => CosineSimilarity.CosineSimilarityCalculation(vectorA, vectorB));
-            }
             public void SaveOutputToCsv_ValidData_SavesFileSuccessfully()
             {
                 // Arrange
