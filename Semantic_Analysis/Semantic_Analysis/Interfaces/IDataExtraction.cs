@@ -35,7 +35,7 @@ namespace Semantic_Analysis
         // Method to clean extracted data (e.g., remove special characters, convert to lowercase, trim whitespace)
         List<string> CleanData(List<string> data);
 
-        // Method to save data to a JSON file
-        void SaveDataToJson(string outputFilePath, List<string> data);
+        // Method to save data to a JSON file with specific file names based on the data type
+        void SaveDataToJson(string outputFilePath, List<string> data, string type);
     }
 }
