@@ -9,6 +9,17 @@
 *.userosscache
 *.sln.docstates
 
+# Ignore build artifacts
+bin/
+obj/
+*.pdb
+*.exe
+*.dll
+*.cache
+*.FileListAbsolute.txt
+*.sourcelink.json
+*.AssemblyReference.cache
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
