@@ -45,6 +45,12 @@ Generated\ Files/
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
 
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
 # NUnit
 *.VisualState.xml
 TestResult.xml
