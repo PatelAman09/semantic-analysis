@@ -10,7 +10,7 @@ using Newtonsoft.Json.Linq;
 using OpenAI.Embeddings; // OpenAI NuGet package
 using Semantic_Analysis.Interfaces; // Reference to the interface
 
-class EmbeddingProcessor : IEmbeddingProcessor
+public class EmbeddingProcessor : IEmbeddingProcessor
 {
     /// <summary>
     /// Reads a JSON file asynchronously from the given file path.

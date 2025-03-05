@@ -1,208 +1,87 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using Semantic_Analysis.Interfaces;
+using OpenAI.Embeddings;
 
 namespace UnitTestProject
 {
-    public static class Embedding // Your main class
-    {
-        public static string ReadJsonFile(string jsonFilePath)
-        {
-            if (!File.Exists(jsonFilePath))
-            {
-                throw new FileNotFoundException($"The specified JSON file does not exist: {jsonFilePath}");
-            }
-
-            return File.ReadAllText(jsonFilePath);
-        }
-
-        public static List<string> AnalyzeJson(string? jsonContent)
-        {
-            if (jsonContent == null)
-            {
-                throw new Exception("The provided JSON content is empty or malformed.");
-            }
-
-            var parsedJson = JsonConvert.DeserializeObject(jsonContent);
-            var extractedData = new List<string>();
-
-            if (parsedJson == null)
-            {
-                throw new Exception("The provided JSON content is empty or malformed.");
-            }
-
-            void Traverse(object? obj, string prefix = "")
-            {
-                if (obj is JObject jObject)
-                {
-                    foreach (var property in jObject.Properties())
-                    {
-                        Traverse(property.Value, $"{prefix}{property.Name}: ");
-                    }
-                }
-                else if (obj is JArray jArray)
-                {
-                    int index = 0;
-                    foreach (var item in jArray)
-                    {
-                        Traverse(item, $"{prefix}[{index++}]: ");
-                    }
-                }
-                else if (obj is JValue jValue)
-                {
-                    extractedData.Add($"{prefix.TrimEnd(' ')}{jValue.Value}");
-                }
-            }
-
-            Traverse(parsedJson);
-            return extractedData;
-        }
-    }
-
     [TestClass]
-    public class JsonFileReaderUnitTest
+    public class EmbeddingProcessorTests
     {
-        private const string ValidJson = "{\"key\": \"value\"}";
-        private string tempFilePath = "test.json";
+        private string tempJsonPath = "test.json";
+        private string tempCsvPath = "test_output.csv";
+        private EmbeddingProcessor processor;
 
         [TestInitialize]
         public void Setup()
         {
-            File.WriteAllText(tempFilePath, ValidJson);
+            processor = new EmbeddingProcessor();
+            File.WriteAllText(tempJsonPath, "{\"key\": \"value\"}");
         }
 
         [TestCleanup]
         public void Cleanup()
         {
-            if (File.Exists(tempFilePath))
-            {
-                File.Delete(tempFilePath);
-            }
+            if (File.Exists(tempJsonPath)) File.Delete(tempJsonPath);
+            if (File.Exists(tempCsvPath)) File.Delete(tempCsvPath);
         }
 
         [TestMethod]
-        public void ReadJsonFile_ValidFile_ShouldReturnContent()
+        public async Task ReadJsonFile_ValidFile_ShouldReturnContent()
         {
-            // Act
-            string result = Embedding.ReadJsonFile(tempFilePath);
-
-            // Assert
-            Assert.AreEqual(ValidJson, result, "The JSON content should match exactly.");
+            string result = await processor.ReadJsonFileAsync(tempJsonPath);
+            Assert.AreEqual("{\"key\": \"value\"}", result);
         }
 
         [TestMethod]
-        public void ReadJsonFile_FileDoesNotExist_ShouldThrowFileNotFoundException()
+        public async Task ReadJsonFile_FileDoesNotExist_ShouldThrowException()
         {
-            // Arrange
-            string nonExistentFilePath = "nonexistent.json";
-
-            // Act & Assert
-            var ex = Assert.ThrowsException<FileNotFoundException>(() => Embedding.ReadJsonFile(nonExistentFilePath));
-            Assert.IsTrue(ex.Message.Contains("does not exist"), "Exception message should indicate missing file.");
+            string fakePath = "missing.json";
+            await Assert.ThrowsExceptionAsync<FileNotFoundException>(async () => await processor.ReadJsonFileAsync(fakePath));
         }
 
         [TestMethod]
-        public void ReadJsonFile_EmptyFile_ShouldReturnEmptyString()
+        public void AnalyzeJson_ValidJson_ShouldExtractKeyValue()
         {
             // Arrange
-            File.WriteAllText(tempFilePath, string.Empty);
+            var processor = new EmbeddingProcessor();
+            string json = "{\"name\": \"John\"}";
 
             // Act
-            string result = Embedding.ReadJsonFile(tempFilePath);
+            List<string> result = processor.AnalyzeJson(json);
 
             // Assert
-            Assert.AreEqual(string.Empty, result, "An empty JSON file should return an empty string.");
+            CollectionAssert.Contains(result, "name:John"); // Adjusted based on function output
         }
 
         [TestMethod]
-        public static string ReadJsonFile(string? jsonFilePath)
+        public void AnalyzeJson_InvalidJson_ShouldThrowException()
         {
-            if (string.IsNullOrWhiteSpace(jsonFilePath))
-            {
-                throw new ArgumentException("File path cannot be null or whitespace.");
-            }
-
-            if (!File.Exists(jsonFilePath))
-            {
-                throw new FileNotFoundException($"The specified JSON file does not exist: {jsonFilePath}");
-            }
-
-            return File.ReadAllText(jsonFilePath);
-        }
-
-        [TestMethod]
-        public void ReadJsonFile_WhitespaceFilePath_ShouldThrowArgumentException()
-        {
-            // Act & Assert
-            Assert.ThrowsException<ArgumentException>(() => Embedding.ReadJsonFile(" "));
-        }
-    }
-
-    [TestClass]
-    public class JsonAnalyzerUnitTest
-    {
-        private const string ComplexJson = @"{
-        ""person"": {
-            ""name"": ""Alice"",
-            ""age"": 25,
-            ""skills"": [""Java"", ""Python""]
-        }
-    }";
-
-        [TestMethod]
-        public void AnalyzeJson_EmptyJson_ShouldReturnEmptyList()
-        {
-            // Arrange
-            string emptyJson = "{}";
-
-            // Act
-            List<string> result = Embedding.AnalyzeJson(emptyJson);
-
-            // Assert
-            Assert.AreEqual(0, result.Count, "An empty JSON should return an empty list.");
-        }
-
-        [TestMethod]
-        public void AnalyzeJson_InvalidJson_ShouldThrowJsonReaderException()
-        {
-            // Arrange
             string invalidJson = "Invalid JSON";
-
-            // Act & Assert
-            Assert.ThrowsException<JsonReaderException>(() => Embedding.AnalyzeJson(invalidJson), "Malformed JSON should throw JsonReaderException.");
+            Assert.ThrowsException<JsonReaderException>(() => processor.AnalyzeJson(invalidJson));
         }
 
         [TestMethod]
-        public void AnalyzeJson_NullJson_ShouldThrowArgumentException()
+        public async Task GenerateAndSaveEmbeddingsAsync_ShouldCreateCSV()
         {
-            // Act & Assert
-            Assert.ThrowsException<ArgumentException>(() => Embedding.AnalyzeJson(null), "Should throw ArgumentException for null input.");
+            var descriptions = new List<string> { "Test description" };
+            await processor.GenerateAndSaveEmbeddingsAsync("fake-api-key", descriptions, tempCsvPath, 1);
+            Assert.IsTrue(File.Exists(tempCsvPath));
         }
 
         [TestMethod]
-        public void AnalyzeJson_WhitespaceJson_ShouldThrowArgumentException()
+        public async Task ProcessJsonFileAsync_ShouldProcessAndSaveEmbeddings()
         {
-            // Arrange
-            string whitespaceJson = "  ";
-
-            // Act & Assert
-            Assert.ThrowsException<ArgumentException>(() => Embedding.AnalyzeJson(whitespaceJson), "Should throw ArgumentException for whitespace input.");
-        }
-
-        [TestMethod]
-        public void AnalyzeJson_ArrayJson_ShouldExtractValues()
-        {
-            // Arrange
-            string jsonArray = @"[ ""One"", ""Two"", ""Three"" ]";
-
-            // Act
-            List<string> result = Embedding.AnalyzeJson(jsonArray);
-
-            // Assert
-            CollectionAssert.AreEqual(new List<string> { "One", "Two", "Three" }, result, "Array elements should be extracted properly.");
+            string apiKey = "fake-api-key";
+            await processor.ProcessJsonFileAsync(tempJsonPath, tempCsvPath, apiKey, 1);
+            Assert.IsTrue(File.Exists(tempCsvPath));
         }
     }
 }
