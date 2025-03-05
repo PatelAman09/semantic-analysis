@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 CosineSimilarity
 Vector 0 vs Vector 1: 0,1484
 Vector 1 vs Vector 2: 0,1256
@@ -84,6 +85,12 @@ nelson mandela,entertainment,0,0.2560240718
 nelson mandela,sports,0,0.2491904094
 nelson mandela,music,0,0.3166420075
 nelson mandela,government,0,0.3827075467
+=======
+she strolled through the quiet forest the rustling leaves beneath her feet creating a calming rhythm,she walked through the forest listening to the rustling leaves under her feet feeling the calm of nature surrounding her,268,0.8848237146
+she strolled through the quiet forest the rustling leaves beneath her feet creating a calming rhythm,"the sun sets behind the mountains casting a golden glow across the sky and the evening breeze begins to cool the air,268,0.4413265641
+"the sun dipped below the horizon casting a golden glow across the sky as a cool evening breeze swept through the air,she walked through the forest listening to the rustling leaves under her feet feeling the calm of nature surrounding her,0,0.4222373068
+"the sun dipped below the horizon casting a golden glow across the sky as a cool evening breeze swept through the air,"the sun sets behind the mountains casting a golden glow across the sky and the evening breeze begins to cool the air,0,0.9087353041
+>>>>>>> origin/Aman-Patel
 Word1,Word2,X-Position,Cosine Similarity
 
 >>>>>>> origin/Development
