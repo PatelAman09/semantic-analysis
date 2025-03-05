@@ -1,5 +1,10 @@
-<<<<<<< HEAD
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\.msCoverageSourceRootsMapping_UnitTestProject
+D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\UnitTestProject.csproj.AssemblyReference.cache
+D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\UnitTestProject.GeneratedMSBuildEditorConfig.editorconfig
+D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\UnitTestProject.AssemblyInfoInputs.cache
+D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\UnitTestProject.AssemblyInfo.cs
+D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\UnitTestProject.csproj.CoreCompileInputs.cache
+D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\UnitTestProject.sourcelink.json
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\testhost.dll
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\Semantic_Analysis.deps.json
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\Semantic_Analysis.runtimeconfig.json
@@ -310,17 +315,9 @@ D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\Semantic_Analysis.dll
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\Semantic_Analysis.pdb
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
-D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\UnitTestProject.csproj.AssemblyReference.cache
-D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\UnitTestProject.GeneratedMSBuildEditorConfig.editorconfig
-D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\UnitTestProject.AssemblyInfoInputs.cache
-D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\UnitTestProject.AssemblyInfo.cs
-D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\UnitTestProject.csproj.CoreCompileInputs.cache
-D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\UnitTestProject.sourcelink.json
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\UnitTest.294DD5B1.Up2Date
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\UnitTestProject.dll
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\refint\UnitTestProject.dll
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\UnitTestProject.pdb
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\UnitTestProject.genruntimeconfig.cache
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\ref\UnitTestProject.dll
-=======
->>>>>>> origin/Development

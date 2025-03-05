@@ -14,67 +14,67 @@ namespace Semantic_Analysis
 {
     public class DataExtraction : IDataExtraction
     {
-        public static void Main(string[] args)
-        {
-            // Load configuration settings from appsettings.json
-            var configuration = LoadConfiguration();
+        //public static void Main(string[] args)
+        //{
+        //    // Load configuration settings from appsettings.json
+        //    var configuration = LoadConfiguration();
 
-            // Retrieve folder paths and file names from configuration
-            string dataPreprocessingPath = configuration["FilePaths:DataPreprocessing"];
-            string preprocessedDataPath = configuration["FilePaths:PreprocessedData"];
-            string referenceDataPath = configuration["FilePaths:ReferenceData"];
-            var extractedDataFileNames = configuration.GetSection("FilePaths:ExtractedDataFileNames").GetChildren().Select(x => x.Value).ToList();
-            var referenceDocumentFileNames = configuration.GetSection("FilePaths:ReferenceDocumentFileNames").GetChildren().Select(x => x.Value).ToList();
+        //    // Retrieve folder paths and file names from configuration
+        //    string dataPreprocessingPath = configuration["FilePaths:DataPreprocessing"];
+        //    string preprocessedDataPath = configuration["FilePaths:PreprocessedData"];
+        //    string referenceDataPath = configuration["FilePaths:ReferenceData"];
+        //    var extractedDataFileNames = configuration.GetSection("FilePaths:ExtractedDataFileNames").GetChildren().Select(x => x.Value).ToList();
+        //    var referenceDocumentFileNames = configuration.GetSection("FilePaths:ReferenceDocumentFileNames").GetChildren().Select(x => x.Value).ToList();
 
-            // Resolve the absolute paths for the directories
-            string projectRoot = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
-            string absoluteDataPreprocessingPath = Path.Combine(projectRoot, dataPreprocessingPath);
-            string absolutePreprocessedDataPath = Path.Combine(projectRoot, preprocessedDataPath);
-            string absoluteReferenceDataPath = Path.Combine(projectRoot, referenceDataPath);
+        //    // Resolve the absolute paths for the directories
+        //    string projectRoot = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+        //    string absoluteDataPreprocessingPath = Path.Combine(projectRoot, dataPreprocessingPath);
+        //    string absolutePreprocessedDataPath = Path.Combine(projectRoot, preprocessedDataPath);
+        //    string absoluteReferenceDataPath = Path.Combine(projectRoot, referenceDataPath);
 
-            // Ensure the necessary directories exist
-            EnsureDirectoryExists(absolutePreprocessedDataPath);
-            EnsureDirectoryExists(absoluteReferenceDataPath);
+        //    // Ensure the necessary directories exist
+        //    EnsureDirectoryExists(absolutePreprocessedDataPath);
+        //    EnsureDirectoryExists(absoluteReferenceDataPath);
 
-            // Locate the required extracted and reference data files
-            string extractedDataFilePath = FindFileInDirectory(absoluteDataPreprocessingPath, extractedDataFileNames);
-            string referenceDocumentFilePath = FindFileInDirectory(absoluteDataPreprocessingPath, referenceDocumentFileNames);
+        //    // Locate the required extracted and reference data files
+        //    string extractedDataFilePath = FindFileInDirectory(absoluteDataPreprocessingPath, extractedDataFileNames);
+        //    string referenceDocumentFilePath = FindFileInDirectory(absoluteDataPreprocessingPath, referenceDocumentFileNames);
 
-            // Validate file existence and print appropriate messages if not found
-            if (string.IsNullOrEmpty(extractedDataFilePath))
-            {
-                Console.WriteLine("No extracted data file found.");
-                return;
-            }
+        //    // Validate file existence and print appropriate messages if not found
+        //    if (string.IsNullOrEmpty(extractedDataFilePath))
+        //    {
+        //        Console.WriteLine("No extracted data file found.");
+        //        return;
+        //    }
 
-            if (string.IsNullOrEmpty(referenceDocumentFilePath))
-            {
-                Console.WriteLine("No reference document file found.");
-                return;
-            }
+        //    if (string.IsNullOrEmpty(referenceDocumentFilePath))
+        //    {
+        //        Console.WriteLine("No reference document file found.");
+        //        return;
+        //    }
 
-            // Define the output file paths for the processed data
-            string outputExtractedDataFilePath = Path.Combine(absolutePreprocessedDataPath, $"{Path.GetFileNameWithoutExtension(extractedDataFilePath)}.json");
-            string outputReferenceDocumentFilePath = Path.Combine(absoluteReferenceDataPath, $"{Path.GetFileNameWithoutExtension(referenceDocumentFilePath)}.json");
+        //    // Define the output file paths for the processed data
+        //    string outputExtractedDataFilePath = Path.Combine(absolutePreprocessedDataPath, $"{Path.GetFileNameWithoutExtension(extractedDataFilePath)}.json");
+        //    string outputReferenceDocumentFilePath = Path.Combine(absoluteReferenceDataPath, $"{Path.GetFileNameWithoutExtension(referenceDocumentFilePath)}.json");
 
-            // Create an instance of DataExtraction to process the files
-            IDataExtraction processor = new DataExtraction();
+        //    // Create an instance of DataExtraction to process the files
+        //    IDataExtraction processor = new DataExtraction();
 
-            // Process the extracted data file
-            List<string> extractedData = processor.ExtractDataFromFile(extractedDataFilePath);
-            extractedData = processor.CleanData(extractedData);
-            processor.SaveDataToJson(outputExtractedDataFilePath, extractedData, "extracted");
+        //    // Process the extracted data file
+        //    List<string> extractedData = processor.ExtractDataFromFile(extractedDataFilePath);
+        //    extractedData = processor.CleanData(extractedData);
+        //    processor.SaveDataToJson(outputExtractedDataFilePath, extractedData, "extracted");
 
-            // Process the reference document file
-            List<string> referenceData = processor.ExtractDataFromFile(referenceDocumentFilePath);
-            referenceData = processor.CleanData(referenceData);
-            processor.SaveDataToJson(outputReferenceDocumentFilePath, referenceData, "reference");
+        //    // Process the reference document file
+        //    List<string> referenceData = processor.ExtractDataFromFile(referenceDocumentFilePath);
+        //    referenceData = processor.CleanData(referenceData);
+        //    processor.SaveDataToJson(outputReferenceDocumentFilePath, referenceData, "reference");
 
 
-            // Output the result of the data extraction
-            Console.WriteLine($"Data extracted and saved to: {outputExtractedDataFilePath}");
-            Console.WriteLine($"Reference document data extracted and saved to: {outputReferenceDocumentFilePath}");
-        }
+        //    // Output the result of the data extraction
+        //    Console.WriteLine($"Data extracted and saved to: {outputExtractedDataFilePath}");
+        //    Console.WriteLine($"Reference document data extracted and saved to: {outputReferenceDocumentFilePath}");
+        //}
 
         private static IConfiguration LoadConfiguration()
         {

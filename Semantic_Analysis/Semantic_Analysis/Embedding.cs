@@ -160,66 +160,37 @@ class EmbeddingProcessor : IEmbeddingProcessor
             Console.WriteLine($"Error: {ex.Message}");
         }
     }
-<<<<<<< HEAD
-
-    //static async Task Main(string[] args)
-    //{
-    //    try
-    //    {
-    //        Console.WriteLine("Enter the path to your JSON file:");
-    //        string jsonFilePath = Console.ReadLine() ?? throw new ArgumentNullException("JSON file path cannot be null.");
-
-    //        Console.WriteLine("Enter the path to save the output CSV file:");
-    //        string csvFilePath = Console.ReadLine() ?? throw new ArgumentNullException("CSV file path cannot be null.");
-
-    //        Console.WriteLine("Enter the save interval (e.g., 10):");
-    //        if (!int.TryParse(Console.ReadLine(), out int saveInterval) || saveInterval <= 0)
-    //        {
-    //            throw new ArgumentException("Save interval must be a positive integer.");
-    //        }
-=======
     /// <summary>
     /// Entry point for the application, prompting user input, validating paths, and initiating the embedding process.
     /// </summary>
     /// <param name="args">Command-line arguments (not used).</param>
     /// <returns>A Task representing the asynchronous operation.</returns>
     /// <exception cref="Exception">Handles any errors occurring in the application.</exception>
-    static async Task Main(string[] args)
-    {
-        try
-        {
-            Console.WriteLine("Enter the path to your JSON file:");
-            string jsonFilePath = Console.ReadLine()?.Trim();
-            if (string.IsNullOrEmpty(jsonFilePath)) throw new ArgumentException("JSON file path cannot be empty.");
+    //static async Task Main(string[] args)
+    //{
+    //    try
+    //    {
+    //        Console.WriteLine("Enter the path to your JSON file:");
+    //        string jsonFilePath = Console.ReadLine()?.Trim();
+    //        if (string.IsNullOrEmpty(jsonFilePath)) throw new ArgumentException("JSON file path cannot be empty.");
 
-            Console.WriteLine("Enter the path to save the output CSV file:");
-            string csvFilePath = Console.ReadLine()?.Trim();
-            if (string.IsNullOrEmpty(csvFilePath)) throw new ArgumentException("CSV file path cannot be empty.");
+    //        Console.WriteLine("Enter the path to save the output CSV file:");
+    //        string csvFilePath = Console.ReadLine()?.Trim();
+    //        if (string.IsNullOrEmpty(csvFilePath)) throw new ArgumentException("CSV file path cannot be empty.");
 
-            Console.WriteLine("Enter the save interval (e.g., 10):");
-            if (!int.TryParse(Console.ReadLine(), out int saveInterval) || saveInterval <= 0)
-                throw new ArgumentException("Save interval must be a positive integer.");
->>>>>>> origin/Development
+    //        Console.WriteLine("Enter the save interval (e.g., 10):");
+    //        if (!int.TryParse(Console.ReadLine(), out int saveInterval) || saveInterval <= 0)
+    //            throw new ArgumentException("Save interval must be a positive integer.");
 
     //        string apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY")
     //                        ?? throw new Exception("Environment variable 'OPENAI_API_KEY' is not set.");
 
-<<<<<<< HEAD
-    //        await ProcessJsonFileAsync(jsonFilePath, csvFilePath, apiKey, saveInterval);
+    //        IEmbeddingProcessor processor = new EmbeddingProcessor();
+    //        await processor.ProcessJsonFileAsync(jsonFilePath, csvFilePath, apiKey, saveInterval);
     //    }
     //    catch (Exception ex)
     //    {
     //        Console.WriteLine($"An error occurred: {ex.Message}");
     //    }
     //}
-=======
-            IEmbeddingProcessor processor = new EmbeddingProcessor();
-            await processor.ProcessJsonFileAsync(jsonFilePath, csvFilePath, apiKey, saveInterval);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"An error occurred: {ex.Message}");
-        }
-    }
->>>>>>> origin/Development
 }
