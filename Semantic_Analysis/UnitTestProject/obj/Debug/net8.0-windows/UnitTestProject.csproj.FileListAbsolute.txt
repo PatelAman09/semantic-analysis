@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\.msCoverageSourceRootsMapping_UnitTestProject
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\testhost.dll
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\Semantic_Analysis.deps.json
@@ -321,3 +322,5 @@ D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\UnitTestProject.pdb
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\UnitTestProject.genruntimeconfig.cache
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\ref\UnitTestProject.dll
+=======
+>>>>>>> origin/Development
