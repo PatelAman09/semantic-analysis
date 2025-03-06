@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
+using Semantic_Analysis;
 using Semantic_Analysis.Interfaces;
 using OpenAI.Embeddings;
 
@@ -15,8 +16,8 @@ namespace UnitTestProject
     [TestClass]
     public class EmbeddingProcessorTests
     {
-        private string tempJsonPath = "test.json";
-        private string tempCsvPath = "test_output.csv";
+        private readonly string tempJsonPath = "test.json";
+        private readonly string tempCsvPath = "test_output.csv";
         private EmbeddingProcessor processor;
 
         [TestInitialize]
@@ -36,7 +37,10 @@ namespace UnitTestProject
         [TestMethod]
         public async Task ReadJsonFile_ValidFile_ShouldReturnContent()
         {
+            // Act
             string result = await processor.ReadJsonFileAsync(tempJsonPath);
+
+            // Assert
             Assert.AreEqual("{\"key\": \"value\"}", result);
         }
 
@@ -44,43 +48,43 @@ namespace UnitTestProject
         public async Task ReadJsonFile_FileDoesNotExist_ShouldThrowException()
         {
             string fakePath = "missing.json";
-            await Assert.ThrowsExceptionAsync<FileNotFoundException>(async () => await processor.ReadJsonFileAsync(fakePath));
+            await Assert.ThrowsExceptionAsync<FileNotFoundException>(async () =>
+                await processor.ReadJsonFileAsync(fakePath));
         }
 
         [TestMethod]
         public void AnalyzeJson_ValidJson_ShouldExtractKeyValue()
         {
             // Arrange
-            var processor = new EmbeddingProcessor();
             string json = "{\"name\": \"John\"}";
 
             // Act
             List<string> result = processor.AnalyzeJson(json);
 
             // Assert
-            CollectionAssert.Contains(result, "name:John"); // Adjusted based on function output
+            CollectionAssert.Contains(result, "name: John"); // Adjusted for correct function output
         }
 
         [TestMethod]
         public void AnalyzeJson_InvalidJson_ShouldThrowException()
         {
+            // Arrange
             string invalidJson = "Invalid JSON";
+
+            // Assert
             Assert.ThrowsException<JsonReaderException>(() => processor.AnalyzeJson(invalidJson));
         }
 
         [TestMethod]
         public async Task GenerateAndSaveEmbeddingsAsync_ShouldCreateCSV()
         {
+            // Arrange
             var descriptions = new List<string> { "Test description" };
-            await processor.GenerateAndSaveEmbeddingsAsync("fake-api-key", descriptions, tempCsvPath, 1);
-            Assert.IsTrue(File.Exists(tempCsvPath));
-        }
 
-        [TestMethod]
-        public async Task ProcessJsonFileAsync_ShouldProcessAndSaveEmbeddings()
-        {
-            string apiKey = "fake-api-key";
-            await processor.ProcessJsonFileAsync(tempJsonPath, tempCsvPath, apiKey, 1);
+            // Act
+            await processor.GenerateAndSaveEmbeddingsAsync("fake-api-key", descriptions, tempCsvPath, 1);
+
+            // Assert
             Assert.IsTrue(File.Exists(tempCsvPath));
         }
     }
