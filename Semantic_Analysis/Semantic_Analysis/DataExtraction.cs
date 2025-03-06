@@ -24,26 +24,26 @@ namespace Semantic_Analysis
             string preprocessedDataPath = configuration["FilePaths:PreprocessedData"];
             string referenceDataPath = configuration["FilePaths:ReferenceData"];
 
+            // Manually retrieving supported extensions from the configuration
+            var supportedExtensions = configuration.GetSection("FilePaths:SupportedFileExtensions")
+                                                     .AsEnumerable()       // Get all key-value pairs
+                                                     .Select(x => x.Value) // Select the values (file extensions)
+                                                     .ToList();
+
             // Resolve the absolute paths for the directories
             string projectRoot = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
             string absoluteDataPreprocessingPath = Path.Combine(projectRoot, dataPreprocessingPath);
-            string absoluteExtractedDataPath = Path.Combine(projectRoot, "ExtractedData"); // Ensure this folder is the target for both
+            string absoluteExtractedDataPath = Path.Combine(projectRoot, preprocessedDataPath); // Ensure this folder is the target for both
 
             // Ensure the necessary directories exist
             EnsureDirectoryExists(absoluteExtractedDataPath);
 
-            // Get all files in the RawData folder
+            // Get all files in the RawData folder with supported extensions
             var filesInRawData = Directory.GetFiles(absoluteDataPreprocessingPath)
-                                          .Where(file => file.EndsWith(".txt", StringComparison.OrdinalIgnoreCase) ||
-                                                         file.EndsWith(".csv", StringComparison.OrdinalIgnoreCase) ||
-                                                         file.EndsWith(".json", StringComparison.OrdinalIgnoreCase) ||
-                                                         file.EndsWith(".md", StringComparison.OrdinalIgnoreCase) ||
-                                                         file.EndsWith(".xml", StringComparison.OrdinalIgnoreCase) ||
-                                                         file.EndsWith(".html", StringComparison.OrdinalIgnoreCase) ||
-                                                         file.EndsWith(".pdf", StringComparison.OrdinalIgnoreCase))
+                                          .Where(file => supportedExtensions.Contains(Path.GetExtension(file).ToLower()))
                                           .ToList();
 
-            // Ensure exactly two files are found
+            // Ensure exactly two files are found (1 extracted data and 1 reference document)
             if (filesInRawData.Count != 2)
             {
                 Console.WriteLine("Error: There should be exactly two files in the RawData folder.");
@@ -75,7 +75,6 @@ namespace Semantic_Analysis
             Console.WriteLine($"Data extracted and saved to: {outputExtractedDataFilePath}");
             Console.WriteLine($"Reference document data extracted and saved to: {outputReferenceDocumentFilePath}");
         }
-
 
         private static IConfiguration LoadConfiguration()
         {
