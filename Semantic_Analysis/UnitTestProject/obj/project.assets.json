@@ -11343,23 +11343,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ADMIN\\.nuget\\packages\\": {},
+    "C:\\Users\\Lenovo\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Development\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\UnitTestProject.csproj",
+      "projectUniqueName": "D:\\IT\\Software Engineering\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\UnitTestProject.csproj",
       "projectName": "UnitTestProject",
-      "projectPath": "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Development\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\UnitTestProject.csproj",
-      "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Development\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\obj\\",
+      "projectPath": "D:\\IT\\Software Engineering\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\UnitTestProject.csproj",
+      "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
+      "outputPath": "D:\\IT\\Software Engineering\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -11368,15 +11368,15 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\TestPakages": {},
+        "C:\\temp\\TestPackages": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "projectReferences": {
-            "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj": {
-              "projectPath": "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj"
+            "D:\\IT\\Software Engineering\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj": {
+              "projectPath": "D:\\IT\\Software Engineering\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj"
             }
           }
         }
@@ -11434,7 +11434,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.103/PortableRuntimeIdentifierGraph.json"
       }
     }
   },
@@ -11443,7 +11443,7 @@
       "code": "Undefined",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Problem reading the cache file C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Development\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+      "message": "Problem reading the cache file D:\\IT\\Software Engineering\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
     }
   ]
 }
