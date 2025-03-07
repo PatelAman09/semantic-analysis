@@ -9,9 +9,9 @@ namespace Semantic_Analysis.Interfaces
 {
     public interface ICosineSimilarity
     {
-        Dictionary<string, double[]> ReadVectorsFromCsv(string inputFilePath);
+        Dictionary<string, (string text, double[] vector)> ReadVectorsFromCsv(string inputFilePath);
         double[] NormalizeVector(double[] vector);
-        void ValidateVectors(Dictionary<string, double[]> vectors);
+        void ValidateVectors(Dictionary<string, (string text, double[] vector)> vectors);
         double CosineSimilarityCalculation(double[] vectorA, double[] vectorB);
         void SaveOutputToCsv(string outputFilePath, List<string> outputData);
     }

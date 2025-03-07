@@ -3,22 +3,22 @@ using Semantic_Analysis.Interfaces;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Globalization;
 
 namespace Semantic_Analysis
 {
     public class CosineSimilarity : ICosineSimilarity
     {
-        public Dictionary<string, double[]> ReadVectorsFromCsv(string inputFilePath)
+        public Dictionary<string, (string text, double[] vector)> ReadVectorsFromCsv(string inputFilePath)
         {
             if (string.IsNullOrEmpty(inputFilePath))
                 throw new ArgumentException("File path must not be null or empty");
 
-            var vectors = new Dictionary<string, double[]>();
+            var vectors = new Dictionary<string, (string text, double[] vector)>();
 
             try
             {
@@ -27,18 +27,31 @@ namespace Semantic_Analysis
                     if (string.IsNullOrWhiteSpace(line)) continue;
 
                     var parts = line.Split(',');
+
                     if (parts.Length < 2) continue; // Skip malformed lines
 
-                    string rawWord = parts[0].Trim('"');
-                    string cleanedWord = rawWord.Contains(":") ? rawWord.Split(':').Last().Trim() : rawWord; // Clean word
+                    // Extract index and text
+                    string rawText = parts[0].Trim().Trim('"');
+                    string index = rawText.Contains(":") ? rawText.Split(':')[0].Trim() : "[Unknown]";
+                    string cleanedText = rawText.Contains(":") ? rawText.Split(':').Last().Trim() : rawText;
 
-                    double[] vectorValues = parts.Skip(1)
-                                                 .Select(value => double.TryParse(value.Trim(), NumberStyles.Float, CultureInfo.InvariantCulture, out double num) ? num : double.NaN)
-                                                 .Where(num => !double.IsNaN(num))
-                                                 .ToArray();
+                    // Parse vector values safely
+                    List<double> vectorValues = new List<double>();
+                    foreach (var value in parts.Skip(1))
+                    {
+                        string cleanedValue = value.Trim().Trim('"'); // Remove extra quotes
+                        if (double.TryParse(cleanedValue, NumberStyles.Float, CultureInfo.InvariantCulture, out double num))
+                        {
+                            vectorValues.Add(num);
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Warning: Invalid number format in CSV: {value}");
+                        }
+                    }
 
-                    if (!string.IsNullOrEmpty(cleanedWord) && vectorValues.Length > 0)
-                        vectors[cleanedWord] = NormalizeVector(vectorValues);
+                    if (!string.IsNullOrEmpty(cleanedText) && vectorValues.Count > 0)
+                        vectors[index] = (cleanedText, NormalizeVector(vectorValues.ToArray()));
                 }
             }
             catch (Exception ex)
@@ -59,13 +72,13 @@ namespace Semantic_Analysis
             return magnitude == 0 ? vector : vector.Select(v => v / magnitude).ToArray();
         }
 
-        public void ValidateVectors(Dictionary<string, double[]> vectors)
+        public void ValidateVectors(Dictionary<string, (string text, double[] vector)> vectors)
         {
             if (vectors.Count < 1)
                 throw new InvalidOperationException("Each file must contain at least one valid vector.");
 
-            int vectorLength = vectors.Values.First().Length;
-            if (vectors.Values.Any(v => v.Length != vectorLength))
+            int vectorLength = vectors.Values.First().vector.Length;
+            if (vectors.Values.Any(v => v.vector.Length != vectorLength))
                 throw new InvalidOperationException("All vectors must have the same length.");
         }
 
@@ -115,8 +128,8 @@ namespace Semantic_Analysis
 
             try
             {
-                Dictionary<string, double[]> vectorsFile1 = cosineSimilarity.ReadVectorsFromCsv(inputFilePath1);
-                Dictionary<string, double[]> vectorsFile2 = cosineSimilarity.ReadVectorsFromCsv(inputFilePath2);
+                Dictionary<string, (string text, double[] vector)> vectorsFile1 = cosineSimilarity.ReadVectorsFromCsv(inputFilePath1);
+                Dictionary<string, (string text, double[] vector)> vectorsFile2 = cosineSimilarity.ReadVectorsFromCsv(inputFilePath2);
 
                 if (vectorsFile1.Count == 0 || vectorsFile2.Count == 0)
                 {
@@ -127,18 +140,22 @@ namespace Semantic_Analysis
                 cosineSimilarity.ValidateVectors(vectorsFile2);
 
                 ConcurrentBag<string> outputData = new ConcurrentBag<string>();
-                outputData.Add("Word1,Word2,X-Position,Cosine Similarity");
+                outputData.Add("Index1,Index2,Word1,Word2,X-Position,Cosine Similarity");
 
                 int totalWords = vectorsFile1.Count;
 
-                Parallel.ForEach(vectorsFile1.Keys, (file1Key, _, index) =>
+                Parallel.ForEach(vectorsFile1.Keys, (index1, _, idx) =>
                 {
-                    foreach (var file2Key in vectorsFile2.Keys)
+                    foreach (var index2 in vectorsFile2.Keys)
                     {
-                        double similarity = Math.Round(cosineSimilarity.CosineSimilarityCalculation(vectorsFile1[file1Key], vectorsFile2[file2Key]), 10);
+                        double similarity = Math.Round(
+                            cosineSimilarity.CosineSimilarityCalculation(vectorsFile1[index1].vector, vectorsFile2[index2].vector),
+                            10
+                        );
 
-                        int xPosition = (int)(((double)index / totalWords) * 536.0); // Ensure proper scaling
-                        outputData.Add($"{file1Key},{file2Key},{xPosition},{similarity.ToString(CultureInfo.InvariantCulture)}");
+                        int xPosition = (int)(((double)idx / totalWords) * 536.0); // Scaling factor
+
+                        outputData.Add($"{index1},{index2},\"{vectorsFile1[index1].text}\",\"{vectorsFile2[index2].text}\",{xPosition},{similarity.ToString(CultureInfo.InvariantCulture)}");
                     }
                 });
 

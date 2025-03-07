@@ -1,6 +1,5 @@
-she strolled through the quiet forest the rustling leaves beneath her feet creating a calming rhythm,she walked through the forest listening to the rustling leaves under her feet feeling the calm of nature surrounding her,268,0.8848237146
-she strolled through the quiet forest the rustling leaves beneath her feet creating a calming rhythm,"the sun sets behind the mountains casting a golden glow across the sky and the evening breeze begins to cool the air,268,0.4413265641
-"the sun dipped below the horizon casting a golden glow across the sky as a cool evening breeze swept through the air,she walked through the forest listening to the rustling leaves under her feet feeling the calm of nature surrounding her,0,0.4222373068
-"the sun dipped below the horizon casting a golden glow across the sky as a cool evening breeze swept through the air,"the sun sets behind the mountains casting a golden glow across the sky and the evening breeze begins to cool the air,0,0.9087353041
-Word1,Word2,X-Position,Cosine Similarity
-
+[0],[1],""the sun dipped below the horizon casting a golden glow across the sky as a cool evening breeze swept through the air","she walked through the forest listening to the rustling leaves under her feet feeling the calm of nature surrounding her",0,0.4218893725
+[0],[0],""the sun dipped below the horizon casting a golden glow across the sky as a cool evening breeze swept through the air",""the sun sets behind the mountains casting a golden glow across the sky and the evening breeze begins to cool the air",0,0.9087208576
+[1],[1],"she strolled through the quiet forest the rustling leaves beneath her feet creating a calming rhythm","she walked through the forest listening to the rustling leaves under her feet feeling the calm of nature surrounding her",268,0.8849513275
+[1],[0],"she strolled through the quiet forest the rustling leaves beneath her feet creating a calming rhythm",""the sun sets behind the mountains casting a golden glow across the sky and the evening breeze begins to cool the air",268,0.4402369339
+Index1,Index2,Word1,Word2,X-Position,Cosine Similarity
