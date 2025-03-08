@@ -112,59 +112,59 @@ namespace Semantic_Analysis
                 .Build();
         }
 
-        public static void Main(string[] args)
-        {
-            IConfigurationRoot config = LoadConfiguration();
-            string inputFile1 = config["FilePaths:InputFileName1"];
-            string inputFile2 = config["FilePaths:InputFileName2"];
-            string outputFileName = config["FilePaths:CSVOutputFileName"];
+        //public static void Main(string[] args)
+        //{
+        //    IConfigurationRoot config = LoadConfiguration();
+        //    string inputFile1 = config["FilePaths:InputFileName1"];
+        //    string inputFile2 = config["FilePaths:InputFileName2"];
+        //    string outputFileName = config["FilePaths:CSVOutputFileName"];
 
-            string rootDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
-            string inputFilePath1 = Path.Combine(rootDirectory, config["FilePaths:InputFolder"], inputFile1);
-            string inputFilePath2 = Path.Combine(rootDirectory, config["FilePaths:InputFolder"], inputFile2);
-            string outputFilePath = Path.Combine(rootDirectory, config["FilePaths:OutputFolder"], outputFileName);
+        //    string rootDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+        //    string inputFilePath1 = Path.Combine(rootDirectory, config["FilePaths:InputFolder"], inputFile1);
+        //    string inputFilePath2 = Path.Combine(rootDirectory, config["FilePaths:InputFolder"], inputFile2);
+        //    string outputFilePath = Path.Combine(rootDirectory, config["FilePaths:OutputFolder"], outputFileName);
 
-            ICosineSimilarity cosineSimilarity = new CosineSimilarity();
+        //    ICosineSimilarity cosineSimilarity = new CosineSimilarity();
 
-            try
-            {
-                Dictionary<string, (string text, double[] vector)> vectorsFile1 = cosineSimilarity.ReadVectorsFromCsv(inputFilePath1);
-                Dictionary<string, (string text, double[] vector)> vectorsFile2 = cosineSimilarity.ReadVectorsFromCsv(inputFilePath2);
+        //    try
+        //    {
+        //        Dictionary<string, (string text, double[] vector)> vectorsFile1 = cosineSimilarity.ReadVectorsFromCsv(inputFilePath1);
+        //        Dictionary<string, (string text, double[] vector)> vectorsFile2 = cosineSimilarity.ReadVectorsFromCsv(inputFilePath2);
 
-                if (vectorsFile1.Count == 0 || vectorsFile2.Count == 0)
-                {
-                    throw new InvalidOperationException("Each input file must contain at least one valid vector.");
-                }
+        //        if (vectorsFile1.Count == 0 || vectorsFile2.Count == 0)
+        //        {
+        //            throw new InvalidOperationException("Each input file must contain at least one valid vector.");
+        //        }
 
-                cosineSimilarity.ValidateVectors(vectorsFile1);
-                cosineSimilarity.ValidateVectors(vectorsFile2);
+        //        cosineSimilarity.ValidateVectors(vectorsFile1);
+        //        cosineSimilarity.ValidateVectors(vectorsFile2);
 
-                ConcurrentBag<string> outputData = new ConcurrentBag<string>();
-                outputData.Add("Index1,Index2,Word1,Word2,X-Position,Cosine Similarity");
+        //        ConcurrentBag<string> outputData = new ConcurrentBag<string>();
+        //        outputData.Add("Index1,Index2,Word1,Word2,X-Position,Cosine Similarity");
 
-                int totalWords = vectorsFile1.Count;
+        //        int totalWords = vectorsFile1.Count;
 
-                Parallel.ForEach(vectorsFile1.Keys, (index1, _, idx) =>
-                {
-                    foreach (var index2 in vectorsFile2.Keys)
-                    {
-                        double similarity = Math.Round(
-                            cosineSimilarity.CosineSimilarityCalculation(vectorsFile1[index1].vector, vectorsFile2[index2].vector),
-                            10
-                        );
+        //        Parallel.ForEach(vectorsFile1.Keys, (index1, _, idx) =>
+        //        {
+        //            foreach (var index2 in vectorsFile2.Keys)
+        //            {
+        //                double similarity = Math.Round(
+        //                    cosineSimilarity.CosineSimilarityCalculation(vectorsFile1[index1].vector, vectorsFile2[index2].vector),
+        //                    10
+        //                );
 
-                        int xPosition = (int)(((double)idx / totalWords) * 536.0); // Scaling factor
+        //                int xPosition = (int)(((double)idx / totalWords) * 536.0); // Scaling factor
 
-                        outputData.Add($"{index1},{index2},\"{vectorsFile1[index1].text}\",\"{vectorsFile2[index2].text}\",{xPosition},{similarity.ToString(CultureInfo.InvariantCulture)}");
-                    }
-                });
+        //                outputData.Add($"{index1},{index2},\"{vectorsFile1[index1].text}\",\"{vectorsFile2[index2].text}\",{xPosition},{similarity.ToString(CultureInfo.InvariantCulture)}");
+        //            }
+        //        });
 
-                cosineSimilarity.SaveOutputToCsv(outputFilePath, outputData.ToList());
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"An error occurred: {ex.Message}");
-            }
-        }
+        //        cosineSimilarity.SaveOutputToCsv(outputFilePath, outputData.ToList());
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"An error occurred: {ex.Message}");
+        //    }
+        //}
     }
 }

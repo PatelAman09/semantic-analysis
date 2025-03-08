@@ -53,19 +53,19 @@
           "dependencies": {
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
-              "version": "[9.0.1, )"
+              "version": "[9.0.2, )"
             },
             "Microsoft.Extensions.Configuration.Abstractions": {
               "target": "Package",
-              "version": "[9.0.1, )"
+              "version": "[9.0.2, )"
             },
             "Microsoft.Extensions.Configuration.Json": {
               "target": "Package",
-              "version": "[9.0.1, )"
+              "version": "[9.0.2, )"
             },
             "Microsoft.Extensions.FileProviders.Physical": {
               "target": "Package",
-              "version": "[9.0.1, )"
+              "version": "[9.0.2, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
@@ -75,9 +75,13 @@
               "target": "Package",
               "version": "[2.1.0, )"
             },
+            "ScottPlot": {
+              "target": "Package",
+              "version": "[5.0.54, )"
+            },
             "itext7": {
               "target": "Package",
-              "version": "[7.2.6, )"
+              "version": "[9.1.0, )"
             }
           },
           "imports": [
