@@ -244,23 +244,21 @@ namespace Semantic_Analysis
 
                 foreach (var sentence in sentences)
                 {
-                    var cleanedSentence = sentence
-                        .Trim()  // Remove leading/trailing spaces
-                        .ToLower() // Convert to lowercase
-                        .Replace(",", "") // Remove commas
-                        .Replace(".", "") // Remove periods
-                        .Replace("!", "") // Remove exclamations
-                        .Replace("?", ""); // Remove question marks
+                    // Clean sentence: Trim spaces, convert to lowercase, and remove special characters
+                    var cleanedSentence = Regex.Replace(sentence
+                            .Trim()  // Remove leading/trailing spaces
+                            .ToLower(), // Convert to lowercase
+                            @"[^a-zA-Z0-9\s]", "");// Remove all non-alphanumeric characters (except spaces)
 
-                    if (!string.IsNullOrEmpty(cleanedSentence))
-                    {
-                        cleanedData.Add(cleanedSentence); // Add each cleaned sentence to list
-                    }
+            // Add non-empty cleaned sentence to the list
+            if (!string.IsNullOrEmpty(cleanedSentence))
+                        cleanedData.Add(cleanedSentence);
                 }
             }
 
             return cleanedData;
         }
+
 
         // --- Data Saving Methods ---
         public void SaveDataToJson(string outputFilePath, List<string> data, string type)
