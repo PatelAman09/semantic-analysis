@@ -21,14 +21,16 @@
 		<PackageReference Include="Microsoft.Extensions.FileProviders.Physical" Version="9.0.2" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="OpenAI" Version="2.1.0" />
-		<PackageReference Include="itext7" Version="9.1.0" />
+		<PackageReference Include="itext7" Version="9.0.0" />
+		<PackageReference Include="OxyPlot.Core" Version="2.2.0" />
+		<PackageReference Include="OxyPlot.SkiaSharp" Version="2.2.0" />
 		<PackageReference Include="ScottPlot" Version="5.0.54" />
 	</ItemGroup>
 
   <ItemGroup>
     <Folder Include="CSVOutput\" />
     <Folder Include="EmbeddingOutput\" />
-    <Folder Include="HeatMap\" />
+    <Folder Include="ScatterPlot\" />
   </ItemGroup>
 
 </Project>

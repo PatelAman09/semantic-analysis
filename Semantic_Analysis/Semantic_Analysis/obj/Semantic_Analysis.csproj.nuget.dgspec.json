@@ -75,13 +75,21 @@
               "target": "Package",
               "version": "[2.1.0, )"
             },
+            "OxyPlot.Core": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "OxyPlot.SkiaSharp": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
             "ScottPlot": {
               "target": "Package",
               "version": "[5.0.54, )"
             },
             "itext7": {
               "target": "Package",
-              "version": "[9.1.0, )"
+              "version": "[9.0.0, )"
             }
           },
           "imports": [

@@ -1330,6 +1330,37 @@
           }
         }
       },
+      "OxyPlot.Core/2.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/OxyPlot.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/OxyPlot.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "OxyPlot.SkiaSharp/2.2.0": {
+        "type": "package",
+        "dependencies": {
+          "OxyPlot.Core": "2.2.0",
+          "SkiaSharp": "2.88.8",
+          "SkiaSharp.HarfBuzz": "2.88.8"
+        },
+        "compile": {
+          "lib/net8.0/OxyPlot.SkiaSharp.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/OxyPlot.SkiaSharp.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "runtime.android-arm.runtime.native.System.IO.Ports/9.0.1": {
         "type": "package",
         "runtimeTargets": {
@@ -4675,8 +4706,10 @@
           "Microsoft.Extensions.FileProviders.Physical": "9.0.2",
           "Newtonsoft.Json": "13.0.3",
           "OpenAI": "2.1.0",
+          "OxyPlot.Core": "2.2.0",
+          "OxyPlot.SkiaSharp": "2.2.0",
           "ScottPlot": "5.0.54",
-          "itext7": "9.1.0"
+          "itext7": "9.0.0"
         },
         "compile": {
           "bin/placeholder/Semantic_Analysis.dll": {}
@@ -6553,6 +6586,48 @@
         "lib/netstandard2.0/OpenAI.xml",
         "openai.2.1.0.nupkg.sha512",
         "openai.nuspec"
+      ]
+    },
+    "OxyPlot.Core/2.2.0": {
+      "sha512": "QhXNdXR5FPpro/VoLx3BOp6AhQo7YrbfmWEZ9cgY+pnYM7RYORZjnu+aDMA8ka9A1r8hLkX//NbCPZNUv+l8qA==",
+      "type": "package",
+      "path": "oxyplot.core/2.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "OxyPlot_128.png",
+        "README.md",
+        "lib/net462/OxyPlot.dll",
+        "lib/net462/OxyPlot.xml",
+        "lib/net6.0/OxyPlot.dll",
+        "lib/net6.0/OxyPlot.xml",
+        "lib/net8.0/OxyPlot.dll",
+        "lib/net8.0/OxyPlot.xml",
+        "lib/netstandard2.0/OxyPlot.dll",
+        "lib/netstandard2.0/OxyPlot.xml",
+        "oxyplot.core.2.2.0.nupkg.sha512",
+        "oxyplot.core.nuspec"
+      ]
+    },
+    "OxyPlot.SkiaSharp/2.2.0": {
+      "sha512": "0+t9fNJK/pTPZdjUjFOeiE22s7KoVwDw4apCP7HVpGDVyUQ2FNIMxCQpJaN6qX/HK+n8xTnFv0DdG1g5MMcDLQ==",
+      "type": "package",
+      "path": "oxyplot.skiasharp/2.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "OxyPlot_128.png",
+        "README.md",
+        "lib/net462/OxyPlot.SkiaSharp.dll",
+        "lib/net462/OxyPlot.SkiaSharp.xml",
+        "lib/net6.0/OxyPlot.SkiaSharp.dll",
+        "lib/net6.0/OxyPlot.SkiaSharp.xml",
+        "lib/net8.0/OxyPlot.SkiaSharp.dll",
+        "lib/net8.0/OxyPlot.SkiaSharp.xml",
+        "lib/netstandard2.0/OxyPlot.SkiaSharp.dll",
+        "lib/netstandard2.0/OxyPlot.SkiaSharp.xml",
+        "oxyplot.skiasharp.2.2.0.nupkg.sha512",
+        "oxyplot.skiasharp.nuspec"
       ]
     },
     "runtime.android-arm.runtime.native.System.IO.Ports/9.0.1": {
@@ -11981,16 +12056,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1605",
-      "level": "Error",
-      "message": "Warning As Error: Detected package downgrade: itext7 from 9.1.0 to 9.0.0. Reference the package directly from the project to select a different version. \r\n UnitTestProject -> Semantic_Analysis -> itext7 (>= 9.1.0) \r\n UnitTestProject -> itext7 (>= 9.0.0)",
-      "libraryId": "itext7",
-      "targetGraphs": [
-        "net8.0-windows7.0"
-      ]
-    }
-  ]
+  }
 }
