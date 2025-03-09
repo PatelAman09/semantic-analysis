@@ -70,7 +70,96 @@ namespace Semantic_Analysis
             }
         }
 
-        // Process CSV data and extract required values
+        // Generate scatter plot with the extracted data - minimal version with no grid customization
+        private static void GenerateScatterPlot(List<double> xPositions, List<double> yValues, List<string> words, string outputPath)
+        {
+            // Create a ScottPlot figure
+            var plt = new ScottPlot.Plot();
+
+            // Add scatter plot
+            var scatter = plt.Add.Scatter(xPositions.ToArray(), yValues.ToArray());
+            scatter.Color = Colors.Blue;
+            scatter.MarkerSize = 5f;
+            scatter.LineWidth = 0f;
+
+            // Add reference line at y=0
+            var referenceLine = plt.Add.HorizontalLine(0);
+            referenceLine.Color = Colors.Black.WithAlpha(0.5f);
+            referenceLine.LineWidth = 1f;
+            referenceLine.LinePattern = LinePattern.Dashed;
+
+            // Customize grid appearance
+            plt.Grid.MajorLineColor = Colors.Gray.WithAlpha(0.2f);
+            plt.Grid.MinorLineColor = Colors.Gray.WithAlpha(0.1f);
+            plt.Grid.MajorLineWidth = 1f;
+            plt.Grid.MinorLineWidth = 0.5f;
+
+            // Add labels
+            plt.Title("Word Position vs. Cosine Similarity");
+            plt.XLabel("Word Position (0 - 536)");
+            plt.YLabel("Cosine Similarity (-1 to 1)");
+
+            // Instead of selecting top 10, display all points from CSV since there are only a few
+            for (int i = 0; i < xPositions.Count; i++)
+            {
+                // Add highlight marker for all points
+                var highlight = plt.Add.Scatter(
+                    new double[] { xPositions[i] },
+                    new double[] { yValues[i] }
+                );
+                highlight.Color = Colors.Red;
+                highlight.MarkerSize = 7f;
+
+                // Add text label with optimized positioning
+                var text = plt.Add.Text(words[i], xPositions[i], yValues[i]);
+                text.LabelFontSize = 10f;
+                text.LabelFontColor = Colors.Red;
+
+                // Adjust text positioning to avoid truncation
+                if (xPositions[i] > 200) // For right side of plot
+                {
+                    text.Alignment = Alignment.MiddleRight;
+                    text.OffsetX = -10f;
+                    text.OffsetY = 10f;
+
+                    // Split long text into multiple lines if needed
+                    if (words[i].Length > 30)
+                    {
+                        // Try to place the text in a better position for readability
+                        text.OffsetY = -15f; // Place above the point
+                    }
+                }
+                else // For left side of plot
+                {
+                    text.Alignment = Alignment.MiddleLeft;
+                    text.OffsetX = 10f;
+                    text.OffsetY = 10f;
+
+                    // Split long text into multiple lines if needed
+                    if (words[i].Length > 30)
+                    {
+                        // Try to place the text in a better position for readability
+                        text.OffsetY = -15f; // Place above the point
+                    }
+                }
+            }
+
+            // Set appropriate axis limits
+            // We only need to show 0-270 range based on the data
+            double xMin = -10; // Slight padding on left
+            double xMax = 280; // Slight padding on right to accommodate point at 268
+
+            // Force Y axis to show -1 to 1 range
+            plt.Axes.SetLimits(xMin, xMax, -1, 1);
+
+            // Ensure the output directory exists
+            Directory.CreateDirectory(Path.GetDirectoryName(outputPath));
+
+            // Save the plot with larger dimensions
+            plt.SavePng(outputPath, 1920, 1080);
+        }
+
+        // Also update the ProcessCsvData method to handle the specific CSV format
         private static (List<double> xPositions, List<double> yValues, List<string> words) ProcessCsvData(string csvFilePath)
         {
             if (!File.Exists(csvFilePath))
@@ -83,33 +172,40 @@ namespace Semantic_Analysis
             List<string> words = new List<string>();
 
             var lines = File.ReadAllLines(csvFilePath);
-            if (lines.Length <= 1)
-            {
-                throw new Exception("CSV file is empty or contains only a header row");
-            }
 
-            // Skip header row
-            for (int i = 1; i < lines.Length; i++)
+            // Skip the last line which is the header (reversed in this file)
+            for (int i = 0; i < lines.Length - 1; i++)
             {
                 var line = lines[i];
                 var parts = line.Split(',');
 
-                if (parts.Length < 6)
+                // The CSV format shows: [index1],[index2],"text1","text2",x-position,similarity
+                if (parts.Length >= 6)
                 {
-                    Console.WriteLine($"Warning: Skipping malformed row {i + 1}: {line}");
-                    continue;
-                }
+                    // Extract x position which is the 5th element (0-indexed)
+                    if (double.TryParse(parts[4], out double xPosition))
+                    {
+                        // Extract cosine similarity which is the 6th element
+                        if (double.TryParse(parts[5], NumberStyles.Float, CultureInfo.InvariantCulture, out double cosineSim))
+                        {
+                            xPositions.Add(xPosition);
 
-                if (double.TryParse(parts[4], out double xPosition) &&
-                    double.TryParse(parts[5], NumberStyles.Float, CultureInfo.InvariantCulture, out double cosineSim))
-                {
-                    xPositions.Add(xPosition);
-                    yValues.Add(2 * cosineSim - 1); // Scale cosine similarity to (-1, 1)
-                    words.Add(parts[2].Trim('"')); // Extract word
-                }
-                else
-                {
-                    Console.WriteLine($"Warning: Could not parse numeric values in row {i + 1}");
+                            // Scale value to -1 to 1 range if needed (depends on if already scaled)
+                            double scaledValue = (cosineSim > 1) ? (2 * cosineSim - 1) : cosineSim;
+                            yValues.Add(scaledValue);
+
+                            // Extract the first text as the word label (between first set of quotes)
+                            string text = ExtractTextBetweenQuotes(line);
+
+                            // Truncate very long texts for display purposes
+                            if (text.Length > 50)
+                            {
+                                text = text.Substring(0, 47) + "...";
+                            }
+
+                            words.Add(text);
+                        }
+                    }
                 }
             }
 
@@ -121,87 +217,19 @@ namespace Semantic_Analysis
             return (xPositions, yValues, words);
         }
 
-        // Generate scatter plot with the extracted data - minimal version with no grid customization
-        private static void GenerateScatterPlot(List<double> xPositions, List<double> yValues, List<string> words, string outputPath)
+        // Helper method to extract text between quotes
+        private static string ExtractTextBetweenQuotes(string line)
         {
-            // Create a ScottPlot figure
-            var plt = new ScottPlot.Plot();
-
-            // Add scatter plot
-            var scatter = plt.Add.Scatter(xPositions.ToArray(), yValues.ToArray());
-            scatter.Color = Colors.Blue;
-            scatter.MarkerSize = 5;
-            scatter.LineWidth = 0; // Show only points, no connecting lines
-
-            // Add reference line at y=0
-            var referenceLine = plt.Add.HorizontalLine(0);
-            referenceLine.Color = Colors.Black.WithAlpha(0.5);
-            referenceLine.LineWidth = 1;
-            referenceLine.LinePattern = LinePattern.Dashed;
-
-            // Add labels using the simplest methods available
-            plt.Title("Word Position vs. Cosine Similarity");
-            plt.XLabel("Word Position (0 - 536)");
-            plt.YLabel("Cosine Similarity (-1 to 1)");
-
-            // Identify and highlight significant points
-            // Simple approach to find points with highest absolute similarity values
-            var significantIndices = new List<int>();
-
-            // Create a list of (index, value) pairs for sorting
-            var valueIndices = new List<(int index, double value)>();
-            for (int i = 0; i < yValues.Count; i++)
+            int firstQuote = line.IndexOf('"');
+            if (firstQuote >= 0)
             {
-                valueIndices.Add((i, Math.Abs(yValues[i])));
+                int secondQuote = line.IndexOf('"', firstQuote + 1);
+                if (secondQuote >= 0)
+                {
+                    return line.Substring(firstQuote + 1, secondQuote - firstQuote - 1);
+                }
             }
-
-            // Sort by absolute y value (similarity) in descending order and take top 10
-            var topIndices = valueIndices
-                .OrderByDescending(pair => pair.value)
-                .Take(10)
-                .Select(pair => pair.index)
-                .ToList();
-
-            // Add text and highlight markers for significant points
-            foreach (int idx in topIndices)
-            {
-                // Add text label
-                var text = plt.Add.Text(words[idx], xPositions[idx], yValues[idx]);
-                text.LabelFontSize = 12;
-                text.LabelFontColor = Colors.Red;
-
-                // Add highlight marker
-                var highlight = plt.Add.Scatter(
-                    new double[] { xPositions[idx] },
-                    new double[] { yValues[idx] }
-                );
-                highlight.Color = Colors.Red;
-                highlight.MarkerSize = 7;
-            }
-
-            // Set appropriate axis limits
-            double xMin = xPositions.Min();
-            double xMax = xPositions.Max();
-            double yMin = yValues.Min();
-            double yMax = yValues.Max();
-
-            // Add padding
-            double xPadding = (xMax - xMin) * 0.05;
-            double yPadding = Math.Max(Math.Abs(yMin), Math.Abs(yMax)) * 0.1;
-
-            // Use SetLimits with positional parameters only
-            plt.Axes.SetLimits(
-                xMin - xPadding,
-                xMax + xPadding,
-                Math.Min(-1, yMin - yPadding),
-                Math.Max(1, yMax + yPadding)
-            );
-
-            // Ensure the output directory exists
-            Directory.CreateDirectory(Path.GetDirectoryName(outputPath));
-
-            // Save the plot
-            plt.SavePng(outputPath, 1200, 800);
+            return string.Empty;
         }
     }
 }

@@ -7,12 +7,16 @@
       "RelativeMoniker": "D:0:0:{9D28E360-331D-4197-857A-50BA888C9E81}|Semantic_Analysis\\Semantic_Analysis.csproj|solutionrelative:semantic_analysis\\visualization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9D28E360-331D-4197-857A-50BA888C9E81}|Semantic_Analysis\\Semantic_Analysis.csproj|e:\\master_of_engg_it\\se project\\aman-patel\\semantic-analysis\\semantic_analysis\\semantic_analysis\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{9D28E360-331D-4197-857A-50BA888C9E81}|Semantic_Analysis\\Semantic_Analysis.csproj|solutionrelative:semantic_analysis\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{9D28E360-331D-4197-857A-50BA888C9E81}|Semantic_Analysis\\Semantic_Analysis.csproj|e:\\master_of_engg_it\\se project\\aman-patel\\semantic-analysis\\semantic_analysis\\semantic_analysis\\cosinesimilarity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9D28E360-331D-4197-857A-50BA888C9E81}|Semantic_Analysis\\Semantic_Analysis.csproj|solutionrelative:semantic_analysis\\cosinesimilarity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D28E360-331D-4197-857A-50BA888C9E81}|Semantic_Analysis\\Semantic_Analysis.csproj|e:\\master_of_engg_it\\se project\\aman-patel\\semantic-analysis\\semantic_analysis\\semantic_analysis\\csvoutput\\cosinesimilarity_calculation.csv||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{9D28E360-331D-4197-857A-50BA888C9E81}|Semantic_Analysis\\Semantic_Analysis.csproj|solutionrelative:semantic_analysis\\csvoutput\\cosinesimilarity_calculation.csv||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D28E360-331D-4197-857A-50BA888C9E81}|Semantic_Analysis\\Semantic_Analysis.csproj|e:\\master_of_engg_it\\se project\\aman-patel\\semantic-analysis\\semantic_analysis\\semantic_analysis\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{9D28E360-331D-4197-857A-50BA888C9E81}|Semantic_Analysis\\Semantic_Analysis.csproj|solutionrelative:semantic_analysis\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -39,28 +43,40 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "cosinesimilarity_calculation.csv",
+              "DocumentMoniker": "E:\\Master_Of_Engg_IT\\SE Project\\Aman-Patel\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\CSVOutput\\cosinesimilarity_calculation.csv",
+              "RelativeDocumentMoniker": "Semantic_Analysis\\CSVOutput\\cosinesimilarity_calculation.csv",
+              "ToolTip": "E:\\Master_Of_Engg_IT\\SE Project\\Aman-Patel\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\CSVOutput\\cosinesimilarity_calculation.csv",
+              "RelativeToolTip": "Semantic_Analysis\\CSVOutput\\cosinesimilarity_calculation.csv",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002120|",
+              "WhenOpened": "2025-03-09T09:57:47.544Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "CosineSimilarity.cs",
               "DocumentMoniker": "E:\\Master_Of_Engg_IT\\SE Project\\Aman-Patel\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\CosineSimilarity.cs",
               "RelativeDocumentMoniker": "Semantic_Analysis\\CosineSimilarity.cs",
               "ToolTip": "E:\\Master_Of_Engg_IT\\SE Project\\Aman-Patel\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\CosineSimilarity.cs",
               "RelativeToolTip": "Semantic_Analysis\\CosineSimilarity.cs",
-              "ViewState": "AgIAAFYAAAAAAAAAAAAkwHQAAAA+AAAAAAAAAA==",
+              "ViewState": "AgIAAIsAAAAAAAAAAAAUwHoAAABvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-09T09:12:07.801Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "appsettings.json",
               "DocumentMoniker": "E:\\Master_Of_Engg_IT\\SE Project\\Aman-Patel\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\appsettings.json",
               "RelativeDocumentMoniker": "Semantic_Analysis\\appsettings.json",
               "ToolTip": "E:\\Master_Of_Engg_IT\\SE Project\\Aman-Patel\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\appsettings.json",
               "RelativeToolTip": "Semantic_Analysis\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-03-08T16:37:26.564Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-08T16:37:26.564Z"
             },
             {
               "$type": "Document",
@@ -70,7 +86,7 @@
               "RelativeDocumentMoniker": "Semantic_Analysis\\Visualization.cs",
               "ToolTip": "E:\\Master_Of_Engg_IT\\SE Project\\Aman-Patel\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Visualization.cs",
               "RelativeToolTip": "Semantic_Analysis\\Visualization.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAABMAAAAAAAAAA==",
+              "ViewState": "AgIAAJMAAAAAAAAAAAAuwJ4AAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-08T15:29:03.876Z",
               "EditorCaption": ""
