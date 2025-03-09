@@ -21,8 +21,7 @@ namespace Semantic_Analysis
 
             // Retrieve folder paths from configuration
             string dataPreprocessingPath = configuration["FilePaths:DataPreprocessing"];
-            string preprocessedDataPath = configuration["FilePaths:PreprocessedData"];
-            string referenceDataPath = configuration["FilePaths:ReferenceData"];
+            string extractedDataPath = configuration["FilePaths:ExtractedData"]; // Now using ExtractedData folder for both
 
             // Manually retrieving supported extensions from the configuration
             var supportedExtensions = configuration.GetSection("FilePaths:SupportedFileExtensions")
@@ -33,7 +32,7 @@ namespace Semantic_Analysis
             // Resolve the absolute paths for the directories
             string projectRoot = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
             string absoluteDataPreprocessingPath = Path.Combine(projectRoot, dataPreprocessingPath);
-            string absoluteExtractedDataPath = Path.Combine(projectRoot, preprocessedDataPath); // Ensure this folder is the target for both
+            string absoluteExtractedDataPath = Path.Combine(projectRoot, extractedDataPath); // Using the ExtractedData folder
 
             // Ensure the necessary directories exist
             EnsureDirectoryExists(absoluteExtractedDataPath);
@@ -250,15 +249,14 @@ namespace Semantic_Analysis
                             .ToLower(), // Convert to lowercase
                             @"[^a-zA-Z0-9\s]", "");// Remove all non-alphanumeric characters (except spaces)
 
-            // Add non-empty cleaned sentence to the list
-            if (!string.IsNullOrEmpty(cleanedSentence))
+                    // Add non-empty cleaned sentence to the list
+                    if (!string.IsNullOrEmpty(cleanedSentence))
                         cleanedData.Add(cleanedSentence);
                 }
             }
 
             return cleanedData;
         }
-
 
         // --- Data Saving Methods ---
         public void SaveDataToJson(string outputFilePath, List<string> data, string type)
