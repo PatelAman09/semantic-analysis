@@ -13,12 +13,6 @@ using Semantic_Analysis.Interfaces; // Reference to the interface
 
 public class EmbeddingProcessor : IEmbeddingProcessor
 {
-    /// <summary>
-    /// Reads a JSON file asynchronously from the given file path.
-    /// </summary>
-    /// <param name="jsonFilePath">Path to the JSON file.</param>
-    /// <returns>Returns the JSON content as a string.</returns>
-    /// <exception cref="FileNotFoundException">Thrown if the file does not exist.</exception>
     public async Task<string> ReadJsonFileAsync(string jsonFilePath)
     {
         if (!File.Exists(jsonFilePath))
@@ -26,12 +20,7 @@ public class EmbeddingProcessor : IEmbeddingProcessor
 
         return await File.ReadAllTextAsync(jsonFilePath);
     }
-    /// <summary>
-    /// Parses and analyzes JSON content, extracting key-value pairs into a list.
-    /// </summary>
-    /// <param name="jsonContent">JSON content as a string.</param>
-    /// <returns>A list of extracted data from the JSON structure.</returns>
-    /// <exception cref="Exception">Thrown if the JSON content is empty or malformed.</exception>
+
     public List<string> AnalyzeJson(string jsonContent)
     {
         var parsedJson = JsonConvert.DeserializeObject(jsonContent);
@@ -39,11 +28,6 @@ public class EmbeddingProcessor : IEmbeddingProcessor
 
         if (parsedJson == null)
             throw new Exception("The provided JSON content is empty or malformed.");
-        /// <summary>
-        /// Recursively traverses a JSON object and extracts values.
-        /// </summary>
-        /// <param name="obj">JSON object to traverse.</param>
-        /// <param name="prefix">Prefix to keep track of nested keys.</param>
 
         void Traverse(object obj, string prefix = "")
         {
@@ -70,14 +54,7 @@ public class EmbeddingProcessor : IEmbeddingProcessor
         Traverse(parsedJson);
         return extractedData;
     }
-    /// <summary>
-    /// Generates an embedding asynchronously with retry logic.
-    /// </summary>
-    /// <param name="client">The OpenAI embedding client.</param>
-    /// <param name="text">The text to generate the embedding for.</param>
-    /// <param name="maxRetries">Maximum number of retry attempts.</param>
-    /// <returns>Returns an OpenAI embedding object.</returns>
-    /// <exception cref="Exception">Thrown if the embedding generation fails after max retries.</exception>
+
     public async Task<OpenAIEmbedding> GenerateEmbeddingWithRetryAsync(EmbeddingClient client, string text, int maxRetries = 3)
     {
         int attempt = 0;
@@ -99,14 +76,14 @@ public class EmbeddingProcessor : IEmbeddingProcessor
 
     public async Task GenerateAndSaveEmbeddingsAsync(string apiKey, List<string> descriptions, string csvFilePath, int saveInterval)
     {
-        Console.WriteLine("Initializing OpenAI Embedding client...");
+        Console.WriteLine($"Initializing OpenAI Embedding client... Output file: {csvFilePath}");
+
         var client = new EmbeddingClient("text-embedding-3-small", apiKey);
 
-        using StreamWriter writer = new StreamWriter(csvFilePath, append: true, encoding: Encoding.UTF8);
-        if (!File.Exists(csvFilePath))
-        {
-            await writer.WriteLineAsync("Description,Embedding");
-        }
+        // Open StreamWriter once (overwrites file) and write the header.
+        using StreamWriter writer = new StreamWriter(csvFilePath, append: false, encoding: Encoding.UTF8);
+        await writer.WriteLineAsync("Description,Embedding");
+        Console.WriteLine($"Overwriting CSV file: {csvFilePath}");
 
         for (int i = 0; i < descriptions.Count; i++)
         {
@@ -129,45 +106,38 @@ public class EmbeddingProcessor : IEmbeddingProcessor
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error processing entry {i + 1}: {ex.Message}");
+                Console.WriteLine($"[{DateTime.UtcNow}] Error processing entry {i + 1}: {ex.Message}");
             }
         }
 
         Console.WriteLine("All embeddings processed and saved.");
     }
-    /// <summary>
-    /// Deletes the file if it exists to ensure a fresh start.
-    /// </summary>
-    /// <param name="filePath">The file to be deleted.</param>
-        static void DeleteFileIfExists(string filePath)
+
+    public void SaveOutputToCsv(string outputFilePath, List<string> outputData)
+    {
+        try
         {
-            try
-            {
-                if (File.Exists(filePath))
-                {
-                    File.Delete(filePath);
-                    Console.WriteLine($"Previous output file deleted: {filePath}");
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Warning: Could not delete {filePath}. Error: {ex.Message}");
-            }
+            Console.WriteLine($"Attempting to write {outputData.Count} lines to {outputFilePath}");
+            File.WriteAllLines(outputFilePath, outputData);
+            Console.WriteLine($"File successfully saved: {outputFilePath}");
         }
-    /// <summary>
-    /// Reads a JSON file, extracts relevant text data, generates embeddings, and saves the results to a CSV file.
-    /// </summary>
-    /// <param name="jsonFilePath">Path to the JSON file to process.</param>
-    /// <param name="csvFilePath">Path where the output CSV file will be saved.</param>
-    /// <param name="apiKey">OpenAI API key for embedding generation.</param>
-    /// <param name="saveInterval">Interval at which progress is saved.</param>
-    /// <returns>A Task representing the asynchronous operation.</returns>
-    /// <exception cref="Exception">Handles errors that occur during processing.</exception>
+        catch (IOException ex)
+        {
+            Console.WriteLine($"Error saving output file '{outputFilePath}': {ex.Message}");
+        }
+    }
 
     public async Task ProcessJsonFileAsync(string jsonFilePath, string csvFilePath, string apiKey, int saveInterval)
     {
         try
         {
+            Console.WriteLine($"Ensuring {csvFilePath} is deleted before processing...");
+            if (File.Exists(csvFilePath))
+            {
+                File.Delete(csvFilePath);
+                Console.WriteLine($"Previous output file deleted: {csvFilePath}");
+            }
+
             Console.WriteLine("Reading and analyzing JSON file...");
             string jsonContent = await ReadJsonFileAsync(jsonFilePath);
             List<string> analyzedData = AnalyzeJson(jsonContent);
@@ -177,65 +147,78 @@ public class EmbeddingProcessor : IEmbeddingProcessor
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error: {ex.Message}");
+            Console.WriteLine($"Error processing JSON file '{jsonFilePath}': {ex.Message}");
         }
     }
-    /// <summary>
-    /// Entry point for the application, prompting user input, validating paths, and initiating the embedding process.
-    /// </summary>
-    /// <param name="args">Command-line arguments (not used).</param>
-    /// <returns>A Task representing the asynchronous operation.</returns>
-    /// <exception cref="Exception">Handles any errors occurring in the application.</exception>
+
+    public static IConfigurationRoot LoadConfiguration()
+    {
+        return new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .Build();
+    }
+
     static async Task Main(string[] args)
     {
         try
         {
-            // Load appsettings.json
-            var config = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .Build();
+            IConfigurationRoot config = LoadConfiguration();
+            //string inputFolder = config["FilePaths:EmbeddingProcessorInput"]
+            //    ?? throw new Exception("Missing 'EmbeddingProcessorInput' in configuration.");
+            //string outputFolder = config["FilePaths:InputFolder"]
+            //    ?? throw new Exception("Missing 'InputFolder' in configuration.");
+            //string outputFile1 = Path.Combine(outputFolder, config["FilePaths:InputFileName1"]
+            //    ?? throw new Exception("Missing 'InputFileName1' in configuration."));
+            //string outputFile2 = Path.Combine(outputFolder, config["FilePaths:InputFileName2"]
+            //    ?? throw new Exception("Missing 'InputFileName2' in configuration."));
 
-            // Read settings from appsettings.json
-            string inputFolder = config["InputForEmbeddings"];
-            string outputFolder = config["InputFolder"];
-            string outputFile1 = Path.Combine(outputFolder, config["InputFileName1"]);
-            string outputFile2 = Path.Combine(outputFolder, config["InputFileName2"]);
-            
+            string inputFolder = config["FilePaths:EmbeddingProcessorInput"];
+            string outputFolder = config["FilePaths:InputFolder"];
+
+            string rootDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            string outputFile1 = Path.Combine(rootDirectory, outputFolder, config["FilePaths:InputFileName1"]);
+            string outputFile2 = Path.Combine(rootDirectory, outputFolder, config["FilePaths:InputFileName2"]);
+
+
             string apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY")
-                            ?? throw new Exception("Environment variable 'OPENAI_API_KEY' is not set.");
+                ?? throw new Exception("Environment variable 'OPENAI_API_KEY' is not set.");
 
-            int saveInterval = 10; // Default save interval
+            if (!Directory.Exists(inputFolder))
+                throw new DirectoryNotFoundException($"Input folder not found: {inputFolder}");
+            if (!Directory.Exists(outputFolder))
+            {
+                Console.WriteLine($"Output folder not found. Creating: {outputFolder}");
+                Directory.CreateDirectory(outputFolder);
+            }
 
-            // Ensure the output directory exists
-            Directory.CreateDirectory(outputFolder);
+            // Debug output: show working directory and absolute file paths.
+            Console.WriteLine($"Current Working Directory: {Directory.GetCurrentDirectory()}");
+            Console.WriteLine($"Output File 1: {Path.GetFullPath(outputFile1)}");
+            Console.WriteLine($"Output File 2: {Path.GetFullPath(outputFile2)}");
 
-            //Ensure deletion of previous outputs
-            DeleteFileIfExists(outputFile1);
-            DeleteFileIfExists(outputFile2);
+            Console.WriteLine("Cleaning up previous output files...");
+            if (File.Exists(outputFile1)) File.Delete(outputFile1);
+            if (File.Exists(outputFile2)) File.Delete(outputFile2);
+            Console.WriteLine("Old output files deleted.");
 
-            // Get all JSON files from the input folder
             var jsonFiles = Directory.GetFiles(inputFolder, "*.json");
-
             if (jsonFiles.Length < 2)
                 throw new Exception("Expected at least two JSON files in the input folder.");
 
-            Console.WriteLine($"Processing files:\n1. {jsonFiles[0]}\n2. {jsonFiles[1]}");
+            Console.WriteLine($"Processing files: {jsonFiles[0]} and {jsonFiles[1]}");
 
             IEmbeddingProcessor processor = new EmbeddingProcessor();
-
-            // Process first file
-            await processor.ProcessJsonFileAsync(jsonFiles[0], outputFile1, apiKey, saveInterval);
-            // Process second file
-            await processor.ProcessJsonFileAsync(jsonFiles[1], outputFile2, apiKey, saveInterval);
+            await Task.WhenAll(
+                processor.ProcessJsonFileAsync(jsonFiles[0], outputFile1, apiKey, 10),
+                processor.ProcessJsonFileAsync(jsonFiles[1], outputFile2, apiKey, 10)
+            );
 
             Console.WriteLine("Embedding processing completed successfully.");
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"An error occurred: {ex.Message}");
+            Console.WriteLine($"Error: {ex.Message}");
         }
     }
-
 }
-
