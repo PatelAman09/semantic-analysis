@@ -19,10 +19,16 @@ namespace Semantic_Analysis
         //    // Load configuration settings from appsettings.json
         //    var configuration = LoadConfiguration();
 
+<<<<<<< HEAD
         //    // Retrieve folder paths from configuration
         //    string dataPreprocessingPath = configuration["FilePaths:DataPreprocessing"];
         //    string preprocessedDataPath = configuration["FilePaths:PreprocessedData"];
         //    string referenceDataPath = configuration["FilePaths:ReferenceData"];
+=======
+            // Retrieve folder paths from configuration
+            string dataPreprocessingPath = configuration["FilePaths:DataPreprocessing"];
+            string extractedDataPath = configuration["FilePaths:ExtractedData"]; // Now using ExtractedData folder for both
+>>>>>>> origin/Development
 
         //    // Manually retrieving supported extensions from the configuration
         //    var supportedExtensions = configuration.GetSection("FilePaths:SupportedFileExtensions")
@@ -30,10 +36,17 @@ namespace Semantic_Analysis
         //                                             .Select(x => x.Value) // Select the values (file extensions)
         //                                             .ToList();
 
+<<<<<<< HEAD
         //    // Resolve the absolute paths for the directories
         //    string projectRoot = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
         //    string absoluteDataPreprocessingPath = Path.Combine(projectRoot, dataPreprocessingPath);
         //    string absoluteExtractedDataPath = Path.Combine(projectRoot, preprocessedDataPath); // Ensure this folder is the target for both
+=======
+            // Resolve the absolute paths for the directories
+            string projectRoot = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            string absoluteDataPreprocessingPath = Path.Combine(projectRoot, dataPreprocessingPath);
+            string absoluteExtractedDataPath = Path.Combine(projectRoot, extractedDataPath); // Using the ExtractedData folder
+>>>>>>> origin/Development
 
         //    // Ensure the necessary directories exist
         //    EnsureDirectoryExists(absoluteExtractedDataPath);
@@ -244,18 +257,15 @@ namespace Semantic_Analysis
 
                 foreach (var sentence in sentences)
                 {
-                    var cleanedSentence = sentence
-                        .Trim()  // Remove leading/trailing spaces
-                        .ToLower() // Convert to lowercase
-                        .Replace(",", "") // Remove commas
-                        .Replace(".", "") // Remove periods
-                        .Replace("!", "") // Remove exclamations
-                        .Replace("?", ""); // Remove question marks
+                    // Clean sentence: Trim spaces, convert to lowercase, and remove special characters
+                    var cleanedSentence = Regex.Replace(sentence
+                            .Trim()  // Remove leading/trailing spaces
+                            .ToLower(), // Convert to lowercase
+                            @"[^a-zA-Z0-9\s]", "");// Remove all non-alphanumeric characters (except spaces)
 
+                    // Add non-empty cleaned sentence to the list
                     if (!string.IsNullOrEmpty(cleanedSentence))
-                    {
-                        cleanedData.Add(cleanedSentence); // Add each cleaned sentence to list
-                    }
+                        cleanedData.Add(cleanedSentence);
                 }
             }
 
