@@ -2,6 +2,19 @@
   "version": 3,
   "targets": {
     "net8.0": {
+      "CsvHelper/33.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/CsvHelper.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/CsvHelper.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "HarfBuzzSharp/7.3.0.3": {
         "type": "package",
         "dependencies": {
@@ -1886,6 +1899,34 @@
     }
   },
   "libraries": {
+    "CsvHelper/33.0.1": {
+      "sha512": "fev4lynklAU2A9GVMLtwarkwaanjSYB4wUqO2nOJX5hnzObORzUqVLe+bDYCUyIIRQM4o5Bsq3CcyJR89iMmEQ==",
+      "type": "package",
+      "path": "csvhelper/33.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "csvhelper.33.0.1.nupkg.sha512",
+        "csvhelper.nuspec",
+        "lib/net462/CsvHelper.dll",
+        "lib/net462/CsvHelper.xml",
+        "lib/net47/CsvHelper.dll",
+        "lib/net47/CsvHelper.xml",
+        "lib/net48/CsvHelper.dll",
+        "lib/net48/CsvHelper.xml",
+        "lib/net6.0/CsvHelper.dll",
+        "lib/net6.0/CsvHelper.xml",
+        "lib/net7.0/CsvHelper.dll",
+        "lib/net7.0/CsvHelper.xml",
+        "lib/net8.0/CsvHelper.dll",
+        "lib/net8.0/CsvHelper.xml",
+        "lib/netstandard2.0/CsvHelper.dll",
+        "lib/netstandard2.0/CsvHelper.xml",
+        "lib/netstandard2.1/CsvHelper.dll",
+        "lib/netstandard2.1/CsvHelper.xml"
+      ]
+    },
     "HarfBuzzSharp/7.3.0.3": {
       "sha512": "Hq+5+gx10coOvuRgB13KBwiWxJq1QeYuhtVLbA01ZCWaugOnolUahF44KvrQTUUHDNk/C7HB6SMaebsZeOdhgg==",
       "type": "package",
@@ -5963,6 +6004,7 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "CsvHelper >= 33.0.1",
       "Microsoft.Extensions.Configuration >= 9.0.2",
       "Microsoft.Extensions.Configuration.Abstractions >= 9.0.2",
       "Microsoft.Extensions.Configuration.Json >= 9.0.2",
@@ -6026,6 +6068,10 @@
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
+          "CsvHelper": {
+            "target": "Package",
+            "version": "[33.0.1, )"
+          },
           "Microsoft.Extensions.Configuration": {
             "target": "Package",
             "version": "[9.0.2, )"

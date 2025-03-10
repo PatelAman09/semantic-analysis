@@ -10,7 +10,7 @@ namespace Semantic_Analysis
 {
     public class Visualization
     {
-        static void Main()
+        public static void Main()
         {
             try
             {
@@ -71,7 +71,7 @@ namespace Semantic_Analysis
         }
 
         // Generate scatter plot with the extracted data - minimal version with no grid customization
-        private static void GenerateScatterPlot(List<double> xPositions, List<double> yValues, List<string> words, string outputPath)
+        public static void GenerateScatterPlot(List<double> xPositions, List<double> yValues, List<string> words, string outputPath)
         {
             // Create a ScottPlot figure
             var plt = new ScottPlot.Plot();
@@ -145,9 +145,8 @@ namespace Semantic_Analysis
             }
 
             // Set appropriate axis limits
-            // We only need to show 0-270 range based on the data
-            double xMin = -10; // Slight padding on left
-            double xMax = 280; // Slight padding on right to accommodate point at 268
+            double xMin = 0;
+            double xMax = 536;
 
             // Force Y axis to show -1 to 1 range
             plt.Axes.SetLimits(xMin, xMax, -1, 1);
@@ -156,11 +155,11 @@ namespace Semantic_Analysis
             Directory.CreateDirectory(Path.GetDirectoryName(outputPath));
 
             // Save the plot with larger dimensions
-            plt.SavePng(outputPath, 1920, 1080);
+            plt.SavePng(outputPath, 1600, 900);
         }
 
         // Also update the ProcessCsvData method to handle the specific CSV format
-        private static (List<double> xPositions, List<double> yValues, List<string> words) ProcessCsvData(string csvFilePath)
+        public static (List<double> xPositions, List<double> yValues, List<string> words) ProcessCsvData(string csvFilePath)
         {
             if (!File.Exists(csvFilePath))
             {
@@ -182,27 +181,19 @@ namespace Semantic_Analysis
                 // The CSV format shows: [index1],[index2],"text1","text2",x-position,similarity
                 if (parts.Length >= 6)
                 {
-                    // Extract x position which is the 5th element (0-indexed)
-                    if (double.TryParse(parts[4], out double xPosition))
+                    // Make sure to handle parsing correctly by trimming any quotes
+                    string xPosStr = parts[4].Trim('"', ' ');
+                    string simStr = parts[5].Trim('"', ' ');
+
+                    if (double.TryParse(xPosStr, out double xPosition))
                     {
-                        // Extract cosine similarity which is the 6th element
-                        if (double.TryParse(parts[5], NumberStyles.Float, CultureInfo.InvariantCulture, out double cosineSim))
+                        if (double.TryParse(simStr, NumberStyles.Float, CultureInfo.InvariantCulture, out double cosineSim))
                         {
                             xPositions.Add(xPosition);
+                            yValues.Add(cosineSim); // Use raw value without scaling
 
-                            // Scale value to -1 to 1 range if needed (depends on if already scaled)
-                            double scaledValue = (cosineSim > 1) ? (2 * cosineSim - 1) : cosineSim;
-                            yValues.Add(scaledValue);
-
-                            // Extract the first text as the word label (between first set of quotes)
+                            // Extract label text
                             string text = ExtractTextBetweenQuotes(line);
-
-                            // Truncate very long texts for display purposes
-                            if (text.Length > 50)
-                            {
-                                text = text.Substring(0, 47) + "...";
-                            }
-
                             words.Add(text);
                         }
                     }
@@ -218,7 +209,7 @@ namespace Semantic_Analysis
         }
 
         // Helper method to extract text between quotes
-        private static string ExtractTextBetweenQuotes(string line)
+        public static string ExtractTextBetweenQuotes(string line)
         {
             int firstQuote = line.IndexOf('"');
             if (firstQuote >= 0)

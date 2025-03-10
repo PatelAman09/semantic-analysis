@@ -42,12 +42,20 @@ namespace UnitTestProject
 
             [TestMethod]
             [ExpectedException(typeof(InvalidOperationException))]
-            public void ValidateVectors_IncorrectVectorLengths_ThrowsException()
+            public void ValidateVectors_ShouldThrowException_WhenVectorsAreEmpty()
             {
-                var vectors = new Dictionary<string, double[]>()
+                var emptyVectors = new Dictionary<string, (string text, double[] vector)>();
+                _cosineSimilarity.ValidateVectors(emptyVectors);
+            }
+
+            [TestMethod]
+            [ExpectedException(typeof(InvalidOperationException))]
+            public void ValidateVectors_ShouldThrowException_WhenVectorsHaveDifferentLengths()
             {
-                { "Vector1", new double[] { 1.0, 2.0 } },
-                { "Vector2", new double[] { 3.0, 4.0, 5.0 } }
+                var vectors = new Dictionary<string, (string, double[])>
+            {
+                { "1", ("text1", new double[] { 1.0, 2.0 }) },
+                { "2", ("text2", new double[] { 1.0, 2.0, 3.0 }) }
             };
 
                 _cosineSimilarity.ValidateVectors(vectors);
@@ -122,6 +130,20 @@ namespace UnitTestProject
 
                 // Assert
                 Assert.AreEqual(outputData[0], savedData[0]);
+            }
+            [TestMethod]
+            public void SaveOutputToCsv_ShouldCreateFileWithCorrectContent()
+            {
+                string testFilePath = Path.Combine(Path.GetTempPath(), "test_output.csv");
+                var outputData = new List<string> { "Index1,Index2,Word1,Word2,Cosine Similarity", "1,2,word1,word2,0.95" };
+
+                _cosineSimilarity.SaveOutputToCsv(testFilePath, outputData);
+
+                Assert.IsTrue(File.Exists(testFilePath));
+                var lines = File.ReadAllLines(testFilePath);
+                CollectionAssert.AreEqual(outputData, lines);
+
+                File.Delete(testFilePath);
             }
         }
     }
