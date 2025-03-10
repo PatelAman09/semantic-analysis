@@ -164,15 +164,6 @@ public class EmbeddingProcessor : IEmbeddingProcessor
         try
         {
             IConfigurationRoot config = LoadConfiguration();
-            //string inputFolder = config["FilePaths:EmbeddingProcessorInput"]
-            //    ?? throw new Exception("Missing 'EmbeddingProcessorInput' in configuration.");
-            //string outputFolder = config["FilePaths:InputFolder"]
-            //    ?? throw new Exception("Missing 'InputFolder' in configuration.");
-            //string outputFile1 = Path.Combine(outputFolder, config["FilePaths:InputFileName1"]
-            //    ?? throw new Exception("Missing 'InputFileName1' in configuration."));
-            //string outputFile2 = Path.Combine(outputFolder, config["FilePaths:InputFileName2"]
-            //    ?? throw new Exception("Missing 'InputFileName2' in configuration."));
-
             string inputFolder = config["FilePaths:EmbeddingProcessorInput"];
             string outputFolder = config["FilePaths:InputFolder"];
 
