@@ -1,5 +1,17 @@
-[0],[1],""the sun dipped below the horizon casting a golden glow across the sky as a cool evening breeze swept through the air","she walked through the forest listening to the rustling leaves under her feet feeling the calm of nature surrounding her",0,0.4218893725
-[0],[0],""the sun dipped below the horizon casting a golden glow across the sky as a cool evening breeze swept through the air",""the sun sets behind the mountains casting a golden glow across the sky and the evening breeze begins to cool the air",0,0.9087208576
-[1],[1],"she strolled through the quiet forest the rustling leaves beneath her feet creating a calming rhythm","she walked through the forest listening to the rustling leaves under her feet feeling the calm of nature surrounding her",268,0.8849513275
-[1],[0],"she strolled through the quiet forest the rustling leaves beneath her feet creating a calming rhythm",""the sun sets behind the mountains casting a golden glow across the sky and the evening breeze begins to cool the air",268,0.4402369339
-Index1,Index2,Word1,Word2,X-Position,Cosine Similarity
+Index1,Index2,Word1,Word2,X_Position,Cosine_Similarity
+[0],[0],"ronaldo","football",0,0.5537953342
+[0],[1],"ronaldo","islam",0,0.2998267092
+[0],[2],"ronaldo","software",0,0.2950694711
+[0],[3],"ronaldo","sports",0,0.4371289311
+[1],[0],"messi","football",178,0.5013355328
+[1],[1],"messi","islam",178,0.4380863908
+[1],[2],"messi","software",178,0.3301121763
+[1],[3],"messi","sports",178,0.5006494228
+[2],[0],"dr zakir naik","football",357,0.2326336757
+[2],[1],"dr zakir naik","islam",357,0.5055260688
+[2],[2],"dr zakir naik","software",357,0.3489455546
+[2],[3],"dr zakir naik","sports",357,0.3104583041
+[3],[0],"jeff bezos","football",536,0.264807878
+[3],[1],"jeff bezos","islam",536,0.2498625015
+[3],[2],"jeff bezos","software",536,0.3911512759
+[3],[3],"jeff bezos","sports",536,0.3825829691

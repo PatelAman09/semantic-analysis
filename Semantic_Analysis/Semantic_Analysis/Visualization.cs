@@ -71,7 +71,7 @@ namespace Semantic_Analysis
         }
 
         // Generate scatter plot with the extracted data - minimal version with no grid customization
-        public static void GenerateScatterPlot(List<double> xPositions, List<double> yValues, List<string> words, string outputPath)
+        private static void GenerateScatterPlot(List<double> xPositions, List<double> yValues, List<string> words, string outputPath)
         {
             // Create a ScottPlot figure
             var plt = new ScottPlot.Plot();
@@ -115,6 +115,13 @@ namespace Semantic_Analysis
                 text.LabelFontSize = 10f;
                 text.LabelFontColor = Colors.Red;
 
+                if (xPositions[i] == 0)
+                {
+                    text.Alignment = Alignment.MiddleLeft;
+                    text.OffsetX = 15f; // Ensure text is not hidden at axis edge
+                    text.OffsetY = 10f;
+                }
+
                 // Adjust text positioning to avoid truncation
                 if (xPositions[i] > 200) // For right side of plot
                 {
@@ -155,11 +162,11 @@ namespace Semantic_Analysis
             Directory.CreateDirectory(Path.GetDirectoryName(outputPath));
 
             // Save the plot with larger dimensions
-            plt.SavePng(outputPath, 1600, 900);
+            plt.SavePng(outputPath, 1920, 1080);
         }
 
         // Also update the ProcessCsvData method to handle the specific CSV format
-        public static (List<double> xPositions, List<double> yValues, List<string> words) ProcessCsvData(string csvFilePath)
+        private static (List<double> xPositions, List<double> yValues, List<string> words) ProcessCsvData(string csvFilePath)
         {
             if (!File.Exists(csvFilePath))
             {
@@ -209,18 +216,10 @@ namespace Semantic_Analysis
         }
 
         // Helper method to extract text between quotes
-        public static string ExtractTextBetweenQuotes(string line)
+        private static string ExtractTextBetweenQuotes(string line)
         {
-            int firstQuote = line.IndexOf('"');
-            if (firstQuote >= 0)
-            {
-                int secondQuote = line.IndexOf('"', firstQuote + 1);
-                if (secondQuote >= 0)
-                {
-                    return line.Substring(firstQuote + 1, secondQuote - firstQuote - 1);
-                }
-            }
-            return string.Empty;
+            var matches = System.Text.RegularExpressions.Regex.Matches(line, "\"(.*?)\"");
+            return matches.Count > 1 ? matches[1].Value : string.Empty; // Extract second quoted field
         }
     }
 }
