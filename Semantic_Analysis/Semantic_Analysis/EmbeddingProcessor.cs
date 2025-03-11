@@ -66,9 +66,11 @@ public class EmbeddingProcessor : IEmbeddingProcessor
             }
             catch (Exception ex) when (attempt < maxRetries - 1)
             {
-                Console.WriteLine($"Attempt {attempt + 1} failed: {ex.Message}. Retrying...");
-                await Task.Delay(1000);
+                // Log a snippet of the text (max 50 characters) for context
+                string snippet = text.Length > 50 ? text.Substring(0, 50) + "..." : text;
+                Console.WriteLine($"Attempt {attempt + 1} failed for text: \"{snippet}\": {ex.Message}. Retrying...");
                 attempt++;
+                await Task.Delay((attempt) * 1000); // Exponential backoff: 1s, 2s, 3s, etc.
             }
         }
         throw new Exception("Failed to generate embedding after multiple attempts.");
@@ -78,40 +80,70 @@ public class EmbeddingProcessor : IEmbeddingProcessor
     {
         Console.WriteLine($"Initializing OpenAI Embedding client... Output file: {csvFilePath}");
 
-        var client = new EmbeddingClient("text-embedding-3-small", apiKey);
+        var client = new EmbeddingClient("text-embedding-3-large", apiKey);
 
-        // Open StreamWriter once (overwrites file) and write the header.
+        // Open StreamWriter once (overwrites file). (CSV header remains untouched.)
         using StreamWriter writer = new StreamWriter(csvFilePath, append: false, encoding: Encoding.UTF8);
-        await writer.WriteLineAsync("Description,Embedding");
         Console.WriteLine($"Overwriting CSV file: {csvFilePath}");
 
-        for (int i = 0; i < descriptions.Count; i++)
+        // Define a batch size for processing. Adjust this value based on your workload and API limits.
+        int batchSize = 10;
+        int processedCount = 0;
+
+        for (int i = 0; i < descriptions.Count; i += batchSize)
         {
+            List<string> batch = descriptions.Skip(i).Take(batchSize).ToList();
             try
             {
-                string description = descriptions[i];
-                Console.WriteLine($"Processing entry {i + 1}/{descriptions.Count}: {description}");
+                // Attempt batch generation of embeddings for the current batch.
+                OpenAIEmbeddingCollection embeddingResults = await client.GenerateEmbeddingsAsync(batch.ToArray());
 
-                OpenAIEmbedding embedding = await GenerateEmbeddingWithRetryAsync(client, description);
-                float[] embeddingArray = embedding.ToFloats().ToArray();
-
-                string embeddingString = string.Join(",", embeddingArray.Select(e => e.ToString(CultureInfo.InvariantCulture)));
-                await writer.WriteLineAsync($"\"{description}\",\"{embeddingString}\"");
-
-                if ((i + 1) % saveInterval == 0)
+                if (embeddingResults != null && embeddingResults.Count == batch.Count)
                 {
-                    await writer.FlushAsync();
-                    Console.WriteLine($"Checkpoint reached: {i + 1} embeddings saved.");
+                    for (int j = 0; j < batch.Count; j++)
+                    {
+                        string description = batch[j];
+                        float[] embeddingArray = embeddingResults[j].ToFloats().ToArray();
+                        string embeddingString = string.Join(",", embeddingArray.Select(e => e.ToString(CultureInfo.InvariantCulture)));
+                        await writer.WriteLineAsync($"\"{description}\",\"{embeddingString}\"");
+                        processedCount++;
+
+                        if (processedCount % saveInterval == 0)
+                        {
+                            await writer.FlushAsync();
+                            Console.WriteLine($"Checkpoint reached: {processedCount} embeddings saved.");
+                        }
+                    }
+                }
+                else
+                {
+                    // Fallback: If batch result count mismatches, process each description individually.
+                    Console.WriteLine("Batch result count mismatch. Falling back to individual processing for this batch.");
+                    foreach (var description in batch)
+                    {
+                        OpenAIEmbedding embedding = await GenerateEmbeddingWithRetryAsync(client, description);
+                        float[] embeddingArray = embedding.ToFloats().ToArray();
+                        string embeddingString = string.Join(",", embeddingArray.Select(e => e.ToString(CultureInfo.InvariantCulture)));
+                        await writer.WriteLineAsync($"\"{description}\",\"{embeddingString}\"");
+                        processedCount++;
+
+                        if (processedCount % saveInterval == 0)
+                        {
+                            await writer.FlushAsync();
+                            Console.WriteLine($"Checkpoint reached: {processedCount} embeddings saved.");
+                        }
+                    }
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[{DateTime.UtcNow}] Error processing entry {i + 1}: {ex.Message}");
+                Console.WriteLine($"[{DateTime.UtcNow}] Error processing batch starting at entry {i + 1}: {ex.Message}");
             }
         }
 
         Console.WriteLine("All embeddings processed and saved.");
     }
+
 
     public void SaveOutputToCsv(string outputFilePath, List<string> outputData)
     {

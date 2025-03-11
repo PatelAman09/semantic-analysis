@@ -52,9 +52,9 @@ C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-anal
 C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.genruntimeconfig.cache
 C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\ref\Semantic_Analysis.dll
 C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\CSVOutput\cosinesimilarity_calculation.csv
-C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\ExtractedData\hello.json
 C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\RawData\bye.txt
 C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\RawData\hello.txt
+<<<<<<< HEAD
 C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\ExtractedData\extractedsentence1.json
 =======
 D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\appsettings.json
@@ -119,3 +119,9 @@ C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Development\semanti
 C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.dll
 C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\refint\Semantic_Analysis.dll
 C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.pdb
+=======
+C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\EmbeddingOutput\embedding_input_vector_1.csv
+C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\EmbeddingOutput\embedding_input_vector_2.csv
+C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\ExtractedData\Dataset1.json
+C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\ExtractedData\Dataset2.json
+>>>>>>> origin/Ahsan

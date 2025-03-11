@@ -323,9 +323,9 @@ C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-anal
 C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\UnitTestProject.genruntimeconfig.cache
 C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\ref\UnitTestProject.dll
 C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\CSVOutput\cosinesimilarity_calculation.csv
-C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\ExtractedData\hello.json
 C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\RawData\bye.txt
 C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\RawData\hello.txt
+<<<<<<< HEAD
 C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\ExtractedData\extractedsentence1.json
 <<<<<<< HEAD
 =======
@@ -666,4 +666,10 @@ C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Development\semanti
 =======
 C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\EmbeddingOutput\embedding_input_vector_1.csv
 C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\EmbeddingOutput\embedding_input_vector_2.csv
+>>>>>>> origin/Ahsan
+=======
+C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\EmbeddingOutput\embedding_input_vector_1.csv
+C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\EmbeddingOutput\embedding_input_vector_2.csv
+C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\ExtractedData\Dataset1.json
+C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\ExtractedData\Dataset2.json
 >>>>>>> origin/Ahsan
