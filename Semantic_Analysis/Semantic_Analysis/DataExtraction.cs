@@ -14,6 +14,7 @@ namespace Semantic_Analysis
 {
     public class DataExtraction : IDataExtraction
     {
+<<<<<<< HEAD
         ////public static void Main(string[] args)
         ////{
         ////    // Load configuration settings from appsettings.json
@@ -87,6 +88,74 @@ namespace Semantic_Analysis
         ////    Console.WriteLine($"Data extracted and saved to: {outputExtractedDataFilePath}");
         ////    Console.WriteLine($"Reference document data extracted and saved to: {outputReferenceDocumentFilePath}");
         ////}
+=======
+        //public static void Main(string[] args)
+        //{
+        //    // Load configuration settings from appsettings.json
+        //    var configuration = LoadConfiguration();
+        //    // Retrieve folder paths from configuration
+        //    string dataPreprocessingPath = configuration["FilePaths:DataPreprocessing"];
+        //    string preprocessedDataPath = configuration["FilePaths:PreprocessedData"];
+        //    string referenceDataPath = configuration["FilePaths:ReferenceData"];
+            // Retrieve folder paths from configuration
+            //string dataPreprocessingPath = configuration["FilePaths:DataPreprocessing"];
+            //string extractedDataPath = configuration["FilePaths:ExtractedData"]; // Now using ExtractedData folder for both
+        //    // Manually retrieving supported extensions from the configuration
+        //    var supportedExtensions = configuration.GetSection("FilePaths:SupportedFileExtensions")
+        //                                             .AsEnumerable()       // Get all key-value pairs
+        //                                             .Select(x => x.Value) // Select the values (file extensions)
+        //                                             .ToList();
+        //    // Resolve the absolute paths for the directories
+        //    string projectRoot = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+        //    string absoluteDataPreprocessingPath = Path.Combine(projectRoot, dataPreprocessingPath);
+        //    string absoluteExtractedDataPath = Path.Combine(projectRoot, preprocessedDataPath); // Ensure this folder is the target for both
+
+            // Resolve the absolute paths for the directories
+            //string projectRoot = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            //string absoluteDataPreprocessingPath = Path.Combine(projectRoot, dataPreprocessingPath);
+            //string absoluteExtractedDataPath = Path.Combine(projectRoot, extractedDataPath); // Using the ExtractedData folder
+
+        //    // Ensure the necessary directories exist
+        //    EnsureDirectoryExists(absoluteExtractedDataPath);
+
+        //    // Get all files in the RawData folder with supported extensions
+        //    var filesInRawData = Directory.GetFiles(absoluteDataPreprocessingPath)
+        //                                  .Where(file => supportedExtensions.Contains(Path.GetExtension(file).ToLower()))
+        //                                  .ToList();
+
+        //    // Ensure exactly two files are found (1 extracted data and 1 reference document)
+        //    if (filesInRawData.Count != 2)
+        //    {
+        //        Console.WriteLine("Error: There should be exactly two files in the RawData folder.");
+        //        return;
+        //    }
+
+        //    // Treat the first file as extracted data and the second as reference document
+        //    string extractedDataFilePath = filesInRawData[0];
+        //    string referenceDocumentFilePath = filesInRawData[1];
+
+        //    // Define the output file paths for both processed data in the ExtractedData folder
+        //    string outputExtractedDataFilePath = Path.Combine(absoluteExtractedDataPath, $"{Path.GetFileNameWithoutExtension(extractedDataFilePath)}.json");
+        //    string outputReferenceDocumentFilePath = Path.Combine(absoluteExtractedDataPath, $"{Path.GetFileNameWithoutExtension(referenceDocumentFilePath)}.json");
+
+        //    // Create an instance of DataExtraction to process the files
+        //    IDataExtraction processor = new DataExtraction();
+
+        //    // Process the extracted data file
+        //    List<string> extractedData = processor.ExtractDataFromFile(extractedDataFilePath);
+        //    extractedData = processor.CleanData(extractedData);
+        //    processor.SaveDataToJson(outputExtractedDataFilePath, extractedData, "extracted");
+
+        //    // Process the reference document file
+        //    List<string> referenceData = processor.ExtractDataFromFile(referenceDocumentFilePath);
+        //    referenceData = processor.CleanData(referenceData);
+        //    processor.SaveDataToJson(outputReferenceDocumentFilePath, referenceData, "reference");
+
+        //    // Output the result of the data extraction
+        //    Console.WriteLine($"Data extracted and saved to: {outputExtractedDataFilePath}");
+        //    Console.WriteLine($"Reference document data extracted and saved to: {outputReferenceDocumentFilePath}");
+        //}
+>>>>>>> origin/Aman-Patel
 
         private static IConfiguration LoadConfiguration()
         {

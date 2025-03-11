@@ -76,6 +76,7 @@ public class EmbeddingProcessor : IEmbeddingProcessor
         throw new Exception("Failed to generate embedding after multiple attempts.");
     }
 
+<<<<<<< HEAD
     public async Task GenerateAndSaveEmbeddingsAsync(string apiKey, List<string> descriptions, string csvFilePath, int saveInterval)
     {
         Console.WriteLine($"Initializing OpenAI Embedding client... Output file: {csvFilePath}");
@@ -243,5 +244,45 @@ public class EmbeddingProcessor : IEmbeddingProcessor
         {
             Console.WriteLine($"Error: {ex.Message}");
         }
+=======
+        //public static async Task Main()
+        //{
+        //    while (true)
+        //    {
+        //        try
+        //        {
+        //            string apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY") ?? throw new Exception("API key not found.");
+        //            EmbeddingProcessor processor = new EmbeddingProcessor();
+
+        //            // Ensure output directory exists
+        //            if (!Directory.Exists(OutputFolder))
+        //                Directory.CreateDirectory(OutputFolder);
+
+        //            // Clean overwrite: Delete old output files before processing
+        //            File.Delete(Path.Combine(OutputFolder, OutputOriginalCsv));
+        //            File.Delete(Path.Combine(OutputFolder, OutputReferenceCsv));
+
+        //            // Process both files
+        //            int saveInterval = 10; // Save after every 10 descriptions
+        //            await processor.ProcessJsonFileAsync(OriginalFile, OutputOriginalCsv, apiKey, saveInterval);
+        //            await processor.ProcessJsonFileAsync(ReferenceFile, OutputReferenceCsv, apiKey, saveInterval);
+
+        //            Console.WriteLine("Processing completed successfully.");
+        //            break;
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            Console.WriteLine($"An error occurred: {ex.Message}");
+        //            Console.Write("Do you want to retry the full process? (y/n): ");
+        //            string response = Console.ReadLine()?.Trim().ToLower();
+        //            if (response != "y")
+        //            {
+        //                Console.WriteLine("Exiting program.");
+        //                break;
+        //            }
+        //        }
+        //    }
+        //}
+>>>>>>> origin/Aman-Patel
     }
 }

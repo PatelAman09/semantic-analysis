@@ -1,6 +1,7 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
     "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj": {}
   },
   "projects": {
@@ -12,12 +13,29 @@
         "projectPath": "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj",
         "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\Final Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\obj\\",
+=======
+    "E:\\Master_Of_Engg_IT\\SE Project\\Aman-Patel\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj": {}
+  },
+  "projects": {
+    "E:\\Master_Of_Engg_IT\\SE Project\\Aman-Patel\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\Master_Of_Engg_IT\\SE Project\\Aman-Patel\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj",
+        "projectName": "Semantic_Analysis",
+        "projectPath": "E:\\Master_Of_Engg_IT\\SE Project\\Aman-Patel\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj",
+        "packagesPath": "C:\\Users\\amman\\.nuget\\packages\\",
+        "outputPath": "E:\\Master_Of_Engg_IT\\SE Project\\Aman-Patel\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\obj\\",
+>>>>>>> origin/Aman-Patel
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
+<<<<<<< HEAD
           "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+          "C:\\Users\\amman\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> origin/Aman-Patel
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +44,11 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+<<<<<<< HEAD
           "C:\\Users\\ADMIN\\Desktop\\semester 1\\Software Eng\\TestPakages": {},
+=======
+          "C:\\Temp_NuGet_Package": {},
+>>>>>>> origin/Aman-Patel
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -43,29 +65,33 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "all"
+          "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "CsvHelper": {
+              "target": "Package",
+              "version": "[33.0.1, )"
+            },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
-              "version": "[9.0.1, )"
+              "version": "[9.0.2, )"
             },
             "Microsoft.Extensions.Configuration.Abstractions": {
               "target": "Package",
-              "version": "[9.0.1, )"
+              "version": "[9.0.2, )"
             },
             "Microsoft.Extensions.Configuration.Json": {
               "target": "Package",
-              "version": "[9.0.1, )"
+              "version": "[9.0.2, )"
             },
             "Microsoft.Extensions.FileProviders.Physical": {
               "target": "Package",
-              "version": "[9.0.1, )"
+              "version": "[9.0.2, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
@@ -75,9 +101,21 @@
               "target": "Package",
               "version": "[2.1.0, )"
             },
+            "OxyPlot.Core": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "OxyPlot.SkiaSharp": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "ScottPlot": {
+              "target": "Package",
+              "version": "[5.0.54, )"
+            },
             "itext7": {
               "target": "Package",
-              "version": "[7.2.6, )"
+              "version": "[9.0.0, )"
             }
           },
           "imports": [
@@ -96,7 +134,11 @@
               "privateAssets": "all"
             }
           },
+<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+=======
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+>>>>>>> origin/Aman-Patel
         }
       }
     }
