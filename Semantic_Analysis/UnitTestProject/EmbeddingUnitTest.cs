@@ -1,24 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
-using OpenAI.Embeddings;
-using Semantic_Analysis.Interfaces;
-
-namespace Semantic_Analysis.Tests
+﻿namespace Semantic_Analysis.Tests
 {
     [TestClass]
     public class EmbeddingProcessorTests
     {
-        private EmbeddingProcessor _processor;
-        private string _testJsonPath;
-        private string _testCsvPath;
-        private string _validJsonContent;
+        private EmbeddingProcessor _processor = null!;
+        private string _testJsonPath = string.Empty;
+        private string _testCsvPath = string.Empty;
+        private string _validJsonContent = string.Empty;
 
         [TestInitialize]
         public void TestInitialize()
@@ -73,15 +61,10 @@ namespace Semantic_Analysis.Tests
             string nonExistentFile = "nonexistent.json";
 
             // Act & Assert
-            try
+            await Assert.ThrowsExceptionAsync<FileNotFoundException>(async () =>
             {
                 await _processor.ReadJsonFileAsync(nonExistentFile);
-                Assert.Fail("Expected FileNotFoundException was not thrown");
-            }
-            catch (FileNotFoundException)
-            {
-                // Expected exception
-            }
+            });
         }
 
         [TestMethod]
@@ -91,24 +74,17 @@ namespace Semantic_Analysis.Tests
             string invalidJson = "{ This is not valid JSON }";
 
             // Act & Assert
-            try
-            {
-                _processor.AnalyzeJson(invalidJson);
-                Assert.Fail("Expected Exception was not thrown");
-            }
-            catch (Exception)
-            {
-                // Expected exception
-            }
+            Assert.ThrowsException<Exception>(() => _processor.AnalyzeJson(invalidJson));
         }
 
         [TestMethod]
         public async Task GenerateEmbeddingWithRetryAsync_MethodExists()
         {
             // This test simply verifies that the method exists and can be called
-            // It doesn't actually test the functionality due to external dependencies
+            // Mock your dependencies or create a test implementation
 
-            // We'll skip the actual execution since we don't have a mock EmbeddingClient
+            // Skip the actual execution with a placeholder
+            await Task.CompletedTask; // Adding 'await' to make this truly async
             Assert.IsTrue(true, "Method exists");
         }
 
@@ -132,9 +108,10 @@ namespace Semantic_Analysis.Tests
         public async Task ProcessJsonFileAsync_MethodExists()
         {
             // This test simply verifies that the method exists
-            // It doesn't test the actual functionality due to external dependencies
+            // Mock your dependencies or create a test implementation
 
-            // We'll skip the actual execution
+            // Add await to make this truly async
+            await Task.CompletedTask;
             Assert.IsTrue(true, "Method exists");
         }
 
@@ -142,9 +119,10 @@ namespace Semantic_Analysis.Tests
         public async Task GenerateAndSaveEmbeddingsAsync_MethodExists()
         {
             // This test simply verifies that the method exists
-            // It doesn't test the actual functionality due to external dependencies
+            // Mock your dependencies or create a test implementation
 
-            // We'll skip the actual execution
+            // Add await to make this truly async
+            await Task.CompletedTask;
             Assert.IsTrue(true, "Method exists");
         }
 
@@ -154,7 +132,6 @@ namespace Semantic_Analysis.Tests
             // This test simply verifies that the method exists
             // It doesn't test the actual functionality since it depends on appsettings.json
 
-            // We'll skip the actual execution
             Assert.IsTrue(true, "Method exists");
         }
 
@@ -177,15 +154,7 @@ namespace Semantic_Analysis.Tests
         public void AnalyzeJson_NullJson_ThrowsException()
         {
             // Act & Assert
-            try
-            {
-                _processor.AnalyzeJson(null);
-                Assert.Fail("Expected ArgumentNullException was not thrown");
-            }
-            catch (ArgumentNullException)
-            {
-                // Expected exception
-            }
+            Assert.ThrowsException<ArgumentNullException>(() => _processor.AnalyzeJson(null));
         }
     }
 }
