@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\appsettings.json
 C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Semantic_Analysis.exe
 C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Semantic_Analysis.deps.json
@@ -55,3 +56,66 @@ C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-anal
 C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\RawData\bye.txt
 C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\RawData\hello.txt
 C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Ahsan\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\ExtractedData\extractedsentence1.json
+=======
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\appsettings.json
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Semantic_Analysis.exe
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Semantic_Analysis.deps.json
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Semantic_Analysis.runtimeconfig.json
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Semantic_Analysis.dll
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Semantic_Analysis.pdb
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\itext.barcodes.dll
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\itext.forms.dll
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\itext.io.dll
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\itext.kernel.dll
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\itext.layout.dll
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\itext.pdfa.dll
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\itext.sign.dll
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\itext.styledxmlparser.dll
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\itext.svg.dll
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\itext.commons.dll
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Microsoft.DotNet.PlatformAbstractions.dll
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Microsoft.Extensions.Configuration.dll
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Microsoft.Extensions.Configuration.FileExtensions.dll
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Json.dll
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Microsoft.Extensions.DependencyModel.dll
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Microsoft.Extensions.FileProviders.Abstractions.dll
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Microsoft.Extensions.FileProviders.Physical.dll
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Microsoft.Extensions.FileSystemGlobbing.dll
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\Newtonsoft.Json.dll
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\OpenAI.dll
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\BouncyCastle.Crypto.dll
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\System.ClientModel.dll
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\System.IO.Pipelines.dll
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\System.Memory.Data.dll
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\System.Text.Encodings.Web.dll
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\System.Text.Json.dll
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.csproj.AssemblyReference.cache
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.GeneratedMSBuildEditorConfig.editorconfig
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.AssemblyInfoInputs.cache
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.AssemblyInfo.cs
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.csproj.CoreCompileInputs.cache
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.sourcelink.json
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic.22E14CE2.Up2Date
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.dll
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\refint\Semantic_Analysis.dll
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.pdb
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.genruntimeconfig.cache
+D:\IT\Software Engineering\SE Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\ref\Semantic_Analysis.dll
+>>>>>>> f219c1a056e485c9b5401fcd11c91ee6f234ae39
+C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.csproj.AssemblyReference.cache
+C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.AssemblyInfoInputs.cache
+C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.AssemblyInfo.cs
+C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.csproj.CoreCompileInputs.cache
+C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.sourcelink.json
+C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.dll
+C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\refint\Semantic_Analysis.dll
+C:\Users\ADMIN\Desktop\semester 1\Software Eng\Final Project\Development\semantic-analysis\Semantic_Analysis\Semantic_Analysis\obj\Debug\net8.0\Semantic_Analysis.pdb

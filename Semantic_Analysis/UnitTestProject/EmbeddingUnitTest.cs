@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -191,6 +191,7 @@ public class EmbeddingProcessor : IEmbeddingProcessor
         catch (Exception ex)
         {
             Console.WriteLine($"An error occurred: {ex.Message}");
+     
         }
     }
 }
