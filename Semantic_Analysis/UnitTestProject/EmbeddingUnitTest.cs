@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,9 +11,8 @@ using OpenAI.Embeddings;
 using Semantic_Analysis.Interfaces;
 
 namespace Semantic_Analysis.Tests
-=======
-﻿namespace Semantic_Analysis.Tests
->>>>>>> origin/Ahsan
+
+
 {
     [TestClass]
     public class EmbeddingProcessorTests
@@ -134,10 +132,7 @@ namespace Semantic_Analysis.Tests
         [TestMethod]
         public async Task GenerateAndSaveEmbeddingsAsync_MethodExists()
         {
-<<<<<<< HEAD
-            Console.WriteLine($"An error occurred: {ex.Message}");
-     
-=======
+    
             // This test simply verifies that the method exists
             // Mock your dependencies or create a test implementation
 
@@ -174,7 +169,6 @@ namespace Semantic_Analysis.Tests
         public void AnalyzeJson_NullJson_ThrowsException()
         {
             // Act & Assert
-<<<<<<< HEAD
             try
             {
                 _processor.AnalyzeJson(null);
@@ -184,10 +178,8 @@ namespace Semantic_Analysis.Tests
             {
                 // Expected exception
             }
->>>>>>> origin/Ahsan
-=======
             Assert.ThrowsException<ArgumentNullException>(() => _processor.AnalyzeJson(null));
->>>>>>> origin/Ahsan
+
         }
     }
 }

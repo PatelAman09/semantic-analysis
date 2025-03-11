@@ -76,7 +76,6 @@ public class EmbeddingProcessor : IEmbeddingProcessor
         throw new Exception("Failed to generate embedding after multiple attempts.");
     }
 
-<<<<<<< HEAD
     public async Task GenerateAndSaveEmbeddingsAsync(string apiKey, List<string> descriptions, string csvFilePath, int saveInterval)
     {
         Console.WriteLine($"Initializing OpenAI Embedding client... Output file: {csvFilePath}");
@@ -192,97 +191,57 @@ public class EmbeddingProcessor : IEmbeddingProcessor
             .Build();
     }
 
-    static async Task Main(string[] args)
-    {
-        try
-        {
-            IConfigurationRoot config = LoadConfiguration();
-            string inputFolder = config["FilePaths:EmbeddingProcessorInput"];
-            string outputFolder = config["FilePaths:InputFolder"];
+    //static async Task Main(string[] args)
+    //{
+    //    try
+    //    {
+    //        IConfigurationRoot config = LoadConfiguration();
+    //        string inputFolder = config["FilePaths:EmbeddingProcessorInput"];
+    //        string outputFolder = config["FilePaths:InputFolder"];
 
-            string rootDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
-            string outputFile1 = Path.Combine(rootDirectory, outputFolder, config["FilePaths:InputFileName1"]);
-            string outputFile2 = Path.Combine(rootDirectory, outputFolder, config["FilePaths:InputFileName2"]);
+    //        string rootDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+    //        string outputFile1 = Path.Combine(rootDirectory, outputFolder, config["FilePaths:InputFileName1"]);
+    //        string outputFile2 = Path.Combine(rootDirectory, outputFolder, config["FilePaths:InputFileName2"]);
 
 
-            string apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY")
-                ?? throw new Exception("Environment variable 'OPENAI_API_KEY' is not set.");
+    //        string apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY")
+    //            ?? throw new Exception("Environment variable 'OPENAI_API_KEY' is not set.");
 
-            if (!Directory.Exists(inputFolder))
-                throw new DirectoryNotFoundException($"Input folder not found: {inputFolder}");
-            if (!Directory.Exists(outputFolder))
-            {
-                Console.WriteLine($"Output folder not found. Creating: {outputFolder}");
-                Directory.CreateDirectory(outputFolder);
-            }
+    //        if (!Directory.Exists(inputFolder))
+    //            throw new DirectoryNotFoundException($"Input folder not found: {inputFolder}");
+    //        if (!Directory.Exists(outputFolder))
+    //        {
+    //            Console.WriteLine($"Output folder not found. Creating: {outputFolder}");
+    //            Directory.CreateDirectory(outputFolder);
+    //        }
 
-            // Debug output: show working directory and absolute file paths.
-            Console.WriteLine($"Current Working Directory: {Directory.GetCurrentDirectory()}");
-            Console.WriteLine($"Output File 1: {Path.GetFullPath(outputFile1)}");
-            Console.WriteLine($"Output File 2: {Path.GetFullPath(outputFile2)}");
+    //        // Debug output: show working directory and absolute file paths.
+    //        Console.WriteLine($"Current Working Directory: {Directory.GetCurrentDirectory()}");
+    //        Console.WriteLine($"Output File 1: {Path.GetFullPath(outputFile1)}");
+    //        Console.WriteLine($"Output File 2: {Path.GetFullPath(outputFile2)}");
 
-            Console.WriteLine("Cleaning up previous output files...");
-            if (File.Exists(outputFile1)) File.Delete(outputFile1);
-            if (File.Exists(outputFile2)) File.Delete(outputFile2);
-            Console.WriteLine("Old output files deleted.");
+    //        Console.WriteLine("Cleaning up previous output files...");
+    //        if (File.Exists(outputFile1)) File.Delete(outputFile1);
+    //        if (File.Exists(outputFile2)) File.Delete(outputFile2);
+    //        Console.WriteLine("Old output files deleted.");
 
-            var jsonFiles = Directory.GetFiles(inputFolder, "*.json");
-            if (jsonFiles.Length < 2)
-                throw new Exception("Expected at least two JSON files in the input folder.");
+    //        var jsonFiles = Directory.GetFiles(inputFolder, "*.json");
+    //        if (jsonFiles.Length < 2)
+    //            throw new Exception("Expected at least two JSON files in the input folder.");
 
-            Console.WriteLine($"Processing files: {jsonFiles[0]} and {jsonFiles[1]}");
+    //        Console.WriteLine($"Processing files: {jsonFiles[0]} and {jsonFiles[1]}");
 
-            IEmbeddingProcessor processor = new EmbeddingProcessor();
-            await Task.WhenAll(
-                processor.ProcessJsonFileAsync(jsonFiles[0], outputFile1, apiKey, 10),
-                processor.ProcessJsonFileAsync(jsonFiles[1], outputFile2, apiKey, 10)
-            );
+    //        IEmbeddingProcessor processor = new EmbeddingProcessor();
+    //        await Task.WhenAll(
+    //            processor.ProcessJsonFileAsync(jsonFiles[0], outputFile1, apiKey, 10),
+    //            processor.ProcessJsonFileAsync(jsonFiles[1], outputFile2, apiKey, 10)
+    //        );
 
-            Console.WriteLine("Embedding processing completed successfully.");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error: {ex.Message}");
-        }
-=======
-        //public static async Task Main()
-        //{
-        //    while (true)
-        //    {
-        //        try
-        //        {
-        //            string apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY") ?? throw new Exception("API key not found.");
-        //            EmbeddingProcessor processor = new EmbeddingProcessor();
-
-        //            // Ensure output directory exists
-        //            if (!Directory.Exists(OutputFolder))
-        //                Directory.CreateDirectory(OutputFolder);
-
-        //            // Clean overwrite: Delete old output files before processing
-        //            File.Delete(Path.Combine(OutputFolder, OutputOriginalCsv));
-        //            File.Delete(Path.Combine(OutputFolder, OutputReferenceCsv));
-
-        //            // Process both files
-        //            int saveInterval = 10; // Save after every 10 descriptions
-        //            await processor.ProcessJsonFileAsync(OriginalFile, OutputOriginalCsv, apiKey, saveInterval);
-        //            await processor.ProcessJsonFileAsync(ReferenceFile, OutputReferenceCsv, apiKey, saveInterval);
-
-        //            Console.WriteLine("Processing completed successfully.");
-        //            break;
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            Console.WriteLine($"An error occurred: {ex.Message}");
-        //            Console.Write("Do you want to retry the full process? (y/n): ");
-        //            string response = Console.ReadLine()?.Trim().ToLower();
-        //            if (response != "y")
-        //            {
-        //                Console.WriteLine("Exiting program.");
-        //                break;
-        //            }
-        //        }
-        //    }
-        //}
->>>>>>> origin/Aman-Patel
-    }
+    //        Console.WriteLine("Embedding processing completed successfully.");
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        Console.WriteLine($"Error: {ex.Message}");
+    //    }
+    //}
 }

@@ -26,27 +26,13 @@
 		<PackageReference Include="ScottPlot" Version="5.0.54" />
 	</ItemGroup>
 
-<<<<<<< HEAD
-	<ItemGroup>
-		<None Include="CSVOutput\**\*">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Include="EmbeddingOutput\**\*">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Include="ExtractedData\**\*">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Include="RawData\**\*">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-	</ItemGroup>
-=======
+
   <ItemGroup>
     <Folder Include="CSVOutput\" />
     <Folder Include="EmbeddingOutput\" />
     <Folder Include="ScatterPlot\" />
+	<Folder Include="ExtractedData\ "/>
+	<Folder Include="RawData\ "/>
   </ItemGroup>
->>>>>>> origin/Aman-Patel
 
 </Project>
