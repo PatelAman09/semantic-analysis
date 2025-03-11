@@ -114,6 +114,25 @@ namespace Semantic_Analysis
                 .Build();
         }
 
+        public double CalculateDocumentSimilarity(Dictionary<string, (string text, double[] vector)> vectorsFile1,
+                                          Dictionary<string, (string text, double[] vector)> vectorsFile2)
+        {
+            double totalSimilarity = 0;
+            int comparisonCount = 0;
+
+            foreach (var entry1 in vectorsFile1)
+            {
+                foreach (var entry2 in vectorsFile2)
+                {
+                    double similarity = CosineSimilarityCalculation(entry1.Value.vector, entry2.Value.vector);
+                    totalSimilarity += similarity;
+                    comparisonCount++;
+                }
+            }
+
+            return comparisonCount > 0 ? totalSimilarity / comparisonCount : 0;
+        }
+
         public static void Main(string[] args)
         {
             IConfigurationRoot config = LoadConfiguration();
@@ -170,14 +189,16 @@ namespace Semantic_Analysis
                             ),
                             10
                         );
-
-                        // The y position is the similarity value (already between -1 and 1)
-                        //double yPosition = similarity;
-
-                        // Add to output with both x and y positions clearly labeled
                         outputData.Add($"{index1},{index2},\"{vectorsFile1[index1].text}\",\"{vectorsFile2[index2].text}\",{xPosition},{similarity.ToString(CultureInfo.InvariantCulture)}");
                     }
                 }
+                // Calculate overall document similarity
+                double documentSimilarity = cosineSimilarity.CalculateDocumentSimilarity(vectorsFile1, vectorsFile2);
+                Console.WriteLine($"Overall document similarity: {documentSimilarity:F4}");
+
+                // Add document similarity as the last line in the CSV
+                outputData.Add($"Document_Similarity --> {documentSimilarity.ToString(CultureInfo.InvariantCulture)}");
+
 
                 cosineSimilarity.SaveOutputToCsv(outputFilePath, outputData);
                 Console.WriteLine($"Successfully processed {vectorsFile1.Count} words from file 1 and {vectorsFile2.Count} words from file 2.");

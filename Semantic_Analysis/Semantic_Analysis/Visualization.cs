@@ -10,49 +10,49 @@ namespace Semantic_Analysis
 {
     public class Visualization
     {
-        public static void Main()
-        {
-            try
-            {
-                // Load configuration from appsettings.json
-                IConfigurationRoot config = LoadConfiguration();
+        //public static void Main()
+        //{
+        //    try
+        //    {
+        //        // Load configuration from appsettings.json
+        //        IConfigurationRoot config = LoadConfiguration();
 
-                // Get file paths from configuration
-                string csvFile = config["FilePaths:CSVOutputFileName"];
-                string scatterPlot = config["FilePaths:ScatterPlotOutputFile"]; // Fixed space in key
+        //        // Get file paths from configuration
+        //        string csvFile = config["FilePaths:CSVOutputFileName"];
+        //        string scatterPlot = config["FilePaths:ScatterPlotOutputFile"]; // Fixed space in key
 
-                // Build complete file paths
-                string rootDirectory = Directory.GetParent(Directory.GetCurrentDirectory())?.Parent?.Parent?.FullName
-                    ?? throw new DirectoryNotFoundException("Could not determine root directory");
-                string csvFilePath = Path.Combine(rootDirectory, config["FilePaths:OutputFolder"], csvFile);
-                string outputImagePath = Path.Combine(rootDirectory, config["FilePaths:ScatterPlotFolder"], scatterPlot);
+        //        // Build complete file paths
+        //        string rootDirectory = Directory.GetParent(Directory.GetCurrentDirectory())?.Parent?.Parent?.FullName
+        //            ?? throw new DirectoryNotFoundException("Could not determine root directory");
+        //        string csvFilePath = Path.Combine(rootDirectory, config["FilePaths:OutputFolder"], csvFile);
+        //        string outputImagePath = Path.Combine(rootDirectory, config["FilePaths:ScatterPlotFolder"], scatterPlot);
 
-                // Ensure directories exist
-                Directory.CreateDirectory(Path.GetDirectoryName(outputImagePath));
+        //        // Ensure directories exist
+        //        Directory.CreateDirectory(Path.GetDirectoryName(outputImagePath));
 
-                // Process CSV data
-                (List<double> xPositions, List<double> yValues, List<string> words) = ProcessCsvData(csvFilePath);
+        //        // Process CSV data
+        //        (List<double> xPositions, List<double> yValues, List<string> words) = ProcessCsvData(csvFilePath);
 
-                // Generate and save the plot
-                GenerateScatterPlot(xPositions, yValues, words, outputImagePath);
+        //        // Generate and save the plot
+        //        GenerateScatterPlot(xPositions, yValues, words, outputImagePath);
 
-                Console.WriteLine($"Plot successfully saved to {outputImagePath}");
-            }
-            catch (FileNotFoundException ex)
-            {
-                Console.WriteLine($"File not found: {ex.Message}");
-            }
-            catch (DirectoryNotFoundException ex)
-            {
-                Console.WriteLine($"Directory not found: {ex.Message}");
-            }
-            catch (Exception ex)
-            {
-                // Detailed error reporting
-                Console.WriteLine($"Error: {ex.Message}");
-                Console.WriteLine($"Stack trace: {ex.StackTrace}");
-            }
-        }
+        //        Console.WriteLine($"Plot successfully saved to {outputImagePath}");
+        //    }
+        //    catch (FileNotFoundException ex)
+        //    {
+        //        Console.WriteLine($"File not found: {ex.Message}");
+        //    }
+        //    catch (DirectoryNotFoundException ex)
+        //    {
+        //        Console.WriteLine($"Directory not found: {ex.Message}");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Detailed error reporting
+        //        Console.WriteLine($"Error: {ex.Message}");
+        //        Console.WriteLine($"Stack trace: {ex.StackTrace}");
+        //    }
+        //}
 
         // Method to load appsettings.json configuration
         public static IConfigurationRoot LoadConfiguration()
@@ -162,7 +162,7 @@ namespace Semantic_Analysis
             Directory.CreateDirectory(Path.GetDirectoryName(outputPath));
 
             // Save the plot with larger dimensions
-            plt.SavePng(outputPath, 1920, 1080);
+            plt.SavePng(outputPath, 1600, 900);
         }
 
         // Also update the ProcessCsvData method to handle the specific CSV format

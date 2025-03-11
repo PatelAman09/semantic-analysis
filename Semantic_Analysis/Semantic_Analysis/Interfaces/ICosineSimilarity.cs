@@ -14,5 +14,6 @@ namespace Semantic_Analysis.Interfaces
         void ValidateVectors(Dictionary<string, (string text, double[] vector)> vectors);
         double CosineSimilarityCalculation(double[] vectorA, double[] vectorB);
         void SaveOutputToCsv(string outputFilePath, List<string> outputData);
+        double CalculateDocumentSimilarity(Dictionary<string, (string text, double[] vector)> vectorsFile1, Dictionary<string, (string text, double[] vector)> vectorsFile2);
     }
 }

@@ -1,17 +1,172 @@
 Index1,Index2,Word1,Word2,X_Position,Cosine_Similarity
-[0],[0],"ronaldo","football",0,0.5537953342
-[0],[1],"ronaldo","islam",0,0.2998267092
-[0],[2],"ronaldo","software",0,0.2950694711
-[0],[3],"ronaldo","sports",0,0.4371289311
-[1],[0],"messi","football",178,0.5013355328
-[1],[1],"messi","islam",178,0.4380863908
-[1],[2],"messi","software",178,0.3301121763
-[1],[3],"messi","sports",178,0.5006494228
-[2],[0],"dr zakir naik","football",357,0.2326336757
-[2],[1],"dr zakir naik","islam",357,0.5055260688
-[2],[2],"dr zakir naik","software",357,0.3489455546
-[2],[3],"dr zakir naik","sports",357,0.3104583041
-[3],[0],"jeff bezos","football",536,0.264807878
-[3],[1],"jeff bezos","islam",536,0.2498625015
-[3],[2],"jeff bezos","software",536,0.3911512759
-[3],[3],"jeff bezos","sports",536,0.3825829691
+[0],[0],"the impact of technology on society has been profound","the world economic forum predicts automation will displace 75 million jobs by 2025 but create 133 million new ones.",0,0.3859005509
+[0],[1],"the impact of technology on society has been profound","heavy social media use is linked to increased anxiety and depression",0,0.398952185
+[0],[2],"the impact of technology on society has been profound","ai can improve healthcare",0,0.3759773555
+[0],[3],"the impact of technology on society has been profound","ai systems can reflect biases",0,0.3584885601
+[0],[4],"the impact of technology on society has been profound","the un stresses the need for global standards on privacy",0,0.3918030596
+[1],[0],"from the way we communicate to how we work","the world economic forum predicts automation will displace 75 million jobs by 2025 but create 133 million new ones.",16,0.3916720956
+[1],[1],"from the way we communicate to how we work","heavy social media use is linked to increased anxiety and depression",16,0.3548577938
+[1],[2],"from the way we communicate to how we work","ai can improve healthcare",16,0.3660697464
+[1],[3],"from the way we communicate to how we work","ai systems can reflect biases",16,0.3391859515
+[1],[4],"from the way we communicate to how we work","the un stresses the need for global standards on privacy",16,0.3851085787
+[10],[0],"this shift has sparked debates over the future of work and the challenges of ensuring that the benefits of technology are widely distributed.","the world economic forum predicts automation will displace 75 million jobs by 2025 but create 133 million new ones.",32,0.549184518
+[10],[1],"this shift has sparked debates over the future of work and the challenges of ensuring that the benefits of technology are widely distributed.","heavy social media use is linked to increased anxiety and depression",32,0.2872461154
+[10],[2],"this shift has sparked debates over the future of work and the challenges of ensuring that the benefits of technology are widely distributed.","ai can improve healthcare",32,0.4460178897
+[10],[3],"this shift has sparked debates over the future of work and the challenges of ensuring that the benefits of technology are widely distributed.","ai systems can reflect biases",32,0.4767400558
+[10],[4],"this shift has sparked debates over the future of work and the challenges of ensuring that the benefits of technology are widely distributed.","the un stresses the need for global standards on privacy",32,0.4452921397
+[11],[0],"automation in industries like manufacturing and retail has led to job losses","the world economic forum predicts automation will displace 75 million jobs by 2025 but create 133 million new ones.",48,0.5358063821
+[11],[1],"automation in industries like manufacturing and retail has led to job losses","heavy social media use is linked to increased anxiety and depression",48,0.2534673586
+[11],[2],"automation in industries like manufacturing and retail has led to job losses","ai can improve healthcare",48,0.3021559583
+[11],[3],"automation in industries like manufacturing and retail has led to job losses","ai systems can reflect biases",48,0.4129128722
+[11],[4],"automation in industries like manufacturing and retail has led to job losses","the un stresses the need for global standards on privacy",48,0.2714359361
+[12],[0],"the fear of mass unemployment in the wake of rapid technological advancements is a growing concern.","the world economic forum predicts automation will displace 75 million jobs by 2025 but create 133 million new ones.",64,0.5534818897
+[12],[1],"the fear of mass unemployment in the wake of rapid technological advancements is a growing concern.","heavy social media use is linked to increased anxiety and depression",64,0.3793938631
+[12],[2],"the fear of mass unemployment in the wake of rapid technological advancements is a growing concern.","ai can improve healthcare",64,0.4583131884
+[12],[3],"the fear of mass unemployment in the wake of rapid technological advancements is a growing concern.","ai systems can reflect biases",64,0.4868112571
+[12],[4],"the fear of mass unemployment in the wake of rapid technological advancements is a growing concern.","the un stresses the need for global standards on privacy",64,0.4316130237
+[13],[0],"another major concern is the effect of technology on mental health.","the world economic forum predicts automation will displace 75 million jobs by 2025 but create 133 million new ones.",81,0.3588037572
+[13],[1],"another major concern is the effect of technology on mental health.","heavy social media use is linked to increased anxiety and depression",81,0.5517360716
+[13],[2],"another major concern is the effect of technology on mental health.","ai can improve healthcare",81,0.4989781986
+[13],[3],"another major concern is the effect of technology on mental health.","ai systems can reflect biases",81,0.4242004878
+[13],[4],"another major concern is the effect of technology on mental health.","the un stresses the need for global standards on privacy",81,0.4530379826
+[14],[0],"social media platforms","the world economic forum predicts automation will displace 75 million jobs by 2025 but create 133 million new ones.",97,0.2864500122
+[14],[1],"social media platforms","heavy social media use is linked to increased anxiety and depression",97,0.6068172333
+[14],[2],"social media platforms","ai can improve healthcare",97,0.3641080467
+[14],[3],"social media platforms","ai systems can reflect biases",97,0.3888936239
+[14],[4],"social media platforms","the un stresses the need for global standards on privacy",97,0.376348205
+[15],[0],"the constant comparison to others can lead to anxiety","the world economic forum predicts automation will displace 75 million jobs by 2025 but create 133 million new ones.",113,0.2580018266
+[15],[1],"the constant comparison to others can lead to anxiety","heavy social media use is linked to increased anxiety and depression",113,0.6369737186
+[15],[2],"the constant comparison to others can lead to anxiety","ai can improve healthcare",113,0.3029826467
+[15],[3],"the constant comparison to others can lead to anxiety","ai systems can reflect biases",113,0.3962902986
+[15],[4],"the constant comparison to others can lead to anxiety","the un stresses the need for global standards on privacy",113,0.3171043049
+[16],[0],"the pressure to present a curated","the world economic forum predicts automation will displace 75 million jobs by 2025 but create 133 million new ones.",129,0.2235952493
+[16],[1],"the pressure to present a curated","heavy social media use is linked to increased anxiety and depression",129,0.5752763954
+[16],[2],"the pressure to present a curated","ai can improve healthcare",129,0.3172609753
+[16],[3],"the pressure to present a curated","ai systems can reflect biases",129,0.3598691599
+[16],[4],"the pressure to present a curated","the un stresses the need for global standards on privacy",129,0.337320777
+[17],[0],"researchers are increasingly studying the long-term impact of constant digital exposure on mental well-being.","the world economic forum predicts automation will displace 75 million jobs by 2025 but create 133 million new ones.",146,0.3093681502
+[17],[1],"researchers are increasingly studying the long-term impact of constant digital exposure on mental well-being.","heavy social media use is linked to increased anxiety and depression",146,0.5506155168
+[17],[2],"researchers are increasingly studying the long-term impact of constant digital exposure on mental well-being.","ai can improve healthcare",146,0.4082238723
+[17],[3],"researchers are increasingly studying the long-term impact of constant digital exposure on mental well-being.","ai systems can reflect biases",146,0.3466353314
+[17],[4],"researchers are increasingly studying the long-term impact of constant digital exposure on mental well-being.","the un stresses the need for global standards on privacy",146,0.3976950879
+[18],[0],"as society becomes more reliant on technology","the world economic forum predicts automation will displace 75 million jobs by 2025 but create 133 million new ones.",162,0.3420065608
+[18],[1],"as society becomes more reliant on technology","heavy social media use is linked to increased anxiety and depression",162,0.4025872126
+[18],[2],"as society becomes more reliant on technology","ai can improve healthcare",162,0.5228806937
+[18],[3],"as society becomes more reliant on technology","ai systems can reflect biases",162,0.4338852753
+[18],[4],"as society becomes more reliant on technology","the un stresses the need for global standards on privacy",162,0.5393942262
+[19],[0],"the increasing use of smartphones","the world economic forum predicts automation will displace 75 million jobs by 2025 but create 133 million new ones.",178,0.3338262487
+[19],[1],"the increasing use of smartphones","heavy social media use is linked to increased anxiety and depression",178,0.4146295061
+[19],[2],"the increasing use of smartphones","ai can improve healthcare",178,0.5302067271
+[19],[3],"the increasing use of smartphones","ai systems can reflect biases",178,0.3733302829
+[19],[4],"the increasing use of smartphones","the un stresses the need for global standards on privacy",178,0.4763203933
+[2],[0],"the advent of the internet has made it possible for people to connect from across the globe in an instant","the world economic forum predicts automation will displace 75 million jobs by 2025 but create 133 million new ones.",194,0.3120568449
+[2],[1],"the advent of the internet has made it possible for people to connect from across the globe in an instant","heavy social media use is linked to increased anxiety and depression",194,0.3676935818
+[2],[2],"the advent of the internet has made it possible for people to connect from across the globe in an instant","ai can improve healthcare",194,0.3344192841
+[2],[3],"the advent of the internet has made it possible for people to connect from across the globe in an instant","ai systems can reflect biases",194,0.2744076627
+[2],[4],"the advent of the internet has made it possible for people to connect from across the globe in an instant","the un stresses the need for global standards on privacy",194,0.3754647368
+[20],[0],"this raises significant concerns about how that data is used","the world economic forum predicts automation will displace 75 million jobs by 2025 but create 133 million new ones.",211,0.2576659778
+[20],[1],"this raises significant concerns about how that data is used","heavy social media use is linked to increased anxiety and depression",211,0.3596264527
+[20],[2],"this raises significant concerns about how that data is used","ai can improve healthcare",211,0.5777546358
+[20],[3],"this raises significant concerns about how that data is used","ai systems can reflect biases",211,0.4216203703
+[20],[4],"this raises significant concerns about how that data is used","the un stresses the need for global standards on privacy",211,0.4899788272
+[21],[0],"in recent years","the world economic forum predicts automation will displace 75 million jobs by 2025 but create 133 million new ones.",227,0.2636884146
+[21],[1],"in recent years","heavy social media use is linked to increased anxiety and depression",227,0.3941942084
+[21],[2],"in recent years","ai can improve healthcare",227,0.5329509227
+[21],[3],"in recent years","ai systems can reflect biases",227,0.4182999838
+[21],[4],"in recent years","the un stresses the need for global standards on privacy",227,0.4662202549
+[22],[0],"despite these challenges","the world economic forum predicts automation will displace 75 million jobs by 2025 but create 133 million new ones.",243,0.3806889499
+[22],[1],"despite these challenges","heavy social media use is linked to increased anxiety and depression",243,0.2394164334
+[22],[2],"despite these challenges","ai can improve healthcare",243,0.4564995321
+[22],[3],"despite these challenges","ai systems can reflect biases",243,0.3446254337
+[22],[4],"despite these challenges","the un stresses the need for global standards on privacy",243,0.4049578145
+[23],[0],"the development of artificial intelligence ai and machine learning promises to revolutionize industries","the world economic forum predicts automation will displace 75 million jobs by 2025 but create 133 million new ones.",259,0.4552027601
+[23],[1],"the development of artificial intelligence ai and machine learning promises to revolutionize industries","heavy social media use is linked to increased anxiety and depression",259,0.2715059429
+[23],[2],"the development of artificial intelligence ai and machine learning promises to revolutionize industries","ai can improve healthcare",259,0.6250875935
+[23],[3],"the development of artificial intelligence ai and machine learning promises to revolutionize industries","ai systems can reflect biases",259,0.5153797814
+[23],[4],"the development of artificial intelligence ai and machine learning promises to revolutionize industries","the un stresses the need for global standards on privacy",259,0.4529928721
+[24],[0],"ai is already being used in","the world economic forum predicts automation will displace 75 million jobs by 2025 but create 133 million new ones.",276,0.3088820502
+[24],[1],"ai is already being used in","heavy social media use is linked to increased anxiety and depression",276,0.2392197226
+[24],[2],"ai is already being used in","ai can improve healthcare",276,0.5461605361
+[24],[3],"ai is already being used in","ai systems can reflect biases",276,0.4762946716
+[24],[4],"ai is already being used in","the un stresses the need for global standards on privacy",276,0.4166628791
+[25],[0],"medical diagnostics","the world economic forum predicts automation will displace 75 million jobs by 2025 but create 133 million new ones.",292,0.3400049942
+[25],[1],"medical diagnostics","heavy social media use is linked to increased anxiety and depression",292,0.2689133246
+[25],[2],"medical diagnostics","ai can improve healthcare",292,0.545062727
+[25],[3],"medical diagnostics","ai systems can reflect biases",292,0.4116622276
+[25],[4],"medical diagnostics","the un stresses the need for global standards on privacy",292,0.3097705416
+[26],[0],"autonomous vehicles","the world economic forum predicts automation will displace 75 million jobs by 2025 but create 133 million new ones.",308,0.4490355019
+[26],[1],"autonomous vehicles","heavy social media use is linked to increased anxiety and depression",308,0.2280384599
+[26],[2],"autonomous vehicles","ai can improve healthcare",308,0.4972181784
+[26],[3],"autonomous vehicles","ai systems can reflect biases",308,0.4739153142
+[26],[4],"autonomous vehicles","the un stresses the need for global standards on privacy",308,0.416461908
+[27],[0],"while these advancements bring exciting possibilities","the world economic forum predicts automation will displace 75 million jobs by 2025 but create 133 million new ones.",324,0.37328459
+[27],[1],"while these advancements bring exciting possibilities","heavy social media use is linked to increased anxiety and depression",324,0.3254032375
+[27],[2],"while these advancements bring exciting possibilities","ai can improve healthcare",324,0.6216083432
+[27],[3],"while these advancements bring exciting possibilities","ai systems can reflect biases",324,0.6051766457
+[27],[4],"while these advancements bring exciting possibilities","the un stresses the need for global standards on privacy",324,0.5224051643
+[28],[0],"ai systems often reflect the biases present in the data they are trained on","the world economic forum predicts automation will displace 75 million jobs by 2025 but create 133 million new ones.",341,0.3299242946
+[28],[1],"ai systems often reflect the biases present in the data they are trained on","heavy social media use is linked to increased anxiety and depression",341,0.3019950784
+[28],[2],"ai systems often reflect the biases present in the data they are trained on","ai can improve healthcare",341,0.5654284988
+[28],[3],"ai systems often reflect the biases present in the data they are trained on","ai systems can reflect biases",341,0.8604067733
+[28],[4],"ai systems often reflect the biases present in the data they are trained on","the un stresses the need for global standards on privacy",341,0.4264996819
+[29],[0],"ensuring that ai systems are fair","the world economic forum predicts automation will displace 75 million jobs by 2025 but create 133 million new ones.",357,0.3111704463
+[29],[1],"ensuring that ai systems are fair","heavy social media use is linked to increased anxiety and depression",357,0.2585682193
+[29],[2],"ensuring that ai systems are fair","ai can improve healthcare",357,0.5439461834
+[29],[3],"ensuring that ai systems are fair","ai systems can reflect biases",357,0.6268960414
+[29],[4],"ensuring that ai systems are fair","the un stresses the need for global standards on privacy",357,0.5359292057
+[3],[0],"businesses have flourished","the world economic forum predicts automation will displace 75 million jobs by 2025 but create 133 million new ones.",373,0.3832923311
+[3],[1],"businesses have flourished","heavy social media use is linked to increased anxiety and depression",373,0.2198383932
+[3],[2],"businesses have flourished","ai can improve healthcare",373,0.3319130118
+[3],[3],"businesses have flourished","ai systems can reflect biases",373,0.3540996037
+[3],[4],"businesses have flourished","the un stresses the need for global standards on privacy",373,0.3212671444
+[30],[0],"in conclusion","the world economic forum predicts automation will displace 75 million jobs by 2025 but create 133 million new ones.",389,0.3577270465
+[30],[1],"in conclusion","heavy social media use is linked to increased anxiety and depression",389,0.3503408922
+[30],[2],"in conclusion","ai can improve healthcare",389,0.3409293606
+[30],[3],"in conclusion","ai systems can reflect biases",389,0.3855905754
+[30],[4],"in conclusion","the un stresses the need for global standards on privacy",389,0.3800000492
+[31],[0],"while it has brought about significant improvements in communication","the world economic forum predicts automation will displace 75 million jobs by 2025 but create 133 million new ones.",406,0.4495136144
+[31],[1],"while it has brought about significant improvements in communication","heavy social media use is linked to increased anxiety and depression",406,0.4804286855
+[31],[2],"while it has brought about significant improvements in communication","ai can improve healthcare",406,0.511871067
+[31],[3],"while it has brought about significant improvements in communication","ai systems can reflect biases",406,0.4541003788
+[31],[4],"while it has brought about significant improvements in communication","the un stresses the need for global standards on privacy",406,0.461015819
+[32],[0],"as we continue to embrace technological advancements","the world economic forum predicts automation will displace 75 million jobs by 2025 but create 133 million new ones.",422,0.414115532
+[32],[1],"as we continue to embrace technological advancements","heavy social media use is linked to increased anxiety and depression",422,0.3284569072
+[32],[2],"as we continue to embrace technological advancements","ai can improve healthcare",422,0.4644741682
+[32],[3],"as we continue to embrace technological advancements","ai systems can reflect biases",422,0.4325694549
+[32],[4],"as we continue to embrace technological advancements","the un stresses the need for global standards on privacy",422,0.4620556046
+[33],[0],"the future of technology and society will depend on how we navigate these challenges and ensure that the benefits are shared equitably across all members of society.","the world economic forum predicts automation will displace 75 million jobs by 2025 but create 133 million new ones.",438,0.4548675891
+[33],[1],"the future of technology and society will depend on how we navigate these challenges and ensure that the benefits are shared equitably across all members of society.","heavy social media use is linked to increased anxiety and depression",438,0.291964824
+[33],[2],"the future of technology and society will depend on how we navigate these challenges and ensure that the benefits are shared equitably across all members of society.","ai can improve healthcare",438,0.4475597957
+[33],[3],"the future of technology and society will depend on how we navigate these challenges and ensure that the benefits are shared equitably across all members of society.","ai systems can reflect biases",438,0.4658081178
+[33],[4],"the future of technology and society will depend on how we navigate these challenges and ensure that the benefits are shared equitably across all members of society.","the un stresses the need for global standards on privacy",438,0.497215036
+[4],[0],"the growth of the digital economy is one of the most significant developments of the past century.","the world economic forum predicts automation will displace 75 million jobs by 2025 but create 133 million new ones.",454,0.4162289409
+[4],[1],"the growth of the digital economy is one of the most significant developments of the past century.","heavy social media use is linked to increased anxiety and depression",454,0.3331038667
+[4],[2],"the growth of the digital economy is one of the most significant developments of the past century.","ai can improve healthcare",454,0.3712469234
+[4],[3],"the growth of the digital economy is one of the most significant developments of the past century.","ai systems can reflect biases",454,0.3198263171
+[4],[4],"the growth of the digital economy is one of the most significant developments of the past century.","the un stresses the need for global standards on privacy",454,0.4877822202
+[5],[0],"online platforms","the world economic forum predicts automation will displace 75 million jobs by 2025 but create 133 million new ones.",471,0.4003127633
+[5],[1],"online platforms","heavy social media use is linked to increased anxiety and depression",471,0.289544847
+[5],[2],"online platforms","ai can improve healthcare",471,0.3177765787
+[5],[3],"online platforms","ai systems can reflect biases",471,0.328827884
+[5],[4],"online platforms","the un stresses the need for global standards on privacy",471,0.3604403416
+[6],[0],"the rise of social media platforms like facebook","the world economic forum predicts automation will displace 75 million jobs by 2025 but create 133 million new ones.",487,0.2902305364
+[6],[1],"the rise of social media platforms like facebook","heavy social media use is linked to increased anxiety and depression",487,0.4797110466
+[6],[2],"the rise of social media platforms like facebook","ai can improve healthcare",487,0.3294545761
+[6],[3],"the rise of social media platforms like facebook","ai systems can reflect biases",487,0.3103067486
+[6],[4],"the rise of social media platforms like facebook","the un stresses the need for global standards on privacy",487,0.3938900079
+[7],[0],"people now have the ability to reach millions with a single tweet or post","the world economic forum predicts automation will displace 75 million jobs by 2025 but create 133 million new ones.",503,0.3263956766
+[7],[1],"people now have the ability to reach millions with a single tweet or post","heavy social media use is linked to increased anxiety and depression",503,0.4245204001
+[7],[2],"people now have the ability to reach millions with a single tweet or post","ai can improve healthcare",503,0.3300952542
+[7],[3],"people now have the ability to reach millions with a single tweet or post","ai systems can reflect biases",503,0.3106174748
+[7],[4],"people now have the ability to reach millions with a single tweet or post","the un stresses the need for global standards on privacy",503,0.3615070125
+[8],[0],"however","the world economic forum predicts automation will displace 75 million jobs by 2025 but create 133 million new ones.",519,0.3843744696
+[8],[1],"however","heavy social media use is linked to increased anxiety and depression",519,0.4045190829
+[8],[2],"however","ai can improve healthcare",519,0.4503011595
+[8],[3],"however","ai systems can reflect biases",519,0.4719245037
+[8],[4],"however","the un stresses the need for global standards on privacy",519,0.4337844314
+[9],[0],"with the rise of automation","the world economic forum predicts automation will displace 75 million jobs by 2025 but create 133 million new ones.",536,0.6129266073
+[9],[1],"with the rise of automation","heavy social media use is linked to increased anxiety and depression",536,0.2924159618
+[9],[2],"with the rise of automation","ai can improve healthcare",536,0.3516556628
+[9],[3],"with the rise of automation","ai systems can reflect biases",536,0.4418617017
+[9],[4],"with the rise of automation","the un stresses the need for global standards on privacy",536,0.3526400008
+Document_Similarity --> 0.4058889711458205
