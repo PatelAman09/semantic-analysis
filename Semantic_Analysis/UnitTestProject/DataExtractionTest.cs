@@ -1,8 +1,10 @@
-﻿using Semantic_Analysis;
+using Semantic_Analysis;
+using Microsoft.Extensions.Configuration;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 
 namespace UnitTestProject
 {
@@ -13,6 +15,8 @@ namespace UnitTestProject
 
         // Mark _testDirectory as nullable to fix CS8618 warning
         private string? _testDirectory;
+        private string? _dataPreprocessingPath;
+        private string? _extractedDataPath;
 
         [TestInitialize]
         public void Setup()
@@ -20,6 +24,13 @@ namespace UnitTestProject
             // Initialize DataExtraction object
             _dataExtraction = new DataExtraction();
             Assert.IsNotNull(_dataExtraction, "Failed to initialize DataExtraction.");
+
+            // Load configuration settings from appsettings.json
+            var configuration = LoadConfiguration();
+            
+            // Retrieve paths from configuration
+            _dataPreprocessingPath = configuration["FilePaths:DataPreprocessing"];
+            _extractedDataPath = configuration["FilePaths:ExtractedData"];
 
             // Set up a temporary directory for test files
             _testDirectory = Path.Combine(Directory.GetCurrentDirectory(), "TestFiles");
@@ -29,22 +40,33 @@ namespace UnitTestProject
             {
                 Directory.CreateDirectory(_testDirectory);
             }
+
+            Console.WriteLine($"DataPreprocessing Path: {_dataPreprocessingPath}");
+            Console.WriteLine($"ExtractedData Path: {_extractedDataPath}");
+        }
+
+        private IConfiguration LoadConfiguration()
+        {
+            var configurationBuilder = new ConfigurationBuilder();
+            configurationBuilder.SetBasePath(Directory.GetCurrentDirectory());
+            configurationBuilder.AddJsonFile("appsettings.json");
+            return configurationBuilder.Build();
         }
 
         [TestMethod]
         public void ExtractDataFromFile_ShouldReturnNonEmptyData_WhenValidFilePath()
         {
-            // Arrange
-            string filePath = @"D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\Semantic_Analysis\RawData\hello.txt"; // Example for text file
+            // Arrange: Get any file from the DataPreprocessing directory
+            var filePath = GetAnyFileFromDirectory(_dataPreprocessingPath!);
 
             // Log the current working directory for debugging
             Console.WriteLine($"Current working directory: {Directory.GetCurrentDirectory()}");
             Console.WriteLine($"File Path: {filePath}");
 
             // Check if the test file exists before proceeding
-            if (!File.Exists(filePath))
+            if (string.IsNullOrEmpty(filePath) || !File.Exists(filePath))
             {
-                Assert.Fail($"Test file not found at {filePath}. Please ensure the file exists before running the test.");
+                Assert.Fail("No valid file found in the DataPreprocessing directory.");
             }
 
             // Act
@@ -65,6 +87,18 @@ namespace UnitTestProject
             }
         }
 
+        private string GetAnyFileFromDirectory(string directoryPath)
+        {
+            // Search for any file in the specified directory with the supported extensions
+            var supportedExtensions = new[] { ".txt", ".csv", ".json", ".md", ".xml", ".html", ".pdf" };
+
+            var files = Directory.GetFiles(directoryPath)
+                .Where(file => supportedExtensions.Contains(Path.GetExtension(file)?.ToLower()))
+                .ToList();
+
+            // Return the first file found or null if no valid files are found
+            return files.FirstOrDefault();
+        }
 
         [TestMethod]
         public void ExtractDataFromCsv_ShouldReturnNonEmptyData_WhenValidCsvFile()
@@ -100,17 +134,17 @@ namespace UnitTestProject
         [TestMethod]
         public void ExtractDataFromJson_ShouldReturnNonEmptyData_WhenValidJsonFile()
         {
-            // Arrange
-            string filePath = @"D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\Semantic_Analysis\RawData\data.json"; // Example for JSON file
+            // Arrange: Use the path from appsettings.json
+            var filePath = GetAnyFileFromDirectory(_dataPreprocessingPath!);
 
             // Debugging: Print out the file path and current working directory
             Console.WriteLine($"Current working directory: {Directory.GetCurrentDirectory()}");
             Console.WriteLine($"File Path: {filePath}");
 
             // Check if the test file exists before proceeding
-            if (!File.Exists(filePath))
+            if (string.IsNullOrEmpty(filePath) || !File.Exists(filePath))
             {
-                Assert.Fail($"Test file not found at {filePath}. Please ensure the file exists before running the test.");
+                Assert.Fail("No valid JSON file found in the DataPreprocessing directory.");
             }
 
             // Act
@@ -129,21 +163,20 @@ namespace UnitTestProject
             }
         }
 
-
         [TestMethod]
         public void ExtractDataFromPdf_ShouldReturnNonEmptyData_WhenValidPdfFile()
         {
-            // Arrange
-            string filePath = @"D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\Semantic_Analysis\RawData\data.pdf"; // Example for PDF file
+            // Arrange: Use the path from appsettings.json
+            var filePath = GetAnyFileFromDirectory(_dataPreprocessingPath!);
 
             // Debugging: Print out the file path and current working directory
             Console.WriteLine($"Current working directory: {Directory.GetCurrentDirectory()}");
             Console.WriteLine($"File Path: {filePath}");
 
             // Check if the test file exists before proceeding
-            if (!File.Exists(filePath))
+            if (string.IsNullOrEmpty(filePath) || !File.Exists(filePath))
             {
-                Assert.Fail($"Test file not found at {filePath}. Please ensure the file exists before running the test.");
+                Assert.Fail("No valid PDF file found in the DataPreprocessing directory.");
             }
 
             // Act
@@ -169,16 +202,15 @@ namespace UnitTestProject
             }
         }
 
-
         [TestMethod]
         public void CleanData_ShouldRemoveSpecialCharactersAndWhitespace()
         {
             List<string> rawData = new List<string>
-    {
-        "  Hello World!   ",
-        "     This is a test.  ",
-        "   Special @# characters!  "
-    };
+            {
+                "  Hello World!   ",
+                "     This is a test.  ",
+                "   Special @# characters!  "
+            };
 
             // Ensure that _dataExtraction is initialized
             Assert.IsNotNull(_dataExtraction, "The DataExtraction object should be initialized.");
@@ -197,7 +229,6 @@ namespace UnitTestProject
                 Assert.IsFalse(string.IsNullOrWhiteSpace(line), "There should be no empty or whitespace-only lines.");
             }
         }
-
 
         [TestCleanup]
         public void Cleanup()
