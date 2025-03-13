@@ -91,6 +91,10 @@
               "target": "Package",
               "version": "[5.0.54, )"
             },
+            "Xceed.Words.NET": {
+              "target": "Package",
+              "version": "[4.0.25103.5784, )"
+            },
             "itext7": {
               "target": "Package",
               "version": "[9.0.0, )"

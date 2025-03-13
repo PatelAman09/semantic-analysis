@@ -1159,6 +1159,17 @@
           "lib/netstandard1.3/System.IO.FileSystem.Primitives.dll": {}
         }
       },
+      "System.IO.Packaging/4.5.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.0/System.IO.Packaging.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.IO.Packaging.dll": {}
+        }
+      },
       "System.IO.Pipelines/9.0.2": {
         "type": "package",
         "compile": {
@@ -1894,6 +1905,69 @@
         },
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlDocument.dll": {}
+        }
+      },
+      "Xceed.Document.NET/4.0.25103.5784": {
+        "type": "package",
+        "dependencies": {
+          "System.IO.Packaging": "4.5.0",
+          "Xceed.Drawing.NET": "[1.0.25103.5784]",
+          "Xceed.Pdf": "[4.0.25103.5784]"
+        },
+        "compile": {
+          "lib/net5.0/Xceed.Document.NET.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net5.0/Xceed.Document.NET.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Xceed.Drawing.NET/1.0.25103.5784": {
+        "type": "package",
+        "dependencies": {
+          "SkiaSharp": "2.88.8"
+        },
+        "compile": {
+          "lib/net5.0/Xceed.Drawing.NET.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net5.0/Xceed.Drawing.NET.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Xceed.Pdf/4.0.25103.5784": {
+        "type": "package",
+        "dependencies": {
+          "Xceed.Drawing.NET": "[1.0.25103.5784]"
+        },
+        "compile": {
+          "lib/net5.0/Xceed.PDF.NET.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/Xceed.PDF.NET.dll": {}
+        }
+      },
+      "Xceed.Words.NET/4.0.25103.5784": {
+        "type": "package",
+        "dependencies": {
+          "Xceed.Document.NET": "[4.0.25103.5784]",
+          "Xceed.Drawing.NET": "[1.0.25103.5784]"
+        },
+        "compile": {
+          "lib/net5.0/Xceed.Words.NET.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net5.0/Xceed.Words.NET.dll": {
+            "related": ".xml"
+          }
         }
       }
     }
@@ -3920,6 +3994,30 @@
         "ref/xamarinwatchos10/_._",
         "system.io.filesystem.primitives.4.3.0.nupkg.sha512",
         "system.io.filesystem.primitives.nuspec"
+      ]
+    },
+    "System.IO.Packaging/4.5.0": {
+      "sha512": "OjtW5pGp1E7KE3ontBrzy+nSFJCM6pcbVDdo3gg4DauTfdtZKdeKvMVlADF4fSY+OfXWUp4qCvOSxIltt37LbA==",
+      "type": "package",
+      "path": "system.io.packaging/4.5.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net46/System.IO.Packaging.dll",
+        "lib/netstandard1.3/System.IO.Packaging.dll",
+        "lib/netstandard2.0/System.IO.Packaging.dll",
+        "ref/net46/System.IO.Packaging.dll",
+        "ref/net46/System.IO.Packaging.xml",
+        "ref/netstandard1.3/System.IO.Packaging.dll",
+        "ref/netstandard1.3/System.IO.Packaging.xml",
+        "ref/netstandard2.0/System.IO.Packaging.dll",
+        "ref/netstandard2.0/System.IO.Packaging.xml",
+        "system.io.packaging.4.5.0.nupkg.sha512",
+        "system.io.packaging.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
       ]
     },
     "System.IO.Pipelines/9.0.2": {
@@ -6000,6 +6098,74 @@
         "system.xml.xmldocument.4.3.0.nupkg.sha512",
         "system.xml.xmldocument.nuspec"
       ]
+    },
+    "Xceed.Document.NET/4.0.25103.5784": {
+      "sha512": "LWz/udAl1dudQ/4gyrCTws+wTQI5cz3V8nr+gFAMVu3NkRrVajVEJMqBMuNhX0dsFJjGdyNbwEWkkWTe/kjuTg==",
+      "type": "package",
+      "path": "xceed.document.net/4.0.25103.5784",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "License Agreement.txt",
+        "images/Words.png",
+        "lib/net40/Xceed.Document.NET.dll",
+        "lib/net40/Xceed.Document.NET.xml",
+        "lib/net5.0/Xceed.Document.NET.dll",
+        "lib/net5.0/Xceed.Document.NET.xml",
+        "xceed.document.net.4.0.25103.5784.nupkg.sha512",
+        "xceed.document.net.nuspec"
+      ]
+    },
+    "Xceed.Drawing.NET/1.0.25103.5784": {
+      "sha512": "/JK5NNQN4YGC0G/gp7KMgnARHbdnUAMckM3TGcesKyNlWLVTIT3CI56BDWcbUyh5BScNHvmLtIDc7rKoYyDT+w==",
+      "type": "package",
+      "path": "xceed.drawing.net/1.0.25103.5784",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "License Agreement.txt",
+        "images/Words.png",
+        "lib/net40/Xceed.Drawing.NET.dll",
+        "lib/net40/Xceed.Drawing.NET.xml",
+        "lib/net5.0/Xceed.Drawing.NET.dll",
+        "lib/net5.0/Xceed.Drawing.NET.xml",
+        "xceed.drawing.net.1.0.25103.5784.nupkg.sha512",
+        "xceed.drawing.net.nuspec"
+      ]
+    },
+    "Xceed.Pdf/4.0.25103.5784": {
+      "sha512": "2BWh2Wstg/qG2rmHOGd62mzhf450e6sltbKFwKos20eYy2oQMEx3sEU4Z3ta3WVHkfV4ea82z261yBWmJ+1ogw==",
+      "type": "package",
+      "path": "xceed.pdf/4.0.25103.5784",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "License Agreement.txt",
+        "images/PDFCreator.png",
+        "lib/net40/Xceed.Pdf.dll",
+        "lib/net5.0/Xceed.PDF.NET.dll",
+        "xceed.pdf.4.0.25103.5784.nupkg.sha512",
+        "xceed.pdf.nuspec"
+      ]
+    },
+    "Xceed.Words.NET/4.0.25103.5784": {
+      "sha512": "LJeVkLGV6RpRdWCIDkmeNURgZIU4TSMAmM/lJnNHuT+nJFvsj2dmD1Ak9EH31DIFR0Tf4psQlgBwDzIndjkeuA==",
+      "type": "package",
+      "path": "xceed.words.net/4.0.25103.5784",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "License Agreement.txt",
+        "images/Words.png",
+        "lib/net40/Xceed.Words.NET.dll",
+        "lib/net40/Xceed.Words.NET.xml",
+        "lib/net5.0/Xceed.Words.NET.dll",
+        "lib/net5.0/Xceed.Words.NET.xml",
+        "tools/init.ps1",
+        "xceed.words.net.4.0.25103.5784.nupkg.sha512",
+        "xceed.words.net.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
@@ -6014,6 +6180,7 @@
       "OxyPlot.Core >= 2.2.0",
       "OxyPlot.SkiaSharp >= 2.2.0",
       "ScottPlot >= 5.0.54",
+      "Xceed.Words.NET >= 4.0.25103.5784",
       "itext7 >= 9.0.0"
     ]
   },
@@ -6107,6 +6274,10 @@
           "ScottPlot": {
             "target": "Package",
             "version": "[5.0.54, )"
+          },
+          "Xceed.Words.NET": {
+            "target": "Package",
+            "version": "[4.0.25103.5784, )"
           },
           "itext7": {
             "target": "Package",
