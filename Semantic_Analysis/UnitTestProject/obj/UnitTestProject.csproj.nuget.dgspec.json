@@ -75,6 +75,10 @@
               "target": "Package",
               "version": "[2.1.0, )"
             },
+            "Xceed.Words.NET": {
+              "target": "Package",
+              "version": "[4.0.25103.5784, )"
+            },
             "itext7": {
               "target": "Package",
               "version": "[7.2.6, )"

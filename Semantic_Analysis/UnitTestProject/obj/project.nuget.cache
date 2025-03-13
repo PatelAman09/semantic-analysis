@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "IB133MWaPRo=",
+  "dgSpecHash": "cV2X3dyDQf0=",
   "success": true,
   "projectFilePath": "D:\\IT\\Software Engineering\\SE Project\\Saquib\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\UnitTestProject.csproj",
   "expectedPackageFiles": [
@@ -83,6 +83,9 @@
     "C:\\Users\\Lenovo\\.nuget\\packages\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\runtime.win-x64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\runtime.win-x86.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\skiasharp\\2.88.8\\skiasharp.2.88.8.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\skiasharp.nativeassets.macos\\2.88.8\\skiasharp.nativeassets.macos.2.88.8.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\skiasharp.nativeassets.win32\\2.88.8\\skiasharp.nativeassets.win32.2.88.8.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\system.appcontext\\4.1.0\\system.appcontext.4.1.0.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\system.clientmodel\\1.2.1\\system.clientmodel.1.2.1.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\system.codedom\\9.0.1\\system.codedom.9.0.1.nupkg.sha512",
@@ -177,7 +180,11 @@
     "C:\\Users\\Lenovo\\.nuget\\packages\\system.web.services.description\\4.10.0\\system.web.services.description.4.10.0.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\system.windows.extensions\\9.0.1\\system.windows.extensions.9.0.1.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
-    "C:\\Users\\Lenovo\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512"
+    "C:\\Users\\Lenovo\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\xceed.document.net\\4.0.25103.5784\\xceed.document.net.4.0.25103.5784.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\xceed.drawing.net\\1.0.25103.5784\\xceed.drawing.net.1.0.25103.5784.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\xceed.pdf\\4.0.25103.5784\\xceed.pdf.4.0.25103.5784.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\xceed.words.net\\4.0.25103.5784\\xceed.words.net.4.0.25103.5784.nupkg.sha512"
   ],
   "logs": []
 }
