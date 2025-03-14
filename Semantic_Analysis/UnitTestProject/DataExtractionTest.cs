@@ -31,30 +31,62 @@ namespace UnitTestProject
             _dataPreprocessingPath = configuration["FilePaths:DataPreprocessing"];
             _extractedDataPath = configuration["FilePaths:ExtractedData"];
             _supportedFileExtensions = configuration["FilePaths:SupportedFileExtensions"]?
-                                          .Split(',')
-                                          .Select(ext => ext.Trim().ToLower())
-                                          .ToList() ?? new List<string>();
+                                              .Split(',')
+                                              .Select(ext => ext.Trim().ToLower())
+                                              .ToList() ?? new List<string>();
 
             // Ensure paths and extensions are valid before continuing
             Assert.IsFalse(string.IsNullOrEmpty(_dataPreprocessingPath), "DataPreprocessing path should not be empty.");
             Assert.IsFalse(string.IsNullOrEmpty(_extractedDataPath), "ExtractedData path should not be empty.");
             Assert.IsTrue(_supportedFileExtensions?.Any() ?? false, "There should be at least one supported file extension.");
 
-            // Get the root of the solution (the directory containing "Semantic_Analysis" folder)
-            var solutionRoot = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\.."));
+            // Find the solution root dynamically by looking for the .sln file
+            var solutionRoot = FindSolutionRoot(Directory.GetCurrentDirectory());
 
-            // Ensure the _dataPreprocessingPath points to the correct RawData directory
-            _dataPreprocessingPath = Path.Combine(solutionRoot, "Semantic_Analysis", "Semantic_Analysis", _dataPreprocessingPath);
-            _extractedDataPath = Path.Combine(solutionRoot, "Semantic_Analysis", "Semantic_Analysis", _extractedDataPath);
+            if (string.IsNullOrEmpty(solutionRoot))
+            {
+                throw new InvalidOperationException("Solution root could not be determined.");
+            }
+
+            // Ensure the paths are constructed correctly
+            var rawDataPath = Path.Combine(solutionRoot, "Semantic_Analysis", _dataPreprocessingPath);
+            var extractedDataPath = Path.Combine(solutionRoot, "Semantic_Analysis", _extractedDataPath);
 
             // Log the paths to verify correctness
             Console.WriteLine($"Solution Root: {solutionRoot}");
-            Console.WriteLine($"DataPreprocessing Path: {_dataPreprocessingPath}");
-            Console.WriteLine($"ExtractedData Path: {_extractedDataPath}");
+            Console.WriteLine($"DataPreprocessing Path: {rawDataPath}");
+            Console.WriteLine($"ExtractedData Path: {extractedDataPath}");
 
             // Ensure the RawData and ExtractedData directories exist
-            Assert.IsTrue(Directory.Exists(_dataPreprocessingPath), $"Directory does not exist: {_dataPreprocessingPath}");
-            Assert.IsTrue(Directory.Exists(_extractedDataPath), $"Directory does not exist: {_extractedDataPath}");
+            Assert.IsTrue(Directory.Exists(rawDataPath), $"Directory does not exist: {rawDataPath}");
+            Assert.IsTrue(Directory.Exists(extractedDataPath), $"Directory does not exist: {extractedDataPath}");
+
+            // Assign to class-level variables
+            _dataPreprocessingPath = rawDataPath;
+            _extractedDataPath = extractedDataPath;
+        }
+
+
+
+        // Method to find the solution root by looking for the .sln file
+        private string? FindSolutionRoot(string startingDirectory)
+        {
+            var directory = new DirectoryInfo(startingDirectory);
+
+            while (directory != null)
+            {
+                // Check if the current directory contains a solution file
+                var slnFile = directory.GetFiles("*.sln").FirstOrDefault();
+                if (slnFile != null)
+                {
+                    return directory.FullName; // Return the directory containing the solution file
+                }
+
+                // Move up to the parent directory
+                directory = directory.Parent;
+            }
+
+            return null; // Return null if no solution file is found
         }
 
 
@@ -97,7 +129,6 @@ namespace UnitTestProject
 
             return files.FirstOrDefault() ?? string.Empty;
         }
-
 
         // Manual parsing of appsettings.json
         private Dictionary<string, string> LoadConfiguration()
@@ -146,9 +177,6 @@ namespace UnitTestProject
             return configuration;
         }
 
-
-
-
         [TestMethod]
         public void ExtractDataFromFile_ShouldReturnNonEmptyData_WhenValidFilePath()
         {
@@ -193,4 +221,3 @@ namespace UnitTestProject
         }
     }
 }
-
