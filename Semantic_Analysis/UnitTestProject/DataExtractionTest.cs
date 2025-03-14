@@ -31,27 +31,32 @@ namespace UnitTestProject
             _dataPreprocessingPath = configuration["FilePaths:DataPreprocessing"];
             _extractedDataPath = configuration["FilePaths:ExtractedData"];
             _supportedFileExtensions = configuration["FilePaths:SupportedFileExtensions"]?
-                                      .Split(',')
-                                      .Select(ext => ext.Trim().ToLower())
-                                      .ToList() ?? new List<string>();
+                                          .Split(',')
+                                          .Select(ext => ext.Trim().ToLower())
+                                          .ToList() ?? new List<string>();
 
             // Ensure paths and extensions are valid before continuing
             Assert.IsFalse(string.IsNullOrEmpty(_dataPreprocessingPath), "DataPreprocessing path should not be empty.");
             Assert.IsFalse(string.IsNullOrEmpty(_extractedDataPath), "ExtractedData path should not be empty.");
             Assert.IsTrue(_supportedFileExtensions?.Any() ?? false, "There should be at least one supported file extension.");
 
-            // Validate directories
+            // Get the root of the solution (the directory containing "Semantic_Analysis" folder)
             var solutionRoot = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\.."));
 
-            // Ensure the _dataPreprocessingPath points to RawData directory, which contains your test files
-            _dataPreprocessingPath = Path.Combine(solutionRoot, "Semantic_Analysis", "Semantic_Analysis", "RawData");
-            _extractedDataPath = Path.Combine(solutionRoot, _extractedDataPath ?? string.Empty);
+            // Ensure the _dataPreprocessingPath points to the correct RawData directory
+            _dataPreprocessingPath = Path.Combine(solutionRoot, "Semantic_Analysis", "Semantic_Analysis", _dataPreprocessingPath);
+            _extractedDataPath = Path.Combine(solutionRoot, "Semantic_Analysis", "Semantic_Analysis", _extractedDataPath);
 
-            // Ensure the RawData directory exists
+            // Log the paths to verify correctness
+            Console.WriteLine($"Solution Root: {solutionRoot}");
+            Console.WriteLine($"DataPreprocessing Path: {_dataPreprocessingPath}");
+            Console.WriteLine($"ExtractedData Path: {_extractedDataPath}");
+
+            // Ensure the RawData and ExtractedData directories exist
             Assert.IsTrue(Directory.Exists(_dataPreprocessingPath), $"Directory does not exist: {_dataPreprocessingPath}");
-
             Assert.IsTrue(Directory.Exists(_extractedDataPath), $"Directory does not exist: {_extractedDataPath}");
         }
+
 
         // Get a valid file from the directory
         private string GetAnyFileFromDirectory(string? directoryPath)
@@ -107,17 +112,18 @@ namespace UnitTestProject
                 throw new FileNotFoundException("appsettings.json not found in the expected location.");
             }
 
+            // Log the content of the appsettings.json file for debugging
+            Console.WriteLine($"Reading appsettings.json from: {appSettingsPath}");
             var jsonString = File.ReadAllText(appSettingsPath);
+            Console.WriteLine($"appsettings.json content:\n{jsonString}");
 
             try
             {
                 // Parse the JSON content
                 using (JsonDocument doc = JsonDocument.Parse(jsonString))
                 {
-                    // Extract the required data from the JSON file
                     var filePaths = doc.RootElement.GetProperty("FilePaths");
 
-                    // Ensure that the properties exist and handle possible nulls
                     configuration["FilePaths:DataPreprocessing"] = filePaths.TryGetProperty("DataPreprocessing", out var dataPreprocessingProp)
                         ? dataPreprocessingProp.GetString() ?? string.Empty
                         : string.Empty;
@@ -126,7 +132,6 @@ namespace UnitTestProject
                         ? extractedDataProp.GetString() ?? string.Empty
                         : string.Empty;
 
-                    // Handle SupportedFileExtensions as an array
                     var extensionsArray = filePaths.GetProperty("SupportedFileExtensions").EnumerateArray();
                     var supportedExtensions = extensionsArray.Select(ext => ext.GetString()?.Trim().ToLower()).ToList();
                     configuration["FilePaths:SupportedFileExtensions"] = string.Join(",", supportedExtensions);
@@ -140,6 +145,7 @@ namespace UnitTestProject
 
             return configuration;
         }
+
 
 
 
