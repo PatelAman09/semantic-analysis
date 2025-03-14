@@ -690,3 +690,6 @@ E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\U
 E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\UnitTestProject.pdb
 E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\UnitTestProject.genruntimeconfig.cache
 E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\UnitTestProject\obj\Debug\net8.0-windows\ref\UnitTestProject.dll
+E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\Xceed.Document.NET.dll
+E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\Xceed.Drawing.NET.dll
+E:\Master_Of_Engg_IT\SE Project\Aman-Patel\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\Xceed.Words.NET.dll

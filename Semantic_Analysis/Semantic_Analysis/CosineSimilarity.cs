@@ -26,27 +26,41 @@ namespace Semantic_Analysis
                 {
                     if (string.IsNullOrWhiteSpace(line)) continue;
 
-                    var parts = line.Split(',');
-
+                    var parts = line.Split(','); // Split normally first
                     if (parts.Length < 2) continue; // Skip malformed lines
 
                     // Extract index and text
                     string rawText = parts[0].Trim().Trim('"');
                     string index = rawText.Contains(":") ? rawText.Split(':')[0].Trim() : "[Unknown]";
-                    string cleanedText = rawText.Contains(":") ? rawText.Split(':').Last().Trim() : rawText;
+                    string cleanedText = rawText.Contains(":") ? rawText.Substring(rawText.IndexOf(':') + 1).Trim() : rawText;
 
-                    // Parse vector values safely
-                    List<double> vectorValues = new List<double>();
-                    foreach (var value in parts.Skip(1))
+                    // **Fix for cases where text contains commas**
+                    int lastTextIndex = 0;
+                    for (int i = 1; i < parts.Length; i++)
                     {
-                        string cleanedValue = value.Trim().Trim('"'); // Remove extra quotes
+                        if (!double.TryParse(parts[i].Trim().Trim('"'), NumberStyles.Float, CultureInfo.InvariantCulture, out _))
+                        {
+                            cleanedText += "," + parts[i].Trim().Trim('"');
+                            lastTextIndex = i;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+
+                    // Extract vector values safely after the complete text
+                    List<double> vectorValues = new List<double>();
+                    for (int i = lastTextIndex + 1; i < parts.Length; i++)
+                    {
+                        string cleanedValue = parts[i].Trim().Trim('"');
                         if (double.TryParse(cleanedValue, NumberStyles.Float, CultureInfo.InvariantCulture, out double num))
                         {
                             vectorValues.Add(num);
                         }
                         else
                         {
-                            Console.WriteLine($"Warning: Invalid number format in CSV: {value}");
+                            Console.WriteLine($"Warning: Invalid number format in CSV: {parts[i]}");
                         }
                     }
 

@@ -9,6 +9,7 @@ using iText.Kernel.Pdf;
 using iText.Kernel.Pdf.Canvas.Parser.Listener;
 using iText.Kernel.Pdf.Canvas.Parser;
 using System.Xml.Linq;
+using Xceed.Words.NET;
 
 namespace Semantic_Analysis
 {
@@ -124,6 +125,9 @@ namespace Semantic_Analysis
                     case ".pdf":
                         fileContent = ExtractDataFromPdf(filePath);
                         break;
+                    case ".docx":  // Handle DOCX files
+                        fileContent = ExtractDataFromDocx(filePath);
+                        break;
                     default:
                         fileContent = ExtractRawData(filePath);
                         break;
@@ -232,23 +236,68 @@ namespace Semantic_Analysis
             }
         }
 
+        /// <summary>
+        /// Extracts data from a DOCX (.docx) file.
+        /// </summary>
+        /// <param name="filePath">The path of the DOCX file to extract data from.</param>
+        /// <returns>A list of strings representing the extracted text from the DOCX file.</returns>
+        public List<string> ExtractDataFromDocx(string filePath)
+        {
+            var content = new List<string>();
+            try
+            {
+                using (var doc = DocX.Load(filePath))
+                {
+                    foreach (var paragraph in doc.Paragraphs)
+                    {
+                        content.Add(paragraph.Text);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error reading DOCX file: {ex.Message}");
+                return new List<string> { $"Error: {ex.Message}" };
+            }
+            return content;
+        }
+
+
         // --- Data Cleaning Methods ---
         public List<string> CleanData(List<string> data)
         {
+            // If the input data is null or empty, return an empty list
+            if (data == null || data.Count == 0)
+            {
+                Console.WriteLine("No data to clean.");
+                return new List<string>(); // Return an empty list
+            }
+
             var cleanedData = new List<string>();
 
             foreach (var line in data)
             {
+                // Create a new variable to store the modified version of 'line'
+                string cleanedLine = line.Replace("\n", " ").Trim();
+
+                // Replace multiple spaces with a single space
+                cleanedLine = Regex.Replace(cleanedLine, @"\s+", " ");
+
                 // Split into sentences by punctuation marks (., !, ?)
-                var sentences = Regex.Split(line, @"(?<=[.!?])\s+");
+                var sentences = Regex.Split(cleanedLine, @"(?<=[.!?])\s+");
 
                 foreach (var sentence in sentences)
                 {
-                    // Clean sentence: Trim spaces, convert to lowercase, and remove special characters
-                    var cleanedSentence = Regex.Replace(sentence
-                            .Trim()  // Remove leading/trailing spaces
-                            .ToLower(), // Convert to lowercase
-                            @"[^a-zA-Z0-9\s]", "");// Remove all non-alphanumeric characters (except spaces)
+                    var cleanedSentence = sentence.Trim().ToLower();
+
+                    // Remove leading numbers and period if it's part of a numbered list like "1. Sentence"
+                    if (Regex.IsMatch(cleanedSentence, @"^\d+\.\s*"))
+                    {
+                        cleanedSentence = Regex.Replace(cleanedSentence, @"^\d+\.\s*", "");
+                    }
+
+                    // Remove non-alphanumeric characters, preserving spaces, periods, punctuation, and apostrophes
+                    cleanedSentence = Regex.Replace(cleanedSentence, @"[^a-zA-Z0-9\s.,!?'-]", "");
 
                     // Add non-empty cleaned sentence to the list
                     if (!string.IsNullOrEmpty(cleanedSentence))
@@ -258,6 +307,7 @@ namespace Semantic_Analysis
 
             return cleanedData;
         }
+
 
         // --- Data Saving Methods ---
         public void SaveDataToJson(string outputFilePath, List<string> data, string type)

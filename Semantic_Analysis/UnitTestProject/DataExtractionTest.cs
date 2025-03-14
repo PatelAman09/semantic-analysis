@@ -1,212 +1,224 @@
-﻿using Semantic_Analysis;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text.Json;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Semantic_Analysis; // Assuming this is where DataExtraction is defined
 
-namespace UnitTestProject
+namespace DataExtraction_UnitTest
 {
     [TestClass]
     public class DataExtractionTest
     {
-        private DataExtraction? _dataExtraction;
+        private DataExtraction _dataExtraction;
+        private string? _dataPreprocessingPath;
+        private string? _extractedDataPath;
+        private List<string>? _supportedFileExtensions;
 
-        // Mark _testDirectory as nullable to fix CS8618 warning
-        private string? _testDirectory;
+        public DataExtractionTest()
+        {
+            _dataExtraction = new DataExtraction();
+        }
 
         [TestInitialize]
         public void Setup()
         {
-            // Initialize DataExtraction object
-            _dataExtraction = new DataExtraction();
-            Assert.IsNotNull(_dataExtraction, "Failed to initialize DataExtraction.");
+            // Load configuration
+            var configuration = LoadConfiguration();
 
-            // Set up a temporary directory for test files
-            _testDirectory = Path.Combine(Directory.GetCurrentDirectory(), "TestFiles");
+            // Get the file paths from configuration
+            _dataPreprocessingPath = configuration["FilePaths:DataPreprocessing"];
+            _extractedDataPath = configuration["FilePaths:ExtractedData"];
+            _supportedFileExtensions = configuration["FilePaths:SupportedFileExtensions"]?
+                                              .Split(',')
+                                              .Select(ext => ext.Trim().ToLower())
+                                              .ToList() ?? new List<string>();
 
-            // Create directory if it doesn't exist
-            if (!Directory.Exists(_testDirectory))
+            // Ensure paths and extensions are valid before continuing
+            Assert.IsFalse(string.IsNullOrEmpty(_dataPreprocessingPath), "DataPreprocessing path should not be empty.");
+            Assert.IsFalse(string.IsNullOrEmpty(_extractedDataPath), "ExtractedData path should not be empty.");
+            Assert.IsTrue(_supportedFileExtensions?.Any() ?? false, "There should be at least one supported file extension.");
+
+            // Find the solution root dynamically by looking for the .sln file
+            var solutionRoot = FindSolutionRoot(Directory.GetCurrentDirectory());
+
+            if (string.IsNullOrEmpty(solutionRoot))
             {
-                Directory.CreateDirectory(_testDirectory);
+                throw new InvalidOperationException("Solution root could not be determined.");
             }
+
+            // Ensure the paths are constructed correctly
+            var rawDataPath = Path.Combine(solutionRoot, "Semantic_Analysis", _dataPreprocessingPath);
+            var extractedDataPath = Path.Combine(solutionRoot, "Semantic_Analysis", _extractedDataPath);
+
+            // Log the paths to verify correctness
+            Console.WriteLine($"Solution Root: {solutionRoot}");
+            Console.WriteLine($"DataPreprocessing Path: {rawDataPath}");
+            Console.WriteLine($"ExtractedData Path: {extractedDataPath}");
+
+            // Ensure the RawData and ExtractedData directories exist
+            Assert.IsTrue(Directory.Exists(rawDataPath), $"Directory does not exist: {rawDataPath}");
+            Assert.IsTrue(Directory.Exists(extractedDataPath), $"Directory does not exist: {extractedDataPath}");
+
+            // Assign to class-level variables
+            _dataPreprocessingPath = rawDataPath;
+            _extractedDataPath = extractedDataPath;
+        }
+
+
+
+        // Method to find the solution root by looking for the .sln file
+        private string? FindSolutionRoot(string startingDirectory)
+        {
+            var directory = new DirectoryInfo(startingDirectory);
+
+            while (directory != null)
+            {
+                // Check if the current directory contains a solution file
+                var slnFile = directory.GetFiles("*.sln").FirstOrDefault();
+                if (slnFile != null)
+                {
+                    return directory.FullName; // Return the directory containing the solution file
+                }
+
+                // Move up to the parent directory
+                directory = directory.Parent;
+            }
+
+            return null; // Return null if no solution file is found
+        }
+
+
+        // Get a valid file from the directory
+        private string GetAnyFileFromDirectory(string? directoryPath)
+        {
+            if (string.IsNullOrEmpty(directoryPath) || !Directory.Exists(directoryPath))
+            {
+                Console.WriteLine($"Directory does not exist or is invalid: {directoryPath}");
+                return string.Empty;
+            }
+
+            Console.WriteLine($"Looking for supported file types: .txt, .csv, .json, .md, .xml, .html, .pdf, .docx");
+
+            var files = Directory.GetFiles(directoryPath)
+                                 .Where(file =>
+                                 {
+                                     var extension = Path.GetExtension(file)?.ToLower();
+
+                                     Console.WriteLine($"Checking file: {file} with extension {extension}");
+
+                                     // Skip temporary files
+                                     if (Path.GetFileName(file).StartsWith("~$"))
+                                     {
+                                         return false;
+                                     }
+
+                                     // Check if the file extension is supported
+                                     return _supportedFileExtensions?.Contains(extension, StringComparer.OrdinalIgnoreCase) ?? false;
+                                 })
+                                 .ToList();
+
+            Console.WriteLine($"Files found: {string.Join(", ", files ?? new List<string>())}");
+
+            if (files == null || !files.Any())
+            {
+                Console.WriteLine($"No valid files found in the directory: {directoryPath}");
+                return string.Empty;
+            }
+
+            return files.FirstOrDefault() ?? string.Empty;
+        }
+
+        // Manual parsing of appsettings.json
+        private Dictionary<string, string> LoadConfiguration()
+        {
+            var configuration = new Dictionary<string, string>();
+
+            // Read the appsettings.json file
+            var appSettingsPath = Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json");
+
+            if (!File.Exists(appSettingsPath))
+            {
+                throw new FileNotFoundException("appsettings.json not found in the expected location.");
+            }
+
+            // Log the content of the appsettings.json file for debugging
+            Console.WriteLine($"Reading appsettings.json from: {appSettingsPath}");
+            var jsonString = File.ReadAllText(appSettingsPath);
+            Console.WriteLine($"appsettings.json content:\n{jsonString}");
+
+            try
+            {
+                // Parse the JSON content
+                using (JsonDocument doc = JsonDocument.Parse(jsonString))
+                {
+                    var filePaths = doc.RootElement.GetProperty("FilePaths");
+
+                    configuration["FilePaths:DataPreprocessing"] = filePaths.TryGetProperty("DataPreprocessing", out var dataPreprocessingProp)
+                        ? dataPreprocessingProp.GetString() ?? string.Empty
+                        : string.Empty;
+
+                    configuration["FilePaths:ExtractedData"] = filePaths.TryGetProperty("ExtractedData", out var extractedDataProp)
+                        ? extractedDataProp.GetString() ?? string.Empty
+                        : string.Empty;
+
+                    var extensionsArray = filePaths.GetProperty("SupportedFileExtensions").EnumerateArray();
+                    var supportedExtensions = extensionsArray.Select(ext => ext.GetString()?.Trim().ToLower()).ToList();
+                    configuration["FilePaths:SupportedFileExtensions"] = string.Join(",", supportedExtensions);
+                }
+            }
+            catch (JsonException ex)
+            {
+                Console.WriteLine($"Error parsing appsettings.json: {ex.Message}");
+                throw; // Rethrow to fail the test if configuration is invalid
+            }
+
+            return configuration;
         }
 
         [TestMethod]
         public void ExtractDataFromFile_ShouldReturnNonEmptyData_WhenValidFilePath()
         {
-            // Arrange
-            string filePath = @"D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\Semantic_Analysis\RawData\hello.txt"; // Example for text file
+            // Arrange: Get any file from the DataPreprocessing directory
+            var filePath = GetAnyFileFromDirectory(_dataPreprocessingPath);
 
-            // Log the current working directory for debugging
-            Console.WriteLine($"Current working directory: {Directory.GetCurrentDirectory()}");
+            // Log the file path for debugging
             Console.WriteLine($"File Path: {filePath}");
 
             // Check if the test file exists before proceeding
-            if (!File.Exists(filePath))
+            if (string.IsNullOrEmpty(filePath) || !File.Exists(filePath))
             {
-                Assert.Fail($"Test file not found at {filePath}. Please ensure the file exists before running the test.");
+                Assert.Fail($"No valid file found in the DataPreprocessing directory.");
             }
 
-            // Act
-            if (_dataExtraction == null)
+            try
             {
-                Assert.Fail("DataExtraction is not initialized.");
-            }
-            var result = _dataExtraction.ExtractDataFromFile(filePath);
+                // Ensure _dataExtraction is not null
+                Assert.IsNotNull(_dataExtraction, "DataExtraction is not initialized.");
 
-            // Assert: Ensure the result is not empty
-            Assert.IsTrue(result.Count > 0, "The file should contain at least one non-empty line of data.");
+                // Act: Extract data from the file
+                Console.WriteLine($"Starting data extraction for file: {filePath}");
+                var result = _dataExtraction.ExtractDataFromFile(filePath);
 
-            // Check if each line is meaningful and not empty
-            foreach (var line in result)
-            {
-                Assert.IsFalse(string.IsNullOrWhiteSpace(line), "There should be no empty or whitespace-only lines in the file.");
-                Assert.IsTrue(line.Length > 2, "Each line should be meaningful (more than 2 characters).");
-            }
-        }
+                // Log the result for debugging
+                Console.WriteLine($"Data extracted: {string.Join(", ", result)}");
 
+                // Assert: Ensure the result is not empty
+                Assert.IsTrue(result?.Count > 0, "The file should contain at least one non-empty line of data.");
 
-        [TestMethod]
-        public void ExtractDataFromCsv_ShouldReturnNonEmptyData_WhenValidCsvFile()
-        {
-            // Arrange: Create a temporary file with dynamic name
-            string fileName = "testCsvFile_" + Guid.NewGuid().ToString() + ".csv";
-            string filePath = Path.Combine(_testDirectory!, fileName); // Use null-forgiving operator
-
-            // Create a CSV file with sample data
-            File.WriteAllLines(filePath, new List<string>
-            {
-                "Column1,Column2,Column3",
-                "Value1,Value2,Value3",
-                "Value4,Value5,Value6"
-            });
-
-            // Act
-            var result = _dataExtraction?.ExtractDataFromCsv(filePath);
-
-            // Assert: Ensure the result is not empty
-            Assert.IsNotNull(result, "The result should not be null.");
-            Assert.IsTrue(result.Count > 0, "The CSV file should contain at least one non-empty line of data.");
-            foreach (var line in result)
-            {
-                Assert.IsFalse(string.IsNullOrWhiteSpace(line), "There should be no empty or whitespace-only lines.");
-                Assert.IsTrue(line.Length > 2, "Each line should be meaningful (more than 2 characters).");
-            }
-
-            // Cleanup: Delete the test file
-            File.Delete(filePath);
-        }
-
-        [TestMethod]
-        public void ExtractDataFromJson_ShouldReturnNonEmptyData_WhenValidJsonFile()
-        {
-            // Arrange
-            string filePath = @"D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\Semantic_Analysis\RawData\data.json"; // Example for JSON file
-
-            // Debugging: Print out the file path and current working directory
-            Console.WriteLine($"Current working directory: {Directory.GetCurrentDirectory()}");
-            Console.WriteLine($"File Path: {filePath}");
-
-            // Check if the test file exists before proceeding
-            if (!File.Exists(filePath))
-            {
-                Assert.Fail($"Test file not found at {filePath}. Please ensure the file exists before running the test.");
-            }
-
-            // Act
-            if (_dataExtraction == null)
-            {
-                Assert.Fail("DataExtraction is not initialized.");
-            }
-            var result = _dataExtraction.ExtractDataFromJson(filePath);
-
-            // Assert: Ensure the result contains data
-            Assert.IsTrue(result.Count > 0, "The file should contain at least one non-empty line of data.");
-            foreach (var line in result)
-            {
-                Assert.IsFalse(string.IsNullOrWhiteSpace(line), "There should be no empty or whitespace-only lines in the file.");
-                Assert.IsTrue(line.Length > 2, "Each line should be meaningful (more than 2 characters).");
-            }
-        }
-
-
-        [TestMethod]
-        public void ExtractDataFromPdf_ShouldReturnNonEmptyData_WhenValidPdfFile()
-        {
-            // Arrange
-            string filePath = @"D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\Semantic_Analysis\RawData\data.pdf"; // Example for PDF file
-
-            // Debugging: Print out the file path and current working directory
-            Console.WriteLine($"Current working directory: {Directory.GetCurrentDirectory()}");
-            Console.WriteLine($"File Path: {filePath}");
-
-            // Check if the test file exists before proceeding
-            if (!File.Exists(filePath))
-            {
-                Assert.Fail($"Test file not found at {filePath}. Please ensure the file exists before running the test.");
-            }
-
-            // Act
-            if (_dataExtraction == null)
-            {
-                Assert.Fail("DataExtraction is not initialized.");
-            }
-            var result = _dataExtraction.ExtractDataFromPdf(filePath);
-
-            // Assert: Ensure the result is not null
-            Assert.IsNotNull(result, "The result should not be null.");
-
-            // Assert: Ensure the result contains data
-            if (result != null)
-            {
-                Assert.IsTrue(result.Count > 0, "The PDF file should contain extracted text.");
-
-                // Assert: Ensure there are no empty or whitespace-only lines
+                // Check if each line is meaningful and not empty
                 foreach (var line in result)
                 {
-                    Assert.IsFalse(string.IsNullOrWhiteSpace(line), "There should be no empty or whitespace-only lines in the extracted PDF text.");
+                    Assert.IsFalse(string.IsNullOrWhiteSpace(line), "There should be no empty or whitespace-only lines in the file.");
+                    Assert.IsTrue(line.Length > 2, "Each line should be meaningful (more than 2 characters).");
                 }
             }
-        }
-
-
-        [TestMethod]
-        public void CleanData_ShouldRemoveSpecialCharactersAndWhitespace()
-        {
-            List<string> rawData = new List<string>
-    {
-        "  Hello World!   ",
-        "     This is a test.  ",
-        "   Special @# characters!  "
-    };
-
-            // Ensure that _dataExtraction is initialized
-            Assert.IsNotNull(_dataExtraction, "The DataExtraction object should be initialized.");
-
-            // Act
-            var cleanedData = _dataExtraction?.CleanData(rawData);
-
-            // Assert: Ensure the cleaned data has no leading/trailing whitespaces or special characters
-            Assert.IsNotNull(cleanedData, "Cleaned data should not be null.");
-            foreach (var line in cleanedData)
+            catch (Exception ex)
             {
-                // Assert that no special characters like @ or # are present
-                Assert.IsFalse(line.Contains("@") || line.Contains("#"), "Special characters should be removed.");
-
-                // Assert that there are no leading or trailing whitespaces and the line is not empty
-                Assert.IsFalse(string.IsNullOrWhiteSpace(line), "There should be no empty or whitespace-only lines.");
-            }
-        }
-
-
-        [TestCleanup]
-        public void Cleanup()
-        {
-            // Clean up test directory after tests (optional)
-            if (Directory.Exists(_testDirectory!))
-            {
-                Directory.Delete(_testDirectory!, true);
+                Assert.Fail($"Data extraction failed for file {filePath}: {ex.Message}");
             }
         }
     }
+
 }

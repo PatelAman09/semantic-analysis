@@ -19,6 +19,7 @@ namespace Semantic_Analysis
                 Console.WriteLine("1. Data Extraction");
                 Console.WriteLine("2. Embedding Generation");
                 Console.WriteLine("3. Cosine Similarity Calculation");
+                Console.WriteLine("4. Visualization");
                 Console.WriteLine("================================");
 
                 // Load configuration
@@ -34,6 +35,9 @@ namespace Semantic_Analysis
                 // Step 3: Cosine Similarity Calculation
                 await ExecuteCosineSimilarityStepAsync(configuration, rootDirectory);
 
+                // Step 4: Visualization
+                ExecuteVisualizationStep(configuration, rootDirectory);
+
                 Console.WriteLine("Semantic Analysis workflow completed successfully!");
             }
             catch (Exception ex)
@@ -42,6 +46,8 @@ namespace Semantic_Analysis
                 Console.WriteLine(ex.StackTrace);
             }
         }
+
+
 
         private static async Task ExecuteDataExtractionStepAsync(IConfiguration configuration, string rootDirectory)
         {
@@ -199,7 +205,8 @@ namespace Semantic_Analysis
 
                 // Calculate step size for x-axis positioning
                 double xAxisRange = 536.0;
-                double stepSize = orderedIndices1.Count > 1 ? xAxisRange / (orderedIndices1.Count - 1) : 0;
+                double stepSize = (orderedIndices1.Count > 1) ? xAxisRange / (orderedIndices1.Count - 1) : xAxisRange / 2;
+
 
                 // Process each pair of vectors (using Task.Run for CPU-bound calculations)
                 Console.WriteLine("Calculating cosine similarities for all pairs of vectors...");
@@ -253,6 +260,36 @@ namespace Semantic_Analysis
             catch (Exception ex)
             {
                 throw new Exception($"Error in cosine similarity calculation: {ex.Message}", ex);
+            }
+        }
+
+        private static void ExecuteVisualizationStep(IConfiguration configuration, string rootDirectory)
+        {
+            Console.WriteLine("\nExecuting Step 4: Visualization...");
+            try
+            {
+                string csvFile = configuration["FilePaths:CSVOutputFileName"];
+                string scatterPlot = configuration["FilePaths:ScatterPlotOutputFile"];
+                string csvFilePath = Path.Combine(rootDirectory, configuration["FilePaths:OutputFolder"], csvFile);
+                string outputImagePath = Path.Combine(rootDirectory, configuration["FilePaths:ScatterPlotFolder"], scatterPlot);
+                Directory.CreateDirectory(Path.GetDirectoryName(outputImagePath));
+
+                var (xPositions, yValues, words, pairLabels, documentSimilarity) = Visualization.ProcessCsvData(csvFilePath);
+
+                Visualization.GenerateScatterPlot(
+                    xPositions, // Assuming these are now static properties
+                    yValues,
+                    words,
+                    pairLabels,
+                    documentSimilarity,
+                    outputImagePath);
+
+                Console.WriteLine($"Plot successfully saved to {outputImagePath}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                Console.WriteLine($"Stack trace: {ex.StackTrace}");
             }
         }
     }
