@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Semantic_Analysis;
 using Semantic_Analysis.Interfaces;
 
-namespace UnitTestProject
+namespace CosineSimilarity_UnitTest
 {
     public class CosineSimilarityUnitTest
     {

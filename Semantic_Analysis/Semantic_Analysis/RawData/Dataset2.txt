@@ -1,0 +1,5 @@
+	“Cat sat on a mat.”
+	“Blue sky, warm sun.”
+	“Apples are red.”
+	“She is happy.”
+	“Phone rings loudly.”

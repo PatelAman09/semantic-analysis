@@ -23,7 +23,12 @@
     <Import Project="$(NuGetPackageRoot)microsoft.net.test.sdk\17.11.1\build\netcoreapp3.1\Microsoft.NET.Test.Sdk.props" Condition="Exists('$(NuGetPackageRoot)microsoft.net.test.sdk\17.11.1\build\netcoreapp3.1\Microsoft.NET.Test.Sdk.props')" />
   </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+<<<<<<< HEAD
     <PkgXceed_Words_NET Condition=" '$(PkgXceed_Words_NET)' == '' ">C:\Users\Lenovo\.nuget\packages\xceed.words.net\4.0.25103.5784</PkgXceed_Words_NET>
     <PkgMSTest_Analyzers Condition=" '$(PkgMSTest_Analyzers)' == '' ">C:\Users\Lenovo\.nuget\packages\mstest.analyzers\3.6.1</PkgMSTest_Analyzers>
+=======
+    <PkgDocX Condition=" '$(PkgDocX)' == '' ">C:\Users\amman\.nuget\packages\docx\4.0.25105.5786</PkgDocX>
+    <PkgMSTest_Analyzers Condition=" '$(PkgMSTest_Analyzers)' == '' ">C:\Users\amman\.nuget\packages\mstest.analyzers\3.6.1</PkgMSTest_Analyzers>
+>>>>>>> origin/Aman-Patel
   </PropertyGroup>
 </Project>

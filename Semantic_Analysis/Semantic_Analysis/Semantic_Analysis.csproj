@@ -14,6 +14,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="CsvHelper" Version="33.0.1" />
+		<PackageReference Include="DocX" Version="4.0.25105.5786" />
 		<PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.2" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.2" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.2" />
@@ -32,8 +33,8 @@
     <Folder Include="CSVOutput\" />
     <Folder Include="EmbeddingOutput\" />
     <Folder Include="ScatterPlot\" />
-	<Folder Include="ExtractedData\ "/>
-	<Folder Include="RawData\ "/>
+	<Folder Include="ExtractedData\ " />
+	<Folder Include="RawData\ " />
   </ItemGroup>
 
 </Project>

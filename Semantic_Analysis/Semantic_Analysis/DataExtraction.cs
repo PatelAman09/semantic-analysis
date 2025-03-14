@@ -9,7 +9,11 @@ using iText.Kernel.Pdf;
 using iText.Kernel.Pdf.Canvas.Parser.Listener;
 using iText.Kernel.Pdf.Canvas.Parser;
 using System.Xml.Linq;
+<<<<<<< HEAD
 using Xceed.Words.NET;  // Add the necessary reference for DocX
+=======
+using Xceed.Words.NET;
+>>>>>>> origin/Aman-Patel
 
 namespace Semantic_Analysis
 {
@@ -19,6 +23,7 @@ namespace Semantic_Analysis
     /// </summary>
     public class DataExtraction : IDataExtraction
     {
+<<<<<<< HEAD
         /// <summary>
         /// Main method that orchestrates the extraction process for the files specified in the configuration.
         /// It processes the extracted data file and the reference document file and saves them as JSON.
@@ -42,6 +47,27 @@ namespace Semantic_Analysis
             string projectRoot = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
             string absoluteDataPreprocessingPath = Path.Combine(projectRoot, dataPreprocessingPath);
             string absoluteExtractedDataPath = Path.Combine(projectRoot, extractedDataPath);
+=======
+        //public static void Main(string[] args)
+        //{
+        //    // Load configuration settings from appsettings.json
+        //    var configuration = LoadConfiguration();
+
+        //    // Retrieve folder paths from configuration
+        //    string dataPreprocessingPath = configuration["FilePaths:DataPreprocessing"];
+        //    string extractedDataPath = configuration["FilePaths:ExtractedData"]; // Now using ExtractedData folder for both
+
+        //    // Manually retrieving supported extensions from the configuration
+        //    var supportedExtensions = configuration.GetSection("FilePaths:SupportedFileExtensions")
+        //                                             .AsEnumerable()       // Get all key-value pairs
+        //                                             .Select(x => x.Value) // Select the values (file extensions)
+        //                                             .ToList();
+
+        //    // Resolve the absolute paths for the directories
+        //    string projectRoot = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+        //    string absoluteDataPreprocessingPath = Path.Combine(projectRoot, dataPreprocessingPath);
+        //    string absoluteExtractedDataPath = Path.Combine(projectRoot, extractedDataPath); // Using the ExtractedData folder
+>>>>>>> origin/Aman-Patel
 
             // Ensure the necessary directories exist
             EnsureDirectoryExists(absoluteExtractedDataPath);
@@ -86,11 +112,15 @@ namespace Semantic_Analysis
 
         #region Configuration and Directory Methods
 
+<<<<<<< HEAD
         /// <summary>
         /// Loads the configuration from the appsettings.json file.
         /// </summary>
         /// <returns>Configuration object that holds the settings from appsettings.json.</returns>
         private static IConfiguration LoadConfiguration()
+=======
+        public static IConfiguration LoadConfiguration()
+>>>>>>> origin/Aman-Patel
         {
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.SetBasePath(Directory.GetCurrentDirectory());
@@ -99,12 +129,16 @@ namespace Semantic_Analysis
             return configurationBuilder.Build();
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Ensures that the directory specified by the path exists.
         /// If the directory does not exist, it will be created.
         /// </summary>
         /// <param name="directoryPath">The path of the directory to check and create if necessary.</param>
         private static void EnsureDirectoryExists(string directoryPath)
+=======
+        public static void EnsureDirectoryExists(string directoryPath)
+>>>>>>> origin/Aman-Patel
         {
             if (!Directory.Exists(directoryPath))
             {
@@ -340,6 +374,7 @@ namespace Semantic_Analysis
             return content;
         }
 
+<<<<<<< HEAD
         #endregion
 
         #region Data Processing Methods
@@ -349,6 +384,10 @@ namespace Semantic_Analysis
         /// </summary>
         /// <param name="data">The list of strings representing the raw extracted data.</param>
         /// <returns>A cleaned list of strings.</returns>
+=======
+
+        // --- Data Cleaning Methods ---
+>>>>>>> origin/Aman-Patel
         public List<string> CleanData(List<string> data)
         {
             // If the input data is null or empty, return an empty list
@@ -393,12 +432,17 @@ namespace Semantic_Analysis
             return cleanedData;
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Saves the extracted and cleaned data to a JSON file.
         /// </summary>
         /// <param name="outputFilePath">The path where the output JSON file will be saved.</param>
         /// <param name="data">The data to be saved as JSON.</param>
         /// <param name="type">The type of data being saved (e.g., "extracted" or "reference").</param>
+=======
+
+        // --- Data Saving Methods ---
+>>>>>>> origin/Aman-Patel
         public void SaveDataToJson(string outputFilePath, List<string> data, string type)
         {
             try

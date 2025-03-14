@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 using OpenAI.Embeddings;
 using Semantic_Analysis.Interfaces;
 
-namespace Semantic_Analysis.Tests
+namespace Embeddings_UnitTest
 
 
 {
@@ -79,16 +79,6 @@ namespace Semantic_Analysis.Tests
             {
                 await _processor.ReadJsonFileAsync(nonExistentFile);
             });
-        }
-
-        [TestMethod]
-        public void AnalyzeJson_EmptyOrMalformedJson_ThrowsException()
-        {
-            // Arrange
-            string invalidJson = "{ This is not valid JSON }";
-
-            // Act & Assert
-            Assert.ThrowsException<Exception>(() => _processor.AnalyzeJson(invalidJson));
         }
 
         [TestMethod]

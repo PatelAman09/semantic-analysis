@@ -15,6 +15,23 @@
           }
         }
       },
+      "DocX/4.0.25105.5786": {
+        "type": "package",
+        "dependencies": {
+          "SkiaSharp": "2.88.8",
+          "System.IO.Packaging": "4.5.0"
+        },
+        "compile": {
+          "lib/net5.0/Xceed.Document.NET.dll": {},
+          "lib/net5.0/Xceed.Drawing.NET.dll": {},
+          "lib/net5.0/Xceed.Words.NET.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/Xceed.Document.NET.dll": {},
+          "lib/net5.0/Xceed.Drawing.NET.dll": {},
+          "lib/net5.0/Xceed.Words.NET.dll": {}
+        }
+      },
       "HarfBuzzSharp/7.3.0.3": {
         "type": "package",
         "dependencies": {
@@ -1999,6 +2016,28 @@
         "lib/netstandard2.0/CsvHelper.xml",
         "lib/netstandard2.1/CsvHelper.dll",
         "lib/netstandard2.1/CsvHelper.xml"
+      ]
+    },
+    "DocX/4.0.25105.5786": {
+      "sha512": "yfzSWXFh3/sgcWyykjfvedFlwIPIbJUNbHgg9auTA2NjuvYvmY4B2AmD4lBJ4bvC2+9GmJNk6e8KeHOuSFPgNA==",
+      "type": "package",
+      "path": "docx/4.0.25105.5786",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "Xceed_Logo_Retina-400x400.png",
+        "docs/readme.md",
+        "docx.4.0.25105.5786.nupkg.sha512",
+        "docx.nuspec",
+        "lib/net40/Xceed.Document.NET.dll",
+        "lib/net40/Xceed.Drawing.NET.dll",
+        "lib/net40/Xceed.Words.NET.dll",
+        "lib/net5.0/Xceed.Document.NET.dll",
+        "lib/net5.0/Xceed.Drawing.NET.dll",
+        "lib/net5.0/Xceed.Words.NET.dll",
+        "tools/install.ps1"
       ]
     },
     "HarfBuzzSharp/7.3.0.3": {
@@ -6171,6 +6210,7 @@
   "projectFileDependencyGroups": {
     "net8.0": [
       "CsvHelper >= 33.0.1",
+      "DocX >= 4.0.25105.5786",
       "Microsoft.Extensions.Configuration >= 9.0.2",
       "Microsoft.Extensions.Configuration.Abstractions >= 9.0.2",
       "Microsoft.Extensions.Configuration.Json >= 9.0.2",
@@ -6191,11 +6231,19 @@
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "D:\\IT\\Software Engineering\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj",
       "projectName": "Semantic_Analysis",
       "projectPath": "D:\\IT\\Software Engineering\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj",
       "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
       "outputPath": "D:\\IT\\Software Engineering\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\obj\\",
+=======
+      "projectUniqueName": "E:\\Master_Of_Engg_IT\\SE Project\\Aman-Patel\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj",
+      "projectName": "Semantic_Analysis",
+      "projectPath": "E:\\Master_Of_Engg_IT\\SE Project\\Aman-Patel\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Semantic_Analysis.csproj",
+      "packagesPath": "C:\\Users\\amman\\.nuget\\packages\\",
+      "outputPath": "E:\\Master_Of_Engg_IT\\SE Project\\Aman-Patel\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\obj\\",
+>>>>>>> origin/Aman-Patel
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -6238,6 +6286,10 @@
           "CsvHelper": {
             "target": "Package",
             "version": "[33.0.1, )"
+          },
+          "DocX": {
+            "target": "Package",
+            "version": "[4.0.25105.5786, )"
           },
           "Microsoft.Extensions.Configuration": {
             "target": "Package",
