@@ -9,45 +9,12 @@ using iText.Kernel.Pdf;
 using iText.Kernel.Pdf.Canvas.Parser.Listener;
 using iText.Kernel.Pdf.Canvas.Parser;
 using System.Xml.Linq;
-<<<<<<< HEAD
-using Xceed.Words.NET;  // Add the necessary reference for DocX
-=======
 using Xceed.Words.NET;
->>>>>>> origin/Aman-Patel
 
 namespace Semantic_Analysis
 {
-    /// <summary>
-    /// The DataExtraction class implements the IDataExtraction interface and provides methods to extract and process data
-    /// from various file types such as text, CSV, JSON, XML, PDF, DOCX, etc.
-    /// </summary>
     public class DataExtraction : IDataExtraction
     {
-<<<<<<< HEAD
-        /// <summary>
-        /// Main method that orchestrates the extraction process for the files specified in the configuration.
-        /// It processes the extracted data file and the reference document file and saves them as JSON.
-        /// </summary>
-        public static void Main(string[] args)
-        {
-            // Load configuration settings from appsettings.json
-            var configuration = LoadConfiguration();
-
-            // Retrieve folder paths from configuration
-            string dataPreprocessingPath = configuration["FilePaths:DataPreprocessing"];
-            string extractedDataPath = configuration["FilePaths:ExtractedData"];
-
-            // Manually retrieving supported extensions from the configuration
-            var supportedExtensions = configuration.GetSection("FilePaths:SupportedFileExtensions")
-                                                     .AsEnumerable()       // Get all key-value pairs
-                                                     .Select(x => x.Value) // Select the values (file extensions)
-                                                     .ToList();
-
-            // Resolve the absolute paths for the directories
-            string projectRoot = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
-            string absoluteDataPreprocessingPath = Path.Combine(projectRoot, dataPreprocessingPath);
-            string absoluteExtractedDataPath = Path.Combine(projectRoot, extractedDataPath);
-=======
         //public static void Main(string[] args)
         //{
         //    // Load configuration settings from appsettings.json
@@ -67,60 +34,50 @@ namespace Semantic_Analysis
         //    string projectRoot = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
         //    string absoluteDataPreprocessingPath = Path.Combine(projectRoot, dataPreprocessingPath);
         //    string absoluteExtractedDataPath = Path.Combine(projectRoot, extractedDataPath); // Using the ExtractedData folder
->>>>>>> origin/Aman-Patel
 
-            // Ensure the necessary directories exist
-            EnsureDirectoryExists(absoluteExtractedDataPath);
+        //    // Ensure the necessary directories exist
+        //    EnsureDirectoryExists(absoluteExtractedDataPath);
 
-            // Get all files in the RawData folder with supported extensions
-            var filesInRawData = Directory.GetFiles(absoluteDataPreprocessingPath)
-                                          .Where(file => supportedExtensions.Contains(Path.GetExtension(file).ToLower()))
-                                          .ToList();
+        //    // Get all files in the RawData folder with supported extensions
+        //    var filesInRawData = Directory.GetFiles(absoluteDataPreprocessingPath)
+        //                                  .Where(file => supportedExtensions.Contains(Path.GetExtension(file).ToLower()))
+        //                                  .ToList();
 
-            // Ensure exactly two files are found (1 extracted data and 1 reference document)
-            if (filesInRawData.Count != 2)
-            {
-                Console.WriteLine("Error: There should be exactly two files in the RawData folder.");
-                return;
-            }
+        //    // Ensure exactly two files are found (1 extracted data and 1 reference document)
+        //    if (filesInRawData.Count != 2)
+        //    {
+        //        Console.WriteLine("Error: There should be exactly two files in the RawData folder.");
+        //        return;
+        //    }
 
-            // Treat the first file as extracted data and the second as reference document
-            string extractedDataFilePath = filesInRawData[0];
-            string referenceDocumentFilePath = filesInRawData[1];
+        //    // Treat the first file as extracted data and the second as reference document
+        //    string extractedDataFilePath = filesInRawData[0];
+        //    string referenceDocumentFilePath = filesInRawData[1];
 
-            // Define the output file paths for both processed data in the ExtractedData folder
-            string outputExtractedDataFilePath = Path.Combine(absoluteExtractedDataPath, $"{Path.GetFileNameWithoutExtension(extractedDataFilePath)}.json");
-            string outputReferenceDocumentFilePath = Path.Combine(absoluteExtractedDataPath, $"{Path.GetFileNameWithoutExtension(referenceDocumentFilePath)}.json");
+        //    // Define the output file paths for both processed data in the ExtractedData folder
+        //    string outputExtractedDataFilePath = Path.Combine(absoluteExtractedDataPath, $"{Path.GetFileNameWithoutExtension(extractedDataFilePath)}.json");
+        //    string outputReferenceDocumentFilePath = Path.Combine(absoluteExtractedDataPath, $"{Path.GetFileNameWithoutExtension(referenceDocumentFilePath)}.json");
 
-            // Create an instance of DataExtraction to process the files
-            IDataExtraction processor = new DataExtraction();
+        //    // Create an instance of DataExtraction to process the files
+        //    IDataExtraction processor = new DataExtraction();
 
-            // Process the extracted data file
-            List<string> extractedData = processor.ExtractDataFromFile(extractedDataFilePath);
-            extractedData = processor.CleanData(extractedData);
-            processor.SaveDataToJson(outputExtractedDataFilePath, extractedData, "extracted");
+        //    // Process the extracted data file
+        //    List<string> extractedData = processor.ExtractDataFromFile(extractedDataFilePath);
+        //    extractedData = processor.CleanData(extractedData);
+        //    processor.SaveDataToJson(outputExtractedDataFilePath, extractedData, "extracted");
 
-            // Process the reference document file
-            List<string> referenceData = processor.ExtractDataFromFile(referenceDocumentFilePath);
-            referenceData = processor.CleanData(referenceData);
-            processor.SaveDataToJson(outputReferenceDocumentFilePath, referenceData, "reference");
+        //    // Process the reference document file
+        //    List<string> referenceData = processor.ExtractDataFromFile(referenceDocumentFilePath);
+        //    referenceData = processor.CleanData(referenceData);
+        //    processor.SaveDataToJson(outputReferenceDocumentFilePath, referenceData, "reference");
 
-            // Output the result of the data extraction
-            Console.WriteLine($"Data extracted and saved to: {outputExtractedDataFilePath}");
-            Console.WriteLine($"Reference document data extracted and saved to: {outputReferenceDocumentFilePath}");
-        }
+        //    // Output the result of the data extraction
+        //    Console.WriteLine($"Data extracted and saved to: {outputExtractedDataFilePath}");
+        //    Console.WriteLine($"Reference document data extracted and saved to: {outputReferenceDocumentFilePath}");
+        //}
 
-        #region Configuration and Directory Methods
 
-<<<<<<< HEAD
-        /// <summary>
-        /// Loads the configuration from the appsettings.json file.
-        /// </summary>
-        /// <returns>Configuration object that holds the settings from appsettings.json.</returns>
-        private static IConfiguration LoadConfiguration()
-=======
         public static IConfiguration LoadConfiguration()
->>>>>>> origin/Aman-Patel
         {
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.SetBasePath(Directory.GetCurrentDirectory());
@@ -129,16 +86,7 @@ namespace Semantic_Analysis
             return configurationBuilder.Build();
         }
 
-<<<<<<< HEAD
-        /// <summary>
-        /// Ensures that the directory specified by the path exists.
-        /// If the directory does not exist, it will be created.
-        /// </summary>
-        /// <param name="directoryPath">The path of the directory to check and create if necessary.</param>
-        private static void EnsureDirectoryExists(string directoryPath)
-=======
         public static void EnsureDirectoryExists(string directoryPath)
->>>>>>> origin/Aman-Patel
         {
             if (!Directory.Exists(directoryPath))
             {
@@ -146,16 +94,6 @@ namespace Semantic_Analysis
             }
         }
 
-        #endregion
-
-        #region Extraction Methods
-
-        /// <summary>
-        /// Extracts data from a file based on its extension.
-        /// It routes the extraction process to the appropriate method depending on the file type.
-        /// </summary>
-        /// <param name="filePath">The path of the file to extract data from.</param>
-        /// <returns>A list of strings representing the extracted data from the file.</returns>
         public List<string> ExtractDataFromFile(string filePath)
         {
             var fileContent = new List<string>();
@@ -202,29 +140,9 @@ namespace Semantic_Analysis
             return fileContent;
         }
 
-        #endregion
-
-        #region File Type Specific Extraction Methods
-
-        /// <summary>
-        /// Extracts data from a plain text (.txt) file.
-        /// </summary>
-        /// <param name="filePath">The path of the text file to extract data from.</param>
-        /// <returns>A list of strings, each representing a line from the text file.</returns>
+        // --- Extraction Methods ---
         public List<string> ExtractDataFromText(string filePath) => File.ReadAllLines(filePath).ToList();
-
-        /// <summary>
-        /// Extracts data from a CSV (.csv) file.
-        /// </summary>
-        /// <param name="filePath">The path of the CSV file to extract data from.</param>
-        /// <returns>A list of strings, each representing a line from the CSV file.</returns>
         public List<string> ExtractDataFromCsv(string filePath) => File.ReadAllLines(filePath).ToList();
-
-        /// <summary>
-        /// Extracts data from a JSON (.json) file.
-        /// </summary>
-        /// <param name="filePath">The path of the JSON file to extract data from.</param>
-        /// <returns>A list of strings representing the parsed JSON data.</returns>
         public List<string> ExtractDataFromJson(string filePath)
         {
             try
@@ -238,12 +156,6 @@ namespace Semantic_Analysis
                 return new List<string> { $"Error: {ex.Message}" };
             }
         }
-
-        /// <summary>
-        /// Extracts data from an XML (.xml) file.
-        /// </summary>
-        /// <param name="filePath">The path of the XML file to extract data from.</param>
-        /// <returns>A list of strings representing the XML elements and their values.</returns>
         public List<string> ExtractDataFromXml(string filePath)
         {
             try
@@ -257,12 +169,6 @@ namespace Semantic_Analysis
                 return new List<string> { $"Error: {ex.Message}" };
             }
         }
-
-        /// <summary>
-        /// Extracts data from a PDF (.pdf) file.
-        /// </summary>
-        /// <param name="filePath">The path of the PDF file to extract data from.</param>
-        /// <returns>A list of strings representing the extracted text from the PDF.</returns>
         public List<string> ExtractDataFromPdf(string filePath)
         {
             var data = new List<string>();
@@ -287,12 +193,6 @@ namespace Semantic_Analysis
             }
             return data;
         }
-
-        /// <summary>
-        /// Extracts raw data from an unsupported or binary file type.
-        /// </summary>
-        /// <param name="filePath">The path of the file to extract raw data from.</param>
-        /// <returns>A list of strings representing the first few bytes of the file in hexadecimal format.</returns>
         public List<string> ExtractRawData(string filePath)
         {
             try
@@ -307,12 +207,6 @@ namespace Semantic_Analysis
                 return new List<string> { $"Error: {ex.Message}" };
             }
         }
-
-        /// <summary>
-        /// Extracts data from a Markdown (.md) file.
-        /// </summary>
-        /// <param name="filePath">The path of the Markdown file to extract data from.</param>
-        /// <returns>A list of strings containing the cleaned text from the Markdown file.</returns>
         public List<string> ExtractDataFromMarkdown(string filePath)
         {
             try
@@ -327,12 +221,6 @@ namespace Semantic_Analysis
                 return new List<string> { $"Error: {ex.Message}" };
             }
         }
-
-        /// <summary>
-        /// Extracts data from an HTML (.html) file.
-        /// </summary>
-        /// <param name="filePath">The path of the HTML file to extract data from.</param>
-        /// <returns>A list of strings containing the cleaned text from the HTML file.</returns>
         public List<string> ExtractDataFromHtml(string filePath)
         {
             try
@@ -374,20 +262,8 @@ namespace Semantic_Analysis
             return content;
         }
 
-<<<<<<< HEAD
-        #endregion
-
-        #region Data Processing Methods
-
-        /// <summary>
-        /// Cleans extracted data by removing unwanted characters and normalizing text.
-        /// </summary>
-        /// <param name="data">The list of strings representing the raw extracted data.</param>
-        /// <returns>A cleaned list of strings.</returns>
-=======
 
         // --- Data Cleaning Methods ---
->>>>>>> origin/Aman-Patel
         public List<string> CleanData(List<string> data)
         {
             // If the input data is null or empty, return an empty list
@@ -432,17 +308,8 @@ namespace Semantic_Analysis
             return cleanedData;
         }
 
-<<<<<<< HEAD
-        /// <summary>
-        /// Saves the extracted and cleaned data to a JSON file.
-        /// </summary>
-        /// <param name="outputFilePath">The path where the output JSON file will be saved.</param>
-        /// <param name="data">The data to be saved as JSON.</param>
-        /// <param name="type">The type of data being saved (e.g., "extracted" or "reference").</param>
-=======
 
         // --- Data Saving Methods ---
->>>>>>> origin/Aman-Patel
         public void SaveDataToJson(string outputFilePath, List<string> data, string type)
         {
             try
@@ -483,7 +350,5 @@ namespace Semantic_Analysis
                 Console.WriteLine($"Error saving data to JSON file: {ex.Message}");
             }
         }
-
-        #endregion
     }
 }
