@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 using System;
-=======
-﻿using System;
->>>>>>> origin/Aman-Patel
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -35,34 +31,15 @@ namespace DataExtraction_UnitTest
             _dataPreprocessingPath = configuration["FilePaths:DataPreprocessing"];
             _extractedDataPath = configuration["FilePaths:ExtractedData"];
             _supportedFileExtensions = configuration["FilePaths:SupportedFileExtensions"]?
-<<<<<<< HEAD
-                                      .Split(',')
-                                      .Select(ext => ext.Trim().ToLower())
-                                      .ToList() ?? new List<string>();
-=======
                                               .Split(',')
                                               .Select(ext => ext.Trim().ToLower())
                                               .ToList() ?? new List<string>();
->>>>>>> origin/Aman-Patel
 
             // Ensure paths and extensions are valid before continuing
             Assert.IsFalse(string.IsNullOrEmpty(_dataPreprocessingPath), "DataPreprocessing path should not be empty.");
             Assert.IsFalse(string.IsNullOrEmpty(_extractedDataPath), "ExtractedData path should not be empty.");
             Assert.IsTrue(_supportedFileExtensions?.Any() ?? false, "There should be at least one supported file extension.");
 
-<<<<<<< HEAD
-            // Validate directories
-            var solutionRoot = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), @"..\..\..\..\.."));
-
-            // Ensure the _dataPreprocessingPath points to RawData directory, which contains your test files
-            _dataPreprocessingPath = Path.Combine(solutionRoot, "Semantic_Analysis", "Semantic_Analysis", "RawData");
-            _extractedDataPath = Path.Combine(solutionRoot, _extractedDataPath ?? string.Empty);
-
-            // Ensure the RawData directory exists
-            Assert.IsTrue(Directory.Exists(_dataPreprocessingPath), $"Directory does not exist: {_dataPreprocessingPath}");
-
-            Assert.IsTrue(Directory.Exists(_extractedDataPath), $"Directory does not exist: {_extractedDataPath}");
-=======
             // Find the solution root dynamically by looking for the .sln file
             var solutionRoot = FindSolutionRoot(Directory.GetCurrentDirectory());
 
@@ -198,98 +175,7 @@ namespace DataExtraction_UnitTest
             }
 
             return configuration;
->>>>>>> origin/Aman-Patel
         }
-
-        // Get a valid file from the directory
-        private string GetAnyFileFromDirectory(string? directoryPath)
-        {
-            if (string.IsNullOrEmpty(directoryPath) || !Directory.Exists(directoryPath))
-            {
-                Console.WriteLine($"Directory does not exist or is invalid: {directoryPath}");
-                return string.Empty;
-            }
-
-            Console.WriteLine($"Looking for supported file types: .txt, .csv, .json, .md, .xml, .html, .pdf, .docx");
-
-            var files = Directory.GetFiles(directoryPath)
-                                 .Where(file =>
-                                 {
-                                     var extension = Path.GetExtension(file)?.ToLower();
-
-                                     Console.WriteLine($"Checking file: {file} with extension {extension}");
-
-                                     // Skip temporary files
-                                     if (Path.GetFileName(file).StartsWith("~$"))
-                                     {
-                                         return false;
-                                     }
-
-                                     // Check if the file extension is supported
-                                     return _supportedFileExtensions?.Contains(extension, StringComparer.OrdinalIgnoreCase) ?? false;
-                                 })
-                                 .ToList();
-
-            Console.WriteLine($"Files found: {string.Join(", ", files ?? new List<string>())}");
-
-            if (files == null || !files.Any())
-            {
-                Console.WriteLine($"No valid files found in the directory: {directoryPath}");
-                return string.Empty;
-            }
-
-            return files.FirstOrDefault() ?? string.Empty;
-        }
-
-
-        // Manual parsing of appsettings.json
-        private Dictionary<string, string> LoadConfiguration()
-        {
-            var configuration = new Dictionary<string, string>();
-
-            // Read the appsettings.json file
-            var appSettingsPath = Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json");
-
-            if (!File.Exists(appSettingsPath))
-            {
-                throw new FileNotFoundException("appsettings.json not found in the expected location.");
-            }
-
-            var jsonString = File.ReadAllText(appSettingsPath);
-
-            try
-            {
-                // Parse the JSON content
-                using (JsonDocument doc = JsonDocument.Parse(jsonString))
-                {
-                    // Extract the required data from the JSON file
-                    var filePaths = doc.RootElement.GetProperty("FilePaths");
-
-                    // Ensure that the properties exist and handle possible nulls
-                    configuration["FilePaths:DataPreprocessing"] = filePaths.TryGetProperty("DataPreprocessing", out var dataPreprocessingProp)
-                        ? dataPreprocessingProp.GetString() ?? string.Empty
-                        : string.Empty;
-
-                    configuration["FilePaths:ExtractedData"] = filePaths.TryGetProperty("ExtractedData", out var extractedDataProp)
-                        ? extractedDataProp.GetString() ?? string.Empty
-                        : string.Empty;
-
-                    // Handle SupportedFileExtensions as an array
-                    var extensionsArray = filePaths.GetProperty("SupportedFileExtensions").EnumerateArray();
-                    var supportedExtensions = extensionsArray.Select(ext => ext.GetString()?.Trim().ToLower()).ToList();
-                    configuration["FilePaths:SupportedFileExtensions"] = string.Join(",", supportedExtensions);
-                }
-            }
-            catch (JsonException ex)
-            {
-                Console.WriteLine($"Error parsing appsettings.json: {ex.Message}");
-                throw; // Rethrow to fail the test if configuration is invalid
-            }
-
-            return configuration;
-        }
-
-
 
         [TestMethod]
         public void ExtractDataFromFile_ShouldReturnNonEmptyData_WhenValidFilePath()
@@ -334,10 +220,5 @@ namespace DataExtraction_UnitTest
             }
         }
     }
-<<<<<<< HEAD
-}
-
-=======
 
 }
->>>>>>> origin/Aman-Patel
