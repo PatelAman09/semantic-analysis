@@ -1,18 +1,15 @@
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using OpenAI.Embeddings; // OpenAI NuGet package
-using Semantic_Analysis.Interfaces; // Reference to the interface
+using OpenAI.Embeddings;
+using Semantic_Analysis.Interfaces;
 
+// Class for processing JSON data and generating OpenAI embeddings
 public class EmbeddingProcessor : IEmbeddingProcessor
 {
+    // Reads JSON file content from the specified path
     public async Task<string> ReadJsonFileAsync(string jsonFilePath)
     {
         if (!File.Exists(jsonFilePath))
@@ -21,6 +18,7 @@ public class EmbeddingProcessor : IEmbeddingProcessor
         return await File.ReadAllTextAsync(jsonFilePath);
     }
 
+    // Extracts data elements from JSON by traversing the structure recursively
     public List<string> AnalyzeJson(string jsonContent)
     {
         var parsedJson = JsonConvert.DeserializeObject(jsonContent);
@@ -29,10 +27,12 @@ public class EmbeddingProcessor : IEmbeddingProcessor
         if (parsedJson == null)
             throw new Exception("The provided JSON content is empty or malformed.");
 
+        // Recursively traverses JSON structure to extract values with their paths
         void Traverse(object obj, string prefix = "")
         {
             if (obj is JObject jObject)
             {
+                // Process each property in JSON objects
                 foreach (var property in jObject.Properties())
                 {
                     Traverse(property.Value, $"{prefix}{property.Name}: ");
@@ -40,6 +40,7 @@ public class EmbeddingProcessor : IEmbeddingProcessor
             }
             else if (obj is JArray jArray)
             {
+                // Process each element in JSON arrays with index
                 for (int i = 0; i < jArray.Count; i++)
                 {
                     Traverse(jArray[i], $"{prefix}[{i}]: ");
@@ -47,6 +48,7 @@ public class EmbeddingProcessor : IEmbeddingProcessor
             }
             else if (obj is JValue jValue)
             {
+                // Add leaf node values to the extracted data
                 extractedData.Add($"{prefix.TrimEnd(' ')}{jValue.Value}");
             }
         }
@@ -55,6 +57,7 @@ public class EmbeddingProcessor : IEmbeddingProcessor
         return extractedData;
     }
 
+    // Generates embedding with retry logic and exponential backoff
     public async Task<OpenAIEmbedding> GenerateEmbeddingWithRetryAsync(EmbeddingClient client, string text, int maxRetries = 3)
     {
         int attempt = 0;
@@ -70,12 +73,15 @@ public class EmbeddingProcessor : IEmbeddingProcessor
                 string snippet = text.Length > 50 ? text.Substring(0, 50) + "..." : text;
                 Console.WriteLine($"Attempt {attempt + 1} failed for text: \"{snippet}\": {ex.Message}. Retrying...");
                 attempt++;
-                await Task.Delay((attempt) * 1000); // Exponential backoff: 1s, 2s, 3s, etc.
+                // Exponential backoff delay between retries
+                // Exponential backoff: 1s, 2s, 3s, etc.
+                await Task.Delay((attempt) * 1000);
             }
         }
         throw new Exception("Failed to generate embedding after multiple attempts.");
     }
 
+    // Processes text descriptions in batches and saves generated embeddings to CSV
     public async Task GenerateAndSaveEmbeddingsAsync(string apiKey, List<string> descriptions, string csvFilePath, int saveInterval)
     {
         Console.WriteLine($"Initializing OpenAI Embedding client... Output file: {csvFilePath}");
@@ -127,6 +133,7 @@ public class EmbeddingProcessor : IEmbeddingProcessor
                         await writer.WriteLineAsync($"\"{description}\",\"{embeddingString}\"");
                         processedCount++;
 
+                        // Periodically save progress
                         if (processedCount % saveInterval == 0)
                         {
                             await writer.FlushAsync();
@@ -144,7 +151,7 @@ public class EmbeddingProcessor : IEmbeddingProcessor
         Console.WriteLine("All embeddings processed and saved.");
     }
 
-
+    // Saves processed data to a CSV file
     public void SaveOutputToCsv(string outputFilePath, List<string> outputData)
     {
         try
@@ -159,10 +166,12 @@ public class EmbeddingProcessor : IEmbeddingProcessor
         }
     }
 
+    // Main processing method that handles the full workflow from JSON to embeddings
     public async Task ProcessJsonFileAsync(string jsonFilePath, string csvFilePath, string apiKey, int saveInterval)
     {
         try
         {
+            // Ensure clean output file
             Console.WriteLine($"Ensuring {csvFilePath} is deleted before processing...");
             if (File.Exists(csvFilePath))
             {
@@ -170,10 +179,12 @@ public class EmbeddingProcessor : IEmbeddingProcessor
                 Console.WriteLine($"Previous output file deleted: {csvFilePath}");
             }
 
+            // Extract data from JSON
             Console.WriteLine("Reading and analyzing JSON file...");
             string jsonContent = await ReadJsonFileAsync(jsonFilePath);
             List<string> analyzedData = AnalyzeJson(jsonContent);
 
+            // Generate and save embeddings
             Console.WriteLine("Starting embedding generation...");
             await GenerateAndSaveEmbeddingsAsync(apiKey, analyzedData, csvFilePath, saveInterval);
         }
@@ -183,6 +194,7 @@ public class EmbeddingProcessor : IEmbeddingProcessor
         }
     }
 
+    // Loads application configuration from appsettings.json
     public static IConfigurationRoot LoadConfiguration()
     {
         return new ConfigurationBuilder()

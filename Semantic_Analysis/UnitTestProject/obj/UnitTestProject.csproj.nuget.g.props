@@ -5,12 +5,12 @@
     <RestoreTool Condition=" '$(RestoreTool)' == '' ">NuGet</RestoreTool>
     <ProjectAssetsFile Condition=" '$(ProjectAssetsFile)' == '' ">$(MSBuildThisFileDirectory)project.assets.json</ProjectAssetsFile>
     <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">$(UserProfile)\.nuget\packages\</NuGetPackageRoot>
-    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">C:\Users\amman\.nuget\packages\;C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages</NuGetPackageFolders>
+    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">C:\Users\ADMIN\.nuget\packages\;C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages</NuGetPackageFolders>
     <NuGetProjectStyle Condition=" '$(NuGetProjectStyle)' == '' ">PackageReference</NuGetProjectStyle>
-    <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">6.13.2</NuGetToolVersion>
+    <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">6.12.1</NuGetToolVersion>
   </PropertyGroup>
   <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <SourceRoot Include="C:\Users\amman\.nuget\packages\" />
+    <SourceRoot Include="C:\Users\ADMIN\.nuget\packages\" />
     <SourceRoot Include="C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages\" />
   </ItemGroup>
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
@@ -23,8 +23,8 @@
     <Import Project="$(NuGetPackageRoot)microsoft.net.test.sdk\17.11.1\build\netcoreapp3.1\Microsoft.NET.Test.Sdk.props" Condition="Exists('$(NuGetPackageRoot)microsoft.net.test.sdk\17.11.1\build\netcoreapp3.1\Microsoft.NET.Test.Sdk.props')" />
   </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <PkgXceed_Words_NET Condition=" '$(PkgXceed_Words_NET)' == '' ">C:\Users\amman\.nuget\packages\xceed.words.net\4.0.25103.5784</PkgXceed_Words_NET>
-    <PkgDocX Condition=" '$(PkgDocX)' == '' ">C:\Users\amman\.nuget\packages\docx\4.0.25105.5786</PkgDocX>
-    <PkgMSTest_Analyzers Condition=" '$(PkgMSTest_Analyzers)' == '' ">C:\Users\amman\.nuget\packages\mstest.analyzers\3.6.1</PkgMSTest_Analyzers>
+    <PkgXceed_Words_NET Condition=" '$(PkgXceed_Words_NET)' == '' ">C:\Users\ADMIN\.nuget\packages\xceed.words.net\4.0.25103.5784</PkgXceed_Words_NET>
+    <PkgDocX Condition=" '$(PkgDocX)' == '' ">C:\Users\ADMIN\.nuget\packages\docx\4.0.25105.5786</PkgDocX>
+    <PkgMSTest_Analyzers Condition=" '$(PkgMSTest_Analyzers)' == '' ">C:\Users\ADMIN\.nuget\packages\mstest.analyzers\3.6.1</PkgMSTest_Analyzers>
   </PropertyGroup>
 </Project>
