@@ -105,6 +105,9 @@ namespace Semantic_Analysis
             List<string> cleanedReferenceData = await Task.Run(() => processor.CleanData(referenceData));
             await Task.Run(() => processor.SaveDataToJson(outputReferenceDocumentFilePath, cleanedReferenceData, "reference"));
 
+            // Output the result of the data extraction
+            Console.WriteLine($"Data extracted and saved to: {outputExtractedDataFilePath}");
+            Console.WriteLine($"Reference document data extracted and saved to: {outputReferenceDocumentFilePath}");
             Console.WriteLine("Data extraction completed successfully.");
         }
 

@@ -13,8 +13,11 @@
     <SourceRoot Include="C:\Users\ADMIN\.nuget\packages\" />
     <SourceRoot Include="C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages\" />
   </ItemGroup>
+<<<<<<< HEAD
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <PkgXceed_Words_NET Condition=" '$(PkgXceed_Words_NET)' == '' ">C:\Users\ADMIN\.nuget\packages\xceed.words.net\4.0.25103.5784</PkgXceed_Words_NET>
     <PkgDocX Condition=" '$(PkgDocX)' == '' ">C:\Users\ADMIN\.nuget\packages\docx\4.0.25105.5786</PkgDocX>
   </PropertyGroup>
+=======
+>>>>>>> origin/Aman-Patel
 </Project>

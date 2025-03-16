@@ -1,5 +1,13 @@
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+<<<<<<< HEAD
+=======
+using OpenAI.Embeddings;
+using Semantic_Analysis;
+
+namespace Embeddings_UnitTest
+
+>>>>>>> origin/Aman-Patel
 
 namespace EmbeddingProcessor_UnitTest
 {
