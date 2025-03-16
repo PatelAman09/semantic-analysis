@@ -1,130 +1,156 @@
 # **Semantic Analysis Of Textual Data**
 
 ## **Project Overview**
+
 The Semantic Analysis Project is a pipeline designed to process documents, extract meaningful data, and perform semantic analysis. The project involves cleaning and filtering text, generating embeddings, calculating cosine similarity, and visualizing the results through charts and heatmaps.
 
 ---
 
 ## **Project Workflow**
 
-### 1. **Document Cleaning and Filtering**
-   - **Input**: Raw document (e.g., text, PDF, or any unstructured data).
-   - **Process**:
-     - Text cleaning: Remove noise, special characters, and unnecessary formatting.
-     - Filtering: Extract relevant information for analysis.
-   - **Output**: A structured JSON file representing the cleaned and filtered data.
+### 1. **Document Cleaning and Extraction**
+
+- **Input**: Raw document (e.g., text, PDF, or any unstructured data).
+- **Process**:
+  - Text cleaning: Remove noise, special characters, and unnecessary formatting.
+  - Filtering: Extract relevant information for analysis.
+- **Output**: A structured JSON file representing the cleaned and filtered data.
 
 ---
 
 ### 2. **Embedding Generation**
-   - **Input**: JSON file created in the previous step.
-   - **Process**:
-     - Upload the JSON file.
-     - Generate embeddings for the text using OpenAI's `text-embedding-ada-002` model.
-   - **Output**: A CSV file with two columns:
-     - **Text**: The original extracted data.
-     - **Embedding**: Numerical vectors representing semantic meaning.
+
+- **Input**: JSON file created in the previous step.
+- **Process**:
+  - Upload the JSON file.
+  - Generate embeddings for the text using OpenAI's `text-embedding-ada-002` model.
+- **Output**: A CSV file with two columns:
+  - **Text**: The original extracted data.
+  - **Embedding**: Numerical vectors representing semantic meaning.
 
 ---
 
 ### 3. **Cosine Similarity Calculation**
-   - **Input**: CSV file with embeddings.
-   - **Process**:
-     - Calculate the cosine similarity between embeddings to measure the semantic similarity between text data points.
-   - **Output**: A CSV file representing a similarity matrix.
+
+- **Input**: CSV file with embeddings.
+- **Process**:
+  - Calculate the cosine similarity between embeddings to measure the semantic similarity between text data points.
+- **Output**: A CSV file representing a similarity matrix.
 
 ---
 
 ### 4. **Visualization**
-   - **Input**: Cosine similarity CSV file.
-   - **Process**:
-     - Generate visualizations (e.g., heatmaps, bar charts) for analyzing and presenting results.
-     - Tools: Excel, Python (Matplotlib, Seaborn), or any preferred data visualization library.
-   - **Output**: Graphical representations of semantic similarities.
+
+- **Input**: Cosine similarity CSV file.
+- **Process**:
+  - Generate visualizations (e.g., heatmaps, scatter plots) for analyzing and presenting results.
+- **Output**: Graphical representations of semantic similarities.
 
 ---
 
-## **Features**
-- Automated processing of documents into structured JSON data.
-- Embedding generation using OpenAI’s cutting-edge `text-embedding-ada-002` model.
-- Semantic similarity analysis through cosine similarity calculations.
-- Easy-to-interpret visualizations like bar charts and heatmaps.
+## **Project Structure**
+
+```
+📂 Semantic_Analysis
+│-- 📂 CSVOutput/              # Folder storing CSV files
+│-- 📂 EmbeddingOutput/        # Folder storing generated embeddings
+│-- 📂 ExtractedData/         # Folder containing input documents
+│-- 📂 ScatterPlot/            # Folder storing visualization results
+│-- 📂 Interfaces/             # Folder containing interface definitions
+│-- 📂 RawData/                # Folder for unprocessed files
+│-- 📜 appsettings.json       # Configuration file
+│-- 📜 CosineSimilarity.cs    # Script for cosine similarity calculation
+│-- 📜 DataExtraction.cs      # Script for document processing
+│-- 📜 EmbeddingProcessor.cs  # Script for generating embeddings
+│-- 📜 Program.cs             # Main entry point
+│-- 📜 Visualization.cs       # Script for visualization
+
+📂 UnitTestProject
+│-- 📜 CosineSimilarityUnitTest.cs  # Unit tests for cosine similarity
+│-- 📜 DataExtractionTest.cs        # Unit tests for data extraction
+│-- 📜 EmbeddingUnitTest.cs         # Unit tests for embedding processor
+```
+
+---
+
+## **Dependencies**
+
+### **For Data Extraction:**
+
+```csharp
+using System.Text.RegularExpressions;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
+using iText.Kernel.Pdf;
+using iText.Kernel.Pdf.Canvas.Parser.Listener;
+using iText.Kernel.Pdf.Canvas.Parser;
+using System.Xml.Linq;
+
+```
+
+### **For Embedding Processor:**
+
+```csharp
+using System.Globalization;
+using System.Text;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using OpenAI.Embeddings;
+using Semantic_Analysis.Interfaces;
+```
+
+### **For Cosine Similarity:**
+
+```csharp
+using Microsoft.Extensions.Configuration;
+using Semantic_Analysis.Interfaces;
+using System.Globalization;
+using System.Text;
+```
 
 ---
 
 ## **Setup Instructions**
 
 ### 1. **Prerequisites**
-- **Programming Language**: C#
-- **Dependencies**:
-  - Newtonsoft.Json (for JSON handling)
-  - HttpClient (for API calls)
-  - Tools for visualization (e.g., Python libraries or Excel)
 
-### 2. **Installation**
-- Clone the repository:
-  ```bash
-  git clone <repository_url>
-  cd <project_folder>
-  ```
-- Install dependencies:
-  ```bash
-  dotnet add package Newtonsoft.Json
-  ```
+- **Programming Language**: .NET Core
+- **Dependencies**: Install required NuGet packages
 
 ---
 
 ## **Usage Instructions**
 
-### Step 1: Document Cleaning and JSON Creation
-1. Place your raw document in the designated folder (`/input`).
-2. Run the cleaning and filtering script to generate a structured JSON file.
+1. Place your raw documents in the `RawData/` folder.  
+2. Open a CMD or any Terminal and navigate to the project root.  
+3. Build the project using:  
+   ```sh
+   dotnet build
+4. Navigate to the output directory:
+   ```sh
+   cd bin/Debug/{YourDotNetVersion}/
+5. Run the executable:
+   ```sh
+   ./Semantic_Analysis.exe
+---
 
-### Step 2: Upload JSON for Embeddings
-1. Specify the path to your JSON file in the configuration or runtime input.
-2. Run the embedding generation script to create the embeddings CSV.
+### Sample Output Files  
 
-### Step 3: Calculate Cosine Similarity
-1. Use the embeddings CSV as input for the cosine similarity function.
-2. Generate the similarity matrix CSV.
+To provide reference outputs, the project includes a `sample_outputs/` folder.  
+This folder contains:  
+- **Raw Data**: Input documents.  
+- **Cosine Similarity**: Precomputed similarity matrices for testing.  
+- **Visualizations**: Scatter plot charts for understanding the analysis results.
+---
 
-### Step 4: Visualization
-1. Load the similarity matrix CSV into the visualization tool.
-2. Generate and analyze the heatmap or bar charts.
+## **Team Members**
+
+-  Muhammad Ahsan Ijaz
+-  Aman Basha Patel
+-  Saqib Attar
 
 ---
 
-## **Examples**
-
-### **Sample Workflow**
-1. Input:  
-   Raw document with text like:
-   ```
-   Climate change is a pressing global issue.
-   Renewable energy is key to a sustainable future.
-   ```
-
-2. Output:
-   - JSON file:
-     ```json
-     [
-       { "text": "Climate change is a pressing global issue." },
-       { "text": "Renewable energy is key to a sustainable future." }
-     ]
-     ```
-   - Embeddings CSV:
-     ```
-     Text,Embedding
-     "Climate change is a pressing global issue.","[0.123, 0.456, 0.789]"
-     "Renewable energy is key to a sustainable future.","[0.234, 0.567, 0.890]"
-     ```
-   - Cosine similarity CSV:
-     ```
-     ,0,1
-     0,1.0,0.89
-     1,0.89,1.0
-     ```
-   - Heatmap:  
-     A graphical representation of similarity scores.
 
 
