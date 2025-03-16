@@ -51,6 +51,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "DocumentFormat.OpenXml": {
+              "target": "Package",
+              "version": "[3.3.0, )"
+            },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
               "version": "[9.0.1, )"
@@ -74,10 +78,6 @@
             "OpenAI": {
               "target": "Package",
               "version": "[2.1.0, )"
-            },
-            "Xceed.Words.NET": {
-              "target": "Package",
-              "version": "[4.0.25103.5784, )"
             },
             "itext7": {
               "target": "Package",

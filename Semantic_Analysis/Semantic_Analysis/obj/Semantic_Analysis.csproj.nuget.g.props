@@ -13,7 +13,4 @@
     <SourceRoot Include="C:\Users\Lenovo\.nuget\packages\" />
     <SourceRoot Include="C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages\" />
   </ItemGroup>
-  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <PkgXceed_Words_NET Condition=" '$(PkgXceed_Words_NET)' == '' ">C:\Users\Lenovo\.nuget\packages\xceed.words.net\4.0.25103.5784</PkgXceed_Words_NET>
-  </PropertyGroup>
 </Project>

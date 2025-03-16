@@ -335,6 +335,8 @@ D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\UnitTestProject.runtimeconfig.json
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\UnitTestProject.dll
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\UnitTestProject.pdb
+D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\DocumentFormat.OpenXml.dll
+D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\DocumentFormat.OpenXml.Framework.dll
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\itext.barcodes.dll
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\itext.bouncy-castle-connector.dll
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\itext.forms.dll
@@ -384,7 +386,6 @@ D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\Newtonsoft.Json.dll
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\OpenAI.dll
-D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\SkiaSharp.dll
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\System.ClientModel.dll
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\System.CodeDom.dll
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\System.ComponentModel.Composition.dll
@@ -428,10 +429,6 @@ D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\System.Threading.AccessControl.dll
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\System.Web.Services.Description.dll
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\System.Windows.Extensions.dll
-D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\Xceed.Document.NET.dll
-D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\Xceed.Drawing.NET.dll
-D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\Xceed.PDF.NET.dll
-D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\Xceed.Words.NET.dll
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\cs\Microsoft.Testing.Extensions.Telemetry.resources.dll
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\de\Microsoft.Testing.Extensions.Telemetry.resources.dll
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\es\Microsoft.Testing.Extensions.Telemetry.resources.dll
@@ -609,10 +606,6 @@ D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\runtimes\win-arm64\native\sni.dll
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\runtimes\win-x64\native\sni.dll
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\runtimes\win-x86\native\sni.dll
-D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\runtimes\osx\native\libSkiaSharp.dylib
-D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\runtimes\win-arm64\native\libSkiaSharp.dll
-D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\runtimes\win-x64\native\libSkiaSharp.dll
-D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\runtimes\win-x86\native\libSkiaSharp.dll
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\runtimes\unix\lib\net8.0\System.Data.Odbc.dll
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\System.Data.Odbc.dll
 D:\IT\Software Engineering\SE Project\Saquib\semantic-analysis\Semantic_Analysis\UnitTestProject\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\System.Data.OleDb.dll

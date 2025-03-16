@@ -9,7 +9,9 @@ using iText.Kernel.Pdf;
 using iText.Kernel.Pdf.Canvas.Parser.Listener;
 using iText.Kernel.Pdf.Canvas.Parser;
 using System.Xml.Linq;
-using Xceed.Words.NET;  // Add the necessary reference for DocX
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Wordprocessing;
+
 
 namespace Semantic_Analysis
 {
@@ -315,7 +317,7 @@ namespace Semantic_Analysis
         }
 
         /// <summary>
-        /// Extracts data from a DOCX (.docx) file.
+        /// Extracts data from a DOCX (.docx) file using the Open XML SDK.
         /// </summary>
         /// <param name="filePath">The path of the DOCX file to extract data from.</param>
         /// <returns>A list of strings representing the extracted text from the DOCX file.</returns>
@@ -324,11 +326,18 @@ namespace Semantic_Analysis
             var content = new List<string>();
             try
             {
-                using (var doc = DocX.Load(filePath))
+                // Open the DOCX file
+                using (WordprocessingDocument wordDoc = WordprocessingDocument.Open(filePath, false))
                 {
-                    foreach (var paragraph in doc.Paragraphs)
+                    // Access the main document part
+                    var body = wordDoc.MainDocumentPart.Document.Body;
+
+                    // Extract the text from each paragraph
+                    foreach (var paragraph in body.Descendants<Paragraph>())
                     {
-                        content.Add(paragraph.Text);
+                        // Extract and add text from the paragraph
+                        var paragraphText = string.Join(" ", paragraph.Descendants<Text>().Select(text => text.Text));
+                        content.Add(paragraphText);
                     }
                 }
             }
@@ -339,7 +348,6 @@ namespace Semantic_Analysis
             }
             return content;
         }
-
         #endregion
 
         #region Data Processing Methods
