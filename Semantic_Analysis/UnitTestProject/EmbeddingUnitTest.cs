@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using OpenAI.Embeddings;
-using Semantic_Analysis.Interfaces;
+using Semantic_Analysis;
 
 namespace Embeddings_UnitTest
 
