@@ -43,7 +43,7 @@ The Semantic Analysis Project is a pipeline designed to process documents, extra
 
 - **Input**: Cosine similarity CSV file.
 - **Process**:
-  - Generate visualizations (e.g., heatmaps, scatter plots) for analyzing and presenting results.
+  - Generate visualizations scatter plots for analyzing and presenting results.
 - **Output**: Graphical representations of semantic similarities.
 
 ---
@@ -85,6 +85,8 @@ using iText.Kernel.Pdf;
 using iText.Kernel.Pdf.Canvas.Parser.Listener;
 using iText.Kernel.Pdf.Canvas.Parser;
 using System.Xml.Linq;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Wordprocessing;
 
 ```
 
