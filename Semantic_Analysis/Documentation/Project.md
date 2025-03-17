@@ -55,16 +55,16 @@ The Semantic Analysis Project is a pipeline designed to process documents, extra
 📂 Semantic_Analysis
 │-- 📂 CSVOutput/              # Folder storing CSV files
 │-- 📂 EmbeddingOutput/        # Folder storing generated embeddings
-│-- 📂 ExtractedData/         # Folder containing input documents
+│-- 📂 ExtractedData/          # Folder containing input documents
 │-- 📂 ScatterPlot/            # Folder storing visualization results
 │-- 📂 Interfaces/             # Folder containing interface definitions
 │-- 📂 RawData/                # Folder for unprocessed files
-│-- 📜 appsettings.json       # Configuration file
-│-- 📜 CosineSimilarity.cs    # Script for cosine similarity calculation
-│-- 📜 DataExtraction.cs      # Script for document processing
-│-- 📜 EmbeddingProcessor.cs  # Script for generating embeddings
-│-- 📜 Program.cs             # Main entry point
-│-- 📜 Visualization.cs       # Script for visualization
+│-- 📜 appsettings.json        # Configuration file
+│-- 📜 CosineSimilarity.cs     # Script for cosine similarity calculation
+│-- 📜 DataExtraction.cs       # Script for document processing
+│-- 📜 EmbeddingProcessor.cs   # Script for generating embeddings
+│-- 📜 Program.cs              # Main entry point
+│-- 📜 Visualization.cs        # Script for visualization
 
 📂 UnitTestProject
 │-- 📜 CosineSimilarityUnitTest.cs  # Unit tests for cosine similarity
