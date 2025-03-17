@@ -3,7 +3,7 @@
 
 ## **Project Overview**
 
-The Semantic Analysis Project is a pipeline designed to process documents, extract meaningful data, and perform semantic analysis. The project involves cleaning and filtering text, generating embeddings, calculating cosine similarity, and visualizing the results through charts and heatmaps.
+The Semantic Analysis Project is a pipeline designed to process documents, extract meaningful data, and perform semantic analysis. The project involves cleaning and filtering text, generating embeddings, calculating cosine similarity, and visualizing the results through scatter plot.
 
 ---
 
