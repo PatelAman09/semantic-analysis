@@ -25,7 +25,6 @@
 		<PackageReference Include="OxyPlot.Core" Version="2.2.0" />
 		<PackageReference Include="OxyPlot.SkiaSharp" Version="2.2.0" />
 		<PackageReference Include="ScottPlot" Version="5.0.54" />
-		<PackageReference Include="Xceed.Words.NET" Version="4.0.25103.5784" />
 	</ItemGroup>
 
 
