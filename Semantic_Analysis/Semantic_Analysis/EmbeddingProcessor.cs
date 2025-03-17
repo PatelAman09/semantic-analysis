@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 using OpenAI.Embeddings;
 using Semantic_Analysis.Interfaces;
 
-// Class for processing JSON data and generating OpenAI embeddings
+// Modified class to process JSON data with user input for processing method
 public class EmbeddingProcessor : IEmbeddingProcessor
 {
     // Reads JSON file content from the specified path
@@ -18,7 +18,23 @@ public class EmbeddingProcessor : IEmbeddingProcessor
         return await File.ReadAllTextAsync(jsonFilePath);
     }
 
-    // Extracts data elements from JSON by traversing the structure recursively
+    // Processes JSON as a whole document
+    public List<string> ProcessWholeJson(string jsonContent)
+    {
+        try
+        {
+            JsonConvert.DeserializeObject(jsonContent);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"The provided JSON content is empty or malformed: {ex.Message}");
+        }
+
+        // Return the entire document as a single string
+        return new List<string> { jsonContent };
+    }
+
+    // Original method to break down JSON into elements
     public List<string> AnalyzeJson(string jsonContent)
     {
         var parsedJson = JsonConvert.DeserializeObject(jsonContent);
@@ -74,7 +90,6 @@ public class EmbeddingProcessor : IEmbeddingProcessor
                 Console.WriteLine($"Attempt {attempt + 1} failed for text: \"{snippet}\": {ex.Message}. Retrying...");
                 attempt++;
                 // Exponential backoff delay between retries
-                // Exponential backoff: 1s, 2s, 3s, etc.
                 await Task.Delay((attempt) * 1000);
             }
         }
@@ -151,22 +166,7 @@ public class EmbeddingProcessor : IEmbeddingProcessor
         Console.WriteLine("All embeddings processed and saved.");
     }
 
-    // Saves processed data to a CSV file
-    public void SaveOutputToCsv(string outputFilePath, List<string> outputData)
-    {
-        try
-        {
-            Console.WriteLine($"Attempting to write {outputData.Count} lines to {outputFilePath}");
-            File.WriteAllLines(outputFilePath, outputData);
-            Console.WriteLine($"File successfully saved: {outputFilePath}");
-        }
-        catch (IOException ex)
-        {
-            Console.WriteLine($"Error saving output file '{outputFilePath}': {ex.Message}");
-        }
-    }
-
-    // Main processing method that handles the full workflow from JSON to embeddings
+    // Main processing method that handles the full workflow with user input for processing method
     public async Task ProcessJsonFileAsync(string jsonFilePath, string csvFilePath, string apiKey, int saveInterval)
     {
         try
@@ -179,14 +179,34 @@ public class EmbeddingProcessor : IEmbeddingProcessor
                 Console.WriteLine($"Previous output file deleted: {csvFilePath}");
             }
 
-            // Extract data from JSON
-            Console.WriteLine("Reading and analyzing JSON file...");
+            // Read JSON content
+            Console.WriteLine($"Reading JSON file: {jsonFilePath}");
             string jsonContent = await ReadJsonFileAsync(jsonFilePath);
-            List<string> analyzedData = AnalyzeJson(jsonContent);
+
+            // Ask user for processing preference for this file
+            Console.WriteLine($"\nHow would you like to process {Path.GetFileName(jsonFilePath)}?");
+            Console.WriteLine("1. Break down into individual elements (words/phrases)");
+            Console.WriteLine("2. Process as a whole document (single embedding)");
+            Console.Write("Enter your choice (1 or 2): ");
+            string choice = Console.ReadLine();
+
+            List<string> processedData;
+            if (choice == "2")
+            {
+                Console.WriteLine("Processing as a whole document...");
+                processedData = ProcessWholeJson(jsonContent);
+            }
+            else
+            {
+                Console.WriteLine("Breaking down into individual elements...");
+                processedData = AnalyzeJson(jsonContent);
+            }
+
+            Console.WriteLine($"Extracted {processedData.Count} items for processing.");
 
             // Generate and save embeddings
             Console.WriteLine("Starting embedding generation...");
-            await GenerateAndSaveEmbeddingsAsync(apiKey, analyzedData, csvFilePath, saveInterval);
+            await GenerateAndSaveEmbeddingsAsync(apiKey, processedData, csvFilePath, saveInterval);
         }
         catch (Exception ex)
         {
@@ -208,13 +228,12 @@ public class EmbeddingProcessor : IEmbeddingProcessor
     //    try
     //    {
     //        IConfigurationRoot config = LoadConfiguration();
-    //        string inputFolder = config["FilePaths:EmbeddingProcessorInput"];
+    //        string inputFolder = config["FilePaths:ExtractedData"];
     //        string outputFolder = config["FilePaths:InputFolder"];
 
     //        string rootDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
     //        string outputFile1 = Path.Combine(rootDirectory, outputFolder, config["FilePaths:InputFileName1"]);
     //        string outputFile2 = Path.Combine(rootDirectory, outputFolder, config["FilePaths:InputFileName2"]);
-
 
     //        string apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY")
     //            ?? throw new Exception("Environment variable 'OPENAI_API_KEY' is not set.");
@@ -241,13 +260,17 @@ public class EmbeddingProcessor : IEmbeddingProcessor
     //        if (jsonFiles.Length < 2)
     //            throw new Exception("Expected at least two JSON files in the input folder.");
 
-    //        Console.WriteLine($"Processing files: {jsonFiles[0]} and {jsonFiles[1]}");
+    //        Console.WriteLine($"Found JSON files: {string.Join(", ", jsonFiles.Select(Path.GetFileName))}");
 
+    //        // Create processor
     //        IEmbeddingProcessor processor = new EmbeddingProcessor();
-    //        await Task.WhenAll(
-    //            processor.ProcessJsonFileAsync(jsonFiles[0], outputFile1, apiKey, 10),
-    //            processor.ProcessJsonFileAsync(jsonFiles[1], outputFile2, apiKey, 10)
-    //        );
+
+    //        // Process files sequentially to allow user input for each file
+    //        Console.WriteLine($"\nProcessing first file: {jsonFiles[0]}");
+    //        await processor.ProcessJsonFileAsync(jsonFiles[0], outputFile1, apiKey, 10);
+
+    //        Console.WriteLine($"\nProcessing second file: {jsonFiles[1]}");
+    //        await processor.ProcessJsonFileAsync(jsonFiles[1], outputFile2, apiKey, 10);
 
     //        Console.WriteLine("Embedding processing completed successfully.");
     //    }

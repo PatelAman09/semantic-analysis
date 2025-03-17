@@ -141,16 +141,17 @@ namespace Semantic_Analysis
                 throw new Exception($"Expected at least two JSON files in {inputFolder}, but found {jsonFiles.Length}.");
             }
 
-            Console.WriteLine($"Processing files: {Path.GetFileName(jsonFiles[0])} and {Path.GetFileName(jsonFiles[1])}");
+            Console.WriteLine($"Found JSON files: {string.Join(", ", jsonFiles.Select(Path.GetFileName))}");
 
             // Create embedding processor instance
             IEmbeddingProcessor processor = new EmbeddingProcessor();
 
-            // Process both files in parallel
-            await Task.WhenAll(
-                processor.ProcessJsonFileAsync(jsonFiles[0], outputFile1, apiKey, 10),
-                processor.ProcessJsonFileAsync(jsonFiles[1], outputFile2, apiKey, 10)
-            );
+            // Process files sequentially to allow user input for each file
+            Console.WriteLine($"\nProcessing first file: {Path.GetFileName(jsonFiles[0])}");
+            await processor.ProcessJsonFileAsync(jsonFiles[0], outputFile1, apiKey, 10);
+
+            Console.WriteLine($"\nProcessing second file: {Path.GetFileName(jsonFiles[1])}");
+            await processor.ProcessJsonFileAsync(jsonFiles[1], outputFile2, apiKey, 10);
 
             Console.WriteLine("Embedding generation completed successfully.");
         }
