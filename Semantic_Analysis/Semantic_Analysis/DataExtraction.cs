@@ -389,8 +389,8 @@ namespace Semantic_Analysis
                         cleanedSentence = Regex.Replace(cleanedSentence, @"^\d+\.\s*", "");
                     }
 
-                    // Remove non-alphanumeric characters, preserving spaces, periods, punctuation, and apostrophes
-                    cleanedSentence = Regex.Replace(cleanedSentence, @"[^a-zA-Z0-9\s.,!?'-]", "");
+                    // Remove non-alphanumeric characters, preserving spaces (and apostrophes)
+                    cleanedSentence = Regex.Replace(cleanedSentence, @"[^\w\s']", "");
 
                     // Add non-empty cleaned sentence to the list
                     if (!string.IsNullOrEmpty(cleanedSentence))
@@ -398,8 +398,13 @@ namespace Semantic_Analysis
                 }
             }
 
-            return cleanedData;
+            // Combine all the cleaned sentences into a single continuous block of text
+            string continuousData = string.Join(" ", cleanedData.Select(sentence => sentence.Trim()));
+
+            // Return the cleaned, continuous data as a single string wrapped in a list for compatibility
+            return new List<string> { continuousData };
         }
+
 
         /// <summary>
         /// Saves the extracted and cleaned data to a JSON file.
@@ -418,24 +423,11 @@ namespace Semantic_Analysis
                     Directory.CreateDirectory(directoryPath);
                 }
 
-                // Collect all cleaned sentences in a list
-                List<string> allSentences = new List<string>();
+                // Concatenate all the cleaned sentences into a single string with spaces separating them
+                string continuousData = string.Join(" ", data.Select(sentence => sentence.Trim()));
 
-                // Add each sentence to the list
-                foreach (var sentence in data)
-                {
-                    // Clean up the sentence by trimming whitespace
-                    string cleanedData = sentence.Trim();
-
-                    // Add the cleaned sentence to the list
-                    if (!string.IsNullOrEmpty(cleanedData))
-                    {
-                        allSentences.Add(cleanedData);
-                    }
-                }
-
-                // Serialize the list of sentences to JSON
-                string jsonData = JsonConvert.SerializeObject(allSentences, Formatting.Indented);
+                // Serialize the continuous string data to JSON
+                string jsonData = JsonConvert.SerializeObject(continuousData, Formatting.Indented);
 
                 // Write the JSON data to the output file
                 File.WriteAllText(outputFilePath, jsonData);
@@ -447,6 +439,7 @@ namespace Semantic_Analysis
                 Console.WriteLine($"Error saving data to JSON file: {ex.Message}");
             }
         }
+
 
         #endregion
     }
