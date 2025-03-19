@@ -51,6 +51,18 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "Avalonia": {
+              "target": "Package",
+              "version": "[11.2.5, )"
+            },
+            "Avalonia.Desktop": {
+              "target": "Package",
+              "version": "[11.2.5, )"
+            },
+            "Avalonia.Themes.Fluent": {
+              "target": "Package",
+              "version": "[11.2.5, )"
+            },
             "CsvHelper": {
               "target": "Package",
               "version": "[33.0.1, )"
@@ -83,15 +95,11 @@
               "target": "Package",
               "version": "[2.1.0, )"
             },
-            "OxyPlot.Core": {
-              "target": "Package",
-              "version": "[2.2.0, )"
-            },
-            "OxyPlot.SkiaSharp": {
-              "target": "Package",
-              "version": "[2.2.0, )"
-            },
             "ScottPlot": {
+              "target": "Package",
+              "version": "[5.0.54, )"
+            },
+            "ScottPlot.Avalonia": {
               "target": "Package",
               "version": "[5.0.54, )"
             },

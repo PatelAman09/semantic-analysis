@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
+﻿using System.Globalization;
 using System.Text;
-using System.Threading.Tasks;
+using System.Numerics;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using OpenAI.Embeddings; // OpenAI NuGet package
-using Semantic_Analysis.Interfaces; // Reference to the interface
+using OpenAI.Embeddings;
+using Semantic_Analysis.Interfaces;
 
 public class EmbeddingProcessor : IEmbeddingProcessor
 {
+    private const int MaxTokens = 8000; // Setting below the limit (8192) for safety
+    private const int EmbeddingDimension = 3072; // Dimension for text-embedding-3-large
+
+    // Reads JSON file content from the specified path
     public async Task<string> ReadJsonFileAsync(string jsonFilePath)
     {
         if (!File.Exists(jsonFilePath))
@@ -21,6 +21,50 @@ public class EmbeddingProcessor : IEmbeddingProcessor
         return await File.ReadAllTextAsync(jsonFilePath);
     }
 
+    // Split text into chunks that fit within token limits
+    private List<string> SplitIntoChunks(string text)
+    {
+        // Approximation: ~4 chars per token
+        int charsPerToken = 4;
+        int maxChars = MaxTokens * charsPerToken;
+
+        List<string> chunks = new List<string>();
+
+        for (int i = 0; i < text.Length; i += maxChars)
+        {
+            int length = Math.Min(maxChars, text.Length - i);
+            chunks.Add(text.Substring(i, length));
+        }
+
+        return chunks;
+    }
+
+    // Processes JSON as a whole document
+    public List<string> ProcessWholeJson(string jsonContent)
+    {
+        try
+        {
+            JsonConvert.DeserializeObject(jsonContent);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"The provided JSON content is empty or malformed: {ex.Message}");
+        }
+
+        // Check if content is likely to exceed token limit
+        int estimatedTokens = jsonContent.Length / 4; // Rough approximation
+
+        if (estimatedTokens > MaxTokens)
+        {
+            Console.WriteLine($"Content is too large (est. {estimatedTokens} tokens). Will process in chunks and average embeddings.");
+            return new List<string> { jsonContent }; // Return as one item, chunking will be handled during embedding
+        }
+
+        // If small enough, return as a single chunk
+        return new List<string> { jsonContent };
+    }
+
+    // Original method to break down JSON into elements
     public List<string> AnalyzeJson(string jsonContent)
     {
         var parsedJson = JsonConvert.DeserializeObject(jsonContent);
@@ -29,10 +73,12 @@ public class EmbeddingProcessor : IEmbeddingProcessor
         if (parsedJson == null)
             throw new Exception("The provided JSON content is empty or malformed.");
 
+        // Recursively traverses JSON structure to extract values with their paths
         void Traverse(object obj, string prefix = "")
         {
             if (obj is JObject jObject)
             {
+                // Process each property in JSON objects
                 foreach (var property in jObject.Properties())
                 {
                     Traverse(property.Value, $"{prefix}{property.Name}: ");
@@ -40,6 +86,7 @@ public class EmbeddingProcessor : IEmbeddingProcessor
             }
             else if (obj is JArray jArray)
             {
+                // Process each element in JSON arrays with index
                 for (int i = 0; i < jArray.Count; i++)
                 {
                     Traverse(jArray[i], $"{prefix}[{i}]: ");
@@ -47,6 +94,7 @@ public class EmbeddingProcessor : IEmbeddingProcessor
             }
             else if (obj is JValue jValue)
             {
+                // Add leaf node values to the extracted data
                 extractedData.Add($"{prefix.TrimEnd(' ')}{jValue.Value}");
             }
         }
@@ -55,6 +103,7 @@ public class EmbeddingProcessor : IEmbeddingProcessor
         return extractedData;
     }
 
+    // Generates embedding with retry logic and exponential backoff
     public async Task<OpenAIEmbedding> GenerateEmbeddingWithRetryAsync(EmbeddingClient client, string text, int maxRetries = 3)
     {
         int attempt = 0;
@@ -70,12 +119,69 @@ public class EmbeddingProcessor : IEmbeddingProcessor
                 string snippet = text.Length > 50 ? text.Substring(0, 50) + "..." : text;
                 Console.WriteLine($"Attempt {attempt + 1} failed for text: \"{snippet}\": {ex.Message}. Retrying...");
                 attempt++;
-                await Task.Delay((attempt) * 1000); // Exponential backoff: 1s, 2s, 3s, etc.
+                // Exponential backoff delay between retries
+                await Task.Delay((attempt) * 1000);
             }
         }
         throw new Exception("Failed to generate embedding after multiple attempts.");
     }
 
+    // Calculate average of multiple embeddings
+    private float[] AverageEmbeddings(List<float[]> embeddings)
+    {
+        if (embeddings.Count == 0)
+            throw new ArgumentException("Cannot average empty list of embeddings");
+
+        float[] result = new float[EmbeddingDimension];
+
+        // Sum all embeddings
+        foreach (var embedding in embeddings)
+        {
+            for (int i = 0; i < EmbeddingDimension; i++)
+            {
+                result[i] += embedding[i];
+            }
+        }
+
+        // Divide by count to get average
+        for (int i = 0; i < EmbeddingDimension; i++)
+        {
+            result[i] /= embeddings.Count;
+        }
+
+        return result;
+    }
+
+    // Generate embedding for potentially large text by splitting and averaging
+    private async Task<float[]> GenerateChunkedEmbeddingAsync(EmbeddingClient client, string text)
+    {
+        // Estimate token count
+        int estimatedTokens = text.Length / 4;
+
+        // If text is small enough, generate embedding directly
+        if (estimatedTokens <= MaxTokens)
+        {
+            OpenAIEmbedding embedding = await GenerateEmbeddingWithRetryAsync(client, text);
+            return embedding.ToFloats().ToArray();
+        }
+
+        // Split into chunks
+        List<string> chunks = SplitIntoChunks(text);
+        Console.WriteLine($"Processing document in {chunks.Count} chunks.");
+
+        // Generate embeddings for each chunk
+        List<float[]> chunkEmbeddings = new List<float[]>();
+        foreach (string chunk in chunks)
+        {
+            OpenAIEmbedding embedding = await GenerateEmbeddingWithRetryAsync(client, chunk);
+            chunkEmbeddings.Add(embedding.ToFloats().ToArray());
+        }
+
+        // Average the embeddings
+        return AverageEmbeddings(chunkEmbeddings);
+    }
+
+    // Processes text descriptions in batches and saves generated embeddings to CSV
     public async Task GenerateAndSaveEmbeddingsAsync(string apiKey, List<string> descriptions, string csvFilePath, int saveInterval)
     {
         Console.WriteLine($"Initializing OpenAI Embedding client... Output file: {csvFilePath}");
@@ -95,38 +201,56 @@ public class EmbeddingProcessor : IEmbeddingProcessor
             List<string> batch = descriptions.Skip(i).Take(batchSize).ToList();
             try
             {
-                // Attempt batch generation of embeddings for the current batch.
-                OpenAIEmbeddingCollection embeddingResults = await client.GenerateEmbeddingsAsync(batch.ToArray());
+                // Check if any item in the batch might exceed token limit
+                bool batchHasLargeItems = batch.Any(text => text.Length / 4 > MaxTokens);
 
-                if (embeddingResults != null && embeddingResults.Count == batch.Count)
+                if (!batchHasLargeItems)
                 {
-                    for (int j = 0; j < batch.Count; j++)
-                    {
-                        string description = batch[j];
-                        float[] embeddingArray = embeddingResults[j].ToFloats().ToArray();
-                        string embeddingString = string.Join(",", embeddingArray.Select(e => e.ToString(CultureInfo.InvariantCulture)));
-                        await writer.WriteLineAsync($"\"{description}\",\"{embeddingString}\"");
-                        processedCount++;
+                    // Standard batch processing for small items
+                    OpenAIEmbeddingCollection embeddingResults = await client.GenerateEmbeddingsAsync(batch.ToArray());
 
-                        if (processedCount % saveInterval == 0)
+                    if (embeddingResults != null && embeddingResults.Count == batch.Count)
+                    {
+                        for (int j = 0; j < batch.Count; j++)
                         {
-                            await writer.FlushAsync();
-                            Console.WriteLine($"Checkpoint reached: {processedCount} embeddings saved.");
+                            string description = batch[j];
+                            float[] embeddingArray = embeddingResults[j].ToFloats().ToArray();
+                            string embeddingString = string.Join(",", embeddingArray.Select(e => e.ToString(CultureInfo.InvariantCulture)));
+                            await writer.WriteLineAsync($"\"{description}\",\"{embeddingString}\"");
+                            processedCount++;
+
+                            if (processedCount % saveInterval == 0)
+                            {
+                                await writer.FlushAsync();
+                                Console.WriteLine($"Checkpoint reached: {processedCount} embeddings saved.");
+                            }
                         }
                     }
                 }
                 else
                 {
-                    // Fallback: If batch result count mismatches, process each description individually.
-                    Console.WriteLine("Batch result count mismatch. Falling back to individual processing for this batch.");
+                    // Process each item individually if batch contains large items
                     foreach (var description in batch)
                     {
-                        OpenAIEmbedding embedding = await GenerateEmbeddingWithRetryAsync(client, description);
-                        float[] embeddingArray = embedding.ToFloats().ToArray();
+                        float[] embeddingArray;
+
+                        if (description.Length / 4 > MaxTokens)
+                        {
+                            // For large texts, use chunking approach
+                            embeddingArray = await GenerateChunkedEmbeddingAsync(client, description);
+                        }
+                        else
+                        {
+                            // For regular sized texts, use standard approach
+                            OpenAIEmbedding embedding = await GenerateEmbeddingWithRetryAsync(client, description);
+                            embeddingArray = embedding.ToFloats().ToArray();
+                        }
+
                         string embeddingString = string.Join(",", embeddingArray.Select(e => e.ToString(CultureInfo.InvariantCulture)));
                         await writer.WriteLineAsync($"\"{description}\",\"{embeddingString}\"");
                         processedCount++;
 
+                        // Periodically save progress
                         if (processedCount % saveInterval == 0)
                         {
                             await writer.FlushAsync();
@@ -138,31 +262,51 @@ public class EmbeddingProcessor : IEmbeddingProcessor
             catch (Exception ex)
             {
                 Console.WriteLine($"[{DateTime.UtcNow}] Error processing batch starting at entry {i + 1}: {ex.Message}");
+
+                // Fallback: Process each item individually if batch processing fails
+                foreach (var description in batch)
+                {
+                    try
+                    {
+                        float[] embeddingArray;
+
+                        if (description.Length / 4 > MaxTokens)
+                        {
+                            embeddingArray = await GenerateChunkedEmbeddingAsync(client, description);
+                        }
+                        else
+                        {
+                            OpenAIEmbedding embedding = await GenerateEmbeddingWithRetryAsync(client, description);
+                            embeddingArray = embedding.ToFloats().ToArray();
+                        }
+
+                        string embeddingString = string.Join(",", embeddingArray.Select(e => e.ToString(CultureInfo.InvariantCulture)));
+                        await writer.WriteLineAsync($"\"{description}\",\"{embeddingString}\"");
+                        processedCount++;
+
+                        if (processedCount % saveInterval == 0)
+                        {
+                            await writer.FlushAsync();
+                            Console.WriteLine($"Checkpoint reached: {processedCount} embeddings saved.");
+                        }
+                    }
+                    catch (Exception itemEx)
+                    {
+                        Console.WriteLine($"[{DateTime.UtcNow}] Error processing individual item: {itemEx.Message}");
+                    }
+                }
             }
         }
 
         Console.WriteLine("All embeddings processed and saved.");
     }
 
-
-    public void SaveOutputToCsv(string outputFilePath, List<string> outputData)
-    {
-        try
-        {
-            Console.WriteLine($"Attempting to write {outputData.Count} lines to {outputFilePath}");
-            File.WriteAllLines(outputFilePath, outputData);
-            Console.WriteLine($"File successfully saved: {outputFilePath}");
-        }
-        catch (IOException ex)
-        {
-            Console.WriteLine($"Error saving output file '{outputFilePath}': {ex.Message}");
-        }
-    }
-
+    // Main processing method that handles the full workflow with user input for processing method
     public async Task ProcessJsonFileAsync(string jsonFilePath, string csvFilePath, string apiKey, int saveInterval)
     {
         try
         {
+            // Ensure clean output file
             Console.WriteLine($"Ensuring {csvFilePath} is deleted before processing...");
             if (File.Exists(csvFilePath))
             {
@@ -170,12 +314,34 @@ public class EmbeddingProcessor : IEmbeddingProcessor
                 Console.WriteLine($"Previous output file deleted: {csvFilePath}");
             }
 
-            Console.WriteLine("Reading and analyzing JSON file...");
+            // Read JSON content
+            Console.WriteLine($"Reading JSON file: {jsonFilePath}");
             string jsonContent = await ReadJsonFileAsync(jsonFilePath);
-            List<string> analyzedData = AnalyzeJson(jsonContent);
 
+            // Ask user for processing preference for this file
+            Console.WriteLine($"\nHow would you like to process {Path.GetFileName(jsonFilePath)}?");
+            Console.WriteLine("1. Break down into individual elements (words/phrases)");
+            Console.WriteLine("2. Process as a whole document (single embedding)");
+            Console.Write("Enter your choice (1 or 2): ");
+            string choice = Console.ReadLine();
+
+            List<string> processedData;
+            if (choice == "2")
+            {
+                Console.WriteLine("Processing as a whole document...");
+                processedData = ProcessWholeJson(jsonContent);
+            }
+            else
+            {
+                Console.WriteLine("Breaking down into individual elements...");
+                processedData = AnalyzeJson(jsonContent);
+            }
+
+            Console.WriteLine($"Extracted {processedData.Count} items for processing.");
+
+            // Generate and save embeddings
             Console.WriteLine("Starting embedding generation...");
-            await GenerateAndSaveEmbeddingsAsync(apiKey, analyzedData, csvFilePath, saveInterval);
+            await GenerateAndSaveEmbeddingsAsync(apiKey, processedData, csvFilePath, saveInterval);
         }
         catch (Exception ex)
         {
@@ -183,6 +349,7 @@ public class EmbeddingProcessor : IEmbeddingProcessor
         }
     }
 
+    // Loads application configuration from appsettings.json
     public static IConfigurationRoot LoadConfiguration()
     {
         return new ConfigurationBuilder()
@@ -196,13 +363,12 @@ public class EmbeddingProcessor : IEmbeddingProcessor
     //    try
     //    {
     //        IConfigurationRoot config = LoadConfiguration();
-    //        string inputFolder = config["FilePaths:EmbeddingProcessorInput"];
+    //        string inputFolder = config["FilePaths:ExtractedData"];
     //        string outputFolder = config["FilePaths:InputFolder"];
 
     //        string rootDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
     //        string outputFile1 = Path.Combine(rootDirectory, outputFolder, config["FilePaths:InputFileName1"]);
     //        string outputFile2 = Path.Combine(rootDirectory, outputFolder, config["FilePaths:InputFileName2"]);
-
 
     //        string apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY")
     //            ?? throw new Exception("Environment variable 'OPENAI_API_KEY' is not set.");
@@ -229,13 +395,17 @@ public class EmbeddingProcessor : IEmbeddingProcessor
     //        if (jsonFiles.Length < 2)
     //            throw new Exception("Expected at least two JSON files in the input folder.");
 
-    //        Console.WriteLine($"Processing files: {jsonFiles[0]} and {jsonFiles[1]}");
+    //        Console.WriteLine($"Found JSON files: {string.Join(", ", jsonFiles.Select(Path.GetFileName))}");
 
+    //        // Create processor
     //        IEmbeddingProcessor processor = new EmbeddingProcessor();
-    //        await Task.WhenAll(
-    //            processor.ProcessJsonFileAsync(jsonFiles[0], outputFile1, apiKey, 10),
-    //            processor.ProcessJsonFileAsync(jsonFiles[1], outputFile2, apiKey, 10)
-    //        );
+
+    //        // Process files sequentially to allow user input for each file
+    //        Console.WriteLine($"\nProcessing first file: {jsonFiles[0]}");
+    //        await processor.ProcessJsonFileAsync(jsonFiles[0], outputFile1, apiKey, 10);
+
+    //        Console.WriteLine($"\nProcessing second file: {jsonFiles[1]}");
+    //        await processor.ProcessJsonFileAsync(jsonFiles[1], outputFile2, apiKey, 10);
 
     //        Console.WriteLine("Embedding processing completed successfully.");
     //    }

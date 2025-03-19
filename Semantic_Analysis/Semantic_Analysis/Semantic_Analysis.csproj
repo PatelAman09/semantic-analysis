@@ -13,6 +13,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Avalonia" Version="11.2.5" />
+		<PackageReference Include="Avalonia.Desktop" Version="11.2.5" />
+		<PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.5" />
 		<PackageReference Include="CsvHelper" Version="33.0.1" />
 		<PackageReference Include="DocumentFormat.OpenXml" Version="3.3.0" />
 		<PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.2" />
@@ -22,9 +25,8 @@
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="OpenAI" Version="2.1.0" />
 		<PackageReference Include="itext7" Version="9.0.0" />
-		<PackageReference Include="OxyPlot.Core" Version="2.2.0" />
-		<PackageReference Include="OxyPlot.SkiaSharp" Version="2.2.0" />
 		<PackageReference Include="ScottPlot" Version="5.0.54" />
+		<PackageReference Include="ScottPlot.Avalonia" Version="5.0.54" />
 	</ItemGroup>
 
 
@@ -33,7 +35,16 @@
     <Folder Include="EmbeddingOutput\" />
     <Folder Include="ScatterPlot\" />
 	<Folder Include="ExtractedData\ " />
-	<Folder Include="RawData\ " />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Update="App.axaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="MainWindow.axaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
   </ItemGroup>
 
 </Project>

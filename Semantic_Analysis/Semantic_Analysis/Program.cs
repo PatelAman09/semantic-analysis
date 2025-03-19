@@ -1,3 +1,4 @@
+
 using Microsoft.Extensions.Configuration;
 using Semantic_Analysis;
 using Semantic_Analysis.Interfaces;
@@ -105,9 +106,6 @@ namespace Semantic_Analysis
             List<string> cleanedReferenceData = await Task.Run(() => processor.CleanData(referenceData));
             await Task.Run(() => processor.SaveDataToJson(outputReferenceDocumentFilePath, cleanedReferenceData, "reference"));
 
-            // Output the result of the data extraction
-            Console.WriteLine($"Data extracted and saved to: {outputExtractedDataFilePath}");
-            Console.WriteLine($"Reference document data extracted and saved to: {outputReferenceDocumentFilePath}");
             Console.WriteLine("Data extraction completed successfully.");
         }
 
@@ -144,16 +142,17 @@ namespace Semantic_Analysis
                 throw new Exception($"Expected at least two JSON files in {inputFolder}, but found {jsonFiles.Length}.");
             }
 
-            Console.WriteLine($"Processing files: {Path.GetFileName(jsonFiles[0])} and {Path.GetFileName(jsonFiles[1])}");
+            Console.WriteLine($"Found JSON files: {string.Join(", ", jsonFiles.Select(Path.GetFileName))}");
 
             // Create embedding processor instance
             IEmbeddingProcessor processor = new EmbeddingProcessor();
 
-            // Process both files in parallel
-            await Task.WhenAll(
-                processor.ProcessJsonFileAsync(jsonFiles[0], outputFile1, apiKey, 10),
-                processor.ProcessJsonFileAsync(jsonFiles[1], outputFile2, apiKey, 10)
-            );
+            // Process files sequentially to allow user input for each file
+            Console.WriteLine($"\nProcessing first file: {Path.GetFileName(jsonFiles[0])}");
+            await processor.ProcessJsonFileAsync(jsonFiles[0], outputFile1, apiKey, 10);
+
+            Console.WriteLine($"\nProcessing second file: {Path.GetFileName(jsonFiles[1])}");
+            await processor.ProcessJsonFileAsync(jsonFiles[1], outputFile2, apiKey, 10);
 
             Console.WriteLine("Embedding generation completed successfully.");
         }
@@ -265,7 +264,6 @@ namespace Semantic_Analysis
                 throw new Exception($"Error in cosine similarity calculation: {ex.Message}", ex);
             }
         }
-
         private static void ExecuteVisualizationStep(IConfiguration configuration, string rootDirectory)
         {
             Console.WriteLine("\nExecuting Step 4: Visualization...");
@@ -277,13 +275,12 @@ namespace Semantic_Analysis
                 string outputImagePath = Path.Combine(rootDirectory, configuration["FilePaths:ScatterPlotFolder"], scatterPlot);
                 Directory.CreateDirectory(Path.GetDirectoryName(outputImagePath));
 
-                var (xPositions, yValues, words, pairLabels, documentSimilarity) = Visualization.ProcessCsvData(csvFilePath);
+                var (xPositions, yValues, words, documentSimilarity) = Visualization.ProcessCsvData(csvFilePath);
 
                 Visualization.GenerateScatterPlot(
                     xPositions, // Assuming these are now static properties
                     yValues,
                     words,
-                    pairLabels,
                     documentSimilarity,
                     outputImagePath);
 
