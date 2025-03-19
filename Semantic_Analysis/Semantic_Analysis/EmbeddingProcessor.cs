@@ -6,7 +6,6 @@ using Newtonsoft.Json.Linq;
 using OpenAI.Embeddings;
 using Semantic_Analysis.Interfaces;
 
-// Modified class to process JSON data with user input for processing method
 public class EmbeddingProcessor : IEmbeddingProcessor
 {
     // Reads JSON file content from the specified path

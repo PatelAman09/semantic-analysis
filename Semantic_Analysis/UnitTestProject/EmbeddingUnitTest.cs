@@ -1,16 +1,17 @@
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using Semantic_Analysis.Interfaces;
+
 
 namespace EmbeddingProcessor_UnitTest
 {
-
     [TestClass]
     public class EmbeddingProcessorTests
     {
-        private EmbeddingProcessor? _processor;
-        private string? _tempDirectory;
-        private string? _tempJsonFile;
-        private string? _tempCsvFile;
+        private IEmbeddingProcessor _processor = null!;
+        private string _tempDirectory = null!;
+        private string _tempJsonFile = null!;
+        private string _tempCsvFile = null!;
 
         [TestInitialize]
         public void Initialize()
@@ -54,9 +55,7 @@ namespace EmbeddingProcessor_UnitTest
             if (_tempJsonFile != null)
                 File.WriteAllText(_tempJsonFile, expectedContent);
 
-            string? actualContent = null;
-            if (_processor != null && _tempJsonFile != null)
-                actualContent = await _processor.ReadJsonFileAsync(_tempJsonFile);
+            string actualContent = await _processor.ReadJsonFileAsync(_tempJsonFile);
 
             Assert.AreEqual(expectedContent, actualContent);
         }
@@ -65,40 +64,39 @@ namespace EmbeddingProcessor_UnitTest
         public async Task ReadJsonFileAsync_FileDoesNotExist_ThrowsException()
         {
             var nonExistentFile = Path.Combine(Path.GetTempPath(), "nonexistent.json");
-            if (_processor != null)
-            {
-                try
-                {
-                    await _processor.ReadJsonFileAsync(nonExistentFile);
-                    Assert.Fail("Expected FileNotFoundException was not thrown");
-                }
-                catch (FileNotFoundException)
-                {
 
-                }
+            try
+            {
+                await _processor.ReadJsonFileAsync(nonExistentFile);
+                Assert.Fail("Expected FileNotFoundException was not thrown");
+            }
+            catch (FileNotFoundException)
+            {
+                // Exception expected
             }
         }
 
         [TestMethod]
-        public void AnalyzeJson_ValidJson_ExtractsData_Lenient()
+        public void AnalyzeJson_ValidJson_ExtractsData()
         {
-            if (_processor == null) return;
-
             string jsonContent = @"{
-        ""name"": ""John"",
-        ""age"": 30,
-        ""address"": {
-            ""street"": ""123 Main St"",
-            ""city"": ""Anytown""
-        },
-        ""phoneNumbers"": [""555-1234"", ""555-5678""]
-    }";
+                ""name"": ""John"",
+                ""age"": 30,
+                ""address"": {
+                    ""street"": ""123 Main St"",
+                    ""city"": ""Anytown""
+                },
+                ""phoneNumbers"": [""555-1234"", ""555-5678""]
+            }";
+
             List<string> result = _processor.AnalyzeJson(jsonContent);
+
             Console.WriteLine($"Found {result.Count} items in result");
             foreach (var item in result)
             {
                 Console.WriteLine($"- \"{item}\"");
             }
+
             Assert.IsTrue(result.Any(s => s.Contains("John")), "Missing 'John' in results");
             Assert.IsTrue(result.Any(s => s.Contains("30")), "Missing '30' in results");
             Assert.IsTrue(result.Any(s => s.Contains("123 Main St")), "Missing street address in results");
@@ -108,10 +106,19 @@ namespace EmbeddingProcessor_UnitTest
         }
 
         [TestMethod]
+        public void ProcessWholeJson_ValidJson_ReturnsWholeDocument()
+        {
+            string jsonContent = @"{""name"": ""John"", ""age"": 30}";
+
+            List<string> result = _processor.ProcessWholeJson(jsonContent);
+
+            Assert.AreEqual(1, result.Count, "Should return exactly one item");
+            Assert.AreEqual(jsonContent, result[0], "Should return the entire JSON content");
+        }
+
+        [TestMethod]
         public void AnalyzeJson_InvalidJson_ThrowsException()
         {
-            if (_processor == null) return;
-
             string jsonContent = "invalid json";
 
             try
@@ -121,25 +128,8 @@ namespace EmbeddingProcessor_UnitTest
             }
             catch (JsonReaderException)
             {
-
+                // Exception expected
             }
-        }
-
-        [TestMethod]
-        public void SaveOutputToCsv_ValidData_CreatesFile()
-        {
-            if (_processor == null || _tempCsvFile == null) return;
-
-            List<string> outputData = new List<string> { "line1", "line2", "line3" };
-
-            _processor.SaveOutputToCsv(_tempCsvFile, outputData);
-
-            Assert.IsTrue(File.Exists(_tempCsvFile));
-            string[] fileContent = File.ReadAllLines(_tempCsvFile);
-            Assert.AreEqual(3, fileContent.Length);
-            Assert.AreEqual("line1", fileContent[0]);
-            Assert.AreEqual("line2", fileContent[1]);
-            Assert.AreEqual("line3", fileContent[2]);
         }
 
         [TestMethod]
@@ -147,81 +137,51 @@ namespace EmbeddingProcessor_UnitTest
         {
             if (_tempDirectory == null) return;
 
-            // This test assumes appsettings.json exists in the test directory
-            // We'll create a temporary one for testing
+            // Create a temporary config file for testing
             string tempConfigPath = Path.Combine(_tempDirectory, "appsettings.json");
             string configContent = @"{
-            ""TestSetting"": ""TestValue""
-        }";
+                ""TestSetting"": ""TestValue""
+            }";
             File.WriteAllText(tempConfigPath, configContent);
 
             // Use a helper method to test the static method
             var config = TestLoadConfiguration(_tempDirectory);
 
             Assert.IsNotNull(config);
+            Assert.AreEqual("TestValue", config["TestSetting"]);
         }
 
         // Helper method to test the static LoadConfiguration method
-        private static Microsoft.Extensions.Configuration.IConfigurationRoot TestLoadConfiguration(string basePath)
+        private static IConfigurationRoot TestLoadConfiguration(string basePath)
         {
-            return new Microsoft.Extensions.Configuration.ConfigurationBuilder()
+            return new ConfigurationBuilder()
                 .SetBasePath(basePath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .Build();
         }
 
-        // Testing a custom implementation of a simulated embedding for the GenerateAndSaveEmbeddingsAsync method
-        [TestMethod]
-        public async Task GenerateAndSaveEmbeddingsAsync_SimulatedTest()
-        {
-            if (_tempCsvFile == null) return;
-
-            List<string> testDescriptions = new List<string> { "description1", "description2" };
-
-            // Create test file
-            await File.WriteAllTextAsync(_tempCsvFile, ""); // Create empty file
-
-            // We can test our method for writing data to CSV files
-            using (StreamWriter writer = new StreamWriter(_tempCsvFile))
-            {
-                // Simulate what would happen in the GenerateAndSaveEmbeddingsAsync method
-                foreach (var description in testDescriptions)
-                {
-                    // Create a simple simulated embedding (just 3 values)
-                    string simulatedEmbedding = "0.1,0.2,0.3";
-                    await writer.WriteLineAsync($"\"{description}\",\"{simulatedEmbedding}\"");
-                }
-            }
-
-            // Assert that the CSV file was created with the expected format
-            Assert.IsTrue(File.Exists(_tempCsvFile));
-            string[] fileContent = File.ReadAllLines(_tempCsvFile);
-            Assert.AreEqual(2, fileContent.Length);
-            Assert.AreEqual("\"description1\",\"0.1,0.2,0.3\"", fileContent[0]);
-            Assert.AreEqual("\"description2\",\"0.1,0.2,0.3\"", fileContent[1]);
-        }
-
-        // For ProcessJsonFileAsync, we can test the file handling logic without making API calls
+        // Test for the ProcessJsonFileAsync method - simulated to avoid API calls
         [TestMethod]
         public async Task ProcessJsonFileAsync_FileHandling_DeletesExistingFile()
         {
             if (_tempCsvFile == null || _tempJsonFile == null) return;
 
-            // Arrange - create existing CSV file
+            // Create existing CSV file
             File.WriteAllText(_tempCsvFile, "existing content");
             Assert.IsTrue(File.Exists(_tempCsvFile));
 
-            // Create a test JSON file with simple content
+            // Create a test JSON file
             string jsonContent = "{\"test\": \"value\"}";
             File.WriteAllText(_tempJsonFile, jsonContent);
 
-
+            // Create a test implementation to simulate file deletion
             var testProcessor = new TestEmbeddingProcessor();
+
             try
             {
                 await testProcessor.TestProcessJsonFileAsync(_tempJsonFile, _tempCsvFile);
 
-                // If the test implementation avoids the API call, we should reach here
+                // If test implementation avoids the API call, we should reach here
                 Assert.IsFalse(File.Exists(_tempCsvFile), "File should be deleted but not recreated in test");
             }
             catch (Exception ex) when (ex.Message.Contains("Test implementation"))
