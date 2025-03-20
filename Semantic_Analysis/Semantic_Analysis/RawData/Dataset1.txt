@@ -1,4 +1,0 @@
-government.
-school.
-hospital.
-sports.

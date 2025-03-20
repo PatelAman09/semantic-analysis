@@ -65,7 +65,7 @@ namespace Semantic_Analysis
                     }
 
                     if (!string.IsNullOrEmpty(cleanedText) && vectorValues.Count > 0)
-                        vectors[index] = (cleanedText, NormalizeVector(vectorValues.ToArray()));
+                        vectors[index] = (cleanedText,(vectorValues.ToArray()));
                 }
             }
             catch (Exception ex)
@@ -80,11 +80,11 @@ namespace Semantic_Analysis
             return vectors;
         }
 
-        public double[] NormalizeVector(double[] vector)
-        {
-            double magnitude = Math.Sqrt(vector.Sum(v => v * v));
-            return magnitude == 0 ? vector : vector.Select(v => v / magnitude).ToArray();
-        }
+        //public double[] NormalizeVector(double[] vector)
+        //{
+        //    double magnitude = Math.Sqrt(vector.Sum(v => v * v));
+        //    return magnitude == 0 ? vector : vector.Select(v => v / magnitude).ToArray();
+        //}
 
         public void ValidateVectors(Dictionary<string, (string text, double[] vector)> vectors)
         {
