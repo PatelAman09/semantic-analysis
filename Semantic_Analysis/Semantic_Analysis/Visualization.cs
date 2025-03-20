@@ -11,34 +11,6 @@ namespace Semantic_Analysis
 {
     public class Visualization
     {
-        //public static void Main()
-        //{
-        //    try
-        //    {
-        //        IConfigurationRoot config = LoadConfiguration();
-
-        //        string csvFile = config["FilePaths:CSVOutputFileName"];
-        //        string scatterPlot = config["FilePaths:ScatterPlotOutputFile"];
-
-        //        string rootDirectory = Directory.GetParent(Directory.GetCurrentDirectory())?.Parent?.Parent?.FullName
-        //            ?? throw new DirectoryNotFoundException("Could not determine root directory");
-        //        string csvFilePath = Path.Combine(rootDirectory, config["FilePaths:OutputFolder"], csvFile);
-        //        string outputImagePath = Path.Combine(rootDirectory, config["FilePaths:ScatterPlotFolder"], scatterPlot);
-
-        //        Directory.CreateDirectory(Path.GetDirectoryName(outputImagePath));
-
-        //        (List<double> xPositions, List<double> yValues, List<string> words, List<string> pairLabels, double documentSimilarity) = ProcessCsvData(csvFilePath);
-
-        //        GenerateScatterPlot(xPositions, yValues, words, pairLabels, documentSimilarity, outputImagePath);
-
-        //        Console.WriteLine($"Plot successfully saved to {outputImagePath}");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine($"Error: {ex.Message}");
-        //        Console.WriteLine($"Stack trace: {ex.StackTrace}");
-        //    }
-        //}
 
         public static IConfigurationRoot LoadConfiguration()
         {
