@@ -1,4 +1,3 @@
-
 using Microsoft.Extensions.Configuration;
 using Semantic_Analysis;
 using Semantic_Analysis.Interfaces;
@@ -20,7 +19,6 @@ namespace Semantic_Analysis
                 Console.WriteLine("1. Data Extraction");
                 Console.WriteLine("2. Embedding Generation");
                 Console.WriteLine("3. Cosine Similarity Calculation");
-                Console.WriteLine("4. Visualization");
                 Console.WriteLine("================================");
 
                 // Load configuration
@@ -36,9 +34,6 @@ namespace Semantic_Analysis
                 // Step 3: Cosine Similarity Calculation
                 await ExecuteCosineSimilarityStepAsync(configuration, rootDirectory);
 
-                // Step 4: Visualization
-                ExecuteVisualizationStep(configuration, rootDirectory);
-
                 Console.WriteLine("Semantic Analysis workflow completed successfully!");
             }
             catch (Exception ex)
@@ -47,8 +42,6 @@ namespace Semantic_Analysis
                 Console.WriteLine(ex.StackTrace);
             }
         }
-
-
 
         private static async Task ExecuteDataExtractionStepAsync(IConfiguration configuration, string rootDirectory)
         {
@@ -200,32 +193,20 @@ namespace Semantic_Analysis
 
                 // Prepare output data
                 List<string> outputData = new List<string>();
-                outputData.Add("Index1,Index2,Word1,Word2,X_Position,Cosine_Similarity");
-
-                // Get ordered indices for consistent x-axis positioning
-                List<string> orderedIndices1 = vectorsFile1.Keys.OrderBy(k => k).ToList();
-
-                // Calculate step size for x-axis positioning
-                double xAxisRange = 536.0;
-                double stepSize = (orderedIndices1.Count > 1) ? xAxisRange / (orderedIndices1.Count - 1) : xAxisRange / 2;
-
+                outputData.Add("Word/Document,Word/Document,Cosine_Similarity"); 
 
                 // Process each pair of vectors (using Task.Run for CPU-bound calculations)
                 Console.WriteLine("Calculating cosine similarities for all pairs of vectors...");
 
                 var calculationTasks = new List<Task<string>>();
 
-                for (int i = 0; i < orderedIndices1.Count; i++)
+                foreach (var index1 in vectorsFile1.Keys)
                 {
-                    string index1 = orderedIndices1[i];
-                    int xPosition = (int)(i * stepSize);
-
                     foreach (var index2 in vectorsFile2.Keys)
                     {
                         // Capture values for lambda
                         string capturedIndex1 = index1;
                         string capturedIndex2 = index2;
-                        int capturedXPosition = xPosition;
 
                         calculationTasks.Add(Task.Run(() => {
                             double similarity = Math.Round(
@@ -235,7 +216,7 @@ namespace Semantic_Analysis
                                 ),
                                 10
                             );
-                            return $"{capturedIndex1},{capturedIndex2},\"{vectorsFile1[capturedIndex1].text}\",\"{vectorsFile2[capturedIndex2].text}\",{capturedXPosition},{similarity.ToString(System.Globalization.CultureInfo.InvariantCulture)}";
+                            return $"{vectorsFile1[capturedIndex1].text}\",\"{vectorsFile2[capturedIndex2].text}\",{similarity.ToString(System.Globalization.CultureInfo.InvariantCulture)}";
                         }));
                     }
                 }
@@ -262,34 +243,6 @@ namespace Semantic_Analysis
             catch (Exception ex)
             {
                 throw new Exception($"Error in cosine similarity calculation: {ex.Message}", ex);
-            }
-        }
-        private static void ExecuteVisualizationStep(IConfiguration configuration, string rootDirectory)
-        {
-            Console.WriteLine("\nExecuting Step 4: Visualization...");
-            try
-            {
-                string csvFile = configuration["FilePaths:CSVOutputFileName"];
-                string scatterPlot = configuration["FilePaths:ScatterPlotOutputFile"];
-                string csvFilePath = Path.Combine(rootDirectory, configuration["FilePaths:OutputFolder"], csvFile);
-                string outputImagePath = Path.Combine(rootDirectory, configuration["FilePaths:ScatterPlotFolder"], scatterPlot);
-                Directory.CreateDirectory(Path.GetDirectoryName(outputImagePath));
-
-                var (xPositions, yValues, words, documentSimilarity) = Visualization.ProcessCsvData(csvFilePath);
-
-                Visualization.GenerateScatterPlot(
-                    xPositions, // Assuming these are now static properties
-                    yValues,
-                    words,
-                    documentSimilarity,
-                    outputImagePath);
-
-                Console.WriteLine($"Plot successfully saved to {outputImagePath}");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error: {ex.Message}");
-                Console.WriteLine($"Stack trace: {ex.StackTrace}");
             }
         }
     }

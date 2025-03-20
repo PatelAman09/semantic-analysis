@@ -51,18 +51,6 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
-            "Avalonia": {
-              "target": "Package",
-              "version": "[11.2.5, )"
-            },
-            "Avalonia.Desktop": {
-              "target": "Package",
-              "version": "[11.2.5, )"
-            },
-            "Avalonia.Themes.Fluent": {
-              "target": "Package",
-              "version": "[11.2.5, )"
-            },
             "CsvHelper": {
               "target": "Package",
               "version": "[33.0.1, )"
@@ -73,19 +61,19 @@
             },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
-              "version": "[9.0.2, )"
+              "version": "[9.0.3, )"
             },
             "Microsoft.Extensions.Configuration.Abstractions": {
               "target": "Package",
-              "version": "[9.0.2, )"
+              "version": "[9.0.3, )"
             },
             "Microsoft.Extensions.Configuration.Json": {
               "target": "Package",
-              "version": "[9.0.2, )"
+              "version": "[9.0.3, )"
             },
             "Microsoft.Extensions.FileProviders.Physical": {
               "target": "Package",
-              "version": "[9.0.2, )"
+              "version": "[9.0.3, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
@@ -95,17 +83,9 @@
               "target": "Package",
               "version": "[2.1.0, )"
             },
-            "ScottPlot": {
-              "target": "Package",
-              "version": "[5.0.54, )"
-            },
-            "ScottPlot.Avalonia": {
-              "target": "Package",
-              "version": "[5.0.54, )"
-            },
             "itext7": {
               "target": "Package",
-              "version": "[9.0.0, )"
+              "version": "[9.1.0, )"
             }
           },
           "imports": [

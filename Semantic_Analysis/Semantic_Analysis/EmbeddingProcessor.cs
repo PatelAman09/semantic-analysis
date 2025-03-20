@@ -9,8 +9,8 @@ using Semantic_Analysis.Interfaces;
 
 public class EmbeddingProcessor : IEmbeddingProcessor
 {
-    private const int MaxTokens = 8000; // Setting below the limit (8192) for safety
-    private const int EmbeddingDimension = 3072; // Dimension for text-embedding-3-large
+    private const int MaxTokens = 8000;
+    private const int EmbeddingDimension = 3072;
 
     // Reads JSON file content from the specified path
     public async Task<string> ReadJsonFileAsync(string jsonFilePath)
@@ -64,7 +64,7 @@ public class EmbeddingProcessor : IEmbeddingProcessor
         return new List<string> { jsonContent };
     }
 
-    // Original method to break down JSON into elements
+    // Method to break down JSON into elements
     public List<string> AnalyzeJson(string jsonContent)
     {
         var parsedJson = JsonConvert.DeserializeObject(jsonContent);
@@ -357,6 +357,7 @@ public class EmbeddingProcessor : IEmbeddingProcessor
             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
             .Build();
     }
+
 
     //static async Task Main(string[] args)
     //{
