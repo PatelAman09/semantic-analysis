@@ -151,7 +151,6 @@ namespace EmbeddingProcessor_UnitTest
             Assert.AreEqual("TestValue", config["TestSetting"]);
         }
 
-        // Helper method to test the static LoadConfiguration method
         private static IConfigurationRoot TestLoadConfiguration(string basePath)
         {
             return new ConfigurationBuilder()
@@ -191,8 +190,7 @@ namespace EmbeddingProcessor_UnitTest
             }
         }
 
-        // Test implementation class to avoid real API calls
-        private class TestEmbeddingProcessor : EmbeddingProcessor
+        public class TestEmbeddingProcessor : EmbeddingProcessor
         {
             public async Task TestProcessJsonFileAsync(string jsonFilePath, string csvFilePath)
             {
