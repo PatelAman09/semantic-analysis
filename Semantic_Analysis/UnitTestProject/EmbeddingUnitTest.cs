@@ -5,6 +5,9 @@ using Semantic_Analysis.Interfaces;
 
 namespace EmbeddingProcessor_UnitTest
 {
+    /// <summary>
+    /// Unit tests for the EmbeddingProcessor class.
+    /// </summary>
     [TestClass]
     public class EmbeddingProcessorTests
     {
@@ -13,6 +16,11 @@ namespace EmbeddingProcessor_UnitTest
         private string _tempJsonFile = null!;
         private string _tempCsvFile = null!;
 
+        #region Setup and Cleanup
+
+        /// <summary>
+        /// Initializes the test environment.
+        /// </summary>
         [TestInitialize]
         public void Initialize()
         {
@@ -28,6 +36,9 @@ namespace EmbeddingProcessor_UnitTest
             _tempCsvFile = Path.Combine(_tempDirectory, "test.csv");
         }
 
+        /// <summary>
+        /// Cleans up temporary files after tests.
+        /// </summary>
         [TestCleanup]
         public void Cleanup()
         {
@@ -47,7 +58,13 @@ namespace EmbeddingProcessor_UnitTest
                 Directory.Delete(_tempDirectory, true);
             }
         }
+        #endregion
 
+        #region JSON File Handling Tests
+
+        /// <summary>
+        /// Tests reading a JSON file when the file exists.
+        /// </summary>
         [TestMethod]
         public async Task ReadJsonFileAsync_FileExists_ReturnsContent()
         {
@@ -60,6 +77,9 @@ namespace EmbeddingProcessor_UnitTest
             Assert.AreEqual(expectedContent, actualContent);
         }
 
+        /// <summary>
+        /// Tests reading a JSON file when the file does not exist.
+        /// </summary>
         [TestMethod]
         public async Task ReadJsonFileAsync_FileDoesNotExist_ThrowsException()
         {
@@ -75,6 +95,13 @@ namespace EmbeddingProcessor_UnitTest
                 // Exception expected
             }
         }
+        #endregion
+
+        #region JSON Analysis Tests
+
+        /// <summary>
+        /// Tests JSON analysis for extracting data.
+        /// </summary>
 
         [TestMethod]
         public void AnalyzeJson_ValidJson_ExtractsData()
@@ -105,6 +132,9 @@ namespace EmbeddingProcessor_UnitTest
             Assert.IsTrue(result.Any(s => s.Contains("555-5678")), "Missing second phone number in results");
         }
 
+        /// <summary>
+        /// Tests JSON processing to return the whole document.
+        /// </summary>
         [TestMethod]
         public void ProcessWholeJson_ValidJson_ReturnsWholeDocument()
         {
@@ -116,6 +146,9 @@ namespace EmbeddingProcessor_UnitTest
             Assert.AreEqual(jsonContent, result[0], "Should return the entire JSON content");
         }
 
+        /// <summary>
+        /// Tests JSON analysis with invalid JSON input.
+        /// </summary>
         [TestMethod]
         public void AnalyzeJson_InvalidJson_ThrowsException()
         {
@@ -131,7 +164,13 @@ namespace EmbeddingProcessor_UnitTest
                 // Exception expected
             }
         }
+        #endregion
 
+        #region Configuration Tests
+
+        /// <summary>
+        /// Tests loading a configuration from an existing file.
+        /// </summary>
         [TestMethod]
         public void LoadConfiguration_ConfigExists_ReturnsConfig()
         {
@@ -151,6 +190,9 @@ namespace EmbeddingProcessor_UnitTest
             Assert.AreEqual("TestValue", config["TestSetting"]);
         }
 
+        /// <summary>
+        /// Helper method to load configuration.
+        /// </summary>
         private static IConfigurationRoot TestLoadConfiguration(string basePath)
         {
             return new ConfigurationBuilder()
@@ -159,7 +201,9 @@ namespace EmbeddingProcessor_UnitTest
                 .Build();
         }
 
-        // Test for the ProcessJsonFileAsync method - simulated to avoid API calls
+        /// <summary>
+        /// Tests the process of handling JSON file processing, ensuring deletion of an existing file.
+        /// </summary>
         [TestMethod]
         public async Task ProcessJsonFileAsync_FileHandling_DeletesExistingFile()
         {
@@ -189,7 +233,13 @@ namespace EmbeddingProcessor_UnitTest
                 Assert.IsFalse(File.Exists(_tempCsvFile), "File should be deleted");
             }
         }
+        #endregion
 
+        #region File Processing Tests
+
+        /// <summary>
+        /// Test implementation of EmbeddingProcessor for controlled testing.
+        /// </summary>
         public class TestEmbeddingProcessor : EmbeddingProcessor
         {
             public async Task TestProcessJsonFileAsync(string jsonFilePath, string csvFilePath)
@@ -214,5 +264,6 @@ namespace EmbeddingProcessor_UnitTest
                 }
             }
         }
+        #endregion
     }
 }

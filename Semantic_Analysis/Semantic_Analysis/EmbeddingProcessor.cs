@@ -1,6 +1,5 @@
 using System.Globalization;
 using System.Text;
-using System.Numerics;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -81,7 +80,7 @@ public class EmbeddingProcessor : IEmbeddingProcessor
             throw new Exception($"The provided JSON content is empty or malformed: {ex.Message}");
         }
 
-        int estimatedTokens = jsonContent.Length / 4; 
+        int estimatedTokens = jsonContent.Length / 4;
 
         if (estimatedTokens > MaxTokens)
         {
@@ -408,64 +407,5 @@ public class EmbeddingProcessor : IEmbeddingProcessor
             Console.WriteLine($"Error processing JSON file '{jsonFilePath}': {ex.Message}");
         }
     }
-    #endregion
-
-    #region Main Method (Commented Out)
-    //static async Task Main(string[] args)
-    //{
-    //    try
-    //    {
-    //        IConfigurationRoot config = LoadConfiguration();
-    //        string inputFolder = config["FilePaths:ExtractedData"];
-    //        string outputFolder = config["FilePaths:InputFolder"];
-
-    //        string rootDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
-    //        string outputFile1 = Path.Combine(rootDirectory, outputFolder, config["FilePaths:InputFileName1"]);
-    //        string outputFile2 = Path.Combine(rootDirectory, outputFolder, config["FilePaths:InputFileName2"]);
-
-    //        string apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY")
-    //            ?? throw new Exception("Environment variable 'OPENAI_API_KEY' is not set.");
-
-    //        if (!Directory.Exists(inputFolder))
-    //            throw new DirectoryNotFoundException($"Input folder not found: {inputFolder}");
-    //        if (!Directory.Exists(outputFolder))
-    //        {
-    //            Console.WriteLine($"Output folder not found. Creating: {outputFolder}");
-    //            Directory.CreateDirectory(outputFolder);
-    //        }
-
-    //        // Debug output: show working directory and absolute file paths.
-    //        Console.WriteLine($"Current Working Directory: {Directory.GetCurrentDirectory()}");
-    //        Console.WriteLine($"Output File 1: {Path.GetFullPath(outputFile1)}");
-    //        Console.WriteLine($"Output File 2: {Path.GetFullPath(outputFile2)}");
-
-    //        Console.WriteLine("Cleaning up previous output files...");
-    //        if (File.Exists(outputFile1)) File.Delete(outputFile1);
-    //        if (File.Exists(outputFile2)) File.Delete(outputFile2);
-    //        Console.WriteLine("Old output files deleted.");
-
-    //        var jsonFiles = Directory.GetFiles(inputFolder, "*.json");
-    //        if (jsonFiles.Length < 2)
-    //            throw new Exception("Expected at least two JSON files in the input folder.");
-
-    //        Console.WriteLine($"Found JSON files: {string.Join(", ", jsonFiles.Select(Path.GetFileName))}");
-
-    //        // Create processor
-    //        IEmbeddingProcessor processor = new EmbeddingProcessor();
-
-    //        // Process files sequentially to allow user input for each file
-    //        Console.WriteLine($"\nProcessing first file: {jsonFiles[0]}");
-    //        await processor.ProcessJsonFileAsync(jsonFiles[0], outputFile1, apiKey, 10);
-
-    //        Console.WriteLine($"\nProcessing second file: {jsonFiles[1]}");
-    //        await processor.ProcessJsonFileAsync(jsonFiles[1], outputFile2, apiKey, 10);
-
-    //        Console.WriteLine("Embedding processing completed successfully.");
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        Console.WriteLine($"Error: {ex.Message}");
-    //    }
-    //}
     #endregion
 }
