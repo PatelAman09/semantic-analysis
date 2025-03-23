@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,7 +13,6 @@ using System.Xml.Linq;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 
-
 namespace Semantic_Analysis
 {
     /// <summary>
@@ -21,78 +21,13 @@ namespace Semantic_Analysis
     /// </summary>
     public class DataExtraction : IDataExtraction
     {
-        /// <summary>
-        /// Main method that orchestrates the extraction process for the files specified in the configuration.
-        /// It processes the extracted data file and the reference document file and saves them as JSON.
-        /// </summary>
-        public static void Main(string[] args)
-        {
-            // Load configuration settings from appsettings.json
-            var configuration = LoadConfiguration();
-
-            // Retrieve folder paths from configuration
-            string dataPreprocessingPath = configuration["FilePaths:DataPreprocessing"];
-            string extractedDataPath = configuration["FilePaths:ExtractedData"];
-
-            // Manually retrieving supported extensions from the configuration
-            var supportedExtensions = configuration.GetSection("FilePaths:SupportedFileExtensions")
-                                                     .AsEnumerable()       // Get all key-value pairs
-                                                     .Select(x => x.Value) // Select the values (file extensions)
-                                                     .ToList();
-
-            // Resolve the absolute paths for the directories
-            string projectRoot = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
-            string absoluteDataPreprocessingPath = Path.Combine(projectRoot, dataPreprocessingPath);
-            string absoluteExtractedDataPath = Path.Combine(projectRoot, extractedDataPath);
-
-            // Ensure the necessary directories exist
-            EnsureDirectoryExists(absoluteExtractedDataPath);
-
-            // Get all files in the RawData folder with supported extensions
-            var filesInRawData = Directory.GetFiles(absoluteDataPreprocessingPath)
-                                          .Where(file => supportedExtensions.Contains(Path.GetExtension(file).ToLower()))
-                                          .ToList();
-
-            // Ensure exactly two files are found (1 extracted data and 1 reference document)
-            if (filesInRawData.Count != 2)
-            {
-                Console.WriteLine("Error: There should be exactly two files in the RawData folder.");
-                return;
-            }
-
-            // Treat the first file as extracted data and the second as reference document
-            string extractedDataFilePath = filesInRawData[0];
-            string referenceDocumentFilePath = filesInRawData[1];
-
-            // Define the output file paths for both processed data in the ExtractedData folder
-            string outputExtractedDataFilePath = Path.Combine(absoluteExtractedDataPath, $"{Path.GetFileNameWithoutExtension(extractedDataFilePath)}.json");
-            string outputReferenceDocumentFilePath = Path.Combine(absoluteExtractedDataPath, $"{Path.GetFileNameWithoutExtension(referenceDocumentFilePath)}.json");
-
-            // Create an instance of DataExtraction to process the files
-            IDataExtraction processor = new DataExtraction();
-
-            // Process the extracted data file
-            List<string> extractedData = processor.ExtractDataFromFile(extractedDataFilePath);
-            extractedData = processor.CleanData(extractedData);
-            processor.SaveDataToJson(outputExtractedDataFilePath, extractedData, "extracted");
-
-            // Process the reference document file
-            List<string> referenceData = processor.ExtractDataFromFile(referenceDocumentFilePath);
-            referenceData = processor.CleanData(referenceData);
-            processor.SaveDataToJson(outputReferenceDocumentFilePath, referenceData, "reference");
-
-            // Output the result of the data extraction
-            Console.WriteLine($"Data extracted and saved to: {outputExtractedDataFilePath}");
-            Console.WriteLine($"Reference document data extracted and saved to: {outputReferenceDocumentFilePath}");
-        }
-
         #region Configuration and Directory Methods
 
         /// <summary>
         /// Loads the configuration from the appsettings.json file.
         /// </summary>
         /// <returns>Configuration object that holds the settings from appsettings.json.</returns>
-        private static IConfiguration LoadConfiguration()
+        public static IConfiguration LoadConfiguration()
         {
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.SetBasePath(Directory.GetCurrentDirectory());
@@ -106,7 +41,7 @@ namespace Semantic_Analysis
         /// If the directory does not exist, it will be created.
         /// </summary>
         /// <param name="directoryPath">The path of the directory to check and create if necessary.</param>
-        private static void EnsureDirectoryExists(string directoryPath)
+        public static void EnsureDirectoryExists(string directoryPath)
         {
             if (!Directory.Exists(directoryPath))
             {
@@ -317,7 +252,7 @@ namespace Semantic_Analysis
         }
 
         /// <summary>
-        /// Extracts data from a DOCX (.docx) file using the Open XML SDK.
+        /// Extracts data from a DOCX (.docx) file.
         /// </summary>
         /// <param name="filePath">The path of the DOCX file to extract data from.</param>
         /// <returns>A list of strings representing the extracted text from the DOCX file.</returns>
@@ -389,8 +324,8 @@ namespace Semantic_Analysis
                         cleanedSentence = Regex.Replace(cleanedSentence, @"^\d+\.\s*", "");
                     }
 
-                    // Remove non-alphanumeric characters, preserving spaces (and apostrophes)
-                    cleanedSentence = Regex.Replace(cleanedSentence, @"[^\w\s']", "");
+                    // Remove non-alphanumeric characters, preserving spaces, periods, punctuation, and apostrophes
+                    cleanedSentence = Regex.Replace(cleanedSentence, @"[^a-zA-Z0-9\s.,!?'-]", "");
 
                     // Add non-empty cleaned sentence to the list
                     if (!string.IsNullOrEmpty(cleanedSentence))
@@ -398,13 +333,8 @@ namespace Semantic_Analysis
                 }
             }
 
-            // Combine all the cleaned sentences into a single continuous block of text
-            string continuousData = string.Join(" ", cleanedData.Select(sentence => sentence.Trim()));
-
-            // Return the cleaned, continuous data as a single string wrapped in a list for compatibility
-            return new List<string> { continuousData };
+            return cleanedData;
         }
-
 
         /// <summary>
         /// Saves the extracted and cleaned data to a JSON file.
@@ -423,11 +353,24 @@ namespace Semantic_Analysis
                     Directory.CreateDirectory(directoryPath);
                 }
 
-                // Concatenate all the cleaned sentences into a single string with spaces separating them
-                string continuousData = string.Join(" ", data.Select(sentence => sentence.Trim()));
+                // Collect all cleaned sentences in a list
+                List<string> allSentences = new List<string>();
 
-                // Serialize the continuous string data to JSON
-                string jsonData = JsonConvert.SerializeObject(continuousData, Formatting.Indented);
+                // Add each sentence to the list
+                foreach (var sentence in data)
+                {
+                    // Clean up the sentence by trimming whitespace
+                    string cleanedData = sentence.Trim();
+
+                    // Add the cleaned sentence to the list
+                    if (!string.IsNullOrEmpty(cleanedData))
+                    {
+                        allSentences.Add(cleanedData);
+                    }
+                }
+
+                // Serialize the list of sentences to JSON
+                string jsonData = JsonConvert.SerializeObject(allSentences, Formatting.Indented);
 
                 // Write the JSON data to the output file
                 File.WriteAllText(outputFilePath, jsonData);
@@ -439,7 +382,6 @@ namespace Semantic_Analysis
                 Console.WriteLine($"Error saving data to JSON file: {ex.Message}");
             }
         }
-
 
         #endregion
     }
