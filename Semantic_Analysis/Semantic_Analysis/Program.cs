@@ -11,6 +11,10 @@ namespace Semantic_Analysis
 {
     public class Program
     {
+        /// <summary>
+        /// Entry method to execute the Semantic Analysis workflow.
+        /// </summary>
+        /// <param name="args">Command-line arguments.</param>
         public static async Task Main(string[] args)
         {
             try
@@ -43,7 +47,13 @@ namespace Semantic_Analysis
             }
         }
 
-        private static async Task ExecuteDataExtractionStepAsync(IConfiguration configuration, string rootDirectory)
+        #region Data Extraction
+        /// <summary>
+        /// Executes the data extraction step of the workflow.
+        /// </summary>
+        /// <param name="configuration">Configuration settings.</param>
+        /// <param name="rootDirectory">Root directory of the project.</param>
+        public static async Task ExecuteDataExtractionStepAsync(IConfiguration configuration, string rootDirectory)
         {
             Console.WriteLine("\nExecuting Step 1: Data Extraction...");
 
@@ -101,8 +111,15 @@ namespace Semantic_Analysis
 
             Console.WriteLine("Data extraction completed successfully.");
         }
+        #endregion
 
-        private static async Task ExecuteEmbeddingGenerationStepAsync(IConfiguration configuration, string rootDirectory)
+        #region Embedding Generation
+        /// <summary>
+        /// Executes the embedding generation step using OpenAI API.
+        /// </summary>
+        /// <param name="configuration">Configuration settings.</param>
+        /// <param name="rootDirectory">Root directory of the project.</param>
+        public static async Task ExecuteEmbeddingGenerationStepAsync(IConfiguration configuration, string rootDirectory)
         {
             Console.WriteLine("\nExecuting Step 2: Embedding Generation...");
 
@@ -149,8 +166,15 @@ namespace Semantic_Analysis
 
             Console.WriteLine("Embedding generation completed successfully.");
         }
+        #endregion
 
-        private static async Task ExecuteCosineSimilarityStepAsync(IConfiguration configuration, string rootDirectory)
+        #region Cosine Similarity Calculation
+        /// <summary>
+        /// Executes the cosine similarity calculation step.
+        /// </summary>
+        /// <param name="configuration">Configuration settings.</param>
+        /// <param name="rootDirectory">Root directory of the project.</param>
+        public static async Task ExecuteCosineSimilarityStepAsync(IConfiguration configuration, string rootDirectory)
         {
             Console.WriteLine("\nExecuting Step 3: Cosine Similarity Calculation...");
 
@@ -232,7 +256,7 @@ namespace Semantic_Analysis
                 Console.WriteLine($"Overall document similarity: {documentSimilarity:F4}");
 
                 // Add document similarity to output
-                outputData.Add($"Document_Similarity --> {documentSimilarity.ToString(System.Globalization.CultureInfo.InvariantCulture)}");
+                outputData.Add($"Overall Document Similarity --> {documentSimilarity.ToString(System.Globalization.CultureInfo.InvariantCulture)}");
 
                 // Save results to CSV
                 await Task.Run(() => cosineSimilarity.SaveOutputToCsv(outputFilePath, outputData));
@@ -245,5 +269,6 @@ namespace Semantic_Analysis
                 throw new Exception($"Error in cosine similarity calculation: {ex.Message}", ex);
             }
         }
+        #endregion
     }
 }

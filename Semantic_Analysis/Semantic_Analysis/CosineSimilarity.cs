@@ -16,13 +16,10 @@ namespace Semantic_Analysis
     /// </summary>
     public class CosineSimilarity : ICosineSimilarity
     {
+        #region CSV Processing
         /// <summary>
         /// Reads vectors from a CSV file and stores them in a dictionary.
         /// </summary>
-        /// <param name="inputFilePath">The path of the CSV file to read vectors from.</param>
-        /// <returns>A dictionary where the key is the index and the value is a tuple containing the text and the vector array.</returns>
-        /// <exception cref="ArgumentException">Thrown if the input file path is null or empty.</exception>
-        /// <exception cref="InvalidOperationException">Thrown if the CSV file contains no valid vectors.</exception>
         public Dictionary<string, (string text, double[] vector)> ReadVectorsFromCsv(string inputFilePath)
         {
             if (string.IsNullOrEmpty(inputFilePath))
@@ -36,10 +33,9 @@ namespace Semantic_Analysis
                 {
                     if (string.IsNullOrWhiteSpace(line)) continue;
 
-                    var parts = line.Split(','); // Split normally first
-                    if (parts.Length < 2) continue; // Skip malformed lines
+                    var parts = line.Split(',');
+                    if (parts.Length < 2) continue;
 
-                    // Extract index and text
                     string rawText = parts[0].Trim().Trim('"');
                     string index = rawText.Contains(":") ? rawText.Split(':')[0].Trim() : "[Unknown]";
                     string cleanedText = rawText.Contains(":") ? rawText.Substring(rawText.IndexOf(':') + 1).Trim() : rawText;
@@ -58,18 +54,12 @@ namespace Semantic_Analysis
                         }
                     }
 
-                    // Extract vector values safely after the complete text
                     List<double> vectorValues = new List<double>();
                     for (int i = lastTextIndex + 1; i < parts.Length; i++)
                     {
-                        string cleanedValue = parts[i].Trim().Trim('"');
-                        if (double.TryParse(cleanedValue, NumberStyles.Float, CultureInfo.InvariantCulture, out double num))
+                        if (double.TryParse(parts[i].Trim().Trim('"'), NumberStyles.Float, CultureInfo.InvariantCulture, out double num))
                         {
                             vectorValues.Add(num);
-                        }
-                        else
-                        {
-                            Console.WriteLine($"Warning: Invalid number format in CSV: {parts[i]}");
                         }
                     }
 
@@ -88,12 +78,12 @@ namespace Semantic_Analysis
 
             return vectors;
         }
+        #endregion
 
+        #region Vector Operations
         /// <summary>
         /// Normalizes a vector by dividing each element by its magnitude.
         /// </summary>
-        /// <param name="vector">The vector to normalize.</param>
-        /// <returns>The normalized vector.</returns>
         public double[] NormalizeVector(double[] vector)
         {
             double magnitude = Math.Sqrt(vector.Sum(v => v * v));
@@ -103,8 +93,6 @@ namespace Semantic_Analysis
         /// <summary>
         /// Validates that all vectors in the given dictionary are of the same length.
         /// </summary>
-        /// <param name="vectors">The dictionary of vectors to validate.</param>
-        /// <exception cref="InvalidOperationException">Thrown if vectors are not of the same length.</exception>
         public void ValidateVectors(Dictionary<string, (string text, double[] vector)> vectors)
         {
             if (vectors.Count < 1)
@@ -114,29 +102,45 @@ namespace Semantic_Analysis
             if (vectors.Values.Any(v => v.vector.Length != vectorLength))
                 throw new InvalidOperationException("All vectors must have the same length.");
         }
+        #endregion
 
+        #region Similarity Calculation
         /// <summary>
         /// Calculates the cosine similarity between two vectors.
         /// </summary>
-        /// <param name="vectorA">The first vector.</param>
-        /// <param name="vectorB">The second vector.</param>
-        /// <returns>The cosine similarity between the two vectors, a value between -1 and 1.</returns>
         public double CosineSimilarityCalculation(double[] vectorA, double[] vectorB)
         {
-            // Cosine similarity formula: dot product / (magnitude of A * magnitude of B)
             double dotProduct = vectorA.Zip(vectorB, (a, b) => a * b).Sum();
             double magnitudeA = Math.Sqrt(vectorA.Sum(v => v * v));
             double magnitudeB = Math.Sqrt(vectorB.Sum(v => v * v));
-
-            // This will return a value between -1 and 1
             return (magnitudeA == 0 || magnitudeB == 0) ? 0.0 : dotProduct / (magnitudeA * magnitudeB);
         }
 
         /// <summary>
+        /// Calculates the average cosine similarity between vectors from two files.
+        /// </summary>
+        public double CalculateDocumentSimilarity(Dictionary<string, (string text, double[] vector)> vectorsFile1,
+                                          Dictionary<string, (string text, double[] vector)> vectorsFile2)
+        {
+            double totalSimilarity = 0;
+            int comparisonCount = 0;
+
+            foreach (var entry1 in vectorsFile1)
+            {
+                foreach (var entry2 in vectorsFile2)
+                {
+                    totalSimilarity += CosineSimilarityCalculation(entry1.Value.vector, entry2.Value.vector);
+                    comparisonCount++;
+                }
+            }
+            return comparisonCount > 0 ? totalSimilarity / comparisonCount : 0;
+        }
+        #endregion
+
+        #region File Handling
+        /// <summary>
         /// Saves the output data to a CSV file.
         /// </summary>
-        /// <param name="outputFilePath">The path of the output file.</param>
-        /// <param name="outputData">The data to write to the CSV file.</param>
         public void SaveOutputToCsv(string outputFilePath, List<string> outputData)
         {
             try
@@ -153,7 +157,6 @@ namespace Semantic_Analysis
         /// <summary>
         /// Loads configuration settings from an appsettings.json file.
         /// </summary>
-        /// <returns>The loaded configuration root object.</returns>
         public static IConfigurationRoot LoadConfiguration()
         {
             return new ConfigurationBuilder()
@@ -161,31 +164,7 @@ namespace Semantic_Analysis
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .Build();
         }
-
-        /// <summary>
-        /// Calculates the average cosine similarity between vectors from two files.
-        /// </summary>
-        /// <param name="vectorsFile1">The vectors from the first file.</param>
-        /// <param name="vectorsFile2">The vectors from the second file.</param>
-        /// <returns>The average cosine similarity between all vector pairs.</returns>
-        public double CalculateDocumentSimilarity(Dictionary<string, (string text, double[] vector)> vectorsFile1,
-                                          Dictionary<string, (string text, double[] vector)> vectorsFile2)
-        {
-            double totalSimilarity = 0;
-            int comparisonCount = 0;
-
-            foreach (var entry1 in vectorsFile1)
-            {
-                foreach (var entry2 in vectorsFile2)
-                {
-                    double similarity = CosineSimilarityCalculation(entry1.Value.vector, entry2.Value.vector);
-                    totalSimilarity += similarity;
-                    comparisonCount++;
-                }
-            }
-
-            return comparisonCount > 0 ? totalSimilarity / comparisonCount : 0;
-        }
+        #endregion
 
         //public static void Main(string[] args)
         //{
@@ -258,3 +237,7 @@ namespace Semantic_Analysis
         //}
     }
 }
+
+
+        
+    
