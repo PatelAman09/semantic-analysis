@@ -1,0 +1,229 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E68607CD-0CF5-44D6-AE68-5F7E6EE7B1E1}|UnitTestProject\\UnitTestProject.csproj|e:\\master_of_engg_it\\se project\\development\\semantic-analysis\\semantic_analysis\\unittestproject\\cosinesimilarityunittest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E68607CD-0CF5-44D6-AE68-5F7E6EE7B1E1}|UnitTestProject\\UnitTestProject.csproj|solutionrelative:unittestproject\\cosinesimilarityunittest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E68607CD-0CF5-44D6-AE68-5F7E6EE7B1E1}|UnitTestProject\\UnitTestProject.csproj|e:\\master_of_engg_it\\se project\\development\\semantic-analysis\\semantic_analysis\\unittestproject\\embeddingunittest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E68607CD-0CF5-44D6-AE68-5F7E6EE7B1E1}|UnitTestProject\\UnitTestProject.csproj|solutionrelative:unittestproject\\embeddingunittest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E68607CD-0CF5-44D6-AE68-5F7E6EE7B1E1}|UnitTestProject\\UnitTestProject.csproj|e:\\master_of_engg_it\\se project\\development\\semantic-analysis\\semantic_analysis\\unittestproject\\dataextractiontest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E68607CD-0CF5-44D6-AE68-5F7E6EE7B1E1}|UnitTestProject\\UnitTestProject.csproj|solutionrelative:unittestproject\\dataextractiontest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D28E360-331D-4197-857A-50BA888C9E81}|Semantic_Analysis\\Semantic_Analysis.csproj|e:\\master_of_engg_it\\se project\\development\\semantic-analysis\\semantic_analysis\\semantic_analysis\\csvoutput\\cosinesimilarity_calculation.csv||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{9D28E360-331D-4197-857A-50BA888C9E81}|Semantic_Analysis\\Semantic_Analysis.csproj|solutionrelative:semantic_analysis\\csvoutput\\cosinesimilarity_calculation.csv||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D28E360-331D-4197-857A-50BA888C9E81}|Semantic_Analysis\\Semantic_Analysis.csproj|e:\\master_of_engg_it\\se project\\development\\semantic-analysis\\semantic_analysis\\semantic_analysis\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{9D28E360-331D-4197-857A-50BA888C9E81}|Semantic_Analysis\\Semantic_Analysis.csproj|solutionrelative:semantic_analysis\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D28E360-331D-4197-857A-50BA888C9E81}|Semantic_Analysis\\Semantic_Analysis.csproj|e:\\master_of_engg_it\\se project\\development\\semantic-analysis\\semantic_analysis\\semantic_analysis\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D28E360-331D-4197-857A-50BA888C9E81}|Semantic_Analysis\\Semantic_Analysis.csproj|solutionrelative:semantic_analysis\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D28E360-331D-4197-857A-50BA888C9E81}|Semantic_Analysis\\Semantic_Analysis.csproj|e:\\master_of_engg_it\\se project\\development\\semantic-analysis\\semantic_analysis\\semantic_analysis\\interfaces\\icosinesimilarity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D28E360-331D-4197-857A-50BA888C9E81}|Semantic_Analysis\\Semantic_Analysis.csproj|solutionrelative:semantic_analysis\\interfaces\\icosinesimilarity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D28E360-331D-4197-857A-50BA888C9E81}|Semantic_Analysis\\Semantic_Analysis.csproj|e:\\master_of_engg_it\\se project\\development\\semantic-analysis\\semantic_analysis\\semantic_analysis\\interfaces\\iembeddings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D28E360-331D-4197-857A-50BA888C9E81}|Semantic_Analysis\\Semantic_Analysis.csproj|solutionrelative:semantic_analysis\\interfaces\\iembeddings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D28E360-331D-4197-857A-50BA888C9E81}|Semantic_Analysis\\Semantic_Analysis.csproj|e:\\master_of_engg_it\\se project\\development\\semantic-analysis\\semantic_analysis\\semantic_analysis\\cosinesimilarity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D28E360-331D-4197-857A-50BA888C9E81}|Semantic_Analysis\\Semantic_Analysis.csproj|solutionrelative:semantic_analysis\\cosinesimilarity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D28E360-331D-4197-857A-50BA888C9E81}|Semantic_Analysis\\Semantic_Analysis.csproj|e:\\master_of_engg_it\\se project\\development\\semantic-analysis\\semantic_analysis\\semantic_analysis\\embeddingprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D28E360-331D-4197-857A-50BA888C9E81}|Semantic_Analysis\\Semantic_Analysis.csproj|solutionrelative:semantic_analysis\\embeddingprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D28E360-331D-4197-857A-50BA888C9E81}|Semantic_Analysis\\Semantic_Analysis.csproj|e:\\master_of_engg_it\\se project\\development\\semantic-analysis\\semantic_analysis\\semantic_analysis\\dataextraction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D28E360-331D-4197-857A-50BA888C9E81}|Semantic_Analysis\\Semantic_Analysis.csproj|solutionrelative:semantic_analysis\\dataextraction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CosineSimilarityUnitTest.cs",
+              "DocumentMoniker": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\CosineSimilarityUnitTest.cs",
+              "RelativeDocumentMoniker": "UnitTestProject\\CosineSimilarityUnitTest.cs",
+              "ToolTip": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\CosineSimilarityUnitTest.cs",
+              "RelativeToolTip": "UnitTestProject\\CosineSimilarityUnitTest.cs",
+              "ViewState": "AgIAALEAAAAAAAAAAAAUwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-23T10:42:06.116Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "EmbeddingUnitTest.cs",
+              "DocumentMoniker": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\EmbeddingUnitTest.cs",
+              "RelativeDocumentMoniker": "UnitTestProject\\EmbeddingUnitTest.cs",
+              "ToolTip": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\EmbeddingUnitTest.cs",
+              "RelativeToolTip": "UnitTestProject\\EmbeddingUnitTest.cs",
+              "ViewState": "AgIAAHoAAAAAAAAAAAAkwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-23T10:41:59.326Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DataExtractionTest.cs",
+              "DocumentMoniker": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\DataExtractionTest.cs",
+              "RelativeDocumentMoniker": "UnitTestProject\\DataExtractionTest.cs",
+              "ToolTip": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\UnitTestProject\\DataExtractionTest.cs",
+              "RelativeToolTip": "UnitTestProject\\DataExtractionTest.cs",
+              "ViewState": "AgIAAFUAAAAAAAAAAAAUwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-23T10:41:52.522Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "cosinesimilarity_calculation.csv",
+              "DocumentMoniker": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\CSVOutput\\cosinesimilarity_calculation.csv",
+              "RelativeDocumentMoniker": "Semantic_Analysis\\CSVOutput\\cosinesimilarity_calculation.csv",
+              "ToolTip": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\CSVOutput\\cosinesimilarity_calculation.csv",
+              "RelativeToolTip": "Semantic_Analysis\\CSVOutput\\cosinesimilarity_calculation.csv",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002120|",
+              "WhenOpened": "2025-03-23T10:38:24.222Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\appsettings.json",
+              "RelativeDocumentMoniker": "Semantic_Analysis\\appsettings.json",
+              "ToolTip": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\appsettings.json",
+              "RelativeToolTip": "Semantic_Analysis\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-03-23T10:37:51.655Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ICosineSimilarity.cs",
+              "DocumentMoniker": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Interfaces\\ICosineSimilarity.cs",
+              "RelativeDocumentMoniker": "Semantic_Analysis\\Interfaces\\ICosineSimilarity.cs",
+              "ToolTip": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Interfaces\\ICosineSimilarity.cs",
+              "RelativeToolTip": "Semantic_Analysis\\Interfaces\\ICosineSimilarity.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-23T10:36:25.8Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Iembeddings.cs",
+              "DocumentMoniker": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Interfaces\\Iembeddings.cs",
+              "RelativeDocumentMoniker": "Semantic_Analysis\\Interfaces\\Iembeddings.cs",
+              "ToolTip": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Interfaces\\Iembeddings.cs",
+              "RelativeToolTip": "Semantic_Analysis\\Interfaces\\Iembeddings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-23T10:36:24.801Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "CosineSimilarity.cs",
+              "DocumentMoniker": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\CosineSimilarity.cs",
+              "RelativeDocumentMoniker": "Semantic_Analysis\\CosineSimilarity.cs",
+              "ToolTip": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\CosineSimilarity.cs",
+              "RelativeToolTip": "Semantic_Analysis\\CosineSimilarity.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKAAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-16T22:30:19.421Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Program.cs",
+              "RelativeDocumentMoniker": "Semantic_Analysis\\Program.cs",
+              "ToolTip": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\Program.cs",
+              "RelativeToolTip": "Semantic_Analysis\\Program.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAA0wBEBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-16T22:30:19.429Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "DataExtraction.cs",
+              "DocumentMoniker": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\DataExtraction.cs",
+              "RelativeDocumentMoniker": "Semantic_Analysis\\DataExtraction.cs",
+              "ToolTip": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\DataExtraction.cs",
+              "RelativeToolTip": "Semantic_Analysis\\DataExtraction.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-16T22:30:19.427Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "EmbeddingProcessor.cs",
+              "DocumentMoniker": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\EmbeddingProcessor.cs",
+              "RelativeDocumentMoniker": "Semantic_Analysis\\EmbeddingProcessor.cs",
+              "ToolTip": "E:\\Master_Of_Engg_IT\\SE Project\\Development\\semantic-analysis\\Semantic_Analysis\\Semantic_Analysis\\EmbeddingProcessor.cs",
+              "RelativeToolTip": "Semantic_Analysis\\EmbeddingProcessor.cs",
+              "ViewState": "AgIAAIkBAAAAAAAAAAAAAJkBAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-16T22:30:19.423Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
