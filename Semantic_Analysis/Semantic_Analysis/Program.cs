@@ -11,6 +11,10 @@ namespace Semantic_Analysis
 {
     public class Program
     {
+        /// <summary>
+        /// Entry method to execute the Semantic Analysis workflow.
+        /// </summary>
+        /// <param name="args">Command-line arguments.</param>
         public static async Task Main(string[] args)
         {
             try
@@ -19,7 +23,6 @@ namespace Semantic_Analysis
                 Console.WriteLine("1. Data Extraction");
                 Console.WriteLine("2. Embedding Generation");
                 Console.WriteLine("3. Cosine Similarity Calculation");
-                Console.WriteLine("4. Visualization");
                 Console.WriteLine("================================");
 
                 // Load configuration
@@ -35,9 +38,6 @@ namespace Semantic_Analysis
                 // Step 3: Cosine Similarity Calculation
                 await ExecuteCosineSimilarityStepAsync(configuration, rootDirectory);
 
-                // Step 4: Visualization
-                ExecuteVisualizationStep(configuration, rootDirectory);
-
                 Console.WriteLine("Semantic Analysis workflow completed successfully!");
             }
             catch (Exception ex)
@@ -47,9 +47,13 @@ namespace Semantic_Analysis
             }
         }
 
-
-
-        private static async Task ExecuteDataExtractionStepAsync(IConfiguration configuration, string rootDirectory)
+        #region Data Extraction
+        /// <summary>
+        /// Executes the data extraction step of the workflow.
+        /// </summary>
+        /// <param name="configuration">Configuration settings.</param>
+        /// <param name="rootDirectory">Root directory of the project.</param>
+        public static async Task ExecuteDataExtractionStepAsync(IConfiguration configuration, string rootDirectory)
         {
             Console.WriteLine("\nExecuting Step 1: Data Extraction...");
 
@@ -105,13 +109,17 @@ namespace Semantic_Analysis
             List<string> cleanedReferenceData = await Task.Run(() => processor.CleanData(referenceData));
             await Task.Run(() => processor.SaveDataToJson(outputReferenceDocumentFilePath, cleanedReferenceData, "reference"));
 
-            // Output the result of the data extraction
-            Console.WriteLine($"Data extracted and saved to: {outputExtractedDataFilePath}");
-            Console.WriteLine($"Reference document data extracted and saved to: {outputReferenceDocumentFilePath}");
             Console.WriteLine("Data extraction completed successfully.");
         }
+        #endregion
 
-        private static async Task ExecuteEmbeddingGenerationStepAsync(IConfiguration configuration, string rootDirectory)
+        #region Embedding Generation
+        /// <summary>
+        /// Executes the embedding generation step using OpenAI API.
+        /// </summary>
+        /// <param name="configuration">Configuration settings.</param>
+        /// <param name="rootDirectory">Root directory of the project.</param>
+        public static async Task ExecuteEmbeddingGenerationStepAsync(IConfiguration configuration, string rootDirectory)
         {
             Console.WriteLine("\nExecuting Step 2: Embedding Generation...");
 
@@ -144,21 +152,29 @@ namespace Semantic_Analysis
                 throw new Exception($"Expected at least two JSON files in {inputFolder}, but found {jsonFiles.Length}.");
             }
 
-            Console.WriteLine($"Processing files: {Path.GetFileName(jsonFiles[0])} and {Path.GetFileName(jsonFiles[1])}");
+            Console.WriteLine($"Found JSON files: {string.Join(", ", jsonFiles.Select(Path.GetFileName))}");
 
             // Create embedding processor instance
             IEmbeddingProcessor processor = new EmbeddingProcessor();
 
-            // Process both files in parallel
-            await Task.WhenAll(
-                processor.ProcessJsonFileAsync(jsonFiles[0], outputFile1, apiKey, 10),
-                processor.ProcessJsonFileAsync(jsonFiles[1], outputFile2, apiKey, 10)
-            );
+            // Process files sequentially to allow user input for each file
+            Console.WriteLine($"\nProcessing first file: {Path.GetFileName(jsonFiles[0])}");
+            await processor.ProcessJsonFileAsync(jsonFiles[0], outputFile1, apiKey, 10);
+
+            Console.WriteLine($"\nProcessing second file: {Path.GetFileName(jsonFiles[1])}");
+            await processor.ProcessJsonFileAsync(jsonFiles[1], outputFile2, apiKey, 10);
 
             Console.WriteLine("Embedding generation completed successfully.");
         }
+        #endregion
 
-        private static async Task ExecuteCosineSimilarityStepAsync(IConfiguration configuration, string rootDirectory)
+        #region Cosine Similarity Calculation
+        /// <summary>
+        /// Executes the cosine similarity calculation step.
+        /// </summary>
+        /// <param name="configuration">Configuration settings.</param>
+        /// <param name="rootDirectory">Root directory of the project.</param>
+        public static async Task ExecuteCosineSimilarityStepAsync(IConfiguration configuration, string rootDirectory)
         {
             Console.WriteLine("\nExecuting Step 3: Cosine Similarity Calculation...");
 
@@ -201,32 +217,20 @@ namespace Semantic_Analysis
 
                 // Prepare output data
                 List<string> outputData = new List<string>();
-                outputData.Add("Index1,Index2,Word1,Word2,X_Position,Cosine_Similarity");
-
-                // Get ordered indices for consistent x-axis positioning
-                List<string> orderedIndices1 = vectorsFile1.Keys.OrderBy(k => k).ToList();
-
-                // Calculate step size for x-axis positioning
-                double xAxisRange = 536.0;
-                double stepSize = (orderedIndices1.Count > 1) ? xAxisRange / (orderedIndices1.Count - 1) : xAxisRange / 2;
-
+                outputData.Add("Word/Document,Word/Document,Cosine_Similarity"); 
 
                 // Process each pair of vectors (using Task.Run for CPU-bound calculations)
                 Console.WriteLine("Calculating cosine similarities for all pairs of vectors...");
 
                 var calculationTasks = new List<Task<string>>();
 
-                for (int i = 0; i < orderedIndices1.Count; i++)
+                foreach (var index1 in vectorsFile1.Keys)
                 {
-                    string index1 = orderedIndices1[i];
-                    int xPosition = (int)(i * stepSize);
-
                     foreach (var index2 in vectorsFile2.Keys)
                     {
                         // Capture values for lambda
                         string capturedIndex1 = index1;
                         string capturedIndex2 = index2;
-                        int capturedXPosition = xPosition;
 
                         calculationTasks.Add(Task.Run(() => {
                             double similarity = Math.Round(
@@ -236,7 +240,7 @@ namespace Semantic_Analysis
                                 ),
                                 10
                             );
-                            return $"{capturedIndex1},{capturedIndex2},\"{vectorsFile1[capturedIndex1].text}\",\"{vectorsFile2[capturedIndex2].text}\",{capturedXPosition},{similarity.ToString(System.Globalization.CultureInfo.InvariantCulture)}";
+                            return $"{vectorsFile1[capturedIndex1].text}\",\"{vectorsFile2[capturedIndex2].text}\",{similarity.ToString(System.Globalization.CultureInfo.InvariantCulture)}";
                         }));
                     }
                 }
@@ -252,7 +256,7 @@ namespace Semantic_Analysis
                 Console.WriteLine($"Overall document similarity: {documentSimilarity:F4}");
 
                 // Add document similarity to output
-                outputData.Add($"Document_Similarity --> {documentSimilarity.ToString(System.Globalization.CultureInfo.InvariantCulture)}");
+                outputData.Add($"Overall Document Similarity --> {documentSimilarity.ToString(System.Globalization.CultureInfo.InvariantCulture)}");
 
                 // Save results to CSV
                 await Task.Run(() => cosineSimilarity.SaveOutputToCsv(outputFilePath, outputData));
@@ -265,35 +269,6 @@ namespace Semantic_Analysis
                 throw new Exception($"Error in cosine similarity calculation: {ex.Message}", ex);
             }
         }
-
-        private static void ExecuteVisualizationStep(IConfiguration configuration, string rootDirectory)
-        {
-            Console.WriteLine("\nExecuting Step 4: Visualization...");
-            try
-            {
-                string csvFile = configuration["FilePaths:CSVOutputFileName"];
-                string scatterPlot = configuration["FilePaths:ScatterPlotOutputFile"];
-                string csvFilePath = Path.Combine(rootDirectory, configuration["FilePaths:OutputFolder"], csvFile);
-                string outputImagePath = Path.Combine(rootDirectory, configuration["FilePaths:ScatterPlotFolder"], scatterPlot);
-                Directory.CreateDirectory(Path.GetDirectoryName(outputImagePath));
-
-                var (xPositions, yValues, words, pairLabels, documentSimilarity) = Visualization.ProcessCsvData(csvFilePath);
-
-                Visualization.GenerateScatterPlot(
-                    xPositions, // Assuming these are now static properties
-                    yValues,
-                    words,
-                    pairLabels,
-                    documentSimilarity,
-                    outputImagePath);
-
-                Console.WriteLine($"Plot successfully saved to {outputImagePath}");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error: {ex.Message}");
-                Console.WriteLine($"Stack trace: {ex.StackTrace}");
-            }
-        }
+        #endregion
     }
 }
