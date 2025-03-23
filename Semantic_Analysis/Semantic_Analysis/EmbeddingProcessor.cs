@@ -1,23 +1,11 @@
-<<<<<<< HEAD
 using System.Globalization;
 using System.Text;
-=======
-﻿using System.Globalization;
-using System.Text;
-using System.Numerics;
->>>>>>> origin/Aman-Patel
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using OpenAI.Embeddings;
 using Semantic_Analysis.Interfaces;
 
-<<<<<<< HEAD
-// Class for processing JSON data and generating OpenAI embeddings
-public class EmbeddingProcessor : IEmbeddingProcessor
-{
-    // Reads JSON file content from the specified path
-=======
 public class EmbeddingProcessor : IEmbeddingProcessor
 {
     #region Constants
@@ -32,7 +20,6 @@ public class EmbeddingProcessor : IEmbeddingProcessor
     /// <param name="jsonFilePath">The path to the JSON file to read.</param>
     /// <returns>The content of the JSON file as a string.</returns>
     /// <exception cref="FileNotFoundException">Thrown when the specified file does not exist.</exception>
->>>>>>> origin/Aman-Patel
     public async Task<string> ReadJsonFileAsync(string jsonFilePath)
     {
         if (!File.Exists(jsonFilePath))
@@ -41,9 +28,6 @@ public class EmbeddingProcessor : IEmbeddingProcessor
         return await File.ReadAllTextAsync(jsonFilePath);
     }
 
-<<<<<<< HEAD
-    // Extracts data elements from JSON by traversing the structure recursively
-=======
     public static IConfigurationRoot LoadConfiguration()
     {
         return new ConfigurationBuilder()
@@ -115,7 +99,6 @@ public class EmbeddingProcessor : IEmbeddingProcessor
     /// <param name="jsonContent">The JSON content to analyze.</param>
     /// <returns>A list of strings representing individual JSON elements with their paths.</returns>
     /// <exception cref="Exception">Thrown when the JSON content is empty or malformed.</exception>
->>>>>>> origin/Aman-Patel
     public List<string> AnalyzeJson(string jsonContent)
     {
         var parsedJson = JsonConvert.DeserializeObject(jsonContent);
@@ -124,18 +107,10 @@ public class EmbeddingProcessor : IEmbeddingProcessor
         if (parsedJson == null)
             throw new Exception("The provided JSON content is empty or malformed.");
 
-<<<<<<< HEAD
-        // Recursively traverses JSON structure to extract values with their paths
-=======
->>>>>>> origin/Aman-Patel
         void Traverse(object obj, string prefix = "")
         {
             if (obj is JObject jObject)
             {
-<<<<<<< HEAD
-                // Process each property in JSON objects
-=======
->>>>>>> origin/Aman-Patel
                 foreach (var property in jObject.Properties())
                 {
                     Traverse(property.Value, $"{prefix}{property.Name}: ");
@@ -143,10 +118,6 @@ public class EmbeddingProcessor : IEmbeddingProcessor
             }
             else if (obj is JArray jArray)
             {
-<<<<<<< HEAD
-                // Process each element in JSON arrays with index
-=======
->>>>>>> origin/Aman-Patel
                 for (int i = 0; i < jArray.Count; i++)
                 {
                     Traverse(jArray[i], $"{prefix}[{i}]: ");
@@ -162,10 +133,6 @@ public class EmbeddingProcessor : IEmbeddingProcessor
         Traverse(parsedJson);
         return extractedData;
     }
-<<<<<<< HEAD
-
-    // Generates embedding with retry logic and exponential backoff
-=======
     #endregion
 
     #region Embedding Generation
@@ -177,7 +144,6 @@ public class EmbeddingProcessor : IEmbeddingProcessor
     /// <param name="maxRetries">Maximum number of retry attempts (default: 3).</param>
     /// <returns>The generated embedding object.</returns>
     /// <exception cref="Exception">Thrown when embedding generation fails after all retries.</exception>
->>>>>>> origin/Aman-Patel
     public async Task<OpenAIEmbedding> GenerateEmbeddingWithRetryAsync(EmbeddingClient client, string text, int maxRetries = 3)
     {
         int attempt = 0;
@@ -194,19 +160,12 @@ public class EmbeddingProcessor : IEmbeddingProcessor
                 Console.WriteLine($"Attempt {attempt + 1} failed for text: \"{snippet}\": {ex.Message}. Retrying...");
                 attempt++;
                 // Exponential backoff delay between retries
-<<<<<<< HEAD
-                // Exponential backoff: 1s, 2s, 3s, etc.
-=======
->>>>>>> origin/Aman-Patel
                 await Task.Delay((attempt) * 1000);
             }
         }
         throw new Exception("Failed to generate embedding after multiple attempts.");
     }
 
-<<<<<<< HEAD
-    // Processes text descriptions in batches and saves generated embeddings to CSV
-=======
     /// <summary>
     /// Calculates the average of multiple embeddings by summing and then dividing by count.
     /// </summary>
@@ -281,17 +240,12 @@ public class EmbeddingProcessor : IEmbeddingProcessor
     /// <param name="csvFilePath">Path to the output CSV file.</param>
     /// <param name="saveInterval">Interval at which to save progress and report status.</param>
     /// <returns>A task representing the asynchronous operation.</returns>
->>>>>>> origin/Aman-Patel
     public async Task GenerateAndSaveEmbeddingsAsync(string apiKey, List<string> descriptions, string csvFilePath, int saveInterval)
     {
         Console.WriteLine($"Initializing OpenAI Embedding client... Output file: {csvFilePath}");
 
         var client = new EmbeddingClient("text-embedding-3-large", apiKey);
 
-<<<<<<< HEAD
-        // Open StreamWriter once (overwrites file). (CSV header remains untouched.)
-=======
->>>>>>> origin/Aman-Patel
         using StreamWriter writer = new StreamWriter(csvFilePath, append: false, encoding: Encoding.UTF8);
         Console.WriteLine($"Overwriting CSV file: {csvFilePath}");
 
@@ -304,25 +258,6 @@ public class EmbeddingProcessor : IEmbeddingProcessor
             List<string> batch = descriptions.Skip(i).Take(batchSize).ToList();
             try
             {
-<<<<<<< HEAD
-                // Attempt batch generation of embeddings for the current batch.
-                OpenAIEmbeddingCollection embeddingResults = await client.GenerateEmbeddingsAsync(batch.ToArray());
-
-                if (embeddingResults != null && embeddingResults.Count == batch.Count)
-                {
-                    for (int j = 0; j < batch.Count; j++)
-                    {
-                        string description = batch[j];
-                        float[] embeddingArray = embeddingResults[j].ToFloats().ToArray();
-                        string embeddingString = string.Join(",", embeddingArray.Select(e => e.ToString(CultureInfo.InvariantCulture)));
-                        await writer.WriteLineAsync($"\"{description}\",\"{embeddingString}\"");
-                        processedCount++;
-
-                        if (processedCount % saveInterval == 0)
-                        {
-                            await writer.FlushAsync();
-                            Console.WriteLine($"Checkpoint reached: {processedCount} embeddings saved.");
-=======
                 bool batchHasLargeItems = batch.Any(text => text.Length / 4 > MaxTokens);
 
                 if (!batchHasLargeItems)
@@ -344,20 +279,11 @@ public class EmbeddingProcessor : IEmbeddingProcessor
                                 await writer.FlushAsync();
                                 Console.WriteLine($"Checkpoint reached: {processedCount} embeddings saved.");
                             }
->>>>>>> origin/Aman-Patel
                         }
                     }
                 }
                 else
                 {
-<<<<<<< HEAD
-                    // Fallback: If batch result count mismatches, process each description individually.
-                    Console.WriteLine("Batch result count mismatch. Falling back to individual processing for this batch.");
-                    foreach (var description in batch)
-                    {
-                        OpenAIEmbedding embedding = await GenerateEmbeddingWithRetryAsync(client, description);
-                        float[] embeddingArray = embedding.ToFloats().ToArray();
-=======
                     foreach (var description in batch)
                     {
                         float[] embeddingArray;
@@ -372,7 +298,6 @@ public class EmbeddingProcessor : IEmbeddingProcessor
                             embeddingArray = embedding.ToFloats().ToArray();
                         }
 
->>>>>>> origin/Aman-Patel
                         string embeddingString = string.Join(",", embeddingArray.Select(e => e.ToString(CultureInfo.InvariantCulture)));
                         await writer.WriteLineAsync($"\"{description}\",\"{embeddingString}\"");
                         processedCount++;
@@ -389,8 +314,6 @@ public class EmbeddingProcessor : IEmbeddingProcessor
             catch (Exception ex)
             {
                 Console.WriteLine($"[{DateTime.UtcNow}] Error processing batch starting at entry {i + 1}: {ex.Message}");
-<<<<<<< HEAD
-=======
 
                 // Fallback: Process each item individually if batch processing fails
                 foreach (var description in batch)
@@ -424,31 +347,11 @@ public class EmbeddingProcessor : IEmbeddingProcessor
                         Console.WriteLine($"[{DateTime.UtcNow}] Error processing individual item: {itemEx.Message}");
                     }
                 }
->>>>>>> origin/Aman-Patel
             }
         }
 
         Console.WriteLine("All embeddings processed and saved.");
     }
-<<<<<<< HEAD
-
-    // Saves processed data to a CSV file
-    public void SaveOutputToCsv(string outputFilePath, List<string> outputData)
-    {
-        try
-        {
-            Console.WriteLine($"Attempting to write {outputData.Count} lines to {outputFilePath}");
-            File.WriteAllLines(outputFilePath, outputData);
-            Console.WriteLine($"File successfully saved: {outputFilePath}");
-        }
-        catch (IOException ex)
-        {
-            Console.WriteLine($"Error saving output file '{outputFilePath}': {ex.Message}");
-        }
-    }
-
-    // Main processing method that handles the full workflow from JSON to embeddings
-=======
     #endregion
 
     #region DataEmbeddingPipeline
@@ -461,15 +364,10 @@ public class EmbeddingProcessor : IEmbeddingProcessor
     /// <param name="apiKey">The OpenAI API key.</param>
     /// <param name="saveInterval">Interval at which to save progress and report status.</param>
     /// <returns>A task representing the asynchronous operation.</returns>
->>>>>>> origin/Aman-Patel
     public async Task ProcessJsonFileAsync(string jsonFilePath, string csvFilePath, string apiKey, int saveInterval)
     {
         try
         {
-<<<<<<< HEAD
-            // Ensure clean output file
-=======
->>>>>>> origin/Aman-Patel
             Console.WriteLine($"Ensuring {csvFilePath} is deleted before processing...");
             if (File.Exists(csvFilePath))
             {
@@ -477,16 +375,6 @@ public class EmbeddingProcessor : IEmbeddingProcessor
                 Console.WriteLine($"Previous output file deleted: {csvFilePath}");
             }
 
-<<<<<<< HEAD
-            // Extract data from JSON
-            Console.WriteLine("Reading and analyzing JSON file...");
-            string jsonContent = await ReadJsonFileAsync(jsonFilePath);
-            List<string> analyzedData = AnalyzeJson(jsonContent);
-
-            // Generate and save embeddings
-            Console.WriteLine("Starting embedding generation...");
-            await GenerateAndSaveEmbeddingsAsync(apiKey, analyzedData, csvFilePath, saveInterval);
-=======
             Console.WriteLine($"Reading JSON file: {jsonFilePath}");
             string jsonContent = await ReadJsonFileAsync(jsonFilePath);
 
@@ -513,83 +401,11 @@ public class EmbeddingProcessor : IEmbeddingProcessor
 
             Console.WriteLine("Starting embedding generation...");
             await GenerateAndSaveEmbeddingsAsync(apiKey, processedData, csvFilePath, saveInterval);
->>>>>>> origin/Aman-Patel
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Error processing JSON file '{jsonFilePath}': {ex.Message}");
         }
     }
-<<<<<<< HEAD
-
-    // Loads application configuration from appsettings.json
-    public static IConfigurationRoot LoadConfiguration()
-    {
-        return new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-            .Build();
-    }
-
-=======
     #endregion
-
-    //static async Task Main(string[] args)
-    //{
-    //    try
-    //    {
-    //        IConfigurationRoot config = LoadConfiguration();
-    //        string inputFolder = config["FilePaths:ExtractedData"];
-    //        string outputFolder = config["FilePaths:InputFolder"];
-
-    //        string rootDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
-    //        string outputFile1 = Path.Combine(rootDirectory, outputFolder, config["FilePaths:InputFileName1"]);
-    //        string outputFile2 = Path.Combine(rootDirectory, outputFolder, config["FilePaths:InputFileName2"]);
-
-    //        string apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY")
-    //            ?? throw new Exception("Environment variable 'OPENAI_API_KEY' is not set.");
-
-    //        if (!Directory.Exists(inputFolder))
-    //            throw new DirectoryNotFoundException($"Input folder not found: {inputFolder}");
-    //        if (!Directory.Exists(outputFolder))
-    //        {
-    //            Console.WriteLine($"Output folder not found. Creating: {outputFolder}");
-    //            Directory.CreateDirectory(outputFolder);
-    //        }
-
-    //        // Debug output: show working directory and absolute file paths.
-    //        Console.WriteLine($"Current Working Directory: {Directory.GetCurrentDirectory()}");
-    //        Console.WriteLine($"Output File 1: {Path.GetFullPath(outputFile1)}");
-    //        Console.WriteLine($"Output File 2: {Path.GetFullPath(outputFile2)}");
-
-    //        Console.WriteLine("Cleaning up previous output files...");
-    //        if (File.Exists(outputFile1)) File.Delete(outputFile1);
-    //        if (File.Exists(outputFile2)) File.Delete(outputFile2);
-    //        Console.WriteLine("Old output files deleted.");
-
-    //        var jsonFiles = Directory.GetFiles(inputFolder, "*.json");
-    //        if (jsonFiles.Length < 2)
-    //            throw new Exception("Expected at least two JSON files in the input folder.");
-
-    //        Console.WriteLine($"Found JSON files: {string.Join(", ", jsonFiles.Select(Path.GetFileName))}");
-
-    //        // Create processor
-    //        IEmbeddingProcessor processor = new EmbeddingProcessor();
-
-    //        // Process files sequentially to allow user input for each file
-    //        Console.WriteLine($"\nProcessing first file: {jsonFiles[0]}");
-    //        await processor.ProcessJsonFileAsync(jsonFiles[0], outputFile1, apiKey, 10);
-
-    //        Console.WriteLine($"\nProcessing second file: {jsonFiles[1]}");
-    //        await processor.ProcessJsonFileAsync(jsonFiles[1], outputFile2, apiKey, 10);
-
-    //        Console.WriteLine("Embedding processing completed successfully.");
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        Console.WriteLine($"Error: {ex.Message}");
-    //    }
-    //}
-    
->>>>>>> origin/Aman-Patel
 }

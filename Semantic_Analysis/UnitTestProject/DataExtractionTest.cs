@@ -1,14 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Text.Json;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-<<<<<<< HEAD
 using Semantic_Analysis; 
-=======
-using Semantic_Analysis; // Namespace for the classes related to Semantic Analysis.
->>>>>>> origin/Aman-Patel
 
 namespace DataExtraction_UnitTest
 {
