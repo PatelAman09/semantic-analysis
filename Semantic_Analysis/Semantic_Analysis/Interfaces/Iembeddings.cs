@@ -18,14 +18,14 @@ namespace Semantic_Analysis.Interfaces
         /// </summary>
         /// <param name="jsonContent">The JSON content to be analyzed.</param>
         /// <returns>A list of strings representing the analysis of the JSON content.</returns>
-        List<string> AnalyzeJson(string jsonContent);  // Keep original method
+        List<string> AnalyzeJson(string jsonContent); 
 
         /// <summary>
         /// Processes the entire JSON content and transforms it into a more usable format, potentially for further processing or embedding generation.
         /// </summary>
         /// <param name="jsonContent">The JSON content to be processed.</param>
         /// <returns>A list of strings representing the processed JSON content.</returns>
-        List<string> ProcessWholeJson(string jsonContent);  // Add new method
+        List<string> ProcessWholeJson(string jsonContent); 
 
         /// <summary>
         /// Generates embeddings for a list of descriptions using an external API and saves the results to a CSV file at regular intervals.
