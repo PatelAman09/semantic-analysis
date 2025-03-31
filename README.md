@@ -69,7 +69,7 @@ The following diagram represents the complete project workflow:
 - Ensure that the API key is set as an environment variable with the name `OPENAI_API_KEY`
   .Use the following command to setup API key through Command Prompt:
    ```sh
-   set OPENAI_API_KEY=<your_api_key_here>
+    setx OPENAI_API_KEY "your_api_key_here"
    ``` 
   
   
