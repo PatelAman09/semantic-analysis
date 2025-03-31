@@ -84,7 +84,7 @@ The following diagram represents the complete project workflow:
    dotnet build
    ```
 3. Place the two documents you want to compare in: `semantic-analysis\Semantic_Analysis\Semantic_Analysis\RawData`<br>
-   Our program supports the following file formats:
+   The program supports the following file formats:
    - Plain text: `.txt`, `.md`
    - Structured documents: `.json`, `.xml`, `.html`
    - Rich text files: `.pdf`, `.docx`
