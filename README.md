@@ -12,8 +12,10 @@ The system delivers **accurate and meaningful results** while optimizing perform
 
 The following diagram represents the complete project workflow:
 
-![Project workflow diagram showing the data processing pipeline from raw documents to similarity matrix](https://github.com/user-attachments/assets/102154c6-b450-4dfc-8d37-3c366956ff0a)<br>
-*Flowchart depicting the three-step process of Semantic Analysis Of Textual Data.*
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/102154c6-b450-4dfc-8d37-3c366956ff0a" alt="Project workflow diagram showing the data processing pipeline">
+</p>
+<p align="center"><i>Fig.1 - Flowchart depicting the three-step process of Semantic Analysis Of Textual Data.</i></p>
 
 ### 1. **Document Cleaning and Extraction**
 
@@ -42,24 +44,11 @@ The following diagram represents the complete project workflow:
 
 ## **Project Structure**
 
-```
-📂 Semantic_Analysis
-│-- 📂 CSVOutput/              # Folder storing CSV files
-│-- 📂 EmbeddingOutput/        # Folder storing generated embeddings
-│-- 📂 ExtractedData/          # Folder containing input documents
-│-- 📂 Interfaces/             # Folder containing interface definitions
-│-- 📂 RawData/                # Folder for unprocessed files
-│-- 📜 appsettings.json        # Configuration file
-│-- 📜 CosineSimilarity.cs     # Script for cosine similarity calculation
-│-- 📜 DataExtraction.cs       # Script for document processing
-│-- 📜 EmbeddingProcessor.cs   # Script for generating embeddings
-│-- 📜 Program.cs              # Main entry point
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/c76b5441-7d16-40b6-9bb3-1119edc5b344" alt="Folder Structure of the Project">
+</p>
+<p align="center"><i>Fig.2 - Folder Structure of the Project.</i></p>
 
-📂 UnitTestProject
-│-- 📜 CosineSimilarityUnitTest.cs  # Unit tests for cosine similarity
-│-- 📜 DataExtractionTest.cs        # Unit tests for data extraction
-│-- 📜 EmbeddingUnitTest.cs         # Unit tests for embedding processor
-```
 
 ## **Setup Instructions for Running the Project**
 
@@ -69,7 +58,7 @@ The following diagram represents the complete project workflow:
 - Ensure that the API key is set as an environment variable with the name `OPENAI_API_KEY`
   .Use the following command to setup API key through Command Prompt:
    ```sh
-    setx OPENAI_API_KEY "your_api_key_here"
+   setx OPENAI_API_KEY "your_api_key_here"
    ``` 
   
   
@@ -97,22 +86,29 @@ The following diagram represents the complete project workflow:
 5. Navigate to `bin/Debug/(Your .NET version)` and execute **Semantic_Analysis.exe**
 6. After running the console application, following prompt will appear:
 
-   ![Embedding type selection prompt showing options for word-by-word/phrase-by-phrase or entire document](https://github.com/user-attachments/assets/3bf89047-4d42-432e-b042-3830c69a6272)<br>
-   *Console interface showing the two embedding options available to user for processing the documents.*<br>
-   - Option 1: Generate embeddings for each word or phrase in the document (suitable for word-by-word or phrase-by-phrase comparison).<br>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/3bf89047-4d42-432e-b042-3830c69a6272" alt="Embedding type selection prompt showing options">
+</p>
+<p align="center"><i>Fig.3 - Console interface showing the two embedding options available to user for processing the documents.</i></p>
+
+   - Option 1: Generate embeddings for each word or phrase in the document (suitable for word-by-word or phrase-by-phrase comparison).
    - Option 2: Generate a single embedding for the entire document (suitable for document-level comparison).
 
-8. The final output file, containing the cosine similarity calculation will be located at:<br>`semantic-analysis\Semantic_Analysis\Semantic_Analysis\CSVOutput`
-   - Sample Output from **CSVOutput** folder:
-   - ![Screenshot of CSV output showing the cosine similarity calculation results in tabular format](https://github.com/user-attachments/assets/f402eba7-ffa6-437a-9f14-78168fe6e0f7)<br>
-*Tabular output displaying texts and their corresponding similarity scores in output folder.*
+7. The final output file, containing the cosine similarity calculation will be located at:<br>`semantic-analysis\Semantic_Analysis\Semantic_Analysis\CSVOutput`
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/f402eba7-ffa6-437a-9f14-78168fe6e0f7" alt="Screenshot of CSV output showing the cosine similarity calculation results">
+</p>
+<p align="center"><i>Fig.4 - Tabular output displaying texts and their corresponding similarity scores in output folder.</i></p>
 
 ## **Sample Result**
 
 ### **Test Case - Comparing Words Across Different Categories**
 
-![Cosine Similarity Matrix showing semantic relationships between different words](https://github.com/user-attachments/assets/0b3c8cc6-3396-4315-99b5-d46edd15b4d9)<br>
-*Table of semantic relationships between reference words and five distinct categories with similarity values.*
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/0b3c8cc6-3396-4315-99b5-d46edd15b4d9" alt="Cosine Similarity Matrix showing semantic relationships">
+</p>
+<p align="center"><i>Fig.5 - Table of semantic relationships between reference words and five distinct categories with similarity values.</i></p>
 
 This test case was conducted using the `text-embedding-3-small` model. The matrix represents semantic similarity scores between reference words and five categories: Technology, Biology, Restaurant, Mathematics, and Arts & Music. Higher values indicate stronger semantic associations. Notable observations include:
 
@@ -120,9 +116,11 @@ This test case was conducted using the `text-embedding-3-small` model. The matri
 - "Algebra" demonstrates clear alignment with Mathematics (0.6993)
 - "Photosynthesis" exhibits significant association with Biology (0.4883)
 
-### **Visual Representation**
+### **Visual Representation (Bar Graph)**
 
-![Bar Graph showing comparative cosine similarity values between different terms](https://github.com/user-attachments/assets/9eb99daf-f311-498a-bcfa-8d2d61ec2c33)<br>
-*Bar chart visualizing the distribution of similarity scores across categories, highlighting domain-specific semantic relationships.*
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/9eb99daf-f311-498a-bcfa-8d2d61ec2c33" alt="Bar Graph showing comparative cosine similarity values">
+</p>
+<p align="center"><i>Fig.6 - Bar chart visualizing the distribution of similarity scores across categories, highlighting domain-specific semantic relationships.</i></p>
 
 The bar graph visualizes the distribution of similarity scores across categories, making patterns more discernible. The visual representation effectively highlights how reference words naturally cluster within their expected domains, validating the semantic analysis model's accuracy in identifying contextual similarities between terms and their categorical associations.
